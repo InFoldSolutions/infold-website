@@ -1,0 +1,76 @@
+#hotspot1 {
+  top: 96px;
+  left: 447.3px;
+  height: 40px;
+  width: 40px;
+}
+
+.hotspot {
+  padding: 3px;
+  border: 1px solid rgb(29 155 240);
+  border-radius: 50%;
+}
+
+.hotspot span {
+  width: 10px;
+  height: 10px;
+  background-color: rgb(29 155 240);
+  border-radius: 50%;
+
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-name: innerHotspotAnimation;
+}
+
+@keyframes innerHotspotAnimation {
+  0% {
+    transform: scaleX(1)
+  }
+
+  18% {
+    transform: scale3d(.85, .85, .85);
+  }
+
+  to {
+    transform: scaleX(1)
+  }
+}
+
+#hotspot2 {
+  top: 160px;
+  left: 490px;
+}
+
+#hotspot3 {
+  top: 222px;
+  left: 275px;
+}
+
+#hotspot4 {
+  top: 191px;
+  left: 388px;
+}
+
+/* Portrait */
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  #hotspot1 {
+    top: 74px;
+    left: 358.3px;
+  }
+
+  #hotspot2 {
+    top: 127px;
+    left: 391px;
+  }
+
+  #hotspot3 {
+    top: 178px;
+    left: 221px;
+  }
+
+  #hotspot4 {
+    top: 152px;
+    left: 313px;
+  }
+}

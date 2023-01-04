@@ -68,6 +68,19 @@
     });
   });
 
+  // ==== Hotspot1 click
+  const twitterPreview = document.getElementById("twitter-preview");
+  const hotspot1 = document.getElementById("hotspot1");
+  const hotspots = document.querySelectorAll(".hotspot");
+  hotspot1.addEventListener("click", () => {
+    twitterPreview.src = "assets/images/previews/twitter-preview-open-blue.png";
+    hotspot1.classList.add("hidden");
+    hotspots.forEach((el) => {
+      el.classList.remove("hidden");
+      el.classList.add("flex")
+    })
+  });
+
   // ===== wow js
   new WOW().init();
 

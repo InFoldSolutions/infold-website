@@ -29,19 +29,19 @@
 }
 
 [tooltip]::after {
-  content: attr(tooltip); /* magic! */
-  text-align: center;
-  min-width: 3em;
-  max-width: 21em;
-  white-space: nowrap;
+  content: attr(tooltip);
+  text-align: left;
   overflow: hidden;
   text-overflow: ellipsis;
   padding: 1ch 1.5ch;
   border-radius: 0;
-  box-shadow: 0 1em 2em -.5em rgba(0, 0, 0, 0.35);
+  box-shadow: 0 1em 2em -0.5em rgb(0 0 0 / 35%);
   background: rgb(24, 26, 27);
   color: rgba(255, 255, 255, 0.8);
-  z-index: 1000; /* absurdity 2 */
+  z-index: 2;
+  width: 205px;
+  line-height: 17px;
+  font-size: 12px;
 }
 
 /* Make the tooltips respond to hover and focus */
@@ -101,25 +101,46 @@
   border-right-color: rgba(25, 97, 13, 0.7);
 }
 
+/* COLOR: BLUE */
+[tooltip][color^="blue"]::after {
+  background-color: rgb(48 86 211);
+}
+
+[tooltip][flow^="down"][color^="blue"]::before {
+  border-bottom-color: rgb(48 86 211);
+}
+
+[tooltip][flow^="up"][color^="blue"]::before {
+  border-top-color: rgb(48 86 211);
+}
+
+[tooltip][flow^="left"][color^="blue"]::before {
+  border-left-color: rgb(48 86 211);
+}
+
+[tooltip][flow^="right"][color^="blue"]::before {
+  border-right-color: rgb(48 86 211);
+}
+
 /* COLOR: LIGHT BLUE */
-[tooltip][color^="green"]::after {
-  background-color: rgba(29, 155, 240, 0.7);
+[tooltip][color^="lightblue"]::after {
+  background-color: rgba(29, 155, 240, 1);
 }
 
-[tooltip][flow^="down"][color^="green"]::before {
-  border-bottom-color: rgba(29, 155, 240, 0.7);
+[tooltip][flow^="down"][color^="lightblue"]::before {
+  border-bottom-color: rgba(29, 155, 240, 1);
 }
 
-[tooltip][flow^="up"][color^="green"]::before {
-  border-top-color: rgba(29, 155, 240, 0.7);
+[tooltip][flow^="up"][color^="lightblue"]::before {
+  border-top-color: rgba(29, 155, 240, 1);
 }
 
-[tooltip][flow^="left"][color^="green"]::before {
-  border-left-color: rgba(29, 155, 240, 0.7);
+[tooltip][flow^="left"][color^="lightblue"]::before {
+  border-left-color: rgba(29, 155, 240, 1);
 }
 
-[tooltip][flow^="right"][color^="green"]::before {
-  border-right-color: rgba(29, 155, 240, 0.7);
+[tooltip][flow^="right"][color^="lightblue"]::before {
+  border-right-color: rgba(29, 155, 240, 1);
 }
 
 /* FLOW: UP */
