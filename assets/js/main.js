@@ -33,7 +33,7 @@
   };
 
   // ===== responsive navbar
-  let navbarToggler = document.querySelector("#navbarToggler");
+  const navbarToggler = document.querySelector("#navbarToggler");
   const navbarCollapse = document.querySelector("#navbarCollapse");
 
   navbarToggler.addEventListener("click", () => {
