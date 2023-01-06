@@ -58,7 +58,7 @@
   left: 27rem;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1150px) {
   .source {
     position: static;
     margin: 20px 25px 0px 0px;
