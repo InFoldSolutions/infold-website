@@ -5,14 +5,17 @@
 
 /* START TOOLTIP STYLES */
 [tooltip] {
-  position: relative; /* opinion 1 */
+  position: relative;
+  /* opinion 1 */
 }
 
 /* Applies to all tooltips */
 [tooltip]::before,
 [tooltip]::after {
-  text-transform: none; /* opinion 2 */
-  font-size: 11px; /* opinion 3 */
+  text-transform: none;
+  /* opinion 2 */
+  font-size: 11px;
+  /* opinion 3 */
   line-height: 1;
   user-select: none;
   pointer-events: none;
@@ -24,8 +27,10 @@
 
 [tooltip]::before {
   content: '';
-  border: 5px solid transparent; /* opinion 4 */
-  z-index: 1001; /* absurdity 1 */
+  border: 5px solid transparent;
+  /* opinion 4 */
+  z-index: 1001;
+  /* absurdity 1 */
 }
 
 [tooltip]::after {
@@ -189,6 +194,7 @@
   left: calc(0em - 5px);
   transform: translate(-.5em, -50%);
 }
+
 [tooltip][flow^="left"]::after {
   top: 50%;
   right: calc(100% + 5px);
@@ -203,6 +209,7 @@
   right: calc(0em - 5px);
   transform: translate(.5em, -50%);
 }
+
 [tooltip][flow^="right"]::after {
   top: 50%;
   left: calc(100% + 5px);
@@ -224,7 +231,7 @@
   }
 }
 
-/* FX All The Things */ 
+/* FX All The Things */
 [tooltip]:not([flow]):hover::before,
 [tooltip]:not([flow]):hover::after,
 [tooltip][flow^="up"]:hover::before,
@@ -249,4 +256,10 @@
 [tooltip][flow^="right"]:focus::before,
 [tooltip][flow^="right"]:focus::after {
   animation: tooltips-horz 100ms ease-out forwards;
+}
+
+@media (max-width: 480px) {
+  [tooltip]::after {
+    width: 135px;
+  }
 }
