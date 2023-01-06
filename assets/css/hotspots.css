@@ -52,8 +52,8 @@
   left: 388px;
 }
 
-/* Portrait */
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+/* iPad */
+@media (max-width: 1024px) {
   #hotspot1 {
     top: 74px;
     left: 358.3px;
@@ -72,5 +72,27 @@
   #hotspot4 {
     top: 152px;
     left: 313px;
+  }
+}
+
+@media (max-width: 480px) {
+  #hotspot1 {
+    left: 49%;
+    top: 20%;
+  }
+
+  #hotspot2 {
+    top: 43%;
+    left: 56%;
+  }
+
+  #hotspot3 {
+    top: 61%;
+    left: 30.5%;
+  }
+
+  #hotspot4 {
+    top: 52%;
+    left: 44.5%;
   }
 }

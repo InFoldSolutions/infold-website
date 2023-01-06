@@ -39,8 +39,8 @@
 }
 
 .dw {
-  top: 0rem;
-  left: 0rem;
+  top: -3rem;
+  left: 15rem;
 }
 
 .medium {
@@ -56,4 +56,31 @@
 .writeas {
   top: 3rem;
   left: 27rem;
+}
+
+@media (max-width: 1150px) {
+  .source {
+    position: static;
+    margin: 20px 25px 0px 0px;
+  }
+
+  .source > div {
+    width: 7rem;
+    height: 7rem;
+  }
+
+  .icons {
+    order: 99;
+  }
+}
+
+@media (max-width: 480px) {
+  .source > div {
+    width: 4.5rem;
+    height: 4.5rem;
+  }
+
+  .source {
+    margin: 20px 20px 0px 0px;
+  }
 }
