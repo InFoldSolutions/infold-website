@@ -53,7 +53,7 @@
 }
 
 /* Portrait */
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+@media (min-width: 768px) and (max-width: 1024px) {
   #hotspot1 {
     top: 74px;
     left: 358.3px;
