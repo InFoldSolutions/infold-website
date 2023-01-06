@@ -1487,6 +1487,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-bottom: 100px;
 }
 
+.pb-\[70px\] {
+  padding-bottom: 70px;
+}
+
 .pt-20 {
   padding-top: 5rem;
 }
