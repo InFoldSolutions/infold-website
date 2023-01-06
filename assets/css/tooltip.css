@@ -263,3 +263,9 @@
     width: 135px;
   }
 }
+
+@media (max-width: 400px) {
+  [tooltip]::after {
+    width: 125px;
+  }
+}
