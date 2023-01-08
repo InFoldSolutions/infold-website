@@ -2213,6 +2213,14 @@ body {
   .sm\:leading-relaxed {
     line-height: 1.625;
   }
+  
+  .sm\:hidden {
+    display: none;
+  }
+  
+  .sm\:visible {
+    display: flex;
+  }
 }
 
 @media (min-width: 720px) {
