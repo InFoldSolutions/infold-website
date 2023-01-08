@@ -515,6 +515,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   }
 }
 
+.list-disc {
+  list-style-type: disc
+}
+
 .visible {
   visibility: visible;
 }
