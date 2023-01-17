@@ -3,7 +3,7 @@
 
   // ======= Sticky
   window.onscroll = function () {
-    const ud_header = document.querySelector(".ud-header");
+    /*const ud_header = document.querySelector(".ud-header");
     const sticky = ud_header.offsetTop;
     const logo = document.querySelector(".header-logo");
 
@@ -18,7 +18,7 @@
       logo.src = "assets/images/logo/logo3-infold.png";
     } else {
       logo.src = "assets/images/logo/infold-logo2-white.png";
-    }
+    }*/
 
     // show or hide the back-top-top button
     const backToTop = document.querySelector(".back-to-top");
@@ -73,7 +73,7 @@
   const hotspot1 = document.getElementById("hotspot1");
   const hotspots = document.querySelectorAll(".hotspot");
   hotspot1.addEventListener("click", () => {
-    twitterPreview.src = "assets/images/previews/twitter-preview-open-blue.png";
+    twitterPreview.src = "assets/images/previews/preview-twitter-open.png";
     hotspot1.classList.add("hidden");
     hotspots.forEach((el) => {
       el.classList.remove("hidden");
