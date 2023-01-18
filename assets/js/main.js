@@ -20,26 +20,31 @@
   function fnBrowserDetect() {
 
     let userAgent = navigator.userAgent;
-    
+
     let browserName;
     let browserImage;
 
-    if (userAgent.match(/chrome|chromium|crios/i)) {
-      browserName = "Chrome";
-      browserImage = "assets/images/browsers/chrome.svg";
-    } else if (userAgent.match(/firefox|fxios/i)) {
-      browserName = "Firefox";
-      browserImage = "assets/images/browsers/firefox.svg";
-    } else if (userAgent.match(/safari/i)) {
-      browserName = "Safari";
-      browserImage = "assets/images/browsers/safari.svg";
-    } else if (userAgent.match(/opr\//i)) {
+    if (userAgent.match(/opr\//i)) {
       browserName = "Opera";
       browserImage = "assets/images/browsers/opera.svg";
-    } else if (userAgent.match(/edg/i)) {
+    }
+    else if (userAgent.match(/edg/i)) {
       browserName = "Edge";
       browserImage = "assets/images/browsers/edge.svg";
-    } else {
+    }
+    else if (userAgent.match(/chrome|chromium|crios/i)) {
+      browserName = "Chrome";
+      browserImage = "assets/images/browsers/chrome.svg";
+    }
+    else if (userAgent.match(/firefox|fxios/i)) {
+      browserName = "Firefox";
+      browserImage = "assets/images/browsers/firefox.svg";
+    }
+    else if (userAgent.match(/safari/i)) {
+      browserName = "Safari";
+      browserImage = "assets/images/browsers/safari.svg";
+    }
+    else {
       browserName = "Chrome";
       browserImage = "assets/images/browsers/chrome.svg";
     }
