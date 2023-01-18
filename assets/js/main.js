@@ -3,23 +3,6 @@
 
   // ======= Sticky
   window.onscroll = function () {
-    /*const ud_header = document.querySelector(".ud-header");
-    const sticky = ud_header.offsetTop;
-    const logo = document.querySelector(".header-logo");
-
-    if (window.pageYOffset > sticky) {
-      ud_header.classList.add("sticky");
-    } else {
-      ud_header.classList.remove("sticky");
-    }
-
-    // === logo change
-    if (ud_header.classList.contains("sticky")) {
-      logo.src = "assets/images/logo/logo3-infold.png";
-    } else {
-      logo.src = "assets/images/logo/infold-logo2-white.png";
-    }*/
-
     // show or hide the back-top-top button
     const backToTop = document.querySelector(".back-to-top");
     if (
@@ -31,6 +14,41 @@
       backToTop.style.display = "none";
     }
   };
+
+  // ===== get browser name
+
+  function fnBrowserDetect() {
+
+    let userAgent = navigator.userAgent;
+    
+    let browserName;
+    let browserImage;
+
+    if (userAgent.match(/chrome|chromium|crios/i)) {
+      browserName = "Chrome";
+      browserImage = "assets/images/browsers/chrome.svg";
+    } else if (userAgent.match(/firefox|fxios/i)) {
+      browserName = "Firefox";
+      browserImage = "assets/images/browsers/firefox.svg";
+    } else if (userAgent.match(/safari/i)) {
+      browserName = "Safari";
+      browserImage = "assets/images/browsers/safari.svg";
+    } else if (userAgent.match(/opr\//i)) {
+      browserName = "Opera";
+      browserImage = "assets/images/browsers/opera.svg";
+    } else if (userAgent.match(/edg/i)) {
+      browserName = "Edge";
+      browserImage = "assets/images/browsers/edge.svg";
+    } else {
+      browserName = "Chrome";
+      browserImage = "assets/images/browsers/chrome.svg";
+    }
+
+    document.getElementById('browserName').innerText = browserName;
+    document.getElementById('browserImage').src = browserImage;
+  }
+
+  fnBrowserDetect();
 
   // ===== responsive navbar
   const navbarToggler = document.querySelector("#navbarToggler");
@@ -71,6 +89,7 @@
   // ==== Hotspot1 click
   const twitterPreview = document.getElementById("twitter-preview");
   const hotspot1 = document.getElementById("hotspot1");
+  const hotspot5 = document.getElementById("hotspot5");
   const hotspots = document.querySelectorAll(".hotspot");
   hotspot1.addEventListener("click", () => {
     twitterPreview.src = "assets/images/previews/preview-twitter-open.png";
@@ -78,6 +97,14 @@
     hotspots.forEach((el) => {
       el.classList.remove("hidden");
       el.classList.add("flex")
+    })
+  });
+  hotspot5.addEventListener("click", () => {
+    twitterPreview.src = "assets/images/previews/preview-twitter.png";
+    hotspot1.classList.remove("hidden");
+    hotspots.forEach((el) => {
+      el.classList.add("hidden");
+      el.classList.remove("flex");
     })
   });
 
@@ -129,33 +156,4 @@
       });
     });
   });
-
-  // section menu active
-  function onScroll(event) {
-    const sections = document.querySelectorAll(".ud-menu-scroll");
-    const scrollPos =
-      window.pageYOffset ||
-      document.documentElement.scrollTop ||
-      document.body.scrollTop;
-
-    for (let i = 0; i < sections.length; i++) {
-      const currLink = sections[i];
-      const val = currLink.getAttribute("href");
-      const refElement = document.querySelector(val);
-      const scrollTopMinus = scrollPos + 73;
-      if (
-        refElement.offsetTop <= scrollTopMinus &&
-        refElement.offsetTop + refElement.offsetHeight > scrollTopMinus
-      ) {
-        document
-          .querySelector(".ud-menu-scroll")
-          .classList.remove("active");
-        currLink.classList.add("active");
-      } else {
-        currLink.classList.remove("active");
-      }
-    }
-  }
-
-  window.document.addEventListener("scroll", onScroll);
 })();

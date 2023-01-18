@@ -11,6 +11,21 @@
   border-radius: 50%;
 }
 
+.hotspot.close {
+  font-size: 0.7em;
+  background: white;
+  border: 1px solid rgb(29 155 240);
+  cursor: pointer;
+  color: rgb(29 155 240);
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+}
+
+.hotspot.close svg {
+  fill: currentColor;
+}
+
 .hotspot span {
   width: 10px;
   height: 10px;
@@ -38,61 +53,66 @@
 }
 
 #hotspot2 {
-  top: 160px;
-  left: 490px;
+  top: 156px;
+  left: 440px;
 }
 
 #hotspot3 {
-  top: 222px;
-  left: 275px;
+  top: 218px;
+  left: 272px;
 }
 
 #hotspot4 {
-  top: 191px;
-  left: 388px;
+  top: 189px;
+  left: 359px;
+}
+
+#hotspot5 {
+  left: 66.3%;
+  top: 28.5%;
 }
 
 /* iPad */
 @media (max-width: 1024px) {
   #hotspot1 {
-    top: 74px;
-    left: 358.3px;
+    top: 71px;
+    left: 361.8px;
   }
 
   #hotspot2 {
-    top: 127px;
-    left: 391px;
+    top: 125px;
+    left: 355px;
   }
 
   #hotspot3 {
-    top: 178px;
-    left: 221px;
+    top: 175px;
+    left: 218px;
   }
 
   #hotspot4 {
     top: 152px;
-    left: 313px;
+    left: 288px;
   }
 }
 
 @media (max-width: 480px) {
   #hotspot1 {
-    left: 49%;
+    left: 50%;
     top: 20%;
   }
 
   #hotspot2 {
     top: 43%;
-    left: 56%;
+    left: 50%;
   }
 
   #hotspot3 {
     top: 61%;
-    left: 30.5%;
+    left: 31.5%;
   }
 
   #hotspot4 {
     top: 52%;
-    left: 44.5%;
+    left: 41%;
   }
 }
