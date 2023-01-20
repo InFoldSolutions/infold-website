@@ -1834,7 +1834,7 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 
 .shadow-circle {
-  box-shadow: 0px 2px 2px 1px rgb(29 155 240 / 0.2);
+  box-shadow: 0px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
 
 .shadow-circle-black {
@@ -2299,6 +2299,10 @@ body {
 
   .md\:ml-6 {
     margin-left: 1.5rem;
+  }
+  
+  .md\:-ml-12 {
+    margin-left: -3rem;
   }
 
   .md\:h-\[400px\] {
