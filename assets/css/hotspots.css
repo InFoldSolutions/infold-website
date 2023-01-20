@@ -13,10 +13,10 @@
 
 .hotspot.close {
   font-size: 0.7em;
-  background: white;
-  border: 1px solid rgb(29 155 240);
+  background: rgb(29 155 240);
+  border: none;
   cursor: pointer;
-  color: rgb(29 155 240);
+  color: white;
   border-radius: 50%;
   width: 19px;
   height: 19px;
