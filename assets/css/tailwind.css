@@ -2187,6 +2187,14 @@ body {
   .sm\:min-w-6 {
     min-width: 12rem;
   }
+
+  .sm\:left-0 {
+    left: 0px;
+  }
+  
+  .sm\:right-0 {
+    right: 0px;
+  }
 }
 
 @media (min-width: 540px) {
