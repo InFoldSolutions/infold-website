@@ -1939,6 +1939,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.order-2 {
+  order: 2;
+}
+
 body {
   font-family: "Inter", sans-serif;
 }
@@ -2238,6 +2242,12 @@ body {
   }
 }
 
+@media (max-width: 960px) {  
+  .md\:mt-20 {
+    margin-top: 5rem;
+  }
+}
+
 @media (min-width: 540px) {
   .sm\:flex {
     display: flex;
@@ -2357,6 +2367,14 @@ body {
 
   .md\:-ml-12 {
     margin-left: -3rem;
+  }
+  
+  .md\:-ml-16 {
+    margin-left: -4rem;
+  }
+  
+  .md\:-ml-24 {
+    margin-left: -6rem;
   }
 
   .md\:h-\[400px\] {
@@ -2512,6 +2530,10 @@ body {
 
   .lg\:mb-11 {
     margin-bottom: 2.75rem;
+  }
+
+  .lg\:-ml-24 {
+    margin-left: -6rem;
   }
 
   .lg\:ml-6 {
@@ -2732,6 +2754,10 @@ body {
 
   .lg\:opacity-0 {
     opacity: 0;
+  }
+  
+  .lg\:order-0 {
+    order: 0;
   }
 
   .lg\:shadow-none {
