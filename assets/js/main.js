@@ -88,6 +88,7 @@
   const hotspot1 = document.getElementById("hotspot1");
   const hotspot5 = document.getElementById("hotspot5");
   const hotspots = document.querySelectorAll(".hotspot");
+
   hotspot1.addEventListener("click", () => {
     twitterPreview.src = "assets/images/previews/preview-twitter-open.png";
     hotspot1.classList.add("hidden");
@@ -96,6 +97,7 @@
       el.classList.add("flex")
     })
   });
+
   hotspot5.addEventListener("click", () => {
     twitterPreview.src = "assets/images/previews/preview-twitter.png";
     hotspot1.classList.remove("hidden");
@@ -104,9 +106,6 @@
       el.classList.remove("flex");
     })
   });
-
-  // ===== wow js
-  new WOW().init();
 
   document.querySelector(".back-to-top").addEventListener("click", (e) => {
     document.body.scrollIntoView({
@@ -127,4 +126,7 @@
       });
     });
   });
+
+  // ===== wow js
+  new WOW().init();
 })();
