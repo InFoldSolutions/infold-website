@@ -131,7 +131,7 @@
                 class="cursor-pointer absolute flex justify-center items-center transition-transform transform-gpu duration-700 ease-in-out delay-100"
                 color="lightblue"
                 tooltip="Lookout for the lightbulb icon, click it to gain additional insights and resources."
-                flow="right">
+                flow="right" onclick="">
                 <span>
                   <div class="select-none" style="height: 80px; width: 80px;">
                     <div class="hostpot-target flex relative items-center justify-center" aria-label="hotspot target"
@@ -144,13 +144,15 @@
                 </span>
               </div>
               <div id="hotspot2" class="hotspot absolute" hidden color="lightblue"
-                tooltip="Related content metadata, source info and short description." flow="up"><span></span>
+                tooltip="Related content metadata, source info and short description." flow="up" onclick="">
+                <span></span>
               </div>
               <div id="hotspot3" class="hotspot absolute" hidden color="lightblue"
-                tooltip="List of sources that wrote or provided feedback on the same topic." flow="down"><span></span>
+                tooltip="List of sources that wrote or provided feedback on the same topic." flow="down" onclick="">
+                <span></span>
               </div>
               <div id="hotspot4" class="hotspot absolute" hidden color="lightblue"
-                tooltip="Relevant keywords linked to common knowledge bases." flow="down"><span></span></div>
+                tooltip="Relevant keywords linked to common knowledge bases." flow="down" onclick=""><span></span></div>
               <div id="hotspot5" class="hotspot absolute hidden close">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                   <g>
@@ -690,28 +692,30 @@
         <div class="flex items-center justify-center w-full lg:w-1/2 mt-4 md:mt-20 order-2 lg:order-0 relative">
           <div id="hotspot6" class="hotspot absolute flex" color="lightblue"
             tooltip="The title holds most weight when trying to figure out the main topic and most relevant keywords."
-            flow="right">
+            flow="right" onclick="">
             <span></span>
           </div>
           <div id="hotspot7" class="hotspot absolute flex" color="lightblue"
             tooltip="External links are parsed, content extracted and its text automatically analysed and classifed."
-            flow="down">
+            flow="down" onclick="">
             <span></span>
           </div>
           <div id="hotspot8" class="hotspot absolute flex" color="lightblue"
-            tooltip="Post body can provide additional context or sentiment in the analysis process." flow="left">
+            tooltip="Post body can provide additional context or sentiment in the analysis process." flow="left"
+            onclick="">
             <span></span>
           </div>
           <div id="hotspot9" class="hotspot absolute flex" color="lightblue"
             tooltip="When aggregating accross multiple posts, likes provide good insights on which are more relevant than others."
-            flow="up"><span></span>
+            flow="up" onclick=""><span></span>
           </div>
           <div id="hotspot10" class="hotspot absolute flex" color="lightblue"
-            tooltip="Comments can give an overview on general sentiment and social feedback." flow="up"><span></span>
+            tooltip="Comments can give an overview on general sentiment and social feedback." flow="up" onclick="">
+            <span></span>
           </div>
           <div id="hotspot11" class="hotspot absolute flex" color="lightblue"
             tooltip="Lightbulb icon will include the count of all related resources that our algorithms identified."
-            flow="up"><span></span>
+            flow="up" onclick=""><span></span>
           </div>
           <img src="assets/images/previews/reddit-preview.png" class="lg:-ml-24" />
         </div>
