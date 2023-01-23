@@ -6,6 +6,7 @@
 }
 
 .hotspot {
+  background-color: rgb(244 247 255);
   padding: 3px;
   border: 1px solid rgb(29 155 240);
   border-radius: 50%;
@@ -70,6 +71,36 @@
 #hotspot5 {
   left: 66.4%;
   top: 28.5%;
+}
+
+#hotspot6 {
+  left: 29%;
+  top: 27.3%;
+}
+
+#hotspot7 {
+  left: 21%;
+  top: 39.3%;
+}
+
+#hotspot8 {
+  right: 39.5%;
+  top: 50.3%;
+}
+
+#hotspot9 {
+  bottom: 22.8%;
+  left: 17.1%;
+}
+
+#hotspot10 {
+  bottom: 22.82%;
+  left: 33.5%;
+}
+
+#hotspot11 {
+  bottom: 22.92%;
+  left: 50.5%;
 }
 
 /* iPad */
