@@ -737,6 +737,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-bottom: 0.5rem;
 }
 
+.mt-4 {
+  margin-top: 1rem;
+}
+
 .mt-10 {
   margin-top: 2.5rem;
 }
@@ -2375,6 +2379,10 @@ body {
   
   .md\:-ml-24 {
     margin-left: -6rem;
+  }
+
+  .md\:pl-8 {
+    padding-left: 2rem;
   }
 
   .md\:h-\[400px\] {
