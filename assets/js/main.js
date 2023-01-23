@@ -1,23 +1,8 @@
-(function () {
-  "use strict";
+window.onload = (event) => {
 
-  // ======= Back to top
-  window.onscroll = function () {
-    // show or hide the back-top-top button
-    const backToTop = document.querySelector(".back-to-top");
-    if (
-      document.body.scrollTop > 50 ||
-      document.documentElement.scrollTop > 50
-    ) {
-      backToTop.style.display = "flex";
-    } else {
-      backToTop.style.display = "none";
-    }
-  };
+  // ===== Get browser name
 
-  // ===== get browser name
-
-  function fnBrowserDetect() {
+  function detectCurrentBrowser() {
 
     let userAgent = navigator.userAgent;
 
@@ -45,28 +30,40 @@
     document.getElementById('browserName').innerText = browserName;
   }
 
-  fnBrowserDetect();
+  detectCurrentBrowser();
 
-  // ===== responsive navbar
+  // ===== Current Year
+
+  function getCurrentYear() {
+    const currentYearEl = document.getElementById('currentYear');
+    currentYearEl.innerText = new Date().getFullYear();
+  }
+
+  getCurrentYear();
+
+  // ===== Responsive navbar
+
   const navbarToggler = document.querySelector("#navbarToggler");
   const navbarCollapse = document.querySelector("#navbarCollapse");
 
   navbarToggler.addEventListener("click", () => {
     navbarToggler.classList.toggle("navbarTogglerActive");
-    navbarCollapse.classList.toggle("hidden");
+    navbarCollapse.classList.toggle("md:hidden");
   });
 
-  //===== close navbar-collapse when a  clicked
+  //===== Close navbar-collapse when a clicked
+
   document
     .querySelectorAll("#navbarCollapse ul li:not(.submenu-item) a")
     .forEach((e) =>
       e.addEventListener("click", () => {
         navbarToggler.classList.remove("navbarTogglerActive");
-        navbarCollapse.classList.add("hidden");
+        navbarCollapse.classList.add("md:hidden");
       })
     );
 
   // ===== Sub-menu
+
   const submenuItems = document.querySelectorAll(".submenu-item");
   submenuItems.forEach((el) => {
     el.querySelector("a").addEventListener("click", () => {
@@ -75,6 +72,7 @@
   });
 
   // ===== Faq accordion
+
   const faqs = document.querySelectorAll(".single-faq");
   faqs.forEach((el) => {
     el.querySelector(".faq-btn").addEventListener("click", () => {
@@ -83,7 +81,8 @@
     });
   });
 
-  // ==== Hotspot1 click
+  // ==== Hotspot click
+
   const twitterPreview = document.getElementById("twitter-preview");
   const hotspot1 = document.getElementById("hotspot1");
   const hotspot5 = document.getElementById("hotspot5");
@@ -107,14 +106,8 @@
     })
   });
 
-  document.querySelector(".back-to-top").addEventListener("click", (e) => {
-    document.body.scrollIntoView({
-      behavior: "smooth",
-      offsetTop: 0,
-    });
-  });
+  // ==== For menu scroll
 
-  // ==== for menu scroll
   const pageLink = document.querySelectorAll(".ud-menu-scroll");
 
   pageLink.forEach((elem) => {
@@ -127,6 +120,42 @@
     });
   });
 
+  // ==== For active menu scroll
+
+  function onScroll() {
+    const sections = document.querySelectorAll(".ud-menu-scroll");
+    const scrollPos =
+      window.pageYOffset ||
+      document.documentElement.scrollTop ||
+      document.body.scrollTop;
+
+    if (scrollPos < 200) {
+      document.querySelector(".ud-menu-scroll").classList.add('active');
+      return;
+    }
+
+    for (let i = 0; i < sections.length; i++) {
+      const currLink = sections[i];
+      const val = currLink.getAttribute("href");
+      const refElement = document.querySelector(val);
+      const scrollTopMinus = scrollPos + 73;
+      if (
+        refElement.offsetTop <= scrollTopMinus &&
+        refElement.offsetTop + refElement.offsetHeight > scrollTopMinus
+      ) {
+        document
+          .querySelector(".ud-menu-scroll")
+          .classList.remove("active");
+        currLink.classList.add("active");
+      } else {
+        currLink.classList.remove("active");
+      }
+    }
+  }
+
+  window.document.addEventListener("scroll", onScroll);
+
   // ===== wow js
   new WOW().init();
-})();
+
+}

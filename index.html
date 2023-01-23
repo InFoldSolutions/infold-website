@@ -21,7 +21,7 @@
 
 <body>
   <!-- ====== Navbar Section Start -->
-  <div class="ud-header absolute top-0 left-0 z-40 flex w-full items-center bg-transparent sticky" id="navbar">
+  <div class="ud-header top-0 left-0 z-40 flex w-full items-center bg-transparent" id="navbar">
     <div class="container">
       <div class="relative -mx-4 flex items-center justify-between">
         <div class="w-60 max-w-full px-4">
@@ -33,47 +33,41 @@
           <div>
             <button id="navbarToggler"
               class="absolute right-4 top-1/2 block -translate-y-1/2 rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden">
-              <span class="relative my-[6px] block h-[2px] w-[30px] bg-white"></span>
-              <span class="relative my-[6px] block h-[2px] w-[30px] bg-white"></span>
-              <span class="relative my-[6px] block h-[2px] w-[30px] bg-white"></span>
+              <span class="relative my-[6px] block h-[2px] w-[30px]"></span>
+              <span class="relative my-[6px] block h-[2px] w-[30px]"></span>
+              <span class="relative my-[6px] block h-[2px] w-[30px]"></span>
             </button>
             <nav id="navbarCollapse"
-              class="absolute right-4 top-full hidden w-full max-w-[250px] rounded-lg bg-white py-5 shadow-lg lg:static lg:block lg:w-full lg:max-w-full lg:bg-transparent lg:py-0 lg:px-4 lg:shadow-none xl:px-6">
+              class="md:absolute md:hidden right-4 top-full w-full max-w-[220px] rounded-lg bg-white py-5 shadow-lg lg:static lg:block lg:w-full lg:max-w-full lg:bg-transparent lg:py-0 lg:px-4 lg:shadow-none xl:px-6">
               <ul class="blcok lg:flex">
                 <li class="group relative">
-                  <a href="#home"
-                    class="ud-menu-scroll mx-8 flex py-2 text-base text-dark group-hover:text-primary lg:mr-0 lg:inline-flex lg:py-5 lg:px-0 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70">
+                  <a href="#navbar"
+                    class="ud-menu-scroll mx-8 flex py-2 text-base text-dark group-hover:text-primary lg:mr-0 lg:inline-flex lg:group-hover:opacity-70 active rounded-lg py-1 px-2 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900">
                     Home
                   </a>
                 </li>
                 <li class="group relative">
                   <a href="#features"
-                    class="ud-menu-scroll mx-8 flex py-2 text-base text-dark group-hover:text-primary lg:mr-0 lg:ml-7 lg:inline-flex lg:py-5 lg:px-0 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70 xl:ml-12">
+                    class="ud-menu-scroll mx-8 flex py-2 text-base text-dark group-hover:text-primary lg:mr-0 lg:ml-4 lg:inline-flex lg:group-hover:opacity-70 rounded-lg py-1 px-2 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900">
                     Features
                   </a>
                 </li>
                 <li class="group relative">
                   <a href="#howitworks"
-                    class="ud-menu-scroll mx-8 flex py-2 text-base text-dark group-hover:text-primary lg:mr-0 lg:ml-7 lg:inline-flex lg:py-5 lg:px-0 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70 xl:ml-12">
+                    class="ud-menu-scroll mx-8 flex py-2 text-base text-dark group-hover:text-primary lg:mr-0 lg:ml-4 lg:inline-flex lg:group-hover:opacity-70 rounded-lg py-1 px-2 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900">
                     How it works
                   </a>
                 </li>
                 <li class="group relative">
                   <a href="#sources"
-                    class="ud-menu-scroll mx-8 flex py-2 text-base text-dark group-hover:text-primary lg:mr-0 lg:ml-7 lg:inline-flex lg:py-5 lg:px-0 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70 xl:ml-12">
-                    Sources
+                    class="ud-menu-scroll mx-8 flex py-2 text-base text-dark group-hover:text-primary lg:mr-0 lg:ml-4 lg:inline-flex lg:group-hover:opacity-70 rounded-lg py-1 px-2 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900">
+                    Data
                   </a>
                 </li>
                 <li class="group relative">
                   <a href="#faq"
-                    class="ud-menu-scroll mx-8 flex py-2 text-base text-dark group-hover:text-primary lg:mr-0 lg:ml-7 lg:inline-flex lg:py-5 lg:px-0 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70 xl:ml-12">
+                    class="ud-menu-scroll mx-8 flex py-2 text-base text-dark group-hover:text-primary lg:mr-0 lg:ml-4 lg:inline-flex lg:group-hover:opacity-70 rounded-lg py-1 px-2 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900">
                     FAQ
-                  </a>
-                </li>
-                <li class="group relative">
-                  <a href="#contact"
-                    class="ud-menu-scroll mx-8 flex py-2 text-base text-dark group-hover:text-primary lg:mr-0 lg:ml-7 lg:inline-flex lg:py-5 lg:px-0 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70 xl:ml-12">
-                    Contact
                   </a>
                 </li>
               </ul>
@@ -86,7 +80,7 @@
   <!-- ====== Navbar Section End -->
 
   <!-- ====== Home Section Start -->
-  <div id="home" class="relative pb-12 pt-[120px] md:pt-[130px] lg:pt-[160px]">
+  <div id="home" class="relative pb-12 pt-[40px] md:pt-[50px] lg:pt-[80px]">
     <div class="container">
       <div class="-mx-4 flex flex-wrap items-center">
         <div class="w-full px-4">
@@ -695,24 +689,29 @@
       <div class="flex flex-wrap">
         <div class="flex items-center justify-center w-full lg:w-1/2 mt-4 md:mt-20 order-2 lg:order-0 relative">
           <div id="hotspot6" class="hotspot absolute flex" color="lightblue"
-            tooltip="The title holds the most weight when trying to figure out the main topics and most relevant keywords." flow="right">
+            tooltip="The title holds most weight when trying to figure out the main topic and most relevant keywords."
+            flow="right">
             <span></span>
           </div>
           <div id="hotspot7" class="hotspot absolute flex" color="lightblue"
-            tooltip="External links are parsed, content extracted and its text automatically analysed and classifed." flow="down">
+            tooltip="External links are parsed, content extracted and its text automatically analysed and classifed."
+            flow="down">
             <span></span>
           </div>
           <div id="hotspot8" class="hotspot absolute flex" color="lightblue"
-            tooltip="Post body can provide additional context or sentiment in the analysis process." flow="left"><span></span>
+            tooltip="Post body can provide additional context or sentiment in the analysis process." flow="left">
+            <span></span>
           </div>
           <div id="hotspot9" class="hotspot absolute flex" color="lightblue"
-            tooltip="When aggregating accross multiple posts, likes provide good insights on which are more relevant than others." flow="up"><span></span>
+            tooltip="When aggregating accross multiple posts, likes provide good insights on which are more relevant than others."
+            flow="up"><span></span>
           </div>
           <div id="hotspot10" class="hotspot absolute flex" color="lightblue"
             tooltip="Comments can give an overview on general sentiment and social feedback." flow="up"><span></span>
           </div>
           <div id="hotspot11" class="hotspot absolute flex" color="lightblue"
-            tooltip="Lightbulb icon will include the count of all related resources that our algorithms identified." flow="up"><span></span>
+            tooltip="Lightbulb icon will include the count of all related resources that our algorithms identified."
+            flow="up"><span></span>
           </div>
           <img src="assets/images/previews/reddit-preview.png" class="lg:-ml-24" />
         </div>
@@ -937,8 +936,8 @@
               Any Questions? Answered
             </h2>
             <p class="text-lg leading-relaxed text-body-color sm:text-xl sm:leading-relaxed">
-              The FAQ section is a collection of commonly asked questions and answers. Please let us know if you think
-              we missed one.
+              If you can't find what you're looking for, email our support team and someone will get
+              back to you as soon as possible.
             </p>
           </div>
         </div>
@@ -1114,140 +1113,59 @@
         </div>
       </div>
     </div>
-
-    <div class="absolute bottom-0 right-0 z-[-1]">
-      <svg width="1440" height="886" viewBox="0 0 1440 886" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path opacity="0.5"
-          d="M193.307 -273.321L1480.87 1014.24L1121.85 1373.26C1121.85 1373.26 731.745 983.231 478.513 729.927C225.976 477.317 -165.714 85.6993 -165.714 85.6993L193.307 -273.321Z"
-          fill="url(#paint0_linear)" />
-        <defs>
-          <linearGradient id="paint0_linear" x1="1308.65" y1="1142.58" x2="602.827" y2="-418.681"
-            gradientUnits="userSpaceOnUse">
-            <stop stop-color="#3056D3" stop-opacity="0.20" />
-            <stop offset="1" stop-color="#f4f7ff" stop-opacity="0" />
-            <stop offset="1" stop-color="#f4f7ff" stop-opacity="0.076144" />
-          </linearGradient>
-        </defs>
-      </svg>
-    </div>
   </section>
   <!-- ====== Faq Section End -->
 
-  <!-- ====== Contact Start ====== -->
-  <section id="contact" class="relative md:pt-[120px]">
-    <div class="absolute top-0 left-0 z-[-1] h-1/2 w-full bg-lightgray lg:h-[45%] xl:h-1/2"></div>
-    <div class="container px-4">
-      <div class="-mx-4 flex flex-wrap items-center">
-        <div class="w-full px-4 lg:w-7/12 xl:w-8/12">
-          <div class="ud-contact-content-wrapper">
-            <div class="ud-contact-title mb-12 lg:mb-[150px]">
-              <span class="mb-5 text-base font-semibold text-dark">
-                CONTACT US
-              </span>
-              <h2 class="text-[26px] font-semibold">
-                Let's talk about anything<br />
-              </h2>
-            </div>
-            <div class="mb-12 flex flex-wrap justify-between lg:mb-0">
-              <div class="mb-8 flex w-[330px] max-w-full">
-                <div class="mr-6 text-[32px] text-primary">
-                  <svg width="29" height="35" viewBox="0 0 29 35" class="fill-current">
-                    <path
-                      d="M14.5 0.710938C6.89844 0.710938 0.664062 6.72656 0.664062 14.0547C0.664062 19.9062 9.03125 29.5859 12.6406 33.5234C13.1328 34.0703 13.7891 34.3437 14.5 34.3437C15.2109 34.3437 15.8672 34.0703 16.3594 33.5234C19.9688 29.6406 28.3359 19.9062 28.3359 14.0547C28.3359 6.67188 22.1016 0.710938 14.5 0.710938ZM14.9375 32.2109C14.6641 32.4844 14.2812 32.4844 14.0625 32.2109C11.3828 29.3125 2.57812 19.3594 2.57812 14.0547C2.57812 7.71094 7.9375 2.625 14.5 2.625C21.0625 2.625 26.4219 7.76562 26.4219 14.0547C26.4219 19.3594 17.6172 29.2578 14.9375 32.2109Z" />
-                    <path
-                      d="M14.5 8.58594C11.2734 8.58594 8.59375 11.2109 8.59375 14.4922C8.59375 17.7188 11.2187 20.3984 14.5 20.3984C17.7812 20.3984 20.4062 17.7734 20.4062 14.4922C20.4062 11.2109 17.7266 8.58594 14.5 8.58594ZM14.5 18.4297C12.3125 18.4297 10.5078 16.625 10.5078 14.4375C10.5078 12.25 12.3125 10.4453 14.5 10.4453C16.6875 10.4453 18.4922 12.25 18.4922 14.4375C18.4922 16.625 16.6875 18.4297 14.5 18.4297Z" />
-                  </svg>
-                </div>
-                <div>
-                  <h5 class="mb-6 text-lg font-semibold">Our Location</h5>
-                  <p class="text-base text-body-color">
-                    We're based in Slovenia, Europe
-                  </p>
-                </div>
-              </div>
-              <div class="mb-8 flex w-[330px] max-w-full">
-                <div class="mr-6 text-[32px] text-primary">
-                  <svg width="34" height="25" viewBox="0 0 34 25" class="fill-current">
-                    <path
-                      d="M30.5156 0.960938H3.17188C1.42188 0.960938 0 2.38281 0 4.13281V20.9219C0 22.6719 1.42188 24.0938 3.17188 24.0938H30.5156C32.2656 24.0938 33.6875 22.6719 33.6875 20.9219V4.13281C33.6875 2.38281 32.2656 0.960938 30.5156 0.960938ZM30.5156 2.875C30.7891 2.875 31.0078 2.92969 31.2266 3.09375L17.6094 11.3516C17.1172 11.625 16.5703 11.625 16.0781 11.3516L2.46094 3.09375C2.67969 2.98438 2.89844 2.875 3.17188 2.875H30.5156ZM30.5156 22.125H3.17188C2.51562 22.125 1.91406 21.5781 1.91406 20.8672V5.00781L15.0391 12.9922C15.5859 13.3203 16.1875 13.4844 16.7891 13.4844C17.3906 13.4844 17.9922 13.3203 18.5391 12.9922L31.6641 5.00781V20.8672C31.7734 21.5781 31.1719 22.125 30.5156 22.125Z" />
-                  </svg>
-                </div>
-                <div>
-                  <h5 class="mb-6 text-lg font-semibold">How Can We Help?</h5>
-                  <p class="text-base text-body-color">
-                    contact@infold.com
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="w-full px-4 lg:w-5/12 xl:w-4/12">
-          <div
-            class="wow fadeInUp rounded-lg bg-white py-10 px-8 shadow-testimonial sm:py-12 sm:px-10 md:p-[60px] lg:p-10 lg:py-12 lg:px-10 2xl:p-[60px]"
-            data-wow-delay=".2s
-              ">
-            <h3 class="mb-8 text-2xl font-semibold md:text-[26px]">
-              Send us a Message
-            </h3>
-            <form>
-              <div class="mb-6">
-                <label for="fullName" class="block text-xs text-dark">Full Name*</label>
-                <input type="text" name="fullName" placeholder="John Doe"
-                  class="w-full border-0 border-b border-[#f1f1f1] py-4 focus:border-primary focus:outline-none" />
-              </div>
-              <div class="mb-6">
-                <label for="email" class="block text-xs text-dark">Email*</label>
-                <input type="email" name="email" placeholder="example@yourmail.com"
-                  class="w-full border-0 border-b border-[#f1f1f1] py-4 focus:border-primary focus:outline-none" />
-              </div>
-              <div class="mb-6">
-                <label for="message" class="block text-xs text-dark">Message*</label>
-                <textarea name="message" rows="4" placeholder="type your message here"
-                  class="w-full resize-none border-0 border-b border-[#f1f1f1] py-4 focus:border-primary focus:outline-none"></textarea>
-              </div>
-              <div class="mb-0">
-                <button type="submit"
-                  class="inline-flex items-center justify-center rounded bg-primary py-4 px-6 text-base font-medium text-white transition duration-300 ease-in-out hover:bg-dark">
-                  Send Message
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- ====== Contact End ====== -->
-
   <!-- ====== Footer Section Start -->
-  <footer class="wow fadeInUp relative z-10 bg-black" data-wow-delay=".15s">
-    <div class="mt-12 border-t border-opacity-40 py-8 lg:mt-[60px]">
-      <div class="container">
-        <div class="-mx-4 flex flex-wrap">
-          <div class="w-full px-4 md:w-2/3 lg:w-1/2">
-            <div class="my-1">
-              <div class="-mx-3 flex items-center justify-center md:justify-start">
-                <a href="javascript:void(0)" class="px-3 text-base text-[#f3f4fe] hover:text-primary">
-                  Privacy policy
-                </a>
-                <a href="javascript:void(0)" class="px-3 text-base text-[#f3f4fe] hover:text-primary">
-                  Legal notice
-                </a>
-                <a href="javascript:void(0)" class="px-3 text-base text-[#f3f4fe] hover:text-primary">
-                  Terms of service
-                </a>
-              </div>
-            </div>
+  <footer class="bg-slate-50">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="pb-10">
+        <img src="assets/images/logo/logo-blue.png" alt="logo" class="mx-auto max-h-46 w-auto" />
+        <nav class="mt-10 text-sm md:hidden" aria-label="quick links">
+          <div class="-my-1 flex justify-center gap-x-6">
+            <a class="inline-block rounded-lg py-1 px-2 text-sm text-body-color hover:bg-slate-100 hover:text-slate-900"
+              href="#navbar">Home</a>
+            <a class="inline-block rounded-lg py-1 px-2 text-sm text-body-color hover:bg-slate-100 hover:text-slate-900"
+              href="#features">Features</a>
+            <a class="inline-block rounded-lg py-1 px-2 text-sm text-body-color hover:bg-slate-100 hover:text-slate-900"
+              href="#howitworks">How it works</a>
+            <a class="inline-block rounded-lg py-1 px-2 text-sm text-body-color hover:bg-slate-100 hover:text-slate-900"
+              href="#sources">Data</a>
+            <a class="inline-block rounded-lg py-1 px-2 text-sm text-body-color hover:bg-slate-100 hover:text-slate-900"
+              href="#faq">FAQ</a>
           </div>
-          <div class="w-full px-4 md:w-1/3 lg:w-1/2">
-            <div class="my-1 flex justify-center md:justify-end">
-              <p class="text-base text-[#f3f4fe]">
-                Designed and Developed by InFold Solutions
-              </p>
-            </div>
-          </div>
+        </nav>
+      </div>
+      <div class="flex flex-col items-center border-t border-slate-400/10 py-10 sm:flex-row-reverse sm:justify-between">
+        <div class="flex gap-x-2">
+          <a href="mailto:support@infold.ai">
+            <svg width="800px" height="800px" viewBox="0 0 24 24"
+              class="h-6 w-6 fill-slate-500 group-hover:fill-slate-700 inline-flex" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM7.005 9C7.005 8.45 7.45 8 8 8H16C16.55 8 17 8.45 17 9V15C17 15.55 16.55 16 16 16H8C7.45 16 7 15.55 7 15L7.005 9ZM12 12.5L8.00001 9.99997V15H16V9.99997L12 12.5ZM12 11.5L8.00001 9.00001H16L12 11.5Z" />
+            </svg>
+            <span class="text-sm text-body-color text-underline">support@infold.ai</span>
+          </a>
+          <a class="group" aria-label="TaxPal on Twitter" href="https://twitter.com">
+            <svg aria-hidden="true" class="h-6 w-6 fill-slate-500 group-hover:fill-slate-700">
+              <path
+                d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0 0 22 5.92a8.19 8.19 0 0 1-2.357.646 4.118 4.118 0 0 0 1.804-2.27 8.224 8.224 0 0 1-2.605.996 4.107 4.107 0 0 0-6.993 3.743 11.65 11.65 0 0 1-8.457-4.287 4.106 4.106 0 0 0 1.27 5.477A4.073 4.073 0 0 1 2.8 9.713v.052a4.105 4.105 0 0 0 3.292 4.022 4.093 4.093 0 0 1-1.853.07 4.108 4.108 0 0 0 3.834 2.85A8.233 8.233 0 0 1 2 18.407a11.615 11.615 0 0 0 6.29 1.84">
+              </path>
+            </svg>
+          </a>
+          <a class="group" aria-label="TaxPal on GitHub" href="https://github.com">
+            <svg aria-hidden="true" class="h-6 w-6 fill-slate-500 group-hover:fill-slate-700">
+              <path
+                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2Z">
+              </path>
+            </svg>
+          </a>
         </div>
+        <p class="mt-6 text-sm text-body-color sm:mt-0 flex">Copyright &copy;&nbsp;<span
+            id="currentYear">2023</span>&nbsp;InFold.ai.
+          All
+          rights reserved.
+        </p>
       </div>
     </div>
   </footer>
