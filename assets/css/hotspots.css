@@ -1,5 +1,49 @@
+/** Hotspot **/
+
+.hostpot-target .outer-circle {
+  opacity: 0;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-name: outerCircleAnimation;
+  animation-delay: 1.5s;
+}
+
+@keyframes outerCircleAnimation {
+  0% {
+    transform: scaleX(1);
+    opacity: 1
+  }
+
+  to {
+    transform: scale3d(2.3, 2.3, 2.3);
+    opacity: 0
+  }
+}
+
+.hostpot-target .inner-circle {
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-name: innerCircleAnimation;
+}
+
+@keyframes innerCircleAnimation {
+  0% {
+    transform: scaleX(1)
+  }
+
+  18% {
+    transform: scale3d(.3, .3, .3);
+  }
+
+  to {
+    transform: scaleX(1)
+  }
+}
+
 #hotspot1 {
-  top: 94px;
+  top: 93px;
   left: 451.8px;
   height: 40px;
   width: 40px;
