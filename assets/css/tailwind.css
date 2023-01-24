@@ -60,6 +60,7 @@ body {
   /* 1 */
   line-height: inherit;
   /* 2 */
+  font-family: "Inter", sans-serif;
 }
 
 /*
@@ -1971,50 +1972,9 @@ Ensure the default browser behavior of the `hidden` attribute.
   order: 2;
 }
 
-body {
-  font-family: "Inter", sans-serif;
-}
-
-.sticky {
-  position: fixed;
-  z-index: 9999;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-  --tw-bg-opacity: 0.8;
-  transition-property: color, background-color, border-color, fill, stroke,
-    opacity, box-shadow, transform, filter, -webkit-text-decoration-color,
-    -webkit-backdrop-filter;
-  transition-property: color, background-color, border-color,
-    text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
-    backdrop-filter;
-  transition-property: color, background-color, border-color,
-    text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
-    backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-  -webkit-backdrop-filter: blur(5px);
-  backdrop-filter: blur(5px);
-  box-shadow: inset 0 -1px 0 0 rgba(0, 0, 0, 0.1);
-}
-
-.sticky .navbar-logo {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-}
-
 #navbarToggler span {
   --tw-bg-opacity: 1;
   background-color: rgb(9 14 52 / var(--tw-bg-opacity));
-}
-
-.sticky #navbarCollapse li a {
-  --tw-text-opacity: 1;
-  color: rgb(9 14 52 / var(--tw-text-opacity));
-}
-
-.sticky #navbarCollapse li a:hover {
-  --tw-text-opacity: 1;
-  color: rgb(29 155 240 / var(--tw-text-opacity));
-  opacity: 1;
 }
 
 #navbarCollapse li .ud-menu-scroll.active {
@@ -2112,6 +2072,15 @@ body {
 .hover\:bg-primary:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(29 155 240 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-primary\:span:hover span {
+  --tw-bg-opacity: 1;
+  background-color: rgb(29 155 240 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-primary\:span:hover span svg {
+  fill: white;
 }
 
 .hover\:bg-dark:hover {
