@@ -2023,37 +2023,7 @@ body {
   color: rgb(15 23 42/var(--tw-text-opacity));
   --tw-bg-opacity: 1;
   background-color: rgb(241 245 249/var(--tw-bg-opacity));
-}
-
-.sticky #navbarCollapse li .ud-menu-scroll.active {
-  --tw-text-opacity: 1;
-  color: rgb(29 155 240 / var(--tw-text-opacity));
-  opacity: 1;
-}
-
-.sticky .loginBtn {
-  --tw-text-opacity: 1;
-  color: rgb(9 14 52 / var(--tw-text-opacity));
-}
-
-.sticky .loginBtn:hover {
-  --tw-text-opacity: 1;
-  color: rgb(29 155 240 / var(--tw-text-opacity));
-  opacity: 1;
-}
-
-.sticky .signUpBtn {
-  --tw-bg-opacity: 1;
-  background-color: rgb(29 155 240 / var(--tw-bg-opacity));
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.sticky .signUpBtn:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(9 14 52 / var(--tw-bg-opacity));
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
+  cursor: default;
 }
 
 .navbarTogglerActive>span:nth-child(1) {
@@ -2208,7 +2178,7 @@ body {
 
 .hover\:bg-slate-100:hover {
   --tw-bg-opacity: 1;
-  background-color: rgb(241 245 249/var(--tw-bg-opacity));
+  background-color: rgb(244 247 255 / var(--tw-bg-opacity));
 }
 
 .hover\:text-slate-900:hover {
@@ -2326,6 +2296,11 @@ body {
 
   .sm\:right-0 {
     right: 0px;
+  }
+
+  .sm-only\:px-4 {
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 }
 

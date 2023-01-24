@@ -259,3 +259,9 @@
 [tooltip][flow^="right"]:focus::after {
   animation: tooltips-horz 100ms ease-out forwards;
 }
+
+@media (max-width: 480px) {
+  [tooltip]::after {
+    width: 200px;
+  }
+}

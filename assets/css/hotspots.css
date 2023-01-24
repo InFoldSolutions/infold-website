@@ -6,10 +6,15 @@
 }
 
 .hotspot {
-  background-color: rgb(244 247 255);
-  padding: 3px;
-  border: 1px solid rgb(29 155 240);
+  background-color: rgba(29, 155, 240, 0.15);
+  padding: 4px;
+  transition: border linear 0.2s;
+  border: 2px solid rgba(29, 155, 240, 0);
   border-radius: 50%;
+}
+
+.hotspot:hover {
+  border-color: rgba(29, 155, 240, 1);
 }
 
 .hotspot.close {
@@ -19,8 +24,8 @@
   cursor: pointer;
   color: white;
   border-radius: 50%;
-  width: 19px;
-  height: 19px;
+  width: 25px;
+  height: 25px;
 }
 
 .hotspot.close svg {
@@ -28,78 +33,79 @@
 }
 
 .hotspot span {
-  width: 10px;
-  height: 10px;
+  width: 17px;
+  height: 17px;
   background-color: rgb(29 155 240);
+  border: 3px solid white;
   border-radius: 50%;
 
   animation-duration: 1.5s;
   animation-iteration-count: infinite;
-  animation-timing-function: linear;
+  animation-timing-function: ease-in-out;
   animation-name: innerHotspotAnimation;
 }
 
 @keyframes innerHotspotAnimation {
   0% {
-    transform: scaleX(1)
+    transform: scale(1)
   }
 
   18% {
-    transform: scale3d(.83, .83, .83);
+    transform: scale(0.88);
   }
 
   to {
-    transform: scaleX(1)
+    transform: scale(1)
   }
 }
 
 #hotspot2 {
-  top: 156px;
-  left: 440px;
+  top: 151px;
+  left: 435px;
 }
 
 #hotspot3 {
-  top: 218px;
+  top: 214px;
   left: 272px;
 }
 
 #hotspot4 {
-  top: 189px;
-  left: 359px;
+  top: 185px;
+  left: 353px;
 }
 
 #hotspot5 {
-  left: 66.4%;
+  left: 66.2%;
   top: 28.5%;
 }
 
 #hotspot6 {
-  left: 29%;
-  top: 27.3%;
+  left: 27%;
+  top: 26.5%;
 }
 
 #hotspot7 {
-  left: 21%;
-  top: 39.3%;
+  left: 17%;
+  top: 38%;
 }
 
 #hotspot8 {
-  right: 39.5%;
-  top: 50.3%;
+  right: 26.5%;
+  top: 49%;
 }
 
 #hotspot9 {
-  bottom: 22.8%;
+  bottom: 17.5%;
   left: 17.1%;
 }
 
 #hotspot10 {
-  bottom: 22.82%;
+  bottom: 17.5%;
   left: 33.5%;
 }
 
 #hotspot11 {
-  bottom: 22.92%;
+  bottom: 17.5%;
   left: 50.5%;
 }
 
@@ -111,18 +117,53 @@
   }
 
   #hotspot2 {
-    top: 125px;
-    left: 355px;
+    top: 119px;
+    left: 350px;
   }
 
   #hotspot3 {
-    top: 175px;
-    left: 218px;
+    top: 170px;
+    left: 213px;
   }
 
   #hotspot4 {
-    top: 152px;
-    left: 288px;
+    top: 147px;
+    left: 283px;
+  }
+
+  #hotspot5 {
+    left: 66%;
+    top: 28%;
+  }
+
+  #hotspot6 {
+    left: 34%;
+    top: 21%;
+  }
+
+  #hotspot7 {
+    left: 24%;
+    top: 36%;
+  }
+
+  #hotspot8 {
+    right: 19%;
+    top: 49%;
+  }
+
+  #hotspot9 {
+    bottom: 10%;
+    left: 23.5%;
+  }
+
+  #hotspot10 {
+    bottom: 10%;
+    left: 39%;
+  }
+
+  #hotspot11 {
+    bottom: 10%;
+    left: 57%;
   }
 }
 
@@ -133,22 +174,52 @@
   }
 
   #hotspot2 {
-    top: 42%;
-    left: 50%;
+    top: 39%;
+    left: 52%;
   }
 
   #hotspot3 {
-    top: 61%;
-    left: 31.5%;
+    top: 57%;
+    left: 29.5%;
   }
 
   #hotspot4 {
-    top: 52%;
+    top: 48%;
     left: 41%;
   }
 
   #hotspot5 {
-    left: 65.4%;
-    top: 24.5%;
+    left: 64.4%;
+    top: 21.5%;
+  }
+
+  #hotspot6 {
+    left: 33%;
+    top: 17%;
+  }
+
+  #hotspot7 {
+    left: 22%;
+    top: 32%;
+  }
+
+  #hotspot8 {
+    right: 17%;
+    top: 45%;
+  }
+
+  #hotspot9 {
+    bottom: 6.5%;
+    left: 21.1%;
+  }
+
+  #hotspot10 {
+    bottom: 6.5%;
+    left: 37.5%;
+  }
+
+  #hotspot11 {
+    bottom: 6.5%;
+    left: 53.5%;
   }
 }
