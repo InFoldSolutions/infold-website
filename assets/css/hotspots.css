@@ -9,7 +9,7 @@
   background-color: rgba(29, 155, 240, 0.15);
   padding: 4px;
   transition: border linear 0.2s;
-  border: 2px solid rgba(29, 155, 240, 0);
+  border: 2px solid rgba(29, 155, 240, 0.15);
   border-radius: 50%;
 }
 
