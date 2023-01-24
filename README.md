@@ -1,9 +1,10 @@
 # InFold marketing website
 
-This is Tailwind CSS version of our old [Bootstrap](https://preview.uideck.com/items/play-bootstrap/) project.
+The goal here is for the user to understand what the InFold product is about and how it works.
 
-### This template crafted using 🥞 [TailGrids](https://tailgrids.com/) UI components
+Main sections:
 
-### [🚀 View Demo](https://play-tailwind.tailgrids.com/)
-
-[![play-tailwind](https://cdn.tailgrids.com/play-tailwind.jpg)](https://play-tailwind.tailgrids.com/)
+- Features
+- How it works
+- Data aggregation
+- FAW
