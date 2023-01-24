@@ -155,6 +155,21 @@ window.onload = (event) => {
 
   window.document.addEventListener("scroll", onScroll);
 
+  // ==== Preload images
+
+  const images = []; // need to stay in memory I guess 
+
+  function preload() {
+    for (var i = 0; i < arguments.length; i++) {
+      images[i] = new Image();
+      images[i].src = preload.arguments[i];
+    }
+  }
+
+  preload(
+    "assets/images/previews/preview-twitter-open.png"
+  )
+
   // ===== wow js
   new WOW().init();
 
