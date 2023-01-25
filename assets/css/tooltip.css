@@ -262,6 +262,6 @@
 
 @media (max-width: 480px) {
   [tooltip]::after {
-    width: 200px;
+    width: 210px;
   }
 }

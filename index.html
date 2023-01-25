@@ -148,7 +148,7 @@
                 <span></span>
               </div>
               <div id="hotspot3" class="hotspot absolute" hidden color="lightblue"
-                tooltip="List of sources that wrote or provided feedback on the same topic." flow="down" onclick="">
+                tooltip="List of sources that wrote or provided feedback on the same topic." flow="right" onclick="">
                 <span></span>
               </div>
               <div id="hotspot4" class="hotspot absolute" hidden color="lightblue"
@@ -696,7 +696,7 @@
           </div>
           <div id="hotspot7" class="hotspot absolute flex" color="lightblue"
             tooltip="External links are parsed, content extracted and its text automatically analysed and classifed."
-            flow="down" onclick="">
+            flow="right" onclick="">
             <span></span>
           </div>
           <div id="hotspot8" class="hotspot absolute flex" color="lightblue"
@@ -706,7 +706,7 @@
           </div>
           <div id="hotspot9" class="hotspot absolute flex" color="lightblue"
             tooltip="When aggregating accross multiple posts, likes provide good insights on which are more relevant than others."
-            flow="up" onclick=""><span></span>
+            flow="right" onclick=""><span></span>
           </div>
           <div id="hotspot10" class="hotspot absolute flex" color="lightblue"
             tooltip="Comments can give an overview on general sentiment and social feedback." flow="up" onclick="">
@@ -716,7 +716,10 @@
             tooltip="Lightbulb icon will include the count of all related resources that our algorithms identified."
             flow="up" onclick=""><span></span>
           </div>
-          <img src="assets/images/previews/reddit-preview.png" class="lg:-ml-24" />
+          <picture>
+            <source srcset="assets/images/previews/reddit-preview-mobile.png" media="(max-width: 480px)"/>
+            <img src="assets/images/previews/reddit-preview.png" class="lg:-ml-24" />
+          </picture>
         </div>
         <div class="w-full md:pl-8 lg:w-1/2">
           <div class="max-w-[620px] sm-only:px-4">
