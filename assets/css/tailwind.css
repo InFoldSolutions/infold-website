@@ -1083,7 +1083,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 
 .max-w-\[890px\] {
-  max-width: 850px;
+  max-width: 890px;
+}
+
+.max-w-\[960px\] {
+  max-width: 960px;
 }
 
 .max-w-\[160px\] {
