@@ -2626,8 +2626,8 @@ Ensure the default browser behavior of the `hidden` attribute.
     margin-bottom: 2.75rem;
   }
 
-  .lg\:-ml-24 {
-    margin-left: -6rem;
+  .lg\:-ml-12 {
+    margin-left: -3rem;
   }
 
   .lg\:ml-6 {
