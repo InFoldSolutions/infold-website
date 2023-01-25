@@ -124,9 +124,9 @@
 
         <div class="w-full sm:px-4">
           <div class="wow fadeInUp relative z-10 mx-auto max-w-[960px]" data-wow-delay=".25s">
-            <div class="mt-16 relative">
+            <div class="mt-16 relative sm-only:overflow-hidden">
               <img src="assets/images/previews/preview-twitter.png" alt="Twitter preview"
-                class="mx-auto max-w-full rounded-t-xl rounded-tr-xl" id="twitter-preview" />
+                class="mx-auto max-w-full rounded-t-xl rounded-tr-xl sm-only:width-200 sm-only:-ml-40 sm-only:max-width-none" id="twitter-preview" />
               <div id="hotspot1"
                 class="cursor-pointer absolute flex justify-center items-center transition-transform transform-gpu duration-700 ease-in-out delay-100"
                 color="lightblue"
@@ -163,7 +163,7 @@
                 </svg>
               </div>
             </div>
-            <div class="absolute -bottom-18 -left-29 z-[-1] sm:left-0">
+            <div class="absolute -bottom-18 -left-29 z-[-1] sm:left-0 sm-only:-bottom-28">
               <svg width="134" height="106" viewBox="0 0 134 106" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="1.66667" cy="104" r="1.66667" transform="rotate(-90 1.66667 104)" fill="rgb(25, 155, 240)">
                 </circle>
@@ -602,8 +602,8 @@
             <h2 class="mb-4 text-3xl font-bold text-dark sm:text-4xl md:text-[42px] flex items-center">
               Main Features <a href="javascript:void(0)"
                 class="flex items-center justify-center text-base font-normal md:ml-6 sm:min-w-6 hover:bg-primary:span">
-                <span class="h-10 w-10 flex items-center justify-center bg-white rounded-full shadow-circle-black mr-2">
-                  <svg width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
+                <span class="h-10 w-10 flex items-center justify-center bg-white rounded-full shadow-circle-black mr-2 transition duration-300">
+                  <svg width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg" class="transition duration-300">
                     <path
                       d="M13.6077 6.63397C14.2743 7.01887 14.2743 7.98112 13.6077 8.36602L2.35767 14.8612C1.691 15.2461 0.857665 14.765 0.857665 13.9952L0.857666 1.00481C0.857666 0.23501 1.691 -0.246117 2.35767 0.138783L13.6077 6.63397Z"></path>
                   </svg>

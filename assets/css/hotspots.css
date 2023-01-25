@@ -140,17 +140,17 @@
 
 #hotspot9 {
   bottom: 17%;
-  left: 19.2%;
+  left: 19%;
 }
 
 #hotspot10 {
   bottom: 17%;
-  left: 34.6%;
+  left: 34.5%;
 }
 
 #hotspot11 {
   bottom: 17%;
-  left: 51.7%;
+  left: 51.5%;
 }
 
 /* iPad */
@@ -213,28 +213,28 @@
 
 @media (max-width: 480px) {
   #hotspot1 {
-    left: 50.3%;
-    top: 20.2%;
+    left: 65.3%;
+    top: 26.5%;
   }
 
   #hotspot2 {
-    top: 39%;
-    left: 49%;
+    top: 43.3%;
+    left: 61%;
   }
 
   #hotspot3 {
-    top: 57%;
-    left: 29.5%;
+    top: 62%;
+    left: 23.5%;
   }
 
   #hotspot4 {
-    top: 49%;
-    left: 39.5%;
+    top: 53.5%;
+    left: 42.3%;
   }
 
   #hotspot5 {
-    left: 64.4%;
-    top: 21.5%;
+    left: 91.3%;
+    top: 27%;
   }
 
   #hotspot6 {
