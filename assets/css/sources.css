@@ -1,16 +1,16 @@
 .wikipedia {
-  top: -1rem;
-  left: 14rem;
+  top: 0rem;
+  left: 12rem;
 }
 
 .wolfram {
-  top: 2.5rem;
-  left: 5rem;
+  top: 9rem;
+  left: 11rem;
 }
 
 .scihub {
-  top: 3rem;
-  left: 25rem;
+  top: 1.5rem;
+  left: 5rem;
 }
 
 .newscientist {
@@ -19,23 +19,23 @@
 }
 
 .nature {
-  top: 2rem;
-  left: 5rem;
+  top: 10rem;
+  left: 4rem;
 }
 
 .techcrunch {
-  top: -1rem;
-  left: 15rem;
+  top: 10rem;
+  left: 4rem;
 }
 
 .foxnews {
-  top: 2.5rem;
-  left: 5.5rem;
+  top: 8.5rem;
+  right: 11.5rem;
 }
 
 .cnn {
-  top: 5rem;
-  left: 27rem;
+  top: 0rem;
+  right: 12rem;
 }
 
 .dw {
@@ -44,13 +44,13 @@
 }
 
 .medium {
-  top: 2rem;
-  left: 5.5rem;
+  top: 1.5rem;
+  right: 4.5rem;
 }
 
 .substack {
-  top: -1rem;
-  left: 16rem;
+  top: 9.5rem;
+  right: 3.5rem;
 }
 
 .writeas {
@@ -64,7 +64,7 @@
     margin: 20px 25px 0px 0px;
   }
 
-  .source > div {
+  .source>div {
     width: 7rem;
     height: 7rem;
   }
@@ -75,7 +75,7 @@
 }
 
 @media (max-width: 480px) {
-  .source > div {
+  .source>div {
     width: 4.5rem;
     height: 4.5rem;
   }
