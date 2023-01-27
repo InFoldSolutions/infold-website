@@ -673,7 +673,7 @@
             <div class="relative z-10 mb-8 flex h-[70px] w-[70px] items-center justify-center rounded-2xl bg-primary">
               <span
                 class="absolute top-0 left-0 z-[-1] mb-8 flex h-[70px] w-[70px] rotate-[25deg] items-center justify-center rounded-2xl bg-primary bg-opacity-20 duration-300 group-hover:rotate-45"></span>
-              <img src="assets/images/features/awards.svg" width="53">
+              <img src="assets/images/features/user-attach.svg" width="53">
             </div>
             <h4 class="mb-3 text-xl font-bold text-dark">
               User Engagement
@@ -788,11 +788,11 @@
           </div>
         </div>
       </div>
-      <div class="um hc ot oi">
+      <div class="flex flex-wrap">
 
         <!-- Logo animation -->
-        <div class="flex relative items-center flex-col">
-          <div class="relative w-70p">
+        <div class="flex relative items-center flex-col w-full">
+          <div class="relative w-70p md:w-full">
             <div class="wow fadeInUp text-center absolute justify-center items-center flex flex-column wikipedia source"
               data-wow-delay=".2s">
               <div
@@ -865,14 +865,14 @@
         </div>
 
         <!-- Integration boxes -->
-        <div class="relative mx-auto display-grid grid-columns-4 gap-x-8 mt-24">
+        <div class="relative display-grid grid-columns-4 md-only:grid-columns-2 sm-only:grid-columns-1 gap-8 mt-24 max-w-full">
           <!-- Top vertical line -->
           <div class="absolute w-1 h-6 -top-15 bg-primary bg-opacity-40 left-1/2" aria-hidden="true"></div>
           <div
             class="relative flex aspect-1 justify-center items-center bg-white rounded-lg border border-[#F3F4FE] p-8"
             data-aos="fade-up">
             <!-- Inner lines -->
-            <div class="rs cd absolute te ir h-6 -top-8 left-1/2 ik" aria-hidden="true">
+            <div class="rs cd absolute te ir h-6 -top-8 left-1/2 ik sm-only:hidden" aria-hidden="true">
               <div class="absolute w-1 h-full bg-primary bg-opacity-40 left-1/2 ik"></div>
               <div class="absolute w-full h-1 bg-primary bg-opacity-40 left-1/2"></div>
             </div>
@@ -895,7 +895,7 @@
             <!-- Inner lines -->
             <div class="rs cd absolute te ir h-6 -top-8 left-1/2 ik" aria-hidden="true">
               <div class="absolute w-1 h-full bg-primary bg-opacity-40 left-1/2 ik"></div>
-              <div class="absolute w-50p h-1 bg-primary bg-opacity-40 left-1/2"></div>
+              <div class="absolute w-50p h-1 bg-primary bg-opacity-40 left-1/2 md:hidden"></div>
             </div>
             <!-- Circle -->
             <div class="ok o_ oz is ry sx rn su ss">
@@ -903,7 +903,7 @@
               <div class="relative z-10 mb-8 flex h-[70px] w-[70px] items-center justify-center rounded-2xl bg-primary">
                 <span
                   class="absolute top-0 left-0 z-[-1] mb-8 flex h-[70px] w-[70px] rotate-[25deg] items-center justify-center rounded-2xl bg-primary bg-opacity-20 duration-300 group-hover:rotate-45"></span>
-                <img src="assets/images/sources/beaker.svg" width="48">
+                <img src="assets/images/sources/beaker.svg" width="50">
               </div>
               <h3 class="mb-3 text-xl font-bold text-dark">Science and Tech</h3>
               <p class="text-body-color">Research, news, commentary about science, technology and nature from scientific
@@ -914,9 +914,9 @@
             class="relative flex aspect-1 justify-center items-center bg-white rounded-lg border border-[#F3F4FE] p-8"
             data-aos="fade-up" data-aos-delay="200">
             <!-- Inner lines -->
-            <div class="rs cd absolute te ir h-6 -top-8 left-1/2 ik" aria-hidden="true">
+            <div class="rs cd absolute te ir h-6 -top-8 left-1/2 ik md:-top-1-8" aria-hidden="true">
               <div class="absolute w-1 h-full bg-primary bg-opacity-40 left-1/2 ik"></div>
-              <div class="absolute w-full h-1 bg-primary bg-opacity-40"></div>
+              <div class="absolute w-full h-1 bg-primary bg-opacity-40 md:hidden"></div>
             </div>
             <!-- Circle -->
             <div class="ok o_ oz is ry sx rn su ss">
@@ -935,9 +935,9 @@
             class="relative flex aspect-1 justify-center items-center bg-white rounded-lg border border-[#F3F4FE] p-8"
             data-aos="fade-up" data-aos-delay="300">
             <!-- Inner lines -->
-            <div class="rs cd absolute te ir h-6 -top-8 left-1/2 ik" aria-hidden="true">
+            <div class="rs cd absolute te ir h-6 -top-8 left-1/2 ik md:-top-1-8" aria-hidden="true">
               <div class="absolute w-1 h-full bg-primary bg-opacity-40 left-1/2 ik"></div>
-              <div class="absolute w-50p h-1 bg-primary bg-opacity-40"></div>
+              <div class="absolute w-50p h-1 bg-primary bg-opacity-40 md:hidden"></div>
             </div>
             <!-- Circle -->
             <div class="ok o_ oz is ry sx rn su ss">
@@ -1062,7 +1062,7 @@
                 </h4>
               </div>
             </button>
-            <div class="faq-content pl-[62px]">
+            <div class="faq-content md:hidden pl-[62px]">
               <p class="py-3 text-base leading-relaxed text-body-color">
                 By providing broader context we help our users to better understand the information they are reading.
                 This allows them to quickly and easily understand the bias and accuracy, and make more informed

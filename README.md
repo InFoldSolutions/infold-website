@@ -8,3 +8,9 @@ Main sections:
 - How it works
 - Data aggregation
 - FAW
+
+Icon set:
+https://www.svgrepo.com/collection/fluent-ui-icons-outlined
+
+Template:
+https://play-tailwind.tailgrids.com/

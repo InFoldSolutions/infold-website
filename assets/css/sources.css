@@ -59,18 +59,44 @@
 }
 
 @media (max-width: 1150px) {
-  .source {
-    position: static;
-    margin: 20px 25px 0px 0px;
+  .wikipedia {
+    top: 0rem;
+    left: 7rem;
   }
 
-  .source>div {
-    width: 7rem;
-    height: 7rem;
+  .scihub {
+    top: 1.5rem;
+    left: 1rem;
   }
 
-  .icons {
-    order: 99;
+  .nature {
+    top: 10rem;
+    left: 1.5rem;
+  }
+
+  .wolfram {
+    top: 9rem;
+    left: 8rem;
+  }
+
+  .cnn {
+    top: 0rem;
+    right: 8rem;
+  }
+
+  .foxnews {
+    top: 8.5rem;
+    right: 8.5rem;
+  }
+
+  .medium {
+    top: 1.5rem;
+    right: 1rem;
+  }
+
+  .substack {
+    top: 9.5rem;
+    right: 1.5rem;
   }
 }
 
@@ -81,6 +107,6 @@
   }
 
   .source {
-    margin: 20px 20px 0px 0px;
+    display: none;
   }
 }
