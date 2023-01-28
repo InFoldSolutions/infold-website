@@ -169,8 +169,4 @@ window.onload = (event) => {
   preload(
     "assets/images/previews/preview-twitter-open.png"
   )
-
-  // ===== wow js
-  new WOW().init();
-
 }
