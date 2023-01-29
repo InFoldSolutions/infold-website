@@ -2494,6 +2494,10 @@ END: Need to rename these
   .sm-only\:-bottom-28 {
     bottom: -28px;
   }
+  
+  .sm-only\:-top-1\.8 {
+    top: -1.8rem;
+  }
 
   .sm-only\:grid-columns-1 {
     grid-template-columns: repeat(1, minmax(0, 1fr));
