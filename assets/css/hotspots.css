@@ -42,7 +42,7 @@
   }
 }
 
-#hotspot1 {
+#hotspot0 {
   top: 107px;
   left: 513px;
   height: 40px;
@@ -114,6 +114,11 @@
   color: white;
 }
 
+#hotspot1 {
+  top: 36%;
+  left: 300px;
+}
+
 #hotspot2 {
   top: 173px;
   left: 488px;
@@ -170,7 +175,7 @@
     bottom: 6%;
   }
 
-  #hotspot1 {
+  #hotspot0 {
     top: 71px;
     left: 361.8px;
   }
@@ -233,7 +238,7 @@
     width: 79%;
   }
 
-  #hotspot1 {
+  #hotspot0 {
     left: 65.3%;
     top: 26.5%;
   }

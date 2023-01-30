@@ -90,8 +90,7 @@
             </h1>
             <p
               class="mx-auto mb-10 max-w-[600px] text-base sm:text-lg sm:leading-relaxed md:text-xl md:leading-relaxed text-body-color">
-              Your personal A.I. assistant that reads and compares millions of information sources, so you don't have
-              to.
+              Your personal A.I. assistant that reads and compares millions of information sources, so you don't have to.
             </p>
             <ul class="mb-10 flex flex-wrap items-center justify-center">
               <li>
@@ -115,10 +114,10 @@
                 <img src="assets/images/platforms/reddit.svg" alt="image" width="50" class="opacity-90" />
               </div>
               <div class="flex content-center justify-center mr-6" color="lightblue" tooltip-width="auto"
-                tooltip="Facebook" flow="down" onclick="">
+                tooltip="Facebook:TBA" flow="down" onclick="">
                 <img src="assets/images/platforms/facebook.svg" alt="image" width="50" class="opacity-30" />
               </div>
-              <div class="flex content-center justify-center" color="lightblue" tooltip-width="auto" tooltip="Youtube"
+              <div class="flex content-center justify-center" color="lightblue" tooltip-width="auto" tooltip="Youtube:TBA"
                 flow="down" onclick="">
                 <img src="assets/images/platforms/youtube.svg" alt="image" width="50" class="opacity-30" />
               </div>
@@ -132,10 +131,10 @@
               <img src="assets/images/previews/preview-twitter.png" alt="Twitter preview"
                 class="mx-auto max-w-full rounded-t-xl rounded-tr-xl sm-only:width-200 sm-only:-ml-40 sm-only:max-width-none"
                 id="twitter-preview" />
-              <div id="hotspot1"
+              <div id="hotspot0"
                 class="cursor-pointer absolute flex justify-center items-center transition-transform transform-gpu duration-700 ease-in-out delay-100"
                 color="lightblue"
-                tooltip="Lookout for the lightbulb icon, click it to gain additional insights and resources."
+                tooltip="Light bulb signifies that we found related context and resources."
                 flow="right" onclick="">
                 <span>
                   <div class="select-none" style="height: 80px; width: 80px;">
@@ -148,12 +147,16 @@
                   </div>
                 </span>
               </div>
+              <div id="hotspot1" class="hotspot absolute" hidden color="lightblue"
+                tooltip="Related item tile and metadata." flow="up" onclick="">
+                <span></span>
+              </div>
               <div id="hotspot2" class="hotspot absolute" hidden color="lightblue"
-                tooltip="Related content metadata, source info and short description." flow="up" onclick="">
+                tooltip="Source info and short body summary." flow="up" onclick="">
                 <span></span>
               </div>
               <div id="hotspot3" class="hotspot absolute" hidden color="lightblue"
-                tooltip="List of sources that wrote or provided feedback on the same topic." flow="right" onclick="">
+                tooltip="List of sources that wrote about the same topic." flow="right" onclick="">
                 <span></span>
               </div>
               <div id="hotspot4" class="hotspot absolute" hidden color="lightblue"
@@ -168,7 +171,7 @@
                 </svg>
               </div>
               <div id="hotspot-info1" class="absolute" hidden>
-                Context dialog next to a post with related resources.
+                A dialog opens next to a post with related resources.
               </div>
             </div>
             <div class="absolute -bottom-18 -left-29 z-[-1] sm:left-0 sm-only:-bottom-28">
@@ -715,7 +718,7 @@
             <span></span>
           </div>
           <div id="hotspot9" class="hotspot absolute flex" color="lightblue"
-            tooltip="When aggregating accross multiple posts, likes provide good insights on which are more relevant than others."
+            tooltip="When comparing multiple posts, likes provide good insights on which are more relevant than others."
             flow="right" onclick=""><span></span>
           </div>
           <div id="hotspot10" class="hotspot absolute flex" color="lightblue"
@@ -723,7 +726,7 @@
             <span></span>
           </div>
           <div id="hotspot11" class="hotspot absolute flex" color="lightblue"
-            tooltip="Lightbulb icon will include the count of all related resources that our algorithms identified."
+            tooltip="Count of related resources that our algorithms identified."
             flow="up" onclick=""><span></span>
           </div>
           <picture>

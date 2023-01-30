@@ -84,14 +84,14 @@ window.onload = (event) => {
   // ==== Hotspot click
 
   const twitterPreview = document.getElementById("twitter-preview");
-  const hotspot1 = document.getElementById("hotspot1");
+  const hotspot0 = document.getElementById("hotspot0");
   const hotspot5 = document.getElementById("hotspot5");
   const homeHotspots = document.querySelectorAll("#home .hotspot");
   const homehotspotInfo = document.getElementById("hotspot-info1");
 
-  hotspot1.addEventListener("click", () => {
+  hotspot0.addEventListener("click", () => {
     twitterPreview.src = "assets/images/previews/preview-twitter-open.png";
-    hotspot1.classList.add("hidden");
+    hotspot0.classList.add("hidden");
     homeHotspots.forEach((el) => {
       el.classList.remove("hidden");
       el.classList.add("flex");
@@ -101,7 +101,7 @@ window.onload = (event) => {
 
   hotspot5.addEventListener("click", () => {
     twitterPreview.src = "assets/images/previews/preview-twitter.png";
-    hotspot1.classList.remove("hidden");
+    hotspot0.classList.remove("hidden");
     homeHotspots.forEach((el) => {
       el.classList.add("hidden");
       el.classList.remove("flex");
