@@ -90,8 +90,8 @@
             </h1>
             <p
               class="mx-auto mb-10 max-w-[600px] text-base sm:text-lg sm:leading-relaxed md:text-xl md:leading-relaxed text-body-color">
-              Making social media informative. Explore different perspectives and gain a broader understanding of a
-              topic.
+              Your personal A.I. assistant that reads and compares millions of information sources, so you don't have
+              to.
             </p>
             <ul class="mb-10 flex flex-wrap items-center justify-center">
               <li>
@@ -106,17 +106,21 @@
               <div class="content-center justify-center items-center mr-6 text-body-color md:text-xl sm:visible" hidden>
                 Available on:
               </div>
-              <div class="flex content-center justify-center mr-6">
+              <div class="flex content-center justify-center mr-6" color="lightblue" tooltip-width="auto"
+                tooltip="Twitter" flow="down" onclick="">
                 <img src="assets/images/platforms/twitter.svg" alt="image" width="50" class="opacity-90" />
               </div>
-              <div class="flex content-center justify-center mr-6">
+              <div class="flex content-center justify-center mr-6" color="lightblue" tooltip-width="auto"
+                tooltip="Reddit" flow="down" onclick="">
                 <img src="assets/images/platforms/reddit.svg" alt="image" width="50" class="opacity-90" />
               </div>
-              <div class="flex content-center justify-center mr-6">
+              <div class="flex content-center justify-center mr-6" color="lightblue" tooltip-width="auto"
+                tooltip="Facebook" flow="down" onclick="">
                 <img src="assets/images/platforms/facebook.svg" alt="image" width="50" class="opacity-30" />
               </div>
-              <div class="flex content-center justify-center">
-                <img src="assets/images/platforms/mastodon.svg" alt="image" width="50" class="opacity-30" />
+              <div class="flex content-center justify-center" color="lightblue" tooltip-width="auto" tooltip="Youtube"
+                flow="down" onclick="">
+                <img src="assets/images/platforms/youtube.svg" alt="image" width="50" class="opacity-30" />
               </div>
             </div>
           </div>
@@ -162,6 +166,9 @@
                     </path>
                   </g>
                 </svg>
+              </div>
+              <div id="hotspot-info1" class="absolute" hidden>
+                Context dialog next to a tweet with related resources.
               </div>
             </div>
             <div class="absolute -bottom-18 -left-29 z-[-1] sm:left-0 sm-only:-bottom-28">
@@ -616,8 +623,8 @@
               </a>
             </h2>
             <p class="text-lg leading-relaxed text-body-color sm:text-xl sm:leading-relaxed">
-              A comprehensive set of features that help you counterbalance any potential bias in a single source and
-              provide a more well-rounded view of the information you're reading.
+              A set of tools that help you navigate modern media with confidence and get a well-rounded understanding
+              of any topic, no matter the source.
             </p>
           </div>
         </div>
@@ -699,8 +706,7 @@
             <span></span>
           </div>
           <div id="hotspot7" class="hotspot absolute flex" color="lightblue"
-            tooltip="External links are parsed, content extracted and its text automatically analysed and classifed."
-            flow="right" onclick="">
+            tooltip="External links are parsed, content extracted analysed and classifed." flow="right" onclick="">
             <span></span>
           </div>
           <div id="hotspot8" class="hotspot absolute flex" color="lightblue"
@@ -865,7 +871,8 @@
         </div>
 
         <!-- Integration boxes -->
-        <div class="relative display-grid grid-columns-4 md-only:grid-columns-2 sm-only:grid-columns-1 gap-8 mt-24 max-w-full">
+        <div
+          class="relative display-grid grid-columns-4 md-only:grid-columns-2 sm-only:grid-columns-1 gap-8 mt-24 max-w-full">
           <!-- Top vertical line -->
           <div class="absolute w-1 h-6 -top-15 bg-primary bg-opacity-40 left-1/2" aria-hidden="true"></div>
           <div

@@ -87,14 +87,16 @@ window.onload = (event) => {
   const hotspot1 = document.getElementById("hotspot1");
   const hotspot5 = document.getElementById("hotspot5");
   const homeHotspots = document.querySelectorAll("#home .hotspot");
+  const homehotspotInfo = document.getElementById("hotspot-info1");
 
   hotspot1.addEventListener("click", () => {
     twitterPreview.src = "assets/images/previews/preview-twitter-open.png";
     hotspot1.classList.add("hidden");
     homeHotspots.forEach((el) => {
       el.classList.remove("hidden");
-      el.classList.add("flex")
-    })
+      el.classList.add("flex");
+    });
+    homehotspotInfo.classList.add("flex");
   });
 
   hotspot5.addEventListener("click", () => {
@@ -104,6 +106,7 @@ window.onload = (event) => {
       el.classList.add("hidden");
       el.classList.remove("flex");
     })
+    homehotspotInfo.classList.remove("flex");
   });
 
   // ==== For menu scroll

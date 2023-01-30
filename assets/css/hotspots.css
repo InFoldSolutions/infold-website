@@ -103,6 +103,17 @@
   }
 }
 
+#hotspot-info1 {
+  bottom: 16.5%;
+  border-radius: 8px;
+  left: 28.1%;
+  width: 39.5%;
+  background-color: rgb(29 155 240);
+  padding: 0.4rem 1rem;
+  font-size: 0.8em;
+  color: white;
+}
+
 #hotspot2 {
   top: 173px;
   left: 488px;
@@ -155,6 +166,10 @@
 
 /* iPad */
 @media (max-width: 1024px) {
+  #hotspot-info1 {
+    bottom: 6%;
+  }
+
   #hotspot1 {
     top: 71px;
     left: 361.8px;
@@ -212,6 +227,12 @@
 }
 
 @media (max-width: 480px) {
+  #hotspot-info1 {
+    bottom: 8%;
+    left: 16.1%;
+    width: 79%;
+  }
+
   #hotspot1 {
     left: 65.3%;
     top: 26.5%;

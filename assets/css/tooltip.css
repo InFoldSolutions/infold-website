@@ -66,6 +66,10 @@
   display: none !important;
 }
 
+[tooltip][tooltip-width^="auto"]::after {
+  width: auto;
+}
+
 /* COLOR: GREEN */
 [tooltip][color^="red"]::after {
   background-color: #FF0000;
@@ -262,6 +266,6 @@
 
 @media (max-width: 480px) {
   [tooltip]::after {
-    width: 210px;
+    max-width: 210px;
   }
 }
