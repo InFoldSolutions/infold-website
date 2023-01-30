@@ -180,6 +180,11 @@
     left: 361.8px;
   }
 
+  #hotspot1 {
+    top: 34%;
+    left: 213px;
+  }
+
   #hotspot2 {
     top: 119px;
     left: 350px;
@@ -241,6 +246,11 @@
   #hotspot0 {
     left: 65.3%;
     top: 26.5%;
+  }
+
+  #hotspot1 {
+    top: 34.5%;
+    left: 85px;
   }
 
   #hotspot2 {
