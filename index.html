@@ -90,7 +90,8 @@
             </h1>
             <p
               class="mx-auto mb-10 max-w-[600px] text-base sm:text-lg sm:leading-relaxed md:text-xl md:leading-relaxed text-body-color">
-              Your personal A.I. assistant that reads and compares millions of information sources, so you don't have to.
+              Your personal research assistant that reads and compares millions of information sources, so you don't
+              have to.
             </p>
             <ul class="mb-10 flex flex-wrap items-center justify-center">
               <li>
@@ -117,8 +118,8 @@
                 tooltip="Facebook:TBA" flow="down" onclick="">
                 <img src="assets/images/platforms/facebook.svg" alt="image" width="50" class="opacity-30" />
               </div>
-              <div class="flex content-center justify-center" color="lightblue" tooltip-width="auto" tooltip="Youtube:TBA"
-                flow="down" onclick="">
+              <div class="flex content-center justify-center" color="lightblue" tooltip-width="auto"
+                tooltip="Youtube:TBA" flow="down" onclick="">
                 <img src="assets/images/platforms/youtube.svg" alt="image" width="50" class="opacity-30" />
               </div>
             </div>
@@ -133,8 +134,7 @@
                 id="twitter-preview" />
               <div id="hotspot0"
                 class="cursor-pointer absolute flex justify-center items-center transition-transform transform-gpu duration-700 ease-in-out delay-100"
-                color="lightblue"
-                tooltip="Light bulb indicates that additional resources were found for given post."
+                color="lightblue" tooltip="Light bulb indicates that additional resources were found for given post."
                 flow="down" onclick="">
                 <span>
                   <div class="select-none" style="height: 80px; width: 80px;">
@@ -171,7 +171,7 @@
                 </svg>
               </div>
               <div id="hotspot-info1" class="absolute" hidden>
-                A dialog opens next to the post with related resources.
+                A dialog with related resources is presented next to the post.
               </div>
             </div>
             <div class="absolute -bottom-18 -left-29 z-[-1] sm:left-0 sm-only:-bottom-28">
@@ -726,10 +726,11 @@
             <span></span>
           </div>
           <div id="hotspot11" class="hotspot absolute flex" color="lightblue"
-            tooltip="Count of related resources that our algorithms identified."
-            flow="up" onclick=""><span></span>
+            tooltip="Count of related resources that our algorithms identified." flow="up" onclick="">
+            <span></span>
           </div>
           <picture>
+            <h3 class="">Example post breakdown:</h3>
             <source srcset="assets/images/previews/reddit-preview-mobile.png" media="(max-width: 480px)" />
             <img src="assets/images/previews/reddit-preview.png" class="lg:-ml-12" />
           </picture>
@@ -802,32 +803,29 @@
         <!-- Logo animation -->
         <div class="flex relative items-center flex-col w-full">
           <div class="relative w-70p md:w-full">
-            <div class="wow fadeInUp text-center absolute justify-center items-center flex flex-column wikipedia source"
-             >
+            <div
+              class="wow fadeInUp text-center absolute justify-center items-center flex flex-column wikipedia source">
               <div
                 class="bg-white overflow-hidden rounded-2xl w-16 h-16 justify-center items-center flex shadow-circle mb-2">
                 <img src="assets/images/sources/wikipedia.svg" class="w-80p mt-2" alt="Wikipedia" title="Wikipedia" />
               </div>
               <span class="text-sm">Wikipedia</span>
             </div>
-            <div class="wow fadeInUp text-center absolute justify-center items-center flex flex-column wolfram source"
-             >
+            <div class="wow fadeInUp text-center absolute justify-center items-center flex flex-column wolfram source">
               <div
                 class="bg-white overflow-hidden rounded-2xl w-16 h-16 justify-center items-center flex shadow-circle mb-2">
                 <img src="assets/images/sources/wolfram.svg" class="w-70p" alt="WolframAlpha" title="WolframAlpha" />
               </div>
               <span class="text-sm">Wolfram</span>
             </div>
-            <div class="wow fadeInUp text-center absolute justify-center items-center flex flex-column scihub source"
-             >
+            <div class="wow fadeInUp text-center absolute justify-center items-center flex flex-column scihub source">
               <div
                 class="bg-white overflow-hidden rounded-2xl w-14 h-14 justify-center items-center flex shadow-circle mb-2">
                 <img src="assets/images/sources/sci-hub.svg" class="w-50p" alt="Sci-Hub" title="Sci-Hub" />
               </div>
               <span class="text-sm">Sci-Hub</span>
             </div>
-            <div class="wow fadeInUp text-center absolute justify-center items-center flex flex-column nature source"
-             >
+            <div class="wow fadeInUp text-center absolute justify-center items-center flex flex-column nature source">
               <div
                 class="bg-black overflow-hidden rounded-2xl w-13 h-13 justify-center items-center flex shadow-circle mb-2">
                 <img src="assets/images/sources/nature.svg" class="w-80p" alt="Nature" title="Nature" />
@@ -838,32 +836,28 @@
             <!-- Lightbulb icon -->
             <img src="assets/images/logo/lightbulb-blue.png" class="mx-auto w-60">
 
-            <div class="wow fadeInUp text-center absolute justify-center items-center flex flex-column cnn source"
-             >
+            <div class="wow fadeInUp text-center absolute justify-center items-center flex flex-column cnn source">
               <div
                 class="bg-black overflow-hidden rounded-2xl w-16 h-16 justify-center items-center flex shadow-circle mb-2">
                 <img src="assets/images/sources/cnn.jpg" class="w-full" alt="CNN" title="CNN" />
               </div>
               <span class="text-sm">CNN</span>
             </div>
-            <div class="wow fadeInUp text-center absolute justify-center items-center flex flex-column foxnews source"
-             >
+            <div class="wow fadeInUp text-center absolute justify-center items-center flex flex-column foxnews source">
               <div
                 class="bg-black overflow-hidden rounded-2xl w-16 h-16 justify-center items-center flex shadow-circle mb-2">
                 <img src="assets/images/sources/foxnews.jpg" class="w-full" alt="Fox News" title="Fox News" />
               </div>
               <span class="text-sm">Fox News</span>
             </div>
-            <div class="wow fadeInUp text-center absolute justify-center items-center flex flex-column medium source"
-             >
+            <div class="wow fadeInUp text-center absolute justify-center items-center flex flex-column medium source">
               <div
                 class="bg-black overflow-hidden rounded-2xl w-14 h-14 justify-center items-center flex shadow-circle mb-2">
                 <img src="assets/images/sources/medium.svg" class="w-full" alt="Medium" title="Medium" />
               </div>
               <span class="text-sm">Medium</span>
             </div>
-            <div class="wow fadeInUp text-center absolute justify-center items-center flex flex-column substack source"
-             >
+            <div class="wow fadeInUp text-center absolute justify-center items-center flex flex-column substack source">
               <div
                 class="bg-white overflow-hidden rounded-2xl w-12 h-12 justify-center items-center flex shadow-circle mb-2">
                 <img src="assets/images/sources/substack.png" class="w-full" alt="Substack" title="Substack" />
@@ -878,8 +872,7 @@
           class="relative display-grid grid-columns-4 md-only:grid-columns-2 sm-only:grid-columns-1 gap-8 mt-24 max-w-full">
           <!-- Top vertical line -->
           <div class="absolute w-1 h-6 -top-15 bg-primary bg-opacity-40 left-1/2" aria-hidden="true"></div>
-          <div
-            class="relative flex justify-center items-center bg-white rounded-lg border border-[#F3F4FE] p-8">
+          <div class="relative flex justify-center items-center bg-white rounded-lg border border-[#F3F4FE] p-8">
             <!-- Inner lines -->
             <div class="rs cd absolute te ir h-6 -top-8 left-1/2 ik sm-only:hidden" aria-hidden="true">
               <div class="absolute w-1 h-full bg-primary bg-opacity-40 left-1/2 ik"></div>
@@ -898,8 +891,7 @@
                 knowledge bases.</p>
             </div>
           </div>
-          <div
-            class="relative flex justify-center items-center bg-white rounded-lg border border-[#F3F4FE] p-8">
+          <div class="relative flex justify-center items-center bg-white rounded-lg border border-[#F3F4FE] p-8">
             <!-- Inner lines -->
             <div class="rs cd absolute te ir h-6 -top-8 sm-only:-top-1.8 left-1/2 ik" aria-hidden="true">
               <div class="absolute w-1 h-full bg-primary bg-opacity-40 left-1/2 ik"></div>
@@ -918,8 +910,7 @@
                 magazines and journals.</p>
             </div>
           </div>
-          <div
-            class="relative flex justify-center items-center bg-white rounded-lg border border-[#F3F4FE] p-8">
+          <div class="relative flex justify-center items-center bg-white rounded-lg border border-[#F3F4FE] p-8">
             <!-- Inner lines -->
             <div class="rs cd absolute te ir h-6 -top-8 left-1/2 ik md:-top-1-8" aria-hidden="true">
               <div class="absolute w-1 h-full bg-primary bg-opacity-40 left-1/2 ik"></div>
@@ -938,8 +929,7 @@
                 from a variety of publishers.</p>
             </div>
           </div>
-          <div
-            class="relative flex justify-center items-center bg-white rounded-lg border border-[#F3F4FE] p-8">
+          <div class="relative flex justify-center items-center bg-white rounded-lg border border-[#F3F4FE] p-8">
             <!-- Inner lines -->
             <div class="rs cd absolute te ir h-6 -top-8 left-1/2 ik md:-top-1-8" aria-hidden="true">
               <div class="absolute w-1 h-full bg-primary bg-opacity-40 left-1/2 ik"></div>
