@@ -703,33 +703,33 @@
     <div class="container">
       <div class="flex flex-wrap">
         <div class="flex items-center justify-center w-full lg:w-1/2 mt-4 md:mt-20 order-2 lg:order-0 relative">
-          <div id="hotspot6" class="hotspot absolute flex" color="lightblue"
-            tooltip="The title holds most weight when trying to figure out the main topic and most relevant keywords."
-            flow="right" onclick="">
-            <span></span>
-          </div>
-          <div id="hotspot7" class="hotspot absolute flex" color="lightblue"
-            tooltip="External links are parsed, content extracted analysed and classifed." flow="right" onclick="">
-            <span></span>
-          </div>
-          <div id="hotspot8" class="hotspot absolute flex" color="lightblue"
-            tooltip="Post body provides additional context and sentiment in the analysis process." flow="left"
-            onclick="">
-            <span></span>
-          </div>
-          <div id="hotspot9" class="hotspot absolute flex" color="lightblue"
-            tooltip="When comparing multiple posts, likes provide good insights on which are more relevant than others."
-            flow="right" onclick=""><span></span>
-          </div>
-          <div id="hotspot10" class="hotspot absolute flex" color="lightblue"
-            tooltip="Comments give us an overview on general sentiment and social feedback." flow="up" onclick="">
-            <span></span>
-          </div>
-          <div id="hotspot11" class="hotspot absolute flex" color="lightblue"
-            tooltip="Count of related resources that our algorithms identified." flow="up" onclick="">
-            <span></span>
-          </div>
-          <picture>
+          <picture class="relative">
+            <div id="hotspot6" class="hotspot absolute flex" color="lightblue"
+              tooltip="The title holds most weight when trying to figure out the main topic and most relevant keywords."
+              flow="right" onclick="">
+              <span></span>
+            </div>
+            <div id="hotspot7" class="hotspot absolute flex" color="lightblue"
+              tooltip="External links are parsed, content extracted analysed and classifed." flow="right" onclick="">
+              <span></span>
+            </div>
+            <div id="hotspot8" class="hotspot absolute flex" color="lightblue"
+              tooltip="Post body provides additional context and sentiment in the analysis process." flow="left"
+              onclick="">
+              <span></span>
+            </div>
+            <div id="hotspot9" class="hotspot absolute flex" color="lightblue"
+              tooltip="When comparing multiple posts, likes provide good insights on which are more relevant than others."
+              flow="right" onclick=""><span></span>
+            </div>
+            <div id="hotspot10" class="hotspot absolute flex" color="lightblue"
+              tooltip="Comments give us an overview on general sentiment and social feedback." flow="up" onclick="">
+              <span></span>
+            </div>
+            <div id="hotspot11" class="hotspot absolute flex" color="lightblue"
+              tooltip="Count of related resources that our algorithms identified." flow="up" onclick="">
+              <span></span>
+            </div>
             <source srcset="assets/images/previews/reddit-preview-mobile.png" media="(max-width: 480px)" />
             <img src="assets/images/previews/reddit-preview.png" class="lg:-ml-12" />
           </picture>
@@ -748,8 +748,9 @@
                   class="rounded-full mr-5 bg-primary w-[70px] h-[70px] text-white flex justify-center items-center text-4xl flex-shrink-0">
                   1</div>
                 <div>
-                  <h3 class="text-xl mb-1 font-semibold">Post breakdown and Analysis</h3>
-                  <p class="text-body-color">Title, body and external links are analysed and summarized. Relevant keywords from individual parts are compared and aggregated.</p>
+                  <h3 class="text-xl mb-1 font-semibold">Text extraction and cleanup</h3>
+                  <p class="text-body-color">Posts title, body, comments and external links are extracted, cleaned and
+                    normalized, to ensure consistency and quality of the data.</p>
                 </div>
               </div>
               <div class="flex mt-12">
@@ -757,8 +758,9 @@
                   class="rounded-full mr-5 bg-primary w-[70px] h-[70px]  text-white flex justify-center items-center text-4xl flex-shrink-0">
                   2</div>
                 <div>
-                  <h3 class="text-xl mb-1 font-semibold">Text Classification and Sentiment</h3>
-                  <p class="text-body-color">Keywords are classified and added to our internal graph database.</p>
+                  <h3 class="text-xl mb-1 font-semibold">Data processing and analysis</h3>
+                  <p class="text-body-color">Multiple techniques are applied, including text classification, topic
+                    modeling, entity recognition, sentiment analysis, etc. </p>
                 </div>
               </div>
               <div class="flex mt-12">
@@ -766,7 +768,7 @@
                   class="rounded-full mr-5 bg-primary w-[70px] h-[70px]  text-white flex justify-center items-center text-4xl flex-shrink-0">
                   3</div>
                 <div>
-                  <h3 class="text-xl mb-1 font-semibold">In-line Resource Attachment</h3>
+                  <h3 class="text-xl mb-1 font-semibold">Comparison and aggregation</h3>
                   <p class="text-body-color">Attach the related resources right next to the post or article you're
                     reading</p>
                 </div>
