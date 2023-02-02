@@ -87,7 +87,7 @@ window.onload = (event) => {
 
   setTimeout(() => {
     hotspot0.classList.add("open");
-  }, 2000);
+  }, 1500);
 
   const twitterPreview = document.getElementById("twitter-preview");
   const hotspot5 = document.getElementById("hotspot5");
