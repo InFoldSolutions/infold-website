@@ -30,7 +30,16 @@ window.onload = (event) => {
     document.getElementById('browserName').innerText = browserName;
   }
 
-  detectCurrentBrowser();
+  //detectCurrentBrowser();
+
+  // ===== Beta sign up
+
+  const betaForm = document.getElementById('beta-signup');
+  
+  betaForm.onsubmit = async (e) => {
+    e.preventDefault();
+    betaForm.innerHTML = '<p class="text-base sm:text-lg text-body-color text-center">Thank you for signing up!</p>';
+  }
 
   // ===== Current Year
 
