@@ -2437,7 +2437,6 @@ Need to rename these
 END: Need to rename these 
 **/
 
-
 @media (max-width: 960px) {
   .md\:mt-20 {
     margin-top: 5rem;
@@ -2514,11 +2513,11 @@ END: Need to rename these
   .sm-only\:-bottom-28 {
     bottom: -28px;
   }
-  
+
   .sm-only\:-top-1\.8 {
     top: -1.8rem;
   }
-  
+
   .sm-only\:mt-1 {
     margin-top: 1em;
   }

@@ -38,7 +38,29 @@ window.onload = (event) => {
   
   betaForm.onsubmit = async (e) => {
     e.preventDefault();
-    betaForm.innerHTML = '<p class="text-base sm:text-lg text-body-color text-center">Thank you for signing up!</p>';
+
+    const submitInput = betaForm.elements['submit'];
+    const email = betaForm.elements['email'].value;
+
+    submitInput.disabled = true;
+    submitInput.value = 'Sending...';
+    submitInput.style = "cursor: not-allowed;"
+
+    const response = await fetch('https://api.infold.ai/signup/beta', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ email })
+    });
+
+    const body = await response.json();
+
+    if (response.status !== 200 || !response.ok || !body.meta || !body.meta.success) {
+      betaForm.innerHTML = '<p class="text-base sm:text-lg text-body-color text-center">Problem while adding e-mail, please try again!</p>';
+    } else {
+      betaForm.innerHTML = '<p class="text-base sm:text-lg text-body-color text-center">Thank you for signing up!</p>';
+    }
   }
 
   // ===== Current Year
