@@ -2506,16 +2506,16 @@ END: Need to rename these
     padding-right: 1rem;
   }
 
-  .sm-only\:width-200 {
-    width: 175%;
+  .sm-only\:width-170 {
+    width: 170%;
   }
 
   .sm-only\:max-w-92 {
     max-width: 24rem;
   }
 
-  .sm-only\:-ml-40 {
-    margin-left: -34.5%;
+  .sm-only\:-ml-32 {
+    margin-left: -32%;
   }
 
   .sm-only\:max-width-none {
