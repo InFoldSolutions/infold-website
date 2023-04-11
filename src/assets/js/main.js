@@ -198,16 +198,16 @@ window.onload = (event) => {
 
   // ==== Preload images
 
-  const images = []; // need to stay in memory I guess 
+  /*const images = []; // need to stay in memory I guess 
 
   function preload() {
     for (var i = 0; i < arguments.length; i++) {
       images[i] = new Image();
       images[i].src = preload.arguments[i];
     }
-  }
+  }*/
 
-  preload(
+  /*preload(
     "assets/images/previews/preview-twitter-open.png"
-  )
+  )*/
 }
