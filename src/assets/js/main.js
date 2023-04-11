@@ -114,7 +114,7 @@ window.onload = (event) => {
 
   // ==== Hotspot click
 
-  const hotspot0 = document.getElementById("hotspot0");
+  /*const hotspot0 = document.getElementById("hotspot0");
 
   setTimeout(() => {
     hotspot0.classList.add("open");
@@ -145,7 +145,7 @@ window.onload = (event) => {
       el.classList.remove("flex");
     })
     homehotspotInfo.classList.remove("flex");
-  });
+  });*/
 
   // ==== For menu scroll
 
