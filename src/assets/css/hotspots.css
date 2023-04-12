@@ -141,13 +141,13 @@
 }
 
 #hotspot6 {
-  right: 35.5%;
-  top: 2.5%;
+  right: 34.5%;
+  top: -0.5%;
 }
 
 #hotspot7 {
-  left: 24.5%;
-  top: 24.5%;
+  left: 24%;
+  top: 23.9%;
 }
 
 #hotspot8 {
@@ -161,13 +161,13 @@
 }
 
 #hotspot10 {
-  top: 41.5%;
-  left: -0.7%;
+  top: 42%;
+  left: -6.7%;
 }
 
 #hotspot11 {
-  top: 41.5%;
-  left: 18.5%;
+  top: 58%;
+  right: 26.5%;
 }
 
 /* iPad */
@@ -208,12 +208,12 @@
 
   #hotspot6 {
     right: 27.5%;
-    top: 3%;
+    top: 0;
   }
 
   #hotspot7 {
     left: 31.5%;
-    top: 24.5%;
+    top: 24%;
   }
 
   #hotspot8 {
@@ -227,11 +227,12 @@
   }
 
   #hotspot10 {
-    left: 6.8%;
+    left: 1.4%;
   }
 
   #hotspot11 {
-    left: 26%;
+    right: 20%;
+    top: 58.2%;
   }
 }
 
@@ -273,13 +274,13 @@
   }
 
   #hotspot6 {
-    right: 25%;
-    top: 0.7%;
+    right: 24.8%;
+    top: -4.3%;
   }
 
   #hotspot7 {
     left: 32%;
-    top: 22%;
+    top: 21%;
   }
 
   #hotspot8 {
@@ -293,12 +294,12 @@
   }
 
   #hotspot10 {
-    top: 39%;
-    left: 5.8%;
+    top: 39.5%;
+    left: -0.2%;
   }
 
   #hotspot11 {
-    top: 39%;
-    left: 24.4%;
+    top: 55.5%;
+    right: 15.4%;
   }
 }
