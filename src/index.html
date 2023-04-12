@@ -2,6 +2,15 @@
 <html lang="en" class="scroll-smooth">
 
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-50T97XQZ53"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-50T97XQZ53');
+  </script>
+
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -97,10 +106,10 @@
             <ul class="mb-10 flex flex-wrap items-center justify-center">
               <li>
                 <form id="beta-signup">
-                  <input type="email" placeholder="E-mail address*" name="email" required 
+                  <input type="email" placeholder="E-mail address*" name="email" required
                     class="rounded-lg py-4 px-4 border-2 border-primary focus:outline-none focus:border-primary text-basesm font-medium text-body-color transition duration-300 ease-in-out hover:shadow-lg" />
                   <input type="submit" name="submit" value="Join Beta"
-                    class="sm-only:mt-1 inline-flex cursor-pointer items-center justify-center border-2 border-primary rounded-lg bg-primary py-4 px-6 text-center text-basesm font-medium text-white transition duration-300 ease-in-out hover:shadow-lg sm:px-10"/>
+                    class="sm-only:mt-1 inline-flex cursor-pointer items-center justify-center border-2 border-primary rounded-lg bg-primary py-4 px-6 text-center text-basesm font-medium text-white transition duration-300 ease-in-out hover:shadow-lg sm:px-10" />
                 </form>
               </li>
             </ul>
@@ -147,7 +156,8 @@
                 <span></span>
               </div>
               <div id="hotspot4" class="hotspot absolute flex" color="lightblue"
-                tooltip="Relevant keywords linked to common knowledge bases." flow="right" onclick=""><span></span></div>
+                tooltip="Relevant keywords linked to common knowledge bases." flow="right" onclick=""><span></span>
+              </div>
             </div>
             <div class="absolute -bottom-18 -left-29 z-[-1] sm:left-0 sm-only:-bottom-28">
               <svg width="134" height="106" viewBox="0 0 134 106" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -683,12 +693,12 @@
         <div class="flex items-center justify-center w-full lg:w-1/2 mt-4 md:mt-20 order-2 lg:order-0 relative">
           <picture class="relative">
             <div id="hotspot6" class="hotspot absolute flex" color="lightblue"
-              tooltip="The title helps us figure out the main topic and most relevant keywords."
-              flow="down" onclick="">
+              tooltip="The title helps us figure out the main topic and most relevant keywords." flow="down" onclick="">
               <span></span>
             </div>
             <div id="hotspot7" class="hotspot absolute flex" color="lightblue"
-              tooltip="External links are analyzed and their content classified by our model to find the most relevant connections." flow="right" onclick="">
+              tooltip="External links are analyzed and their content classified by our model to find the most relevant connections."
+              flow="right" onclick="">
               <span></span>
             </div>
             <div id="hotspot10" class="hotspot absolute flex" color="lightblue"
@@ -696,7 +706,8 @@
               <span></span>
             </div>
             <div id="hotspot11" class="hotspot absolute flex" color="lightblue"
-              tooltip="User engagement allows for publishers and individual contributors to be rewarded." flow="up" onclick="">
+              tooltip="User engagement allows for publishers and individual contributors to be rewarded." flow="up"
+              onclick="">
               <span></span>
             </div>
             <!--<source srcset="assets/images/previews/reddit-preview-mobile.png" media="(max-width: 480px)" />-->
