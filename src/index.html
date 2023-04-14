@@ -597,7 +597,7 @@
             </span>
             <h2 class="mb-4 text-3xl font-bold text-dark sm:text-4xl md:text-[42px] flex items-center">
               Main Features <a href="javascript:void(0)"
-                class="flex items-center justify-center text-base font-normal md:ml-6 sm:min-w-6 hover:bg-primary:span">
+                class="flex items-center justify-center text-base font-normal md:ml-6 sm:min-w-6 hover:bg-primary:span" id="video-modal-open">
                 <span
                   class="h-10 w-10 flex items-center justify-center bg-white rounded-full shadow-circle-black mr-2 transition duration-300">
                   <svg width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg"
@@ -1156,6 +1156,20 @@
     </div>
   </footer>
   <!-- ====== Footer Section End -->
+
+  <!-- ====== Video Modal Start -->
+  <section id="video-modal" class="fixed bg-black bg-opacity-40 w-full h-full top-0 left-0 right-0 bottom-0 z-40 hidden">
+    <div class="container h-full">
+      <div class="mx-auto max-w-[960px] relative top-1/2 transform-y-1/2">
+        <div class="absolute -top-10 right-0 z-40 rounded-2xl bg-black block py-2 px-4 text-center cursor-pointer font-bold text-white" id="video-modal-close">(X) Close</div>
+        <div style="padding:56.25% 0 0 0;position:relative;"><iframe
+            src="https://player.vimeo.com/video/817572275?h=76955bc694&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+            frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
+            style="position:absolute;top:0;left:0;width:100%;height:100%;" title="InFold.ai - Intro"></iframe></div>
+        <script src="https://player.vimeo.com/api/player.js"></script>
+      </div>
+    </div>
+  </section>
 
   <!-- ====== Back To Top Start -->
   <a href="javascript:void(0)"

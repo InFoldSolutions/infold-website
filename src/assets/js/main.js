@@ -196,6 +196,22 @@ window.onload = (event) => {
 
   window.document.addEventListener("scroll", onScroll);
 
+  // ==== Video modal
+
+  const videoModal = document.getElementById("video-modal");
+  const videoModalClose = document.getElementById("video-modal-close");
+  const videoModalOpen = document.getElementById("video-modal-open");
+
+  videoModalClose.addEventListener("click", () => {
+    videoModal.classList.remove("block");
+    videoModal.classList.add("hidden");
+  });
+
+  videoModalOpen.addEventListener("click", () => {
+    videoModal.classList.remove("hidden");
+    videoModal.classList.add("block");
+  });
+
   // ==== Preload images
 
   /*const images = []; // need to stay in memory I guess 
