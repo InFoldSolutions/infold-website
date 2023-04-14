@@ -205,6 +205,12 @@ window.onload = (event) => {
   videoModalClose.addEventListener("click", () => {
     videoModal.classList.remove("block");
     videoModal.classList.add("hidden");
+
+    if (Vimeo) {
+      const iframe = videoModal.querySelector("iframe");
+      const player = new Vimeo.Player(iframe);
+      player.pause();
+    }
   });
 
   videoModalOpen.addEventListener("click", () => {

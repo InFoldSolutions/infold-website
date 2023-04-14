@@ -1528,6 +1528,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-bg-opacity: 0.4;
 }
 
+.bg-opacity-60 {
+  --tw-bg-opacity: 0.6;
+}
+
+.bg-opacity-80 {
+  --tw-bg-opacity: 0.8;
+}
+
 .bg-opacity-5 {
   --tw-bg-opacity: 0.05;
 }
@@ -2394,6 +2402,14 @@ a.ud-menu-scroll.active {
 
 .border-slate-400\/10 {
   border-color: rgba(148, 163, 184, .1);
+}
+
+.border-black {
+  border-color: #000
+}
+
+.border-\[4px\] {
+  border-width: 4px;
 }
 
 .border-t {
