@@ -14,13 +14,13 @@ window.onload = (event) => {
       browserName = "Firefox";
       browserLink = "https://addons.mozilla.org/en-US/firefox/addon/infold/";
     }
-    /*else if (userAgent.match(/opr\//i)) {
+    else if (userAgent.match(/opr\//i)) {
       browserName = "Opera";
     }
     else if (userAgent.match(/edg/i)) {
       browserName = "Edge";
     }
-    else if (userAgent.match(/safari/i)) {
+    /*else if (userAgent.match(/safari/i)) {
       browserName = "Safari";
     }*/
 
