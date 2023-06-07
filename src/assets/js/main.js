@@ -6,35 +6,33 @@ window.onload = (event) => {
 
     let userAgent = navigator.userAgent;
 
-    let browserName;
+    let browserName = "Chrome",
+        browserLink = "https://chrome.google.com/webstore/detail/infoldai/dfmmanoiegndhgdjendeidcakajifnlb?hl=en";
 
-    if (userAgent.match(/opr\//i)) {
+    // Currently only FF and Chrome are supported
+    if (userAgent.match(/firefox|fxios/i)) {
+      browserName = "Firefox";
+      browserLink = "https://addons.mozilla.org/en-US/firefox/addon/infold/";
+    }
+    /*else if (userAgent.match(/opr\//i)) {
       browserName = "Opera";
     }
     else if (userAgent.match(/edg/i)) {
       browserName = "Edge";
     }
-    else if (userAgent.match(/chrome|chromium|crios/i)) {
-      browserName = "Chrome";
-    }
-    else if (userAgent.match(/firefox|fxios/i)) {
-      browserName = "Firefox";
-    }
     else if (userAgent.match(/safari/i)) {
       browserName = "Safari";
-    }
-    else {
-      browserName = "Chrome";
-    }
+    }*/
 
     document.getElementById('browserName').innerText = browserName;
+    document.getElementById('browserLink').href = browserLink;
   }
 
-  //detectCurrentBrowser();
+  detectCurrentBrowser();
 
   // ===== Beta sign up
 
-  const betaForm = document.getElementById('beta-signup');
+  /*const betaForm = document.getElementById('beta-signup');
   
   betaForm.onsubmit = async (e) => {
     e.preventDefault();
@@ -61,7 +59,7 @@ window.onload = (event) => {
     } else {
       betaForm.innerHTML = '<p class="text-base sm:text-lg text-body-color text-center">Thank you for signing up!</p>';
     }
-  }
+  }*/
 
   // ===== Current Year
 
