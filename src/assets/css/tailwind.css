@@ -1464,6 +1464,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: #dadbdb;
 }
 
+.bg-000 {
+  background: #000;
+}
+
 .bg-black {
   --tw-bg-opacity: 1;
   background-color: rgb(33 43 54 / var(--tw-bg-opacity));
