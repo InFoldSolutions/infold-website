@@ -151,6 +151,11 @@ window.onload = (event) => {
 
   pageLink.forEach((elem) => {
     elem.addEventListener("click", (e) => {
+      const target = e.target;
+
+      if (!target.href.includes("#")) 
+        return;
+
       e.preventDefault();
       document.querySelector(elem.getAttribute("href")).scrollIntoView({
         behavior: "smooth",
@@ -176,6 +181,10 @@ window.onload = (event) => {
     for (let i = 0; i < sections.length; i++) {
       const currLink = sections[i];
       const val = currLink.getAttribute("href");
+
+      if (!val.includes("#"))
+        continue;
+
       const refElement = document.querySelector(val);
       const scrollTopMinus = scrollPos + 73;
       if (
