@@ -81,6 +81,13 @@
                     FAQ
                   </a>
                 </li>
+                <li class="group relative">
+                  <a href="https://www.patreon.com/infold/"
+                    target="_blank"
+                    class="ud-menu-scroll mx-4 flex py-2 text-base lg:mr-0 lg:ml-4 lg:inline-flex rounded-lg text-white bg-000 py-1 px-2 text-sm items-center">
+                    <img src="assets/images/footer/patreon.png" width="19" height="19" />&nbsp;Patreon
+                  </a>
+                </li>
               </ul>
             </nav>
           </div>
@@ -101,16 +108,21 @@
             </h1>
             <p
               class="mx-auto mb-10 max-w-[600px] text-base sm:text-lg sm:leading-relaxed md:text-xl md:leading-relaxed text-body-color">
-              Don't have time to research every topic? We read and compare thousands of sources, so you don't have to.
+              Supporting a more informed reader. We read and compare thousands of sources, so you don't have to.
             </p>
             <ul class="mb-10 flex flex-wrap items-center justify-center">
               <li>
-                <form id="beta-signup">
+                <a href="https://chrome.google.com/webstore/detail/infoldai/dfmmanoiegndhgdjendeidcakajifnlb?hl=en" target="_blank" id="browserLink"
+                  class="inline-flex items-center justify-center rounded-lg bg-primary py-4 px-6 text-center text-base font-medium text-white transition duration-300 ease-in-out hover:shadow-lg sm:px-10">
+                  <b>+ Add to <span id="browserName"></span></b>&nbsp;-&nbsp;<span class="opacity-80">It's
+                    Free</span>
+                </a>
+                <!--<form id="beta-signup">
                   <input type="email" placeholder="E-mail address*" name="email" required
                     class="rounded-lg py-4 px-4 border-2 border-primary focus:outline-none focus:border-primary text-basesm font-medium text-body-color transition duration-300 ease-in-out hover:shadow-lg" />
                   <input type="submit" name="submit" value="Join Beta"
                     class="sm-only:mt-1 inline-flex cursor-pointer items-center justify-center border-2 border-primary rounded-lg bg-primary py-4 px-6 text-center text-basesm font-medium text-white transition duration-300 ease-in-out hover:shadow-lg sm:px-10" />
-                </form>
+                </form>-->
               </li>
             </ul>
             <div class="wow fadeInUp flex justify-center md:-ml-12">
@@ -597,7 +609,8 @@
             </span>
             <h2 class="mb-4 text-3xl font-bold text-dark sm:text-4xl md:text-[42px] flex items-center">
               Main Features <a href="javascript:void(0)"
-                class="flex items-center justify-center text-base font-normal md:ml-6 sm:min-w-6 hover:bg-primary:span" id="video-modal-open">
+                class="flex items-center justify-center text-base font-normal md:ml-6 sm:min-w-6 hover:bg-primary:span"
+                id="video-modal-open">
                 <span
                   class="h-10 w-10 flex items-center justify-center bg-white rounded-full shadow-circle-black mr-2 transition duration-300">
                   <svg width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg"
@@ -729,7 +742,7 @@
                   1</div>
                 <div>
                   <h3 class="text-xl mb-1 font-semibold">Data extraction and cleanup</h3>
-                <p class="text-body-color">Post content, comments and external links are analyzed, cleaned and
+                  <p class="text-body-color">Post content, comments and external links are analyzed, cleaned and
                     normalized, to ensure consistency, quality of the data.</p>
                 </div>
               </div>
@@ -1126,6 +1139,11 @@
               href="#sources">Data</a>
             <a class="ud-menu-scroll inline-block rounded-lg py-1 px-2 text-sm text-body-color hover:bg-slate-100 hover:text-slate-900"
               href="#faq">FAQ</a>
+            <a href="https://www.patreon.com/infold/"
+              target="_blank"
+              class="ud-menu-scroll inline-block rounded-lg py-1 px-2 text-sm text-white bg-000 inline-flex items-center">
+              <img src="assets/images/footer/patreon.png" width="19" height="19" />&nbsp;Patreon
+            </a>
           </div>
         </nav>
       </div>
@@ -1158,10 +1176,13 @@
   <!-- ====== Footer Section End -->
 
   <!-- ====== Video Modal Start -->
-  <section id="video-modal" class="fixed bg-black bg-opacity-60 w-full h-full top-0 left-0 right-0 bottom-0 z-40 hidden">
+  <section id="video-modal"
+    class="fixed bg-black bg-opacity-60 w-full h-full top-0 left-0 right-0 bottom-0 z-40 hidden">
     <div class="container h-full">
       <div class="mx-auto max-w-[960px] relative top-1/2 transform-y-1/2 border-black border-[4px]">
-        <div class="absolute -top-10 right-0 z-40 rounded-2xl bg-black block py-2 px-4 text-center cursor-pointer font-bold text-white" id="video-modal-close">(X) Close</div>
+        <div
+          class="absolute -top-10 right-0 z-40 rounded-2xl bg-black block py-2 px-4 text-center cursor-pointer font-bold text-white"
+          id="video-modal-close">(X) Close</div>
         <div style="padding:56.25% 0 0 0;position:relative;"><iframe
             src="https://player.vimeo.com/video/817572275?h=76955bc694&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
             frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
