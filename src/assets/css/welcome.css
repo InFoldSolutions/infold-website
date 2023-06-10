@@ -1,0 +1,222 @@
+.welcome-first-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column
+}
+
+.welcome-first-container .welcome-loading-background {
+  position: absolute;
+  right: 0;
+  top: 0;
+  background-color: #F7F7F7;
+  width: 100%;
+  height: 100vh;
+  display: block
+}
+
+.welcome-first-container .welcome-loading {
+  display: block;
+  position: relative;
+  min-height: 600px
+}
+
+.welcome-first-container .welcome-loading .welcome-main {
+  display: block;
+  margin: 50px auto 0 auto;
+  width: 315px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0
+}
+
+.welcome-steps-container {
+  height: 100vh;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto
+}
+
+.welcome-steps-container .welcome-first {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 15px;
+  height: 570px
+}
+
+.welcome-steps-container .welcome-first h1.title {
+
+  color: #1F262E;
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: -0.67px;
+  line-height: 29px;
+  padding: 0 0 28px 0
+}
+
+.welcome-steps-container .welcome-first .welcome-content {
+  border-left: 1px solid #E2E5E9;
+  margin-left: 10px
+}
+
+.welcome-steps-container .welcome-first .welcome-content .row.active {
+  display: block
+}
+
+.welcome-content .row img {
+  display: none
+}
+
+.welcome-content .row.active img {
+  display: block
+}
+
+.welcome-steps-container .welcome-first .welcome-content .step-1.active .step-3-imgs .step-3-first img, .welcome-steps-container .welcome-first .welcome-content .step-2.active .step-3-imgs .step-3-first img, .welcome-steps-container .welcome-first .welcome-content .step-3.active .step-3-imgs .step-3-first img {
+  display: block
+}
+
+.welcome-steps-container .welcome-first .welcome-content .step-1.active .step-3-imgs .step-3-second img, .welcome-steps-container .welcome-first .welcome-content .step-2.active .step-3-imgs .step-3-second img, .welcome-steps-container .welcome-first .welcome-content .step-3.active .step-3-imgs .step-3-second img {
+  display: block
+}
+
+.welcome-steps-container .welcome-first .welcome-content .step-1, .welcome-steps-container .welcome-first .welcome-content .step-2, .welcome-steps-container .welcome-first .welcome-content .step-3, .welcome-steps-container .welcome-first .welcome-content .last-step {
+  margin: 0
+}
+
+.welcome-steps-container .welcome-first .welcome-content .step-1 .step-1-content, .welcome-steps-container .welcome-first .welcome-content .step-1 .step-2-content, .welcome-steps-container .welcome-first .welcome-content .step-1 .step-3-content, .welcome-steps-container .welcome-first .welcome-content .step-2 .step-1-content, .welcome-steps-container .welcome-first .welcome-content .step-2 .step-2-content, .welcome-steps-container .welcome-first .welcome-content .step-2 .step-3-content, .welcome-steps-container .welcome-first .welcome-content .step-3 .step-1-content, .welcome-steps-container .welcome-first .welcome-content .step-3 .step-2-content, .welcome-steps-container .welcome-first .welcome-content .step-3 .step-3-content, .welcome-steps-container .welcome-first .welcome-content .last-step .step-1-content, .welcome-steps-container .welcome-first .welcome-content .last-step .step-2-content, .welcome-steps-container .welcome-first .welcome-content .last-step .step-3-content {
+  padding-bottom: 23px
+}
+
+.welcome-steps-container .welcome-first .welcome-content .step-1 .step-1-content, .welcome-steps-container .welcome-first .welcome-content .step-1 .step-2-content, .welcome-steps-container .welcome-first .welcome-content .step-1 .step-3-content, .welcome-steps-container .welcome-first .welcome-content .step-1 .last-step-content, .welcome-steps-container .welcome-first .welcome-content .step-2 .step-1-content, .welcome-steps-container .welcome-first .welcome-content .step-2 .step-2-content, .welcome-steps-container .welcome-first .welcome-content .step-2 .step-3-content, .welcome-steps-container .welcome-first .welcome-content .step-2 .last-step-content, .welcome-steps-container .welcome-first .welcome-content .step-3 .step-1-content, .welcome-steps-container .welcome-first .welcome-content .step-3 .step-2-content, .welcome-steps-container .welcome-first .welcome-content .step-3 .step-3-content, .welcome-steps-container .welcome-first .welcome-content .step-3 .last-step-content, .welcome-steps-container .welcome-first .welcome-content .last-step .step-1-content, .welcome-steps-container .welcome-first .welcome-content .last-step .step-2-content, .welcome-steps-container .welcome-first .welcome-content .last-step .step-3-content, .welcome-steps-container .welcome-first .welcome-content .last-step .last-step-content {
+  padding-left: 33px
+}
+
+.title {
+  color: #9097A0;
+
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 21px
+}
+
+.title span.number-background {
+  height: 35px;
+  width: 34px;
+  border-radius: 50%;
+  background-color: #FFFFFF;
+  position: absolute;
+  left: -18px;
+  margin-top: -7.5px
+}
+
+.title span.number {
+  height: 26px;
+  width: 26px;
+  border-radius: 50%;
+  background-color: #B6BBC1;
+  color: #FFFFFF;
+
+  font-size: 15px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 19px;
+  text-align: center;
+  position: absolute;
+  left: -14px;
+  margin-top: -3px;
+  padding-top: 3.5px;
+  z-index: 99999
+}
+
+.title span.number img {
+  margin-top: -2px
+}
+
+.subtitle {
+  color: #646C76;
+
+  font-size: 15px;
+  letter-spacing: 0;
+  line-height: 23px;
+  padding: 8px 0 20px 0;
+  font-weight: 400;
+  display: none
+}
+
+.continue-button {
+  height: 41px;
+  width: 118px;
+  color: #FFFFFF;
+
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 17px;
+  text-align: center;
+  border-radius: 6px;
+  background-color: rgb(29 155 240);
+  align-items: center;
+  justify-content: center;
+  display: none;
+  cursor: pointer
+}
+
+.continue-button a {
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+}
+
+.continue-button.close-button {
+  background-color: #9097A0;
+}
+
+.continue-button img {
+  margin-left: 13px;
+  margin-bottom: 1px
+}
+
+@media (min-width: 1071px) {
+  .welcome-background {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: #F7F7F7;
+    width: 50%;
+    height: 100vh;
+    display: none
+  }
+
+  .welcome-steps-container .welcome-first h1.title {
+    padding: 55px 0 28px 0;
+  }
+}
+
+.active .continue-button {
+  display: flex
+}
+
+.active .title {
+  color: #1F262E
+}
+
+.active .title span.number {
+  background-color: rgb(29 155 240)
+}
+
+.active .subtitle {
+  width: 350px;
+  display: flex;
+}
+
+.home-logo {
+  width: 160px;
+  left: -20px;
+  position: relative;
+}

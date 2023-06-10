@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
+
 <head>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-50T97XQZ53"></script>
@@ -23,30 +24,78 @@
   <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
 
   <link rel="stylesheet" href="assets/css/animate.css" />
-  <link rel="stylesheet" href="assets/css/tooltip.css" />
+  <link rel="stylesheet" href="assets/css/welcome.css" />
   <link rel="stylesheet" href="assets/css/tailwind.css" />
 </head>
 
 <body>
   <!-- ====== Home Section Start -->
-  <div id="home" class="relative pb-12 pt-[40px] md:pt-[50px] lg:pt-[80px]">
-    <div class="container">
-      <div class="-mx-4 flex flex-wrap items-center">
-        <div class="w-full">
-          <div class="hero-content wow fadeInUp mx-auto max-w-[780px] text-center px-4">
-            <h1 class="mb-8 text-3xl font-bold leading-snug sm:text-4xl sm:leading-snug md:text-[45px] md:leading-snug">
-              Welcome to InFold
-            </h1>
-            <p
-              class="mx-auto mb-10 max-w-[600px] text-base sm:text-lg sm:leading-relaxed md:text-xl md:leading-relaxed text-body-color">
-              Thank you for installing, lets get you up and running.
-            </p>
+  <div class="welcome-background" style="display: block;"></div>
+  <div class="welcome-steps-container" style="display: flex;">
+    <div class="welcome-first">
+      <a href="/">
+        <img class="home-logo" src="https://www.infold.ai/assets/images/logo/logo-new-white.png">
+      </a>
+      <h1 class="title">Supporting a more informed reader</h1>
+      <div class="welcome-content">
+        <div class="row step-1 active">
+          <div class="md:w-1/2 relative float-left step-1-content">
+            <div class="title">
+              <span class="number-background"></span>
+              <span class="number">1</span>
+              Get context next to a tweet
+            </div>
+            <div class="subtitle">We analyze the post and any attached URLs. Related content is displayed right next to it.</div>
+            <div class="continue-button next-button">
+              Next <img src="assets/images/arrow-right.svg">
+            </div>
+          </div>
+          <div class="md:w-1/2 relative float-left step-1-imgs">
+            <picture class="absolute -right-12 -mt-14">
+              <img src="assets/images/previews/twitter-example.png">
+            </picture>
+          </div>
+        </div>
+        <div class="row step-2">
+          <div class="md:w-1/2 relative float-left step-2-content">
+            <div class="title">
+              <span class="number-background"></span>
+              <span class="number">2</span>
+              Subreddit breakdown
+            </div>
+            <div class="subtitle">Icon with related items count will signify we were able to find relevant information.</div>
+            <div class="continue-button next-button">
+              Next <img src="assets/images/arrow-right.svg">
+            </div>
+          </div>
+          <div class="md:w-1/2 relative float-left step-2-imgs">
+            <picture class="absolute -right-12 -mt-24">
+              <img src="assets/images/previews/reddit-example3.png" class="w-[600px] max-w-none">
+            </picture>
+          </div>
+        </div>
+        <div class="row step-3">
+          <div class="md:w-1/2 relative float-left step-2-content">
+            <div class="title">
+              <span class="number-background"></span>
+              <span class="number">3</span>
+              Popup action icon
+            </div>
+            <div class="subtitle">Can provide extra settings or related content based on the current website.</div>
+            <div class="continue-button">
+              <a href="https://infold.ai">Website</a>
+            </div>
+          </div>
+          <div class="md:w-1/2 relative float-left step-2-imgs">
+              <picture class="absolute -right-16 -mt-36">
+                <img src="assets/images/previews/popup-example.png">
+              </picture>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <!-- ====== Hero Section End -->
+  <script src="assets/js/welcome.js"></script>
 </body>
-
 </html>
