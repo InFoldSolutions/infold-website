@@ -64,36 +64,13 @@
   margin-left: 10px
 }
 
-.welcome-steps-container .welcome-first .welcome-content .row.active {
-  display: block
-}
-
 .welcome-content .row img {
   display: none
 }
 
-.welcome-content .row.active img {
-  display: block
-}
-
-.welcome-steps-container .welcome-first .welcome-content .step-1.active .step-3-imgs .step-3-first img, .welcome-steps-container .welcome-first .welcome-content .step-2.active .step-3-imgs .step-3-first img, .welcome-steps-container .welcome-first .welcome-content .step-3.active .step-3-imgs .step-3-first img {
-  display: block
-}
-
-.welcome-steps-container .welcome-first .welcome-content .step-1.active .step-3-imgs .step-3-second img, .welcome-steps-container .welcome-first .welcome-content .step-2.active .step-3-imgs .step-3-second img, .welcome-steps-container .welcome-first .welcome-content .step-3.active .step-3-imgs .step-3-second img {
-  display: block
-}
-
-.welcome-steps-container .welcome-first .welcome-content .step-1, .welcome-steps-container .welcome-first .welcome-content .step-2, .welcome-steps-container .welcome-first .welcome-content .step-3, .welcome-steps-container .welcome-first .welcome-content .last-step {
-  margin: 0
-}
-
-.welcome-steps-container .welcome-first .welcome-content .step-1 .step-1-content, .welcome-steps-container .welcome-first .welcome-content .step-1 .step-2-content, .welcome-steps-container .welcome-first .welcome-content .step-1 .step-3-content, .welcome-steps-container .welcome-first .welcome-content .step-2 .step-1-content, .welcome-steps-container .welcome-first .welcome-content .step-2 .step-2-content, .welcome-steps-container .welcome-first .welcome-content .step-2 .step-3-content, .welcome-steps-container .welcome-first .welcome-content .step-3 .step-1-content, .welcome-steps-container .welcome-first .welcome-content .step-3 .step-2-content, .welcome-steps-container .welcome-first .welcome-content .step-3 .step-3-content, .welcome-steps-container .welcome-first .welcome-content .last-step .step-1-content, .welcome-steps-container .welcome-first .welcome-content .last-step .step-2-content, .welcome-steps-container .welcome-first .welcome-content .last-step .step-3-content {
+.step-content {
+  padding-left: 33px;
   padding-bottom: 23px
-}
-
-.welcome-steps-container .welcome-first .welcome-content .step-1 .step-1-content, .welcome-steps-container .welcome-first .welcome-content .step-1 .step-2-content, .welcome-steps-container .welcome-first .welcome-content .step-1 .step-3-content, .welcome-steps-container .welcome-first .welcome-content .step-1 .last-step-content, .welcome-steps-container .welcome-first .welcome-content .step-2 .step-1-content, .welcome-steps-container .welcome-first .welcome-content .step-2 .step-2-content, .welcome-steps-container .welcome-first .welcome-content .step-2 .step-3-content, .welcome-steps-container .welcome-first .welcome-content .step-2 .last-step-content, .welcome-steps-container .welcome-first .welcome-content .step-3 .step-1-content, .welcome-steps-container .welcome-first .welcome-content .step-3 .step-2-content, .welcome-steps-container .welcome-first .welcome-content .step-3 .step-3-content, .welcome-steps-container .welcome-first .welcome-content .step-3 .last-step-content, .welcome-steps-container .welcome-first .welcome-content .last-step .step-1-content, .welcome-steps-container .welcome-first .welcome-content .last-step .step-2-content, .welcome-steps-container .welcome-first .welcome-content .last-step .step-3-content, .welcome-steps-container .welcome-first .welcome-content .last-step .last-step-content {
-  padding-left: 33px
 }
 
 .title {
@@ -149,9 +126,16 @@
   display: none
 }
 
+.buttons {
+  max-width: 150px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .continue-button {
   height: 41px;
-  width: 118px;
+  width: 100px;
   color: #FFFFFF;
 
   font-size: 14px;
@@ -173,13 +157,25 @@
   justify-content: center;
 }
 
-.continue-button.close-button {
-  background-color: #9097A0;
-}
-
 .continue-button img {
   margin-left: 13px;
   margin-bottom: 1px
+}
+
+.continue-button.prev-button {
+  background-color: #9097A0;
+  max-width: 45px;
+  opacity: 0.6;
+  transition: 0.1s opacity ease-in-out;
+}
+
+.continue-button.prev-button img {
+  transform: rotate(180deg);
+  margin-left: 0;
+}
+
+.continue-button.prev-button:hover {
+  opacity: 0.8;
 }
 
 @media (min-width: 1071px) {
@@ -198,21 +194,78 @@
   }
 }
 
-.active .continue-button {
-  display: flex
+/** Last step **/
+
+.last-step span.number-background {
+  background-color: #FFFFFF;
+  border: 1px solid #B6BBC1
 }
 
-.active .title {
+.last-step span.number {
+  height: 26px;
+  width: 26px;
+  border-radius: 50%;
+  background-color: #B6BBC1;
+  color: #FFFFFF;
+  font-family: Inter-V;
+  font-size: 15px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 19px;
+  text-align: center;
+  position: absolute;
+  left: -14px;
+  margin-top: -3px;
+  padding-top: 3.5px;
+  z-index: 99999;
+}
+
+.last-step span.number-background {
+  height: 35px;
+  width: 34px;
+  border-radius: 50%;
+  background-color: #FFFFFF;
+  position: absolute;
+  left: -18px;
+  margin-top: -7.5px;
+}
+
+.last-step span.number img {
+  display: flex;
+  margin: auto;
+  top: 4px;
+  position: relative;
+}
+
+/** Active **/
+
+.row.active {
+  display: block
+}
+
+.row.active .continue-button {
+  display: inline-flex
+}
+
+.row.active .title {
   color: #1F262E
 }
 
-.active .title span.number {
+.row.active .title span.number {
   background-color: rgb(29 155 240)
 }
 
-.active .subtitle {
+.row.active .subtitle {
   width: 350px;
   display: flex;
+}
+
+.row.active img {
+  display: block
+}
+
+.row.active img {
+  display: block;
 }
 
 .home-logo {

@@ -853,6 +853,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-top: -9rem;
 }
 
+.-mt-56 {
+  margin-top: -14rem;
+}
+
+.-mt-64 {
+  margin-top: -16rem;
+}
+
 .mt-\[6px\] {
   margin-top: 6px;
 }
@@ -1129,7 +1137,15 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 330px;
 }
 
-.w-\[600px\] {
+.w-\[510px\] {
+  width: 510px;
+}
+
+.w-\[565px\] {
+  width: 565px;
+}
+
+.w-\[660px\] {
   width: 660px;
 }
 
