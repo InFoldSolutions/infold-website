@@ -857,6 +857,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-top: -9rem;
 }
 
+.-mt-44 {
+  margin-top: -11rem;
+}
+
+.-mt-46 {
+  margin-top: -11.5rem;
+}
+
 .-mt-56 {
   margin-top: -14rem;
 }
@@ -2377,8 +2385,8 @@ a.ud-menu-scroll.active {
 }
 
 .hover\:underline:hover {
-  -webkit-text-decoration-line: underline;
-  text-decoration-line: underline;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
 }
 
 .hover\:opacity-70:hover {
@@ -2538,6 +2546,11 @@ a.ud-menu-scroll.active {
 .gap-8 {
   -moz-gap: 2rem;
   gap: 2rem;
+}
+
+.gap-2 {
+  -moz-gap: 0.5rem;
+  gap: 0.5rem;
 }
 
 .gap-x-4 {
