@@ -57,8 +57,16 @@
   border-radius: 50%;
 }
 
+.hotspot.black {
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
 .hotspot:hover {
   border-color: rgba(29, 155, 240, 1);
+}
+
+.hotspot.black:hover {
+  border-color: rgba(0, 0, 0, 1);
 }
 
 .hotspot.close {
@@ -70,6 +78,10 @@
   border-radius: 50%;
   width: 25px;
   height: 25px;
+}
+
+.hotspot.black.close {
+  background: rgb(0, 0, 0);
 }
 
 .hotspot.close svg {
@@ -87,6 +99,10 @@
   animation-iteration-count: infinite;
   animation-timing-function: ease-in-out;
   animation-name: innerHotspotAnimation;
+}
+
+.hotspot.black span {
+  background-color: rgb(0, 0, 0);
 }
 
 @keyframes innerHotspotAnimation {
@@ -116,13 +132,13 @@
 }
 
 #hotspot1 {
-  top: 36%;
-  left: 207px;
+  top: 32%;
+  left: 194px;
 }
 
 #hotspot2 {
   top: 163px;
-  right: 230px;
+  right: 225px;
 }
 
 #hotspot3 {
@@ -131,8 +147,8 @@
 }
 
 #hotspot4 {
-  top: 212px;
-  left: 207px;
+  top: 223px;
+  left: 194px;
 }
 
 #hotspot5 {
@@ -182,8 +198,8 @@
   }
 
   #hotspot1 {
-    top: 34%;
-    left: 142px;
+    top: 30%;
+    left: 134px;
   }
 
   #hotspot2 {
@@ -197,8 +213,8 @@
   }
 
   #hotspot4 {
-    top: 147px;
-    left: 142px;
+    top: 156px;
+    left: 134px;
   }
 
   #hotspot5 {
@@ -249,8 +265,8 @@
   }
 
   #hotspot1 {
-    top: 34.5%;
-    left: 16px;
+    top: 29.5%;
+    left: 15px;
   }
 
   #hotspot2 {
@@ -264,8 +280,8 @@
   }
 
   #hotspot4 {
-    top: 59%;
-    left: 16px;
+    top: 57%;
+    left: 15px;
   }
 
   #hotspot5 {
