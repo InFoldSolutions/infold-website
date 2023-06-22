@@ -64,7 +64,7 @@
   margin-left: 10px
 }
 
-.welcome-content .row img {
+.welcome-content .row .step-imgs {
   display: none
 }
 
@@ -267,7 +267,7 @@
   display: flex;
 }
 
-.row.active img {
+.row.active .step-imgs {
   display: block
 }
 
