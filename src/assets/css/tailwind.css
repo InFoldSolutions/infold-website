@@ -2956,6 +2956,10 @@ END: Need to rename these
     font-size: 26px;
   }
 
+  .md\:text-\[38px\] {
+    font-size: 38px;
+  }
+  
   .md\:text-\[45px\] {
     font-size: 45px;
   }
