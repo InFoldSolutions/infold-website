@@ -801,6 +801,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-bottom: 0.5rem;
 }
 
+.mt-1 {
+  margin-top: 0.25rem;
+}
+
 .mt-2 {
   margin-top: 0.5rem;
 }
@@ -2189,6 +2193,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   outline-offset: 2px;
 }
 
+.outline-1 {
+  outline: 1px solid;
+}
+
+.outline-primary {
+  outline-color: rgb(29 155 240);
+}
+
 .ring-primary {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(29 155 240 / var(--tw-ring-opacity));
@@ -2666,7 +2678,7 @@ END: Need to rename these
   }
 
   .sm-only\:width-170 {
-    width: 163%;
+    width: 158%;
   }
 
   .sm-only\:max-w-92 {
@@ -2982,6 +2994,10 @@ END: Need to rename these
   .lg\:mr-0 {
     margin-right: 0px;
   }
+  
+  .lg\:mt-0 {
+    margin-top: 0px;
+  }
 
   .lg\:ml-8 {
     margin-left: 2rem;
@@ -3025,6 +3041,14 @@ END: Need to rename these
 
   .lg\:ml-4 {
     margin-left: 1rem;
+  }
+  
+  .lg\:ml-2 {
+    margin-left: 0.5rem;
+  }
+  
+  .lg\:ml-1 {
+    margin-left: 0.25rem;
   }
 
   .lg\:ml-7 {
