@@ -1987,6 +1987,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   text-decoration: underline;
 }
 
+.text-underline-none {
+  text-decoration: none;
+}
+
 .font-medium {
   font-weight: 500;
 }
