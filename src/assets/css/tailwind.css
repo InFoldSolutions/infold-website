@@ -712,6 +712,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-right: -0.5rem;
 }
 
+.-mr-1 {
+  margin-right: -0.25rem;
+}
+
 .my-\[6px\] {
   margin-top: 6px;
   margin-bottom: 6px;
@@ -1041,6 +1045,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 1.5rem;
 }
 
+.h-7 {
+  height: 1.75rem;
+}
+
 .h-20 {
   height: 5rem;
 }
@@ -1123,6 +1131,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .w-6 {
   width: 1.5rem;
+}
+
+.w-7 {
+  width: 1.75rem;
 }
 
 .w-60 {
