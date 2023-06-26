@@ -7,7 +7,7 @@ window.onload = (event) => {
     let userAgent = navigator.userAgent;
 
     let browserName = "Chrome",
-        browserLink = "https://chrome.google.com/webstore/detail/infoldai/dfmmanoiegndhgdjendeidcakajifnlb?hl=en";
+      browserLink = "https://chrome.google.com/webstore/detail/infoldai/dfmmanoiegndhgdjendeidcakajifnlb?hl=en";
 
     // Currently only FF and Chrome are supported
     if (userAgent.match(/firefox|fxios/i)) {
@@ -151,12 +151,23 @@ window.onload = (event) => {
 
   pageLink.forEach((elem) => {
     elem.addEventListener("click", (e) => {
+      e.preventDefault();
+
       const target = e.target;
 
-      if (!target.href.includes("#")) 
+      if (!target.href.includes("#"))
         return;
 
-      e.preventDefault();
+      if (target.href.includes("home")) {
+        window.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: "smooth",
+        });
+
+        return;
+      }
+
       document.querySelector(elem.getAttribute("href")).scrollIntoView({
         behavior: "smooth",
         offsetTop: 1 - 60,
