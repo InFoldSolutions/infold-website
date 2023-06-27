@@ -151,12 +151,12 @@ window.onload = (event) => {
 
   pageLink.forEach((elem) => {
     elem.addEventListener("click", (e) => {
-      e.preventDefault();
-
       const target = e.target;
 
       if (!target.href.includes("#"))
         return;
+
+      e.preventDefault();
 
       if (target.href.includes("home")) {
         window.scrollTo({
