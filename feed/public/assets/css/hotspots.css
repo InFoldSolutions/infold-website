@@ -1,0 +1,321 @@
+/** Hotspot **/
+
+.hostpot-target .outer-circle {
+  opacity: 0;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-name: outerCircleAnimation;
+  animation-delay: 1.5s;
+}
+
+@keyframes outerCircleAnimation {
+  0% {
+    transform: scaleX(1);
+    opacity: 1
+  }
+
+  to {
+    transform: scale3d(2.3, 2.3, 2.3);
+    opacity: 0
+  }
+}
+
+.hostpot-target .inner-circle {
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-name: innerCircleAnimation;
+}
+
+@keyframes innerCircleAnimation {
+  0% {
+    transform: scaleX(1)
+  }
+
+  18% {
+    transform: scale3d(.3, .3, .3);
+  }
+
+  to {
+    transform: scaleX(1)
+  }
+}
+
+#hotspot0 {
+  top: 107px;
+  left: 513px;
+  height: 40px;
+  width: 40px;
+}
+
+.hotspot {
+  background-color: rgba(29, 155, 240, 0.15);
+  padding: 4px;
+  transition: border linear 0.2s;
+  border: 2px solid rgba(29, 155, 240, 0.15);
+  border-radius: 50%;
+}
+
+.hotspot.black {
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
+.hotspot:hover {
+  border-color: rgba(29, 155, 240, 1);
+}
+
+.hotspot.black:hover {
+  border-color: rgba(0, 0, 0, 1);
+}
+
+.hotspot.close {
+  font-size: 0.7em;
+  background: rgb(29 155 240);
+  border: none;
+  cursor: pointer;
+  color: white;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+}
+
+.hotspot.black.close {
+  background: rgb(0, 0, 0);
+}
+
+.hotspot.close svg {
+  fill: currentColor;
+}
+
+.hotspot span {
+  width: 17px;
+  height: 17px;
+  background-color: rgb(29 155 240);
+  border: 3px solid white;
+  border-radius: 50%;
+
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  animation-name: innerHotspotAnimation;
+}
+
+.hotspot.black span {
+  background-color: rgb(0, 0, 0);
+}
+
+@keyframes innerHotspotAnimation {
+  0% {
+    transform: scale(1)
+  }
+
+  18% {
+    transform: scale(0.88);
+  }
+
+  to {
+    transform: scale(1)
+  }
+}
+
+#hotspot-info1 {
+  bottom: 16.8%;
+  border-radius: 8px;
+  left: 28.1%;
+  width: 39.5%;
+  background-color: rgb(29 155 240);
+  padding: 0.4rem 1rem;
+  font-size: 0.75em;
+  color: white;
+  text-align: center;
+}
+
+#hotspot1 {
+  top: 32%;
+  left: 205px;
+}
+
+#hotspot2 {
+  top: 163px;
+  right: 190px;
+}
+
+#hotspot3 {
+  top: 256px;
+  left: 481px;
+}
+
+#hotspot4 {
+  top: 236px;
+  left: 205px;
+}
+
+#hotspot5 {
+  left: 66.2%;
+  top: 28.5%;
+}
+
+#hotspot6 {
+  right: 34.5%;
+  top: -0.5%;
+}
+
+#hotspot7 {
+  left: 24%;
+  top: 23.9%;
+}
+
+#hotspot8 {
+  right: 26%;
+  top: 49%;
+}
+
+#hotspot9 {
+  top: 8.5%;
+  left: -0.7%;
+}
+
+#hotspot10 {
+  top: 42%;
+  left: -6.7%;
+}
+
+#hotspot11 {
+  top: 58%;
+  right: 26.5%;
+}
+
+/* iPad */
+@media (max-width: 1024px) {
+  #hotspot-info1 {
+    bottom: 6%;
+  }
+
+  #hotspot0 {
+    top: 71px;
+    left: 361.8px;
+  }
+
+  #hotspot1 {
+    top: 30%;
+    left: 142px;
+  }
+
+  #hotspot2 {
+    top: 119px;
+    right: 132px;
+  }
+
+  #hotspot3 {
+    top: 179px;
+    left: 346px;
+  }
+
+  #hotspot4 {
+    top: 165px;
+    left: 142px;
+  }
+
+  #hotspot5 {
+    left: 66%;
+    top: 28%;
+  }
+
+  #hotspot6 {
+    right: 27.5%;
+    top: 0;
+  }
+
+  #hotspot7 {
+    left: 31.5%;
+    top: 24%;
+  }
+
+  #hotspot8 {
+    right: 19%;
+    top: 49%;
+  }
+
+  #hotspot9 {
+    bottom: 10.5%;
+    left: 26.7%;
+  }
+
+  #hotspot10 {
+    left: 1.4%;
+  }
+
+  #hotspot11 {
+    right: 20%;
+    top: 58.2%;
+  }
+}
+
+@media (max-width: 480px) {
+  #hotspot-info1 {
+    bottom: 8%;
+    left: 16.1%;
+    width: 79%;
+  }
+
+  #hotspot0 {
+    left: 65.3%;
+    top: 26.5%;
+  }
+
+  #hotspot1 {
+    top: 29.5%;
+    left: 15px;
+  }
+
+  #hotspot2 {
+    top: 46%;
+    right: 1px;
+  }
+
+  #hotspot3 {
+    top: 71.5%;
+    left: 53.5%;
+  }
+
+  #hotspot4 {
+    top: 57%;
+    left: 15px;
+  }
+
+  #hotspot5 {
+    left: 91.3%;
+    top: 27%;
+  }
+
+  #hotspot6 {
+    right: 24.8%;
+    top: -4.3%;
+  }
+
+  #hotspot7 {
+    left: 32%;
+    top: 21%;
+  }
+
+  #hotspot8 {
+    right: 13.4%;
+    top: 47.6%;
+  }
+
+  #hotspot9 {
+    bottom: 9%;
+    left: 15%;
+  }
+
+  #hotspot10 {
+    top: 39.5%;
+    left: -0.2%;
+  }
+
+  #hotspot11 {
+    top: 55.5%;
+    right: 15.4%;
+  }
+}

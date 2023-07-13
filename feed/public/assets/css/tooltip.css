@@ -1,0 +1,283 @@
+/**
+* Credits
+* based on: https://codepen.io/tutsplus/pen/WROvdG
+**/
+
+/* START TOOLTIP STYLES */
+[tooltip] {
+  position: relative;
+  /* opinion 1 */
+}
+
+/* Applies to all tooltips */
+[tooltip]::before,
+[tooltip]::after {
+  text-transform: none;
+  /* opinion 2 */
+  font-size: 12px;
+  /* opinion 3 */
+  line-height: 1;
+  user-select: none;
+  pointer-events: none;
+  position: absolute;
+  display: none;
+  visibility: hidden;
+  opacity: 0;
+}
+
+[tooltip]::before {
+  content: '';
+  border: 5px solid transparent;
+  /* opinion 4 */
+  z-index: 1001;
+  /* absurdity 1 */
+}
+
+[tooltip]::after {
+  content: attr(tooltip);
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 1ch 1.5ch;
+  border-radius: 0;
+  box-shadow: 0 1em 2em -0.5em rgb(0 0 0 / 35%);
+  background: rgb(24, 26, 27);
+  color: rgba(255, 255, 255, 0.8);
+  z-index: 2;
+  font-weight: 500;
+  width: 235px;
+  line-height: 21px;
+  font-size: 14px;
+  font-family: "Inter", sans-serif;
+}
+
+/* Make the tooltips respond to hover and focus */
+[tooltip]:hover::before,
+[tooltip]:hover::after,
+[tooltip].open::before,
+[tooltip].open::after,
+[tooltip]:focus:before,
+[tooltip]:focus::after {
+  display: flex;
+  visibility: visible;
+}
+
+/* don't show empty tooltips */
+[tooltip='']::before,
+[tooltip='']::after {
+  display: none !important;
+}
+
+[tooltip][tooltip-width^="auto"]::after {
+  width: auto;
+}
+
+/* COLOR: GREEN */
+[tooltip][color^="red"]::after {
+  background-color: #FF0000;
+}
+
+[tooltip][flow^="down"][color^="red"]::before {
+  border-bottom-color: #FF0000;
+}
+
+[tooltip][flow^="up"][color^="red"]::before {
+  border-top-color: #FF0000;
+}
+
+[tooltip][flow^="left"][color^="red"]::before {
+  border-left-color: #FF0000;
+}
+
+[tooltip][flow^="right"][color^="red"]::before {
+  border-right-color: #FF0000;
+}
+
+/* COLOR: GREEN */
+[tooltip][color^="green"]::after {
+  background-color: rgba(25, 97, 13, 0.7);
+}
+
+[tooltip][flow^="down"][color^="green"]::before {
+  border-bottom-color: rgba(25, 97, 13, 0.7);
+}
+
+[tooltip][flow^="up"][color^="green"]::before {
+  border-top-color: rgba(25, 97, 13, 0.7);
+}
+
+[tooltip][flow^="left"][color^="green"]::before {
+  border-left-color: rgba(25, 97, 13, 0.7);
+}
+
+[tooltip][flow^="right"][color^="green"]::before {
+  border-right-color: rgba(25, 97, 13, 0.7);
+}
+
+/* COLOR: BLUE */
+[tooltip][color^="blue"]::after {
+  background-color: rgb(48 86 211);
+}
+
+[tooltip][flow^="down"][color^="blue"]::before {
+  border-bottom-color: rgb(48 86 211);
+}
+
+[tooltip][flow^="up"][color^="blue"]::before {
+  border-top-color: rgb(48 86 211);
+}
+
+[tooltip][flow^="left"][color^="blue"]::before {
+  border-left-color: rgb(48 86 211);
+}
+
+[tooltip][flow^="right"][color^="blue"]::before {
+  border-right-color: rgb(48 86 211);
+}
+
+/* COLOR: LIGHT BLUE */
+[tooltip][color^="lightblue"]::after {
+  background-color: rgba(29, 155, 240, 1);
+}
+
+[tooltip][flow^="down"][color^="lightblue"]::before {
+  border-bottom-color: rgba(29, 155, 240, 1);
+}
+
+[tooltip][flow^="up"][color^="lightblue"]::before {
+  border-top-color: rgba(29, 155, 240, 1);
+}
+
+[tooltip][flow^="left"][color^="lightblue"]::before {
+  border-left-color: rgba(29, 155, 240, 1);
+}
+
+[tooltip][flow^="right"][color^="lightblue"]::before {
+  border-right-color: rgba(29, 155, 240, 1);
+}
+
+/* FLOW: UP */
+[tooltip]:not([flow])::before,
+[tooltip][flow^="up"]::before {
+  bottom: 100%;
+  border-bottom-width: 0;
+  border-top-color: #333;
+}
+
+[tooltip]:not([flow])::after,
+[tooltip][flow^="up"]::after {
+  bottom: calc(100% + 5px);
+}
+
+[tooltip]:not([flow])::before,
+[tooltip]:not([flow])::after,
+[tooltip][flow^="up"]::before,
+[tooltip][flow^="up"]::after {
+  left: 50%;
+  transform: translate(-50%, -.5em);
+}
+
+/* FLOW: DOWN */
+[tooltip][flow^="down"]::before {
+  top: 100%;
+  border-top-width: 0;
+  border-bottom-color: #333;
+}
+
+[tooltip][flow^="down"]::after {
+  top: calc(100% + 5px);
+}
+
+[tooltip][flow^="down"]::before,
+[tooltip][flow^="down"]::after {
+  left: 50%;
+  transform: translate(-50%, .5em);
+}
+
+/* FLOW: LEFT */
+[tooltip][flow^="left"]::before {
+  top: 50%;
+  border-right-width: 0;
+  border-left-color: #333;
+  left: calc(0em - 5px);
+  transform: translate(-.5em, -50%);
+}
+
+[tooltip][flow^="left"]::after {
+  top: 50%;
+  right: calc(100% + 5px);
+  transform: translate(-.5em, -50%);
+}
+
+/* FLOW: RIGHT */
+[tooltip][flow^="right"]::before {
+  top: 50%;
+  border-left-width: 0;
+  border-right-color: #333;
+  right: calc(0em - 5px);
+  transform: translate(.5em, -50%);
+}
+
+[tooltip][flow^="right"]::after {
+  top: 50%;
+  left: calc(100% + 5px);
+  transform: translate(.5em, -50%);
+}
+
+/* KEYFRAMES */
+@keyframes tooltips-vert {
+  to {
+    opacity: .99;
+    transform: translate(-50%, 0);
+  }
+}
+
+@keyframes tooltips-horz {
+  to {
+    opacity: .99;
+    transform: translate(0, -50%);
+  }
+}
+
+/* FX All The Things */
+[tooltip]:not([flow]):hover::before,
+[tooltip]:not([flow]):hover::after,
+[tooltip][flow^="up"]:hover::before,
+[tooltip][flow^="up"]:hover::after,
+[tooltip][flow^="down"]:hover::before,
+[tooltip][flow^="down"]:hover::after,
+[tooltip]:not([flow]):focus::before,
+[tooltip]:not([flow]):focus::after,
+[tooltip][flow^="up"]:focus::before,
+[tooltip][flow^="up"]:focus::after,
+[tooltip][flow^="down"]:focus::before,
+[tooltip][flow^="down"]:focus::after, 
+[tooltip]:not([flow]).open::before,
+[tooltip]:not([flow]).open::after,
+[tooltip][flow^="up"].open::before,
+[tooltip][flow^="up"].open::after,
+[tooltip][flow^="down"].open::before,
+[tooltip][flow^="down"].open::after {
+  animation: tooltips-vert 100ms ease-out forwards;
+}
+
+[tooltip][flow^="left"]:hover::before,
+[tooltip][flow^="left"]:hover::after,
+[tooltip][flow^="right"]:hover::before,
+[tooltip][flow^="right"]:hover::after,
+[tooltip][flow^="left"]:focus::before,
+[tooltip][flow^="left"]:focus::after,
+[tooltip][flow^="right"]:focus::before,
+[tooltip][flow^="right"]:focus::after,
+[tooltip][flow^="left"].open::before,
+[tooltip][flow^="left"].open::after,
+[tooltip][flow^="right"].open::before,
+[tooltip][flow^="right"].open::after {
+  animation: tooltips-horz 100ms ease-out forwards;
+}
+
+@media (max-width: 480px) {
+  [tooltip]::after {
+    max-width: 200px;
+  }
+}
