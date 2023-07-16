@@ -22,7 +22,7 @@ export default function Wrapper({ initialData }: { initialData: any }) {
     e.target.classList.add('underline');
 
     try {
-      const data = await getFeed(e.target.dataset.endpoint, e.target.dataset.bucket);
+      const data = await getFeed(e.target.dataset.endpoint, 20, e.target.dataset.bucket);
 
       if (data) setFeedData(data);
     }
@@ -34,11 +34,9 @@ export default function Wrapper({ initialData }: { initialData: any }) {
   async function onKeywordClick(e: any) {
     console.log('onKeywordClick')
 
-    if (e.target.tagName === 'A' || e.target.parentNode.tagName === 'A') return;
+    if (!e.target.classList.contains('keyword') || e.target.tagName === 'A' || e.target.parentNode.tagName === 'A') return;
 
     e.preventDefault();
-
-    if (!e.target.classList.contains('keyword')) return;
   }
 
   return (

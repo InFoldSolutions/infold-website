@@ -1,7 +1,7 @@
+import Image from 'next/image'
 
 export default function AnalyzedIcon({ analyzed, keyword }: { analyzed: any, keyword: string }) {
   const latestAnalyzed = (analyzed) ? analyzed[0] : null;
-  console.log('latestAnalyzed', latestAnalyzed);
 
   let icon, label, url;
 
@@ -23,7 +23,7 @@ export default function AnalyzedIcon({ analyzed, keyword }: { analyzed: any, key
 
   return (
     <a className='flex border-solid border-r-neutral-50 border-r-2 bg-neutral-100 hover:bg-neutral-200 justify-center h-full w-8 p-1 items-center dark:border-r-0' href={url} title={label} target='_blank'>
-      <img src={icon} alt={label} className="w-5 h-5" />
+      <Image src={icon} alt={label} width={20} height={20} />
     </a>
   )
 }
