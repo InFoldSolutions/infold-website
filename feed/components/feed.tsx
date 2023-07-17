@@ -12,11 +12,11 @@ export default function Feed({ data, onKeywordClick }: { data: any, onKeywordCli
   return (
     <ul>
       {data.topics.map((item: Item) => (
-        <li className='py-8 px-10 border-l-2 border-b-2 border-dashed first:pt-4' key={item.slug}>
+        <li className='py-10 px-10 border-l-2 border-b-2 border-dashed first:pt-4' key={item.slug}>
           <ReactTimeAgo
             date={item.added_at}
             locale="en-US"
-            className='text-gray-600 flex text-base pb-2 relative before:content-[""] before:absolute before:rounded before:right-[100%] before:top-[50%] before:w-4 before:h-4 before:bg-black before:border-[50%] before:transform before:-translate-y-3 before:-translate-x-8'
+            className='text-gray-600 dark:text-gray-300 flex text-base pb-2 relative before:content-[""] before:absolute before:rounded before:right-[100%] before:top-[50%] before:w-4 before:h-4 before:bg-black dark:before:bg-neutral-400 before:border-[50%] before:transform before:-translate-y-3 before:-translate-x-8'
           // 
           />
           <h3 className='mb-4 text-3xl font-bold leading-snug text-left'>
