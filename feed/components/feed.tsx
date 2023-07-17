@@ -1,19 +1,24 @@
 
 'use client'
 
-import config from '@/config'
-
 import Link from 'next/link'
 
-import { Item } from '@/helpers/api'
+import ReactTimeAgo from 'react-time-ago'
 
-import AnalyzedIcon from '@/components/icon'
+import { Item } from '@/helpers/api'
+import Keywords from './keywords'
 
 export default function Feed({ data, onKeywordClick }: { data: any, onKeywordClick: any }) {
   return (
     <ul>
       {data.topics.map((item: Item) => (
-        <li className='mb-8' key={item.slug}>
+        <li className='py-8 px-10 border-l-2 border-b-2 border-dashed first:pt-4' key={item.slug}>
+          <ReactTimeAgo
+            date={item.added_at}
+            locale="en-US"
+            className='text-gray-600 flex text-base pb-2 relative before:content-[""] before:absolute before:rounded before:right-[100%] before:top-[50%] before:w-4 before:h-4 before:bg-black before:border-[50%] before:transform before:-translate-y-3 before:-translate-x-8'
+          // 
+          />
           <h3 className='mb-4 text-3xl font-bold leading-snug text-left'>
             {item.title}<br />
             <small className='text-sm'>Summarized from {item.articles} articles.</small>
@@ -21,45 +26,16 @@ export default function Feed({ data, onKeywordClick }: { data: any, onKeywordCli
           <div className='text-left'>
             <ul className='list-inside list-disc'>
               {item.outline.slice(0, 2).map((outline: string, index: number) => (
-                <li className='mb-4' key={index}>
+                <li className='mb-4 last:mb-0' key={index}>
                   {outline}
                   {index === 1 && <Link href={`/topics/${item.slug}`} className="text-blue-500 underline ml-2">more..</Link>}
                 </li>
               ))}
             </ul>
           </div>
-          <div className='relative mt-6'>
-            <ul className='max-w-screen-2xl flex flex-nowrap gap-x-2 overflow-x-scroll no-scrollbar' onClick={onKeywordClick}>
-              {item.keywords.filter(filterKeywords).map((keyword: any, k: number) => (
-                <li className='group w-auto flex items-center items-stretch whitespace-nowrap' key={k}>
-                  <AnalyzedIcon analyzed={keyword.analyzed} keyword={keyword.keyword} />
-                  <span className='bg-neutral-100 hover:bg-neutral-200 py-1 px-2 cursor-pointer text-base dark:text-white dark:bg-neutral-950 dark:hover:bg-neutral-800' title="Apply filter for keyword">
-                    {keyword.keyword}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {item.keywords.length > 0 && <Keywords item={item} onKeywordClick={onKeywordClick} />}
         </li>
       ))}
     </ul>
   )
-}
-
-// We filter some obvious false positives
-function filterKeywords(data: any) {
-  if (data.keyword.length < 3)
-    return false;
-
-  if (config.keywordsBlacklist.includes(data.keyword.toLowerCase()))
-    return false;
-
-  if (data.type === "person") { // check for type person to have at least two full words
-    const words = data.keyword.split(" ");
-
-    if (words.length < 2)
-      return false;
-  }
-
-  return true;
 }

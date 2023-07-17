@@ -10,22 +10,21 @@ export type Item = {
   articles: number
 }
 
-export function getApiUrl(endpoint = 'rising', limit = 20, bucket: any = null) {
+export function getApiUrl(endpoint = 'rising', limit: number = 0, bucket: any = null) {
   let url = `${API_URL}/topics/${endpoint}`;
   let separator = '?';
 
   if (bucket) {
     url += `${separator}bucket=${bucket}`
     separator = '&';
-  } if (limit)
+  } 
+  if (limit)
     url += `${separator}limit=${limit}`
 
   return url;
 }
 
-export async function getFeed(endpoint = 'rising', limit = 20, bucket: any = null) {
-  console.log('Fetching feed data...')
-
+export async function getFeed(endpoint = 'rising', limit: number = 0, bucket: any = null) {
   try {
     const url = getApiUrl(endpoint, limit, bucket);
     const res = await fetch(url)
@@ -41,9 +40,30 @@ export async function getFeed(endpoint = 'rising', limit = 20, bucket: any = nul
   }
 }
 
-export async function getTopic(slug: string) {
-  console.log('Fetching topic data...')
+export async function getSearchFeed(keywords: string[]) {
+  try {
+    const url = getApiUrl('search');
+    console.log('url', url)
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ keywords, strict: true }),
+    })
 
+    if (!res.ok)
+      throw new Error('Response not ok');
+
+    const data = await res.json()
+    return data
+  } catch (error) {
+    console.error('Failed to fetch search feed data', error)
+    return { topics: [] };
+  }
+}
+
+export async function getTopic(slug: string) {
   try {
     const url = getApiUrl(slug, 0);
     console.time('fetch topic')
