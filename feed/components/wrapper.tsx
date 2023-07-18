@@ -1,8 +1,8 @@
 
 'use client'
 
-import { useState, useCallback } from 'react'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useState, useCallback, useEffect } from 'react'
+import { useRouter, useSearchParams, usePathname } from 'next/navigation'
 
 import Filters from '@/components/filters'
 import Feed from '@/components/feed'
@@ -19,8 +19,37 @@ export default function Wrapper({ initialData }: { initialData: any }) {
   const [feedData, setFeedData] = useState(initialData);
   const [isLoading, setIsLoading] = useState(false);
 
+  const pathname = usePathname()
   const searchParams: any = useSearchParams()
   const router = useRouter()
+
+  // listen for URL changes
+  useEffect(() => {
+    if (searchParams.keywords) {
+      const fetchSearchData = async () => {
+        setIsLoading(true);
+        const data = await getSearchFeed(searchParams.keywords.split(','));
+        setIsLoading(false);
+
+        if (data) setFeedData(data);
+      }
+
+      fetchSearchData()
+        .catch(console.error)
+    } else {
+      const fetchFeedData = async () => {
+        setIsLoading(true);
+        const data = await getFeed();
+        setIsLoading(false);
+
+        if (data) setFeedData(data);
+      }
+
+      fetchFeedData()
+        .catch(console.error)
+    }
+  }, [pathname, searchParams])
+
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
@@ -58,12 +87,6 @@ export default function Wrapper({ initialData }: { initialData: any }) {
     const queryString = keywords ? `${keywords},${e.target.innerText}` : e.target.innerText;
 
     router.push('?' + createQueryString('keywords', queryString))
-
-    setIsLoading(true);
-    const data = await getSearchFeed(queryString.split(','));
-    setIsLoading(false);
-
-    if (data) setFeedData(data);
   }
 
   async function removeKeywordFilter(e: any) {
@@ -79,23 +102,10 @@ export default function Wrapper({ initialData }: { initialData: any }) {
     const keywordsArray = keywords.split(',')
     const queryString = keywordsArray.filter((keyword: string) => keyword !== keywordText).join(',')
 
-    let data = null;
-
     if (queryString)
       router.push('?' + createQueryString('keywords', queryString))
     else
       router.push('/')
-
-    setIsLoading(true);
-
-    if (queryString) 
-      data = await getSearchFeed(queryString.split(','));
-    else 
-      data = await getFeed();
-    
-    setIsLoading(false);
-
-    if (data) setFeedData(data);
   }
 
   return (

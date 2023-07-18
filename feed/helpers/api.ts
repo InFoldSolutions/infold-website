@@ -43,7 +43,6 @@ export async function getFeed(endpoint = 'rising', limit: number = 0, bucket: an
 export async function getSearchFeed(keywords: string[]) {
   try {
     const url = getApiUrl('search');
-    console.log('url', url)
     const res = await fetch(url, {
       method: 'POST',
       headers: {
@@ -66,9 +65,7 @@ export async function getSearchFeed(keywords: string[]) {
 export async function getTopic(slug: string) {
   try {
     const url = getApiUrl(slug, 0);
-    console.time('fetch topic')
     const res = await fetch(url)
-    console.timeEnd('fetch topic')
 
     if (!res.ok)
       throw new Error('Response not ok');
