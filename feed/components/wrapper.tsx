@@ -32,10 +32,12 @@ export default function Wrapper({ initialData }: { initialData: any }) {
       return
     }
 
-    if (searchParams.keywords) {
+    const keywords = searchParams.get('keywords');
+
+    if (keywords) {
       const fetchSearchData = async () => {
         setIsLoading(true);
-        const data = await getSearchFeed(searchParams.keywords.split(','));
+        const data = await getSearchFeed(keywords.split(','));
         setIsLoading(false);
 
         if (data) setFeedData(data);
