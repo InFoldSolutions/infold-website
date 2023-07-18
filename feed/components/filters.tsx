@@ -16,7 +16,7 @@ export default function Filters({ removeKeywordFilter }: { removeKeywordFilter: 
         <span className='mr-2'>Keywords:</span>
         {keywords.split(',').map((keyword: string, index: number) => (
           <span
-            className='keyword bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 py-1 px-2 cursor-pointer dark:text-white dark:bg-neutral-950 dark:hover:bg-neutral-800 mr-2'
+            className='keyword bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 py-1 px-2 cursor-pointer dark:text-white dark:bg-neutral-800 dark:hover:bg-neutral-700 mr-2'
             title="Remove filter for keyword"
             onClick={removeKeywordFilter}
             key={index}>

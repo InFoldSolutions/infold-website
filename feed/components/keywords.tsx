@@ -10,7 +10,7 @@ export default function Keywords({ item, onKeywordClick }: { item: any, onKeywor
         {item.keywords.filter(filterKeywords).map((keyword: any, k: number) => (
           <li className='group w-auto flex items-center items-stretch whitespace-nowrap' key={k}>
             <AnalyzedIcon analyzed={keyword.analyzed} keyword={keyword.keyword} />
-            <span className='keyword bg-neutral-100 hover:bg-neutral-200 py-1 px-2 cursor-pointer text-base dark:text-white dark:bg-neutral-800 dark:hover:bg-neutral-950' title="Apply filter for keyword">
+            <span className='keyword bg-neutral-100 hover:bg-neutral-200 py-1 px-2 cursor-pointer text-base dark:text-white dark:bg-neutral-800 dark:hover:bg-neutral-700' title="Apply filter for keyword">
               {keyword.keyword}
             </span>
           </li>

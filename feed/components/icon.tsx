@@ -22,7 +22,7 @@ export default function AnalyzedIcon({ analyzed, keyword }: { analyzed: any, key
   }
 
   return (
-    <a className='flex border-solid border-r-neutral-50 border-r-2 bg-neutral-100 hover:bg-neutral-200 justify-center h-full w-8 p-1 items-center dark:border-r-0' href={url} title={label} target='_blank'>
+    <a className='flex border-solid border-r-neutral-50 border-r-2 bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-400 hover:dark:bg-neutral-400 justify-center h-full w-8 p-1 items-center dark:border-r-0' href={url} title={label} target='_blank'>
       <Image src={icon} alt={label} width={20} height={20} />
     </a>
   )
