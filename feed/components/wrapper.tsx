@@ -104,9 +104,9 @@ export default function Wrapper({ initialData }: { initialData: any }) {
 
   return (
     <div className='z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex'>
-      <div className='mx-auto max-w-[780px] lg:w-[780px] px-4'>
+      <div className='max-w-[780px] lg:w-[780px] pl-4 md:pl-8'>
         <div
-          className='mx-auto mb-8 text-base sm:text-lg sm:leading-relaxed md:text-xl md:leading-relaxed text-body-color'>
+          className='mb-6 mt-8 lg:mt-0 lg:mb-8 text-base sm:text-lg sm:leading-relaxed md:text-xl md:leading-relaxed text-body-color'>
           <Filters removeKeywordFilter={removeKeywordFilter} />
         </div>
 
