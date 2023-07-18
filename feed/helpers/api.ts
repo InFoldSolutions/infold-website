@@ -27,7 +27,7 @@ export function getApiUrl(endpoint = 'rising', limit: number = 0, bucket: any = 
 export async function getFeed(endpoint = 'rising', limit: number = 0, bucket: any = null) {
   try {
     const url = getApiUrl(endpoint, limit, bucket);
-    const res = await fetch(url)
+    const res = await fetch(url, { next: { revalidate: 5 } })
 
     if (!res.ok)
       throw new Error('Response not ok');

@@ -15,6 +15,8 @@ import en from 'javascript-time-ago/locale/en.json'
 
 TimeAgo.addDefaultLocale(en)
 
+let loaded = false;
+
 export default function Wrapper({ initialData }: { initialData: any }) {
   const [feedData, setFeedData] = useState(initialData);
   const [isLoading, setIsLoading] = useState(false);
@@ -25,6 +27,11 @@ export default function Wrapper({ initialData }: { initialData: any }) {
 
   // listen for URL changes
   useEffect(() => {
+    if (!loaded) { // ignore on 1st load, server side rendering
+      loaded = true;
+      return
+    }
+
     if (searchParams.keywords) {
       const fetchSearchData = async () => {
         setIsLoading(true);
@@ -37,9 +44,12 @@ export default function Wrapper({ initialData }: { initialData: any }) {
       fetchSearchData()
         .catch(console.error)
     } else {
+      const endpoint = searchParams.get('sort') || 'rising';
+      const bucket = searchParams.get('time') || null;
+
       const fetchFeedData = async () => {
         setIsLoading(true);
-        const data = await getFeed();
+        const data = await getFeed(endpoint, 20, bucket);
         setIsLoading(false);
 
         if (data) setFeedData(data);
@@ -49,7 +59,6 @@ export default function Wrapper({ initialData }: { initialData: any }) {
         .catch(console.error)
     }
   }, [pathname, searchParams])
-
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
@@ -61,23 +70,6 @@ export default function Wrapper({ initialData }: { initialData: any }) {
     [searchParams]
   )
 
-  async function onClick(e: any) {
-    e.preventDefault();
-
-    if (!e.target.classList.contains('filter')) return;
-
-    const filters = e.target.parentNode.querySelectorAll('.filter');
-    filters.forEach((filter: any) => filter.classList.remove('underline'));
-
-    e.target.classList.add('underline');
-
-    setIsLoading(true);
-    const data = await getFeed(e.target.dataset.endpoint, 20, e.target.dataset.bucket);
-    setIsLoading(false);
-
-    if (data) setFeedData(data);
-  }
-
   async function onKeywordClick(e: any) {
     if (!e.target.classList.contains('keyword') || e.target.tagName === 'A' || e.target.parentNode.tagName === 'A') return;
 
@@ -86,7 +78,7 @@ export default function Wrapper({ initialData }: { initialData: any }) {
     const keywords = searchParams.get('keywords') || '';
     const queryString = keywords ? `${keywords},${e.target.innerText}` : e.target.innerText;
 
-    router.push('?' + createQueryString('keywords', queryString))
+    router.push(`?keywords=${queryString}`)
   }
 
   async function removeKeywordFilter(e: any) {
@@ -113,7 +105,7 @@ export default function Wrapper({ initialData }: { initialData: any }) {
       <div className='mx-auto w-[780px] px-4'>
         <div
           className='mx-auto mb-8 text-base sm:text-lg sm:leading-relaxed md:text-xl md:leading-relaxed text-body-color'>
-          <Filters onClick={onClick} removeKeywordFilter={removeKeywordFilter} />
+          <Filters removeKeywordFilter={removeKeywordFilter} />
         </div>
 
         {isLoading && (`Loading ...`)}

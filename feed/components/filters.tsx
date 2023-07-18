@@ -1,10 +1,14 @@
 'use client';
 
+import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 
-export default function Filters({ onClick, removeKeywordFilter }: { onClick: any, removeKeywordFilter: any }) {
+export default function Filters({ removeKeywordFilter }: { removeKeywordFilter: any }) {
   const searchParams: any = useSearchParams()
   const keywords = searchParams.get('keywords') || '';
+
+  const endpoint = searchParams.get('sort') || 'rising';
+  const bucket = searchParams.get('time') || null;
 
   if (keywords) {
     return (
@@ -24,12 +28,12 @@ export default function Filters({ onClick, removeKeywordFilter }: { onClick: any
     )
   } else {
     return (
-      <div onClick={onClick}>
-        <span className='underline cursor-pointer filter hover:underline' data-endpoint='rising'>Latest</span> |
-        <span className='ml-3 cursor-pointer filter hover:underline' data-endpoint='top' data-bucket='day'>Top 24h</span> |
-        <span className='ml-3 cursor-pointer filter hover:underline' data-endpoint='top' data-bucket='week'>Top 7d</span> |
-        <span className='ml-3 cursor-pointer filter hover:underline' data-endpoint='top' data-bucket='month'>Top 30d</span> |
-        <span className='ml-3 cursor-pointer filter hover:underline' data-endpoint='top' data-bucket='year'>Top 365d</span>
+      <div>
+        <Link className={`${(endpoint === 'rising') ? 'underline' : ''} cursor-pointer filter hover:underline`} href={`?sort=rising`}>Latest</Link> |
+        <Link className={`${(endpoint === 'top' && bucket === 'day') ? 'underline' : ''} ml-3 cursor-pointer filter hover:underline`} href={`?sort=top&time=day`}>Top 24h</Link> |
+        <Link className={`${(endpoint === 'top' && bucket === 'week') ? 'underline' : ''} ml-3 cursor-pointer filter hover:underline`} href={`?sort=top&time=week`}>Top 7d</Link> |
+        <Link className={`${(endpoint === 'top' && bucket === 'month') ? 'underline' : ''} ml-3 cursor-pointer filter hover:underline`} href={`?sort=top&time=month`}>Top 30d</Link> |
+        <Link className={`${(endpoint === 'top' && bucket === 'year') ? 'underline' : ''} ml-3 cursor-pointer filter hover:underline`} href={`?sort=top&time=year`}>Top 365d</Link>
       </div>
     )
   }
