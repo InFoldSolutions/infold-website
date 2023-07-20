@@ -1,4 +1,5 @@
 import { getTopic } from '@/helpers/api'
+import Timeline from '@/components/timeline';
 
 export default async function Topic({ params }: { params: { slug: string } }) {
   const data = await getTopic(params.slug);
@@ -13,13 +14,15 @@ export default async function Topic({ params }: { params: { slug: string } }) {
           </h3>
           <div className='text-left'>
             <ul className='list-inside list-disc'>
-              {data.outline.map((outline: string, index: number) => (
+              {data.outline.slice(0, 2).map((outline: string, index: number) => (
                 <li className='mb-4' key={index}>
                   {outline}
                 </li>
               ))}
             </ul>
           </div>
+
+          <Timeline data={data} />
         </div>
       </div>
     </main>

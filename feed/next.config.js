@@ -2,11 +2,29 @@
 const nextConfig = {
     images: {
         remotePatterns: [
-            { // https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Wikipedia%27s_W.svg/1024px-Wikipedia%27s_W.svg.png
+            {
                 protocol: 'https',
                 hostname: 'upload.wikimedia.org',
                 port: '',
                 pathname: '/wikipedia/commons/**',
+            },
+            {
+                protocol: 'https',
+                hostname: 'pbs.twimg.com',
+                port: '',
+                pathname: '/**',
+            },
+            {
+                protocol: 'https',
+                hostname: 'cdn.shopify.com',
+                port: '',
+                pathname: '/**',
+            },
+            {
+                protocol: 'https',
+                hostname: 'dev-to-uploads.s3.amazonaws.com',
+                port: '',
+                pathname: '/**',
             },
         ],
     },
