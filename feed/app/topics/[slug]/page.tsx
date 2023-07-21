@@ -2,8 +2,21 @@ import { getTopic } from '@/helpers/api'
 
 import Timeline from '@/components/timeline';
 import Keywords from '@/components/keywords';
+import { Metadata } from 'next';
 
-export default async function Topic({ params, searchParams }: { params: { slug: string }, searchParams: any }) {
+export async function generateMetadata(
+  { params }: { params: any }
+): Promise<Metadata> {
+  // fetch data
+  const data = await getTopic(params.slug);
+
+  return {
+    title: data.title,
+    description: data.outline.slice(0, 2).join(' ')
+  }
+}
+
+export default async function Topic({ params }: { params: { slug: string } }) {
   const data = await getTopic(params.slug);
 
   return (

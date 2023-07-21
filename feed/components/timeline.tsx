@@ -75,19 +75,20 @@ export default function Timeline({ data }: { data: any }) {
       <Arrow direction='left' clickFunction={prevClickHandler} visible={false} />
       <Arrow direction='right' clickFunction={nextClickHandler} visible={true} />
       <div className='timeline relative max-w-screen-2xl overflow-x-scroll overflow-y-hidden no-scrollbar' onScroll={onScrollHandler}>
-        <ul className='flex flex-nowrap h-[150px] relative pl-[35px]'>
+        <ul className='flex flex-nowrap h-[130px] relative pl-[35px]'>
           {sortedSources.map((item: any, index: number) => (
-            <li className='group timeline-item select-none flex cursor-pointer relative items-center h-[50px] top-[90px] even:top-[10px] relative before:content-[""] before:absolute before:rounded before:-top-[21px] before:left-[17px] before:w-3 before:h-3 before:bg-neutral-800 dark:before:bg-neutral-400 before:border-[50%]'
+            <li className='group timeline-item select-none flex cursor-pointer relative items-center h-[50px] top-[75px] even:top-[5px] relative before:content-[""] before:absolute before:rounded before:-top-[15px] before:left-[16px] before:w-3 before:h-3 before:bg-neutral-800 dark:before:bg-neutral-400 before:border-[50%]'
               onClick={() => window.open(item.articles[0].url, '_blank')}
               title={item.articles[0].title}
               key={index} >
-              <Image src={item.source.logo} alt={item.source.name} width={80} height={80} className='w-12 h-12 max-w-none rounded-full mr-2 border-2 border-transparent group-hover:border-sky-400' />
-              <div className='flex flex-col w-auto min-w-[120px] overflow-x-hidden'>
+              <Image src={item.source.logo} alt={item.source.name} width={80} height={80} className='w-11 h-11 max-w-none rounded-full mr-2 border-2 border-transparent group-hover:border-sky-400' />
+              <div className='flex flex-col min-w-[101px] overflow-x-hidden'>
                 <span className='leading-4'>{item.source.name}</span>
                 <ReactTimeAgo
                   date={new Date(item.articles[0].added_at).getTime()}
                   locale="en-US"
                   className='text-gray-600 dark:text-gray-300 text-xs'
+                  title={item.articles[0].title}
                 />
               </div>
             </li>

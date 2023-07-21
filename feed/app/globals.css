@@ -33,5 +33,5 @@ body {
 }
 
 .timeline-item:nth-child(even)::before {
-  top: 59px
+  top: 54px
 }
