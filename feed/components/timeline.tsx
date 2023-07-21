@@ -67,7 +67,7 @@ export default function Timeline({ data }: { data: any }) {
     <div className='relative mt-8'>
       <div className='top-1/2 -mt-[1px] absolute h-px bg-neutral-800 dark:bg-neutral-400 w-full'></div>
       <Arrow direction='left' clickFunction={prevClickHandler} visible={false} />
-      <Arrow direction='right' clickFunction={nextClickHandler} visible={true} />
+      <Arrow direction='right' clickFunction={nextClickHandler} visible={(sortedSources.length > 4)} />
       <div className='timeline relative max-w-screen-2xl overflow-x-scroll overflow-y-hidden no-scrollbar' onScroll={onScrollHandler}>
         <ul className='flex flex-nowrap h-[130px] relative pl-[35px]'>
           {sortedSources.map((item: any, index: number) => (
@@ -81,6 +81,7 @@ export default function Timeline({ data }: { data: any }) {
                 <TimeAgo
                   date={new Date(item.articles[0].added_at).getTime()}
                   className='text-gray-600 dark:text-gray-300 text-xs'
+                  title={item.articles[0].title}
                 />
               </div>
             </li>
