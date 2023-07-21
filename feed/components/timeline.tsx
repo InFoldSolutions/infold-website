@@ -2,15 +2,9 @@
 
 import { UIEvent } from 'react';
 
+import TimeAgo from 'react-timeago'
+
 import Image from 'next/image'
-
-import TimeAgo from 'javascript-time-ago'
-
-import en from 'javascript-time-ago/locale/en.json'
-
-TimeAgo.addDefaultLocale(en)
-
-import ReactTimeAgo from 'react-time-ago'
 
 import Arrow from './arrow'
 
@@ -82,13 +76,11 @@ export default function Timeline({ data }: { data: any }) {
               title={item.articles[0].title}
               key={index} >
               <Image src={item.source.logo} alt={item.source.name} width={80} height={80} className='w-11 h-11 max-w-none rounded-full mr-2 border-2 border-transparent group-hover:border-sky-400' />
-              <div className='flex flex-col min-w-[101px] overflow-x-hidden'>
+              <div className='flex flex-col min-w-[110px] overflow-x-hidden'>
                 <span className='leading-4'>{item.source.name}</span>
-                <ReactTimeAgo
+                <TimeAgo
                   date={new Date(item.articles[0].added_at).getTime()}
-                  locale="en-US"
                   className='text-gray-600 dark:text-gray-300 text-xs'
-                  title={item.articles[0].title}
                 />
               </div>
             </li>

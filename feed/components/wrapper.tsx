@@ -9,12 +9,6 @@ import Feed from '@/components/feed'
 
 import { getFeed, getSearchFeed } from '@/helpers/api'
 
-import TimeAgo from 'javascript-time-ago'
-
-import en from 'javascript-time-ago/locale/en.json'
-
-TimeAgo.addDefaultLocale(en)
-
 let loaded = false;
 
 export default function Wrapper({ initialData }: { initialData: any }) {
