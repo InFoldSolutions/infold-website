@@ -19,7 +19,7 @@ export default function Keywords({ item }: { item: any }) {
     const keywords = searchParams.get('keywords') || '';
     const queryString = keywords ? `${keywords},${e.target.innerText}` : e.target.innerText;
 
-    router.push(`?keywords=${queryString}`)
+    router.push(`/?keywords=${queryString}`)
   }
 
   return (
