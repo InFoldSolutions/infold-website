@@ -31,3 +31,7 @@ body {
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+.timeline-item:nth-child(even)::before {
+  top: 59px
+}
