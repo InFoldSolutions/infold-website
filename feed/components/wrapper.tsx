@@ -72,17 +72,6 @@ export default function Wrapper({ initialData }: { initialData: any }) {
     [searchParams]
   )
 
-  async function onKeywordClick(e: any) {
-    if (!e.target.classList.contains('keyword') || e.target.tagName === 'A' || e.target.parentNode.tagName === 'A') return;
-
-    e.preventDefault();
-
-    const keywords = searchParams.get('keywords') || '';
-    const queryString = keywords ? `${keywords},${e.target.innerText}` : e.target.innerText;
-
-    router.push(`?keywords=${queryString}`)
-  }
-
   async function removeKeywordFilter(e: any) {
     e.preventDefault();
 
@@ -111,7 +100,7 @@ export default function Wrapper({ initialData }: { initialData: any }) {
         </div>
 
         {isLoading && (`Loading ...`)}
-        {!isLoading && (<Feed data={feedData} onKeywordClick={onKeywordClick} />)}
+        {!isLoading && (<Feed data={feedData} />)}
       </div>
     </div>
   )

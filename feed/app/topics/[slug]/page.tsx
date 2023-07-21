@@ -1,7 +1,9 @@
 import { getTopic } from '@/helpers/api'
-import Timeline from '@/components/timeline';
 
-export default async function Topic({ params }: { params: { slug: string } }) {
+import Timeline from '@/components/timeline';
+import Keywords from '@/components/keywords';
+
+export default async function Topic({ params, searchParams }: { params: { slug: string }, searchParams: any }) {
   const data = await getTopic(params.slug);
 
   return (
@@ -22,7 +24,19 @@ export default async function Topic({ params }: { params: { slug: string } }) {
             </ul>
           </div>
 
+          {data.keywords.length > 0 && <Keywords item={data} />}
+
           <Timeline data={data} />
+
+          <div className='text-left mt-10'>
+            <ul className='list-inside list-disc'>
+              {data.outline.slice(2).map((outline: string, index: number) => (
+                <li className='mb-4' key={index}>
+                  {outline}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </main>

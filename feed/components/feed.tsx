@@ -8,7 +8,7 @@ import ReactTimeAgo from 'react-time-ago'
 import { Item } from '@/helpers/api'
 import Keywords from './keywords'
 
-export default function Feed({ data, onKeywordClick }: { data: any, onKeywordClick: any }) {
+export default function Feed({ data }: { data: any }) {
   return (
     <div>
       {!data.topics && <div className='text-center text-2xl'>No topics found.</div>}
@@ -35,7 +35,7 @@ export default function Feed({ data, onKeywordClick }: { data: any, onKeywordCli
                   ))}
                 </ul>
               </div>
-              {item.keywords.length > 0 && <Keywords item={item} onKeywordClick={onKeywordClick} />}
+              {item.keywords.length > 0 && <Keywords item={item} />}
             </li>
           ))}
         </ul>}

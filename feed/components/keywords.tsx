@@ -1,9 +1,27 @@
+'use client'
+
+import { useRouter, useSearchParams, usePathname } from 'next/navigation'
 
 import config from '@/config'
 
 import AnalyzedIcon from '@/components/icon'
 
-export default function Keywords({ item, onKeywordClick }: { item: any, onKeywordClick: any }) {
+export default function Keywords({ item }: { item: any }) {
+
+  const searchParams: any = useSearchParams()
+  const router = useRouter()
+
+  async function onKeywordClick(e: any) {
+    if (!e.target.classList.contains('keyword') || e.target.tagName === 'A' || e.target.parentNode.tagName === 'A') return;
+
+    e.preventDefault();
+
+    const keywords = searchParams.get('keywords') || '';
+    const queryString = keywords ? `${keywords},${e.target.innerText}` : e.target.innerText;
+
+    router.push(`?keywords=${queryString}`)
+  }
+
   return (
     <div className='relative mt-6'>
       <ul className='max-w-screen-2xl flex flex-nowrap gap-x-2 overflow-x-scroll no-scrollbar' onClick={onKeywordClick}>
