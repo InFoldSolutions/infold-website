@@ -65,7 +65,7 @@ export default function Timeline({ data }: { data: any }) {
 
   return (
     <div className='relative mt-8'>
-      <div className='top-1/2 -mt-[1px] absolute h-px bg-neutral-800 dark:bg-neutral-400 w-full'></div>
+      <div className='top-1/2 -mt-[1px] absolute h-px bg-transparent w-full border-dashed border-b-2 border-white dark:border-neutral-600'></div>
       <Arrow direction='left' clickFunction={prevClickHandler} visible={false} />
       <Arrow direction='right' clickFunction={nextClickHandler} visible={(sortedSources.length > 4)} />
       <div className='timeline relative max-w-screen-2xl overflow-x-scroll overflow-y-hidden no-scrollbar' onScroll={onScrollHandler}>

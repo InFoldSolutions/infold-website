@@ -56,41 +56,12 @@ export default function Wrapper({ initialData }: { initialData: any }) {
     }
   }, [pathname, searchParams])
 
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams)
-      params.set(name, value)
-
-      return params.toString()
-    },
-    [searchParams]
-  )
-
-  async function removeKeywordFilter(e: any) {
-    e.preventDefault();
-
-    let target = e.target;
-
-    if (!target.classList.contains('keyword'))
-      target = e.target.parentNode;
-
-    const keywordText = target.innerText.replace('×', '').trim()
-    const keywords = searchParams.get('keywords') || ''
-    const keywordsArray = keywords.split(',')
-    const queryString = keywordsArray.filter((keyword: string) => keyword !== keywordText).join(',')
-
-    if (queryString)
-      router.push('?' + createQueryString('keywords', queryString))
-    else
-      router.push('/')
-  }
-
   return (
     <div className='md:mx-auto z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex'>
       <div className='md:mx-auto max-w-[780px] lg:w-[780px] pl-4 md:pl-8'>
         <div
           className='mb-6 mt-8 lg:mt-0 lg:mb-8 text-base sm:text-lg sm:leading-relaxed md:text-xl md:leading-relaxed text-body-color'>
-          <Filters removeKeywordFilter={removeKeywordFilter} />
+          <Filters />
         </div>
 
         {isLoading && (`Loading ...`)}

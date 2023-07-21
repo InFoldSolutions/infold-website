@@ -1,14 +1,34 @@
 'use client';
 
 import Link from 'next/link'
-import { useSearchParams } from 'next/navigation'
+import { useSearchParams, useRouter } from 'next/navigation'
 
-export default function Filters({ removeKeywordFilter }: { removeKeywordFilter: any }) {
+export default function Filters() {
+  const router = useRouter()
   const searchParams: any = useSearchParams()
+  
   const keywords = searchParams.get('keywords') || '';
-
   const endpoint = searchParams.get('sort') || 'rising';
   const bucket = searchParams.get('time') || null;
+
+  function removeKeywordFilter(e: any) {
+    e.preventDefault();
+
+    let target = e.target;
+
+    if (!target.classList.contains('keyword'))
+      target = e.target.parentNode;
+
+    const keywordText = target.innerText.replace('×', '').trim()
+    const keywords = searchParams.get('keywords') || ''
+    const keywordsArray = keywords.split(',')
+    const queryString = keywordsArray.filter((keyword: string) => keyword !== keywordText).join(',')
+
+    if (queryString)
+      router.push(`/?keywords=${queryString}`)
+    else
+      router.push('/')
+  }
 
   if (keywords) {
     return (
