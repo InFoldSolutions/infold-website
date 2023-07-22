@@ -25,7 +25,7 @@ export default async function Topic({ params }: { params: { slug: string } }) {
         <div className='mx-auto md:max-w-[740px] lg:max-w-[780px] px-4'>
           <h3 className='mb-4 text-3xl font-bold leading-snug text-left'>
             {data.title}<br />
-            <small className='text-sm'>Summarized from {data.sources.length} sources.</small>
+            <small className='text-sm'>Topic summarized from {data.sources.length} sources.</small>
           </h3>
           <div className='text-left'>
             <ul className='list-inside list-disc'>
