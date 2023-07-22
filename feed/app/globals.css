@@ -29,7 +29,11 @@ body {
 /* Global helpers */
 
 .no-scrollbar::-webkit-scrollbar {
-  display: none;
+  display: none; /* Chrome, Safari, Opera*/
+}
+
+.no-scrollbar {
+  scrollbar-width: none; /* Firefox */
 }
 
 .timeline-item:nth-child(even)::before {

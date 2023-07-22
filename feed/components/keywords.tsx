@@ -1,6 +1,6 @@
 'use client'
 
-import { useRouter, useSearchParams, usePathname } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 import config from '@/config'
 
@@ -28,13 +28,14 @@ export default function Keywords({ item }: { item: any }) {
         {item.keywords.filter(filterKeywords).map((keyword: any, k: number) => (
           <li className='group w-auto flex items-center items-stretch whitespace-nowrap' key={k}>
             <AnalyzedIcon analyzed={keyword.analyzed} keyword={keyword.keyword} />
-            <span className='keyword bg-neutral-100 hover:bg-neutral-200 py-1 px-2 cursor-pointer text-base dark:text-white dark:bg-neutral-800 dark:hover:bg-neutral-700' title="Search topics for keyword">
+            <span className='keyword bg-neutral-100 hover:bg-neutral-200 py-1 px-2 cursor-pointer text-base dark:text-white dark:bg-neutral-900 dark:hover:bg-neutral-800' title="Search topics for keyword">
               {keyword.keyword}
             </span>
           </li>
         ))}
       </ul>
-    </div>)
+    </div>
+  )
 }
 
 // We filter some obvious false positives

@@ -1,13 +1,15 @@
 
 'use client'
 
-import { useState, useCallback, useEffect } from 'react'
-import { useRouter, useSearchParams, usePathname } from 'next/navigation'
+import { useState, useEffect } from 'react'
+import { useSearchParams, usePathname } from 'next/navigation'
 
+import Header from '@/components/header'
 import Filters from '@/components/filters'
 import Feed from '@/components/feed'
 
 import { getFeed, getSearchFeed } from '@/helpers/api'
+import Footer from './footer'
 
 let loaded = false;
 
@@ -17,7 +19,6 @@ export default function Wrapper({ initialData }: { initialData: any }) {
 
   const pathname = usePathname()
   const searchParams: any = useSearchParams()
-  const router = useRouter()
 
   // listen for URL changes
   useEffect(() => {
@@ -57,16 +58,18 @@ export default function Wrapper({ initialData }: { initialData: any }) {
   }, [pathname, searchParams])
 
   return (
-    <div className='md:mx-auto z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex'>
-      <div className='md:mx-auto max-w-[780px] lg:w-[780px] pl-4 md:pl-8'>
-        <div
-          className='mb-6 mt-8 lg:mt-0 lg:mb-8 text-base sm:text-lg sm:leading-relaxed md:text-xl md:leading-relaxed text-body-color'>
-          <Filters />
-        </div>
+    <div className='md:mx-auto max-w-[780px] lg:w-[780px] pl-4 md:pl-8'>
+      <Header />
 
-        {isLoading && (`Loading ...`)}
-        {!isLoading && (<Feed data={feedData} />)}
+      <div
+        className='mb-6 mt-8 lg:mt-0 lg:mb-8 text-base sm:text-lg sm:leading-relaxed md:text-xl md:leading-relaxed text-body-color'>
+        <Filters />
       </div>
+
+      {isLoading && (`Loading ...`)}
+      {!isLoading && (<Feed data={feedData} />)}
+
+      <Footer />
     </div>
   )
 }

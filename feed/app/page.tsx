@@ -1,4 +1,5 @@
 import Wrapper from '@/components/wrapper';
+
 import { getFeed, getSearchFeed } from '@/helpers/api'
 
 export default async function Home({ params, searchParams }: { params: any, searchParams: any }) {
@@ -8,14 +9,16 @@ export default async function Home({ params, searchParams }: { params: any, sear
 
   let data = null;
 
-  if (keywords) 
+  if (keywords)
     data = await getSearchFeed(keywords.split(','));
   else
     data = await getFeed(endpoint, 20, bucket);
 
   return (
-    <main className='flex min-h-screen flex-col items-center justify-between py-4 lg:p-24'>
-      <Wrapper initialData={data} />
-    </main>
+    <main className='flex min-h-screen flex-col items-center justify-between py-4'>
+      <div className='md:mx-auto z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex'>
+        <Wrapper initialData={data} />
+      </div>
+    </main >
   )
 }
