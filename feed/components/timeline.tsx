@@ -1,6 +1,6 @@
 'use client'
 
-import { UIEvent } from 'react';
+import { UIEvent, useState } from 'react';
 
 import TimeAgo from 'react-timeago'
 
@@ -9,6 +9,8 @@ import Image from 'next/image'
 import Arrow from './arrow'
 
 export default function Timeline({ data }: { data: any }) {
+
+  const [isDesktop] = useState(window.innerWidth > 650);
 
   const sortedSources = data.sources.sort((a: any, b: any) => {
     return new Date(b.articles[0].added_at).getTime() - new Date(a.articles[0].added_at).getTime()
@@ -50,6 +52,8 @@ export default function Timeline({ data }: { data: any }) {
     const leftArrow = document.querySelector('.left.arrow') as HTMLElement;
     const rightArrow = document.querySelector('.right.arrow') as HTMLElement;
 
+    if (!leftArrow || !rightArrow) return;
+
     if (element.scrollLeft === 0)
       leftArrow.classList.add('hidden')
 
@@ -66,8 +70,14 @@ export default function Timeline({ data }: { data: any }) {
   return (
     <div className='relative mt-8'>
       <div className='top-1/2 -mt-[1px] absolute h-px bg-transparent w-full border-dashed border-b-2 border-white dark:border-neutral-600'></div>
-      <Arrow direction='left' clickFunction={prevClickHandler} visible={false} />
-      <Arrow direction='right' clickFunction={nextClickHandler} visible={(sortedSources.length > 4)} />
+
+      {isDesktop &&
+        <div>
+          <Arrow direction='left' clickFunction={prevClickHandler} visible={false} />
+          <Arrow direction='right' clickFunction={nextClickHandler} visible={(sortedSources.length > 4)} />
+        </div>
+      }
+
       <div className='timeline relative max-w-screen-2xl overflow-x-scroll overflow-y-hidden no-scrollbar' onScroll={onScrollHandler}>
         <ul className='flex flex-nowrap h-[130px] relative pl-[35px]'>
           {sortedSources.map((item: any, index: number) => (
