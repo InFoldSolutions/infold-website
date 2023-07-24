@@ -1,6 +1,6 @@
 'use client'
 
-import { UIEvent, useState } from 'react';
+import { UIEvent } from 'react';
 
 import TimeAgo from 'react-timeago'
 
@@ -10,8 +10,7 @@ import Arrow from './arrow'
 
 export default function Timeline({ data }: { data: any }) {
 
-  const [isDesktop] = useState(window.innerWidth > 650);
-
+  const isDesktop: boolean = (window.innerWidth > 650);
   const sortedSources = data.sources.sort((a: any, b: any) => {
     return new Date(b.articles[0].added_at).getTime() - new Date(a.articles[0].added_at).getTime()
   })

@@ -48,13 +48,16 @@ export async function getSearchFeed(keywords: string[]) {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ keywords, strict: true }),
+      body: JSON.stringify({ keywords }),
     })
 
     if (!res.ok)
       throw new Error('Response not ok');
 
     const data = await res.json()
+
+    console.log('getSearchFeed data', data)
+
     return data
   } catch (error) {
     console.error('Failed to fetch search feed data', error)

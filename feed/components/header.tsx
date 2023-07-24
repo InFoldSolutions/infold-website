@@ -6,8 +6,9 @@ export default function Header() {
 
   let browserLink = "https://chrome.google.com/webstore/detail/infoldai/dfmmanoiegndhgdjendeidcakajifnlb?hl=en";
 
-  if (navigator && navigator.userAgent.match(/firefox|fxios/i))
-    browserLink = "https://addons.mozilla.org/en-US/firefox/addon/infold/";
+  if (navigator)
+    if (navigator.userAgent.match(/firefox|fxios/i))
+      browserLink = "https://addons.mozilla.org/en-US/firefox/addon/infold/";
 
   return (
     <header className="flex my-0 md:my-5 py-5 mb-8 border-b-2 border-dashed border-white dark:border-neutral-600">
