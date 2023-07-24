@@ -22,7 +22,7 @@ export default function AnalyzedIcon({ analyzed, keyword }: { analyzed: any, key
   }
 
   return (
-    <a className='flex border-solid border-r-neutral-50 border-r-2 bg-neutral-200 hover:bg-neutral-200 dark:bg-neutral-700 hover:dark:bg-neutral-600 justify-center h-full w-8 p-1 items-center dark:border-r-0' 
+    <a className='select-none flex border-solid border-r-neutral-50 border-r-2 bg-neutral-200 hover:bg-neutral-200 dark:bg-neutral-700 hover:dark:bg-neutral-600 justify-center h-full w-8 p-1 items-center dark:border-r-0' 
        href={url} 
        title={`${label} keyword`} 
        target='_blank'>

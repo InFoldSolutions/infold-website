@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 export default function Footer() {
   return (
-    <footer className="flex mt-5 pt-2 mb-4 border-t-2 border-dashed border-white dark:border-neutral-600">
+    <footer className="flex mt-6 pt-3 mb-4 border-t-2 border-dashed border-white dark:border-neutral-600">
       <div className="relative w-full flex items-center justify-between flex">
         <div className='w-auto'>
           <a href="/" className="navbar-logo flex items-center w-full">
@@ -16,13 +16,13 @@ export default function Footer() {
               <li className="mr-3">
                 <a href="https://www.patreon.com/infold/" target="_blank"
                   className="h-full text-center flex">
-                  <Image src="/assets/images/patreon.png" width="19" height="19" alt='InFold on Patreon' /><span className='hidden md:inline-block'>&nbsp;Patreon</span>
+                  <Image src="/assets/images/patreon.png" width="19" height="19" alt='InFold on Patreon' className='mr-1' /><span className='hidden md:inline-block'>Patreon</span>
                 </a>
               </li>
               <li className="mr-3">
                 <a href="https://www.twitter.com/infoldai/" target="_blank"
                   className="h-full text-center flex">
-                  <Image src="/assets/images/twitter.svg" width="19" height="19" alt="Follow InFold on Twitter" /><span className='hidden md:inline-block'>&nbsp;Follow us</span>
+                  <Image src="/assets/images/twitter.svg" width="19" height="19" alt="Follow InFold on Twitter" className='mr-1' /><span className='hidden md:inline-block'>Follow us</span>
                 </a>
               </li>
             </ul>

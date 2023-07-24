@@ -68,7 +68,7 @@ export default function Timeline({ data }: { data: any }) {
 
   return (
     <div className='relative mt-8'>
-      <div className='top-1/2 -mt-[1px] absolute h-px bg-transparent w-full border-dashed border-b-2 border-white dark:border-neutral-600'></div>
+      <div className='top-1/2 -mt-[34px] absolute h-px bg-transparent w-full border-dashed border-b-2 border-white dark:border-neutral-600'></div>
 
       {isDesktop &&
         <div>
@@ -96,6 +96,34 @@ export default function Timeline({ data }: { data: any }) {
             </li>
           ))
           }
+        </ul>
+      </div>
+
+      <div className='mt-9 flex items-center'>
+        <ul className='flex ml-auto w-auto'>
+          <li className='flex items-center mr-2 cursor-pointer border-2 p-1 px-2 select-none' title='Toggle display'>
+            <picture className="mr-2">
+              <source srcSet="/assets/images/article-icon-white.png" media="(prefers-color-scheme: dark)" />
+              <Image
+                src="/assets/images/article-icon.png"
+                alt="Related Articles"
+                width={18}
+                height={18}
+              />
+            </picture>
+            <span className='hidden md:inline-block'>Related articles -</span>
+            <span className='ml-1'>56</span>
+          </li>
+          <li className='opacity-50 hover:opacity-100 flex items-center mr-2 cursor-pointer border-2 p-1 px-2 select-none' title='Toggle display'>
+            <Image className="mr-2" src="/assets/images/twitter.svg" width={19} height={19} alt='Tweets' />
+            <span className='hidden md:inline-block'>Tweets -</span>
+            <span className='ml-1'>23</span>
+          </li>
+          <li className='opacity-50 hover:opacity-100 flex items-center cursor-pointer border-2 p-1 px-2 select-none' title='Toggle display'>
+            <Image className="mr-2" src="/assets/images/reddit.svg" width={19} height={19} alt='Posts' />
+            <span className='hidden md:inline-block'>Posts -</span>
+            <span className='ml-1'>10</span>
+          </li>
         </ul>
       </div>
     </div>
