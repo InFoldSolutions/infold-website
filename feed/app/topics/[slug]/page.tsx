@@ -52,7 +52,7 @@ export default async function Topic({ params }: { params: { slug: string } }) {
             </div>}
 
             <div className='mt-6'>
-              <h3 className='mb-4 text-2xl font-bold'>Detailed summary</h3>
+              <h3 className='mb-4 text-2xl font-bold select-none'>Detailed summary</h3>
               <ul className='list-inside list-disc'>
                 {data.outline.slice(2).map((outline: string, index: number) => (
                   <li className='mb-4' key={index}>
