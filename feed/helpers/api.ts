@@ -10,7 +10,7 @@ export type Item = {
   articles: number
 }
 
-export function getApiUrl(endpoint = 'rising', limit: number = 0, bucket: any = null) {
+export function getApiUrl(endpoint = 'rising', limit: number = 0, bucket: any = null, page: number = 1) {
   let url = `${API_URL}/topics/${endpoint}`;
   let separator = '?';
 
@@ -18,31 +18,40 @@ export function getApiUrl(endpoint = 'rising', limit: number = 0, bucket: any = 
     url += `${separator}bucket=${bucket}`
     separator = '&';
   } 
-  if (limit)
+  if (limit) {
     url += `${separator}limit=${limit}`
+    separator = '&';
+  }
+  if (page > 1) {
+    url += `${separator}page=${page}`
+  }
 
   return url;
 }
 
-export async function getFeed(endpoint = 'rising', limit: number = 0, bucket: any = null) {
+export async function getFeed(endpoint = 'rising', limit: number = 0, bucket: any = null, page: number = 1) {
   try {
-    const url = getApiUrl(endpoint, limit, bucket);
+    const url = getApiUrl(endpoint, limit, bucket, page);
     const res = await fetch(url, { next: { revalidate: 5 } })
 
     if (!res.ok)
       throw new Error('Response not ok');
 
     const data = await res.json()
-    return data
+
+    if (!data.topics)
+      throw new Error('Topics not found');
+
+    return data.topics
   } catch (error) {
     console.error('Failed to fetch feed data', error)
     return { topics: [] };
   }
 }
 
-export async function getSearchFeed(keywords: string[]) {
+export async function getSearchFeed(keywords: string[], page: number = 1) {
   try {
-    const url = getApiUrl('search');
+    const url = getApiUrl('search', 20, null, page);
     const res = await fetch(url, {
       method: 'POST',
       headers: {
@@ -56,9 +65,10 @@ export async function getSearchFeed(keywords: string[]) {
 
     const data = await res.json()
 
-    console.log('getSearchFeed data', data)
+    if (!data.topics)
+      throw new Error('Topics not found');
 
-    return data
+    return data.topics
   } catch (error) {
     console.error('Failed to fetch search feed data', error)
     return { topics: [] };

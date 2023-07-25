@@ -15,10 +15,8 @@ export default async function Home({ params, searchParams }: { params: any, sear
     data = await getFeed(endpoint, 20, bucket);
 
   return (
-    <main className='flex min-h-screen flex-col items-center justify-between'>
-      <div className='md:mx-auto z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex'>
-        <Wrapper initialData={data} />
-      </div>
+    <main>
+      <Wrapper initialData={data} />
     </main >
   )
 }

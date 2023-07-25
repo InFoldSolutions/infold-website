@@ -23,8 +23,8 @@ export default async function Topic({ params }: { params: { slug: string } }) {
   const data = await getTopic(params.slug);
 
   return (
-    <main className='flex min-h-screen flex-col items-center justify-between'>
-      <div className='z-10 w-full max-w-5xl items-center justify-between font-mono text-sm'>
+    <main>
+      <div className='w-full font-mono'>
         <div className='mx-auto md:max-w-[740px] lg:max-w-[780px] px-4'>
           <Header />
 

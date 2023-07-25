@@ -6,12 +6,12 @@ export default function Header() {
 
   let browserLink = "https://chrome.google.com/webstore/detail/infoldai/dfmmanoiegndhgdjendeidcakajifnlb?hl=en";
 
-  if (navigator)
+  if (navigator !== undefined && navigator.userAgent)
     if (navigator.userAgent.match(/firefox|fxios/i))
       browserLink = "https://addons.mozilla.org/en-US/firefox/addon/infold/";
 
   return (
-    <header className="flex my-0 md:my-5 py-5 mb-8 border-b-2 border-dashed border-white dark:border-neutral-600">
+    <header className="flex my-0 md:my-5 pb-5 mb-8 border-b-2 border-dashed border-white dark:border-neutral-600">
       <div className="relative w-full flex items-center justify-between flex">
         <div className='w-auto'>
           <a href="/" className="navbar-logo flex items-center w-full">
