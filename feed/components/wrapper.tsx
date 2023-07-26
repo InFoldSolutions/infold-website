@@ -30,7 +30,10 @@ export default function Wrapper({ initialData }: { initialData: any }) {
       return
     }
 
+    setIsLoading(true)
+
     setOffset(1);
+    setEndOfFeed(false);
 
     const backToTop = document.getElementById('back-to-top') as HTMLElement;
 
@@ -38,7 +41,6 @@ export default function Wrapper({ initialData }: { initialData: any }) {
       backToTop.classList.add('hidden')
 
     const fetchFeedData = async () => {
-      setIsLoading(true)
 
       let data: any;
       const keywords = searchParams.get('keywords')
@@ -65,8 +67,9 @@ export default function Wrapper({ initialData }: { initialData: any }) {
   useEffect(() => {
 
     if (offset > 1 && !endOfFeed) {
+      setIsLoadMore(true)
+
       const fetchMoreData = async () => {
-        setIsLoadMore(true)
 
         let data: any;
         const keywords = searchParams.get('keywords')
