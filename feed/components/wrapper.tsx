@@ -84,6 +84,8 @@ export default function Wrapper({ initialData }: { initialData: any }) {
   }, [offset])
 
   function onScrollHandler(e: UIEvent<HTMLDivElement>) {
+    console.log('onScrollHandler', e)
+    
     const element = e.target as HTMLElement
     const backToTop = element.nextElementSibling as HTMLElement
     const isBottom = Math.abs(element.scrollHeight - element.scrollTop - element.clientHeight) < 1
@@ -111,7 +113,7 @@ export default function Wrapper({ initialData }: { initialData: any }) {
 
   return (
     <div className='relative overflow-hidden'>
-      <div className='w-full max-h-screen font-mono lg:flex overflow-y-auto' onScroll={onScrollHandler}>
+      <div className='w-full max-h-screen font-mono lg:flex overflow-y-auto' onScroll={onScrollHandler} onTouchMove={onScrollHandler}>
         <div className='md:mx-auto max-w-[780px] lg:w-[780px] pl-4 md:pl-8 pr-4 lg:pr-0'>
           <Header />
 
