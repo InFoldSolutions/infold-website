@@ -111,7 +111,7 @@ export default function Wrapper({ initialData }: { initialData: any }) {
 
   return (
     <div className='relative overflow-hidden'>
-      <div className='w-full max-h-screen font-mono lg:flex overflow-y-auto' onScroll={onScrollHandler}>
+      <div className='w-full max-h-screen font-mono lg:flex overflow-y-auto overflow-x-hidden' onScroll={onScrollHandler}>
         <div className='md:mx-auto max-w-[780px] lg:w-[780px] pl-4 md:pl-8 pr-4 lg:pr-0'>
           <Header />
 
