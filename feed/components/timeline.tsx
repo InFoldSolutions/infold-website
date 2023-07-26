@@ -68,7 +68,7 @@ export default function Timeline({ data }: { data: any }) {
 
   return (
     <div className='relative mt-8'>
-      <div className='top-1/2 -mt-[34px] absolute h-px bg-transparent w-full border-dashed border-b-2 border-white dark:border-neutral-600'></div>
+      <div className='top-1/2 -mt-[36px] absolute h-px bg-transparent w-full border-dashed border-b-2 border-white dark:border-neutral-600'></div>
 
       {isDesktop &&
         <div>

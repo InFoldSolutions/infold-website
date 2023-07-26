@@ -88,12 +88,12 @@ export default function Wrapper({ initialData }: { initialData: any }) {
     const backToTop = element.nextElementSibling as HTMLElement
     const isBottom = Math.abs(element.scrollHeight - element.scrollTop - element.clientHeight) < 1
 
-    if (isBottom)
+    if (isBottom && !isLoadMore)
       setOffset(offset + 1);
 
-    if (element.scrollTop > 100)
+    if (element.scrollTop > 100 && backToTop.classList.contains('hidden'))
       backToTop.classList.remove('hidden')
-    else  
+    else if (element.scrollTop <= 100 && !backToTop.classList.contains('hidden'))
       backToTop.classList.add('hidden')
   }
 
