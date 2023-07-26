@@ -11,7 +11,7 @@ export default function Header() {
       browserLink = "https://addons.mozilla.org/en-US/firefox/addon/infold/";
 
   return (
-    <header className="flex my-0 md:my-5 pb-5 mb-8 border-b-2 border-dashed border-white dark:border-neutral-600">
+    <header className="flex my-5 pb-5 mb-8 border-b-2 border-dashed border-white dark:border-neutral-600">
       <div className="relative w-full flex items-center justify-between flex">
         <div className='w-auto'>
           <a href="/" className="navbar-logo flex items-center w-full">

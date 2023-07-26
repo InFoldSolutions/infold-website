@@ -1,7 +1,7 @@
 
 'use client'
 
-import { useRef, useState, useEffect, UIEvent } from 'react'
+import { useState, useEffect, UIEvent } from 'react'
 import { useSearchParams, usePathname } from 'next/navigation'
 
 import Header from '@/components/header'
@@ -84,30 +84,56 @@ export default function Wrapper({ initialData }: { initialData: any }) {
   }, [offset])
 
   function onScrollHandler(e: UIEvent<HTMLDivElement>) {
-    const element = e.target as HTMLElement;
-    const isBottom = Math.abs(element.scrollHeight - element.scrollTop - element.clientHeight) < 1;
+    const element = e.target as HTMLElement
+    const backToTop = element.nextElementSibling as HTMLElement
+    const isBottom = Math.abs(element.scrollHeight - element.scrollTop - element.clientHeight) < 1
 
     if (isBottom)
       setOffset(offset + 1);
+
+    if (element.scrollTop > 100)
+      backToTop.classList.remove('hidden')
+    else  
+      backToTop.classList.add('hidden')
+  }
+
+  function backToTopHandler(e: UIEvent<HTMLDivElement>) {
+    const element = e.target as HTMLElement
+    const scrollElement = element.previousElementSibling as HTMLElement
+
+    if (!scrollElement) return console.warn('Wrapper: backToTopHandler: scrollElement not found')
+
+    scrollElement.scroll({
+      top: 0,
+      behavior: 'smooth',
+    });
   }
 
   return (
-    <div className='w-full max-h-screen font-mono lg:flex overflow-y-auto' onScroll={onScrollHandler}>
-      <div className='md:mx-auto max-w-[780px] lg:w-[780px] pl-4 md:pl-8'>
-        <Header />
+    <div className='relative overflow-hidden'>
+      <div className='w-full max-h-screen font-mono lg:flex overflow-y-auto py-4' onScroll={onScrollHandler}>
+        <div className='md:mx-auto max-w-[780px] lg:w-[780px] pl-4 md:pl-8 pr-4 lg:pr-0'>
+          <Header />
 
-        <div
-          className='mb-6 mt-8 lg:mt-0 lg:mb-8 text-base sm:text-lg sm:leading-relaxed md:text-xl md:leading-relaxed text-body-color'>
-          <Filters />
+          <div
+            className='mb-4 mt-8 lg:mt-0 lg:mb-4 text-base sm:text-lg sm:leading-relaxed md:text-xl md:leading-relaxed text-body-color'>
+            <Filters />
+          </div>
+
+          {isLoading && (`Loading ...`)}
+          {!isLoading && (<Feed data={feedData} />)}
+
+          {isLoadMore && (<div className='w-full justify-center mt-3 pt-2'>Loading more ...</div>)}
+
+          <Footer />
         </div>
-
-        {isLoading && (`Loading ...`)}
-        {!isLoading && (<Feed data={feedData} />)}
-
-        {isLoadMore && (<div className='w-full justify-center m-2 p-2'>Loading more ...</div>)}
-
-        <Footer />
       </div>
+
+      <div 
+        className='absolute bottom-2 right-2 md:right-6 py-2 px-3 w-auto flex bg-transparent border-dashed border-2 border-white dark:border-neutral-600 hidden cursor-pointer' 
+        onClick={backToTopHandler}>
+          Back to top
+        </div>
     </div>
   )
 }
