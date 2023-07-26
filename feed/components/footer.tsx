@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 export default function Footer() {
   return (
-    <footer className="flex mt-6 pt-3 mb-4 border-t-2 border-dashed border-white dark:border-neutral-600">
+    <footer className="flex mt-6 pt-3 pb-4 border-t-2 border-dashed border-white dark:border-neutral-600">
       <div className="relative w-full flex items-center justify-between flex">
         <div className='w-auto'>
           <a href="/" className="navbar-logo flex items-center w-full">

@@ -10,7 +10,7 @@ import Keywords from './keywords'
 
 export default function Feed({ data }: { data: any, onScrollHandler?: any }) {
   return (
-    <div>
+    <div className='px-2'>
       {!data || data.length === 0 && <div className='text-center text-2xl'>No topics found.</div>}
       {data.length > 0 &&
         <ul>
@@ -21,7 +21,7 @@ export default function Feed({ data }: { data: any, onScrollHandler?: any }) {
                 className='text-gray-600 dark:text-gray-300 flex text-base pb-2 relative before:content-[""] before:absolute before:rounded before:right-[100%] before:top-[50%] before:w-4 before:h-4 before:bg-black dark:before:bg-neutral-400 before:border-[50%] before:transform before:-translate-y-3 before:-translate-x-3 md:before:-translate-x-8'
               />
               <h3 className='mb-4 text-3xl font-bold leading-snug text-left'>
-                {item.title}<br />
+                <Link href={`/topics/${item.slug}`}>{item.title}</Link><br />
                 <small className='text-sm'>Summarized from {item.articles} articles.</small>
               </h3>
               <div className='text-left'>

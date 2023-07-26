@@ -18,11 +18,13 @@ export default function Wrapper({ initialData }: { initialData: any }) {
   const [offset, setOffset] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadMore, setIsLoadMore] = useState(false);
+  const [endOfFeed, setEndOfFeed] = useState(false);
 
   const pathname = usePathname()
   const searchParams: any = useSearchParams()
 
   useEffect(() => {
+
     if (!loaded) { // ignore on 1st load, server side rendering !TODO: this doesn't account for "back" navigation
       loaded = true;
       return
@@ -30,16 +32,21 @@ export default function Wrapper({ initialData }: { initialData: any }) {
 
     setOffset(1);
 
+    const backToTop = document.getElementById('back-to-top') as HTMLElement;
+
+    if (!backToTop.classList.contains('hidden'))
+      backToTop.classList.add('hidden')
+
     const fetchFeedData = async () => {
-      setIsLoading(true);
+      setIsLoading(true)
 
       let data: any;
-      const keywords = searchParams.get('keywords');
+      const keywords = searchParams.get('keywords')
 
       if (keywords) {
         data = await getSearchFeed(keywords.split(','))
       } else {
-        const endpoint = searchParams.get('sort') || 'rising';
+        const endpoint = searchParams.get('sort') || 'rising'
         const bucket = searchParams.get('time') || null;
 
         data = await getFeed(endpoint, 20, bucket)
@@ -56,7 +63,8 @@ export default function Wrapper({ initialData }: { initialData: any }) {
   }, [pathname, searchParams])
 
   useEffect(() => {
-    if (offset > 1) {
+
+    if (offset > 1 && !endOfFeed) {
       const fetchMoreData = async () => {
         setIsLoadMore(true)
 
@@ -74,8 +82,10 @@ export default function Wrapper({ initialData }: { initialData: any }) {
 
         setIsLoadMore(false);
 
-        if (data)
+        if (data && data.length > 0)
           setFeedData((prevData: any) => [...prevData, ...data])
+        else
+          setEndOfFeed(true)
       }
 
       fetchMoreData()
@@ -87,6 +97,9 @@ export default function Wrapper({ initialData }: { initialData: any }) {
     const element = e.target as HTMLElement
     const backToTop = element.nextElementSibling as HTMLElement
     const isBottom = Math.abs(element.scrollHeight - element.scrollTop - element.clientHeight) < 1
+
+    if (element.scrollHeight <= document.body.clientHeight)
+      return
 
     if (isBottom && !isLoadMore)
       setOffset(offset + 1);
@@ -111,8 +124,8 @@ export default function Wrapper({ initialData }: { initialData: any }) {
 
   return (
     <div className='relative overflow-hidden'>
-      <div className='w-full max-h-screen font-mono lg:flex overflow-y-auto overflow-x-hidden' onScroll={onScrollHandler}>
-        <div className='md:mx-auto max-w-[780px] lg:w-[780px] pl-4 md:pl-8 pr-4 lg:pr-0'>
+      <div className='w-full max-h-screen font-mono lg:flex overflow-y-auto overflow-x-hidden no-scrollbar' onScroll={onScrollHandler}>
+        <div className='md:mx-auto max-w-[780px] lg:w-[780px] px-4'>
           <Header />
 
           <div
@@ -129,11 +142,12 @@ export default function Wrapper({ initialData }: { initialData: any }) {
         </div>
       </div>
 
-      <div 
-        className='absolute bottom-2 right-2 md:right-6 py-2 px-3 w-auto flex bg-transparent border-dashed border-2 border-white dark:border-neutral-600 hidden cursor-pointer' 
+      <div
+        id='back-to-top'
+        className='absolute bottom-2 right-2 py-2 px-3 w-auto flex bg-transparent border-dashed border-2 border-white dark:border-neutral-600 hidden cursor-pointer'
         onClick={backToTopHandler}>
-          Back to top
-        </div>
+        Back to top
+      </div>
     </div>
   )
 }

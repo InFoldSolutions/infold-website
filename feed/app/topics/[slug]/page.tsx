@@ -23,8 +23,8 @@ export default async function Topic({ params }: { params: { slug: string } }) {
   const data = await getTopic(params.slug);
 
   return (
-    <main>
-      <div className='w-full font-mono'>
+    <main className='relative overflow-hidden'>
+      <div className='w-full max-h-screen font-mono overflow-y-auto overflow-x-hidden no-scrollbar'>
         <div className='mx-auto md:max-w-[740px] lg:max-w-[780px] px-4'>
           <Header />
 
