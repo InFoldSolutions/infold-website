@@ -28,6 +28,8 @@ export default function Keywords({ item }: { item: any }) {
   }
 
   function nextClickHandler(e: UIEvent<HTMLDivElement>) {
+    e.preventDefault();
+    
     let target = findParentByCls(e.target as HTMLElement, 'arrow', 4);
     const element = target.parentElement?.parentElement?.querySelector('.keywords');
 

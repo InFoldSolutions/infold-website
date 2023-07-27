@@ -16,6 +16,8 @@ export default function Timeline({ data }: { data: any }) {
   })
 
   function nextClickHandler(e: MouseEvent) {
+    e.preventDefault();
+    
     const element = document.querySelector('.timeline');
 
     if (!element) return console.warn('Timeline: nextClickHandler: element not found')
@@ -29,6 +31,8 @@ export default function Timeline({ data }: { data: any }) {
   }
 
   function prevClickHandler(e: MouseEvent) {
+    e.preventDefault();
+
     const element = document.querySelector('.timeline');
 
     if (!element) return console.warn('Timeline: prevClickHandler: element not found')

@@ -47,12 +47,12 @@ export default async function Topic({ params }: { params: { slug: string } }) {
             <Timeline data={data} />
 
             {data.keywords.length > 0 && <div className='mt-6'>
-              <h3 className='mb-4 text-2xl font-bold select-none'>Relevant Keywords</h3>
+              <h3 className='mb-4 text-2xl font-bold'>Relevant Keywords</h3>
               <Keywords item={data} />
             </div>}
 
             <div className='mt-6'>
-              <h3 className='mb-4 text-2xl font-bold select-none'>Detailed summary</h3>
+              <h3 className='mb-4 text-2xl font-bold'>Detailed summary</h3>
               <ul className='list-inside list-disc'>
                 {data.outline.slice(2).map((outline: string, index: number) => (
                   <li className='mb-4' key={index}>

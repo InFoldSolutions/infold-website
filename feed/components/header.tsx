@@ -1,14 +1,18 @@
 'use client'
 
 import Image from 'next/image'
+import { useEffect } from 'react';
 
 export default function Header() {
 
   let browserLink = "https://chrome.google.com/webstore/detail/infoldai/dfmmanoiegndhgdjendeidcakajifnlb?hl=en";
 
-  if (navigator !== undefined && navigator.userAgent)
-    if (navigator.userAgent.match(/firefox|fxios/i))
+  useEffect(() => {
+    const isFirefox = navigator?.userAgent.match(/firefox|fxios/i);
+
+    if (isFirefox)
       browserLink = "https://addons.mozilla.org/en-US/firefox/addon/infold/";
+  })
 
   return (
     <header className="flex my-5 pb-5 mb-8 border-b-2 border-dashed border-white dark:border-neutral-600">
@@ -19,8 +23,8 @@ export default function Header() {
             <span className='text-2xl'>InFold</span>
           </a>
         </div>
-        <div className='text-sm mx-auto w-auto flex justify-center hidden md:flex'>making sense of the news</div>
-        <div className="w-auto items-center justify-end flex">
+        <div className='text-sm mx-auto w-auto flex justify-center hidden md:flex'>we aggregate news</div>
+        <div className="w-auto items-center justify-end flex text-sm">
           <ul className="ml-auto w-auto flex">
             <li className="mr-2">
               <a href="https://infold.medium.com/a-lot-of-knowledge-is-a-dangerous-thing-6a4d2560cc83" target="_blank"

@@ -15,14 +15,16 @@ export default function Footer() {
             <ul className="ml-auto w-auto flex">
               <li className="mr-3">
                 <a href="https://www.patreon.com/infold/" target="_blank"
-                  className="h-full text-center flex">
-                  <Image src="/assets/images/patreon.png" width="19" height="19" alt='InFold on Patreon' className='mr-1' /><span className='hidden md:inline-block'>Patreon</span>
+                  className="h-full text-center flex items-center">
+                  <Image src="/assets/images/patreon.png" width="19" height="19" alt='InFold on Patreon' className='mr-1' />
+                  <span className='hidden md:inline-block'>Patreon</span>
                 </a>
               </li>
               <li className="mr-3">
                 <a href="https://www.twitter.com/infoldai/" target="_blank"
-                  className="h-full text-center flex">
-                  <Image src="/assets/images/twitter.svg" width="19" height="19" alt="Follow InFold on Twitter" className='mr-1' /><span className='hidden md:inline-block'>Follow us</span>
+                  className="h-full text-center flex items-center">
+                  <Image src="/assets/images/twitter.svg" width="19" height="19" alt="Follow InFold on Twitter" className='mr-1' />
+                  <span className='hidden md:inline-block'>Follow us</span>
                 </a>
               </li>
             </ul>
