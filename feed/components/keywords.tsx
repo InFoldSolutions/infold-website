@@ -1,6 +1,6 @@
 'use client'
 
-import { UIEvent } from 'react';
+import { UIEvent, useState, useEffect } from 'react';
 
 import { useRouter, useSearchParams } from 'next/navigation'
 
@@ -12,7 +12,12 @@ import { findParentByCls } from '@/helpers/utils';
 
 export default function Keywords({ item }: { item: any }) {
 
-  const isDesktop: boolean = (window.innerWidth > 650);
+  let [isDesktop, setIsDesktop] = useState(false)
+
+  useEffect(() => {
+    setIsDesktop(window.innerWidth > 650)
+  })
+
   const searchParams: any = useSearchParams()
   const router = useRouter()
 
@@ -87,7 +92,7 @@ export default function Keywords({ item }: { item: any }) {
       {isDesktop &&
         <div>
           <Arrow direction='left' clickFunction={prevClickHandler} visible={false} />
-          <Arrow direction='right' clickFunction={nextClickHandler} visible={(filteredKeywords.length > 4)} />
+          <Arrow direction='right' clickFunction={nextClickHandler} visible={(filteredKeywords.length > 3)} />
         </div>
       }
 

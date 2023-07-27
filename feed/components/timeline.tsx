@@ -1,6 +1,6 @@
 'use client'
 
-import { UIEvent } from 'react';
+import { UIEvent, useEffect, useState } from 'react';
 
 import TimeAgo from 'react-timeago'
 
@@ -10,9 +10,13 @@ import Arrow from './arrow'
 
 export default function Timeline({ data }: { data: any }) {
 
-  const isDesktop: boolean = (window.innerWidth > 650);
+  let [isDesktop, setIsDesktop] = useState(false)
   const sortedSources = data.sources.sort((a: any, b: any) => {
     return new Date(b.articles[0].added_at).getTime() - new Date(a.articles[0].added_at).getTime()
+  })
+
+  useEffect(() => {
+    setIsDesktop(window.innerWidth > 650)
   })
 
   function nextClickHandler(e: MouseEvent) {
@@ -100,6 +104,7 @@ export default function Timeline({ data }: { data: any }) {
           </ul>
         </div>
       </div>
+      
       <div className='mt-9 flex items-center'>
         <ul className='flex ml-auto w-auto'>
           <li className='flex items-center mr-2 cursor-pointer border-2 p-1 px-2 select-none' title='Toggle display'>

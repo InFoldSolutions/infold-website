@@ -33,6 +33,7 @@ export default async function Topic({ params }: { params: { slug: string } }) {
               {data.title}<br />
               <small className='text-sm'>Topic summarized from {data.sources.length} sources.</small>
             </h3>
+            
             <div className='text-left'>
               <ul className='list-inside list-disc'>
                 {data.outline.slice(0, 2).map((outline: string, index: number) => (
