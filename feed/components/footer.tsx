@@ -24,7 +24,7 @@ export default function Footer() {
           }
         </div>
         <div className="w-auto items-center justify-end flex">
-          <nav>
+          <nav className='text-sm'>
             <ul className="ml-auto w-auto flex">
               <li className="mr-3">
                 <a href="https://www.patreon.com/infold/" target="_blank"

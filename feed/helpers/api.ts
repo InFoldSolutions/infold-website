@@ -76,6 +76,8 @@ export async function getSearchFeed(keywords: string[], page: number = 1) {
 }
 
 export async function getTopic(slug: string) {
+  console.log('getTopic', slug)
+
   try {
     const url = getApiUrl(slug, 0);
     const res = await fetch(url)
@@ -91,6 +93,6 @@ export async function getTopic(slug: string) {
     return data.topic
   } catch (error) {
     console.error('Failed to fetch topic data', error)
-    return { topics: [] };
+    return { };
   }
 }

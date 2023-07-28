@@ -7,13 +7,15 @@ import { useSearchParams, usePathname } from 'next/navigation'
 import Header from '@/components/header'
 import Filters from '@/components/filters'
 import Feed from '@/components/feed'
+import Footer from '@/components/footer'
 
 import { getFeed, getSearchFeed } from '@/helpers/api'
-import Footer from './footer'
+import { usePrevious } from '@/helpers/utils'
 
 let loaded = false;
 
 export default function Wrapper({ initialData }: { initialData: any }) {
+
   const [feedData, setFeedData] = useState(initialData);
   const [offset, setOffset] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
@@ -21,9 +23,16 @@ export default function Wrapper({ initialData }: { initialData: any }) {
   const [endOfFeed, setEndOfFeed] = useState(false);
 
   const pathname = usePathname()
-  const searchParams: any = useSearchParams()
+  const searchParams = useSearchParams()
+
+  /*const prevPathname = usePrevious(pathname)
+  const prevSearchParams = usePrevious(searchParams)
 
   useEffect(() => {
+    console.log('Wrapper: useEffect: arguments')
+
+    console.log('Wrapper: useEffect: pathname', pathname, searchParams.get('sort'), searchParams.get('time'))
+    console.log('Wrapper: useEffect: prev pathname', prevPathname, prevSearchParams.get('sort'), prevSearchParams.get('time'))
 
     if (!loaded) { // ignore on 1st load, server side rendering !TODO: this doesn't account for "back" navigation
       loaded = true;
@@ -62,9 +71,10 @@ export default function Wrapper({ initialData }: { initialData: any }) {
 
     fetchFeedData()
       .catch(console.error)
-  }, [pathname, searchParams])
+  }, [pathname, searchParams])*/
 
   useEffect(() => {
+    console.log('Wrapper: useEffect: offset', offset)
 
     if (offset > 1 && !endOfFeed) {
       setIsLoadMore(true)
