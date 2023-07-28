@@ -32,7 +32,7 @@ export default async function Privacy() {
           <h2 className='text-2xl mb-2'>Third party services</h2>
           <p
             className='mx-auto mb-10 text-base sm:text-lg sm:leading-relaxed md:text-xl md:leading-relaxed text-body-color'>
-            InFold uses Chrome (Chromium) or WebExtensions Storage Sync API for storing user's settings.
+            InFold uses Chromium or WebExtensions Storage Sync API for storing user's settings.
           </p>
           <p
             className='mx-auto mb-10 text-base sm:text-lg sm:leading-relaxed md:text-xl md:leading-relaxed text-body-color'>
