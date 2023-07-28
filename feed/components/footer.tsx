@@ -13,7 +13,7 @@ export default function Footer() {
       <div className="relative w-full flex items-center justify-between flex">
         <div className='w-auto flex items-center'>
           <a href="/" className="flex items-center w-full mr-2">
-            <Image src="/assets/images/logo-infold-black.png" alt="InFold - logo" width={25} height={25} className='mr-2' />
+            <Image src="/assets/images/logo-infold-black.png" alt="InFold - logo" width={25} height={25} className='rounded mr-2' />
             <span className='text-sm'>InFold</span>
           </a>
           {pathname !== '/privacy' &&
