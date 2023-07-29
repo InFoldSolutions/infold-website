@@ -26,7 +26,7 @@ export default async function Topic({ params }: { params: { slug: string } }) {
   return (
     <main className='relative overflow-hidden'>
       <div className='w-full max-h-screen font-mono overflow-y-auto overflow-x-hidden no-scrollbar'>
-        <div className='md:mx-auto max-w-[780px] lg:w-[780px] p-4 md:p-6 lg:px-12'>
+        <div className='md:mx-auto max-w-[780px] lg:w-[780px] p-4 md:p-8'>
           <Header />
 
           <TopicWrapper data={data} />

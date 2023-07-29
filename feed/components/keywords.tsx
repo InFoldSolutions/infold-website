@@ -15,7 +15,7 @@ export default function Keywords({ item }: { item: any }) {
   let [isDesktop, setIsDesktop] = useState(false)
 
   useEffect(() => {
-    setIsDesktop(window.innerWidth > 650)
+    setIsDesktop(window.innerWidth > 820)
   })
 
   const searchParams: any = useSearchParams()
