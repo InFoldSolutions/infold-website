@@ -24,10 +24,12 @@ export default function TopicWrapper({ data }: { data: any }) {
       <h3 className='text-2xl font-bold text-left'>Timeline</h3>
       <Timeline data={data} />
 
-      {data.keywords.length > 0 && <div className='mt-6'>
-        <h3 className='mb-4 text-2xl font-bold'>Relevant Keywords</h3>
-        <Keywords item={data} />
-      </div>}
+      {data.keywords.length > 0 &&
+        <div className='mt-6'>
+          <h3 className='mb-4 text-2xl font-bold'>Relevant Keywords</h3>
+          <Keywords item={data} />
+        </div>
+      }
 
       <div className='mt-6'>
         <h3 className='mb-4 text-2xl font-bold'>Detailed summary</h3>
