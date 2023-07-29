@@ -47,7 +47,7 @@ export default function Modal({ children }: { children: React.ReactNode }) {
     >
       <div
         ref={wrapper}
-        className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full min-h-1/2 flex items-center justify-center lg:w-6/12 bg-gray-300 dark:bg-black'
+        className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full lg:w-auto h-full lg:h-auto flex items-center justify-center bg-gray-300 dark:bg-black'
       >
         <div className='absolute top-4 md:top-7 right-3 md:right-7 p-1 w-8 md:w-10 z-20 cursor-pointer dark:bg-black bg-neutral-200' onClick={onCloseClick}>
           <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>
