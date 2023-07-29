@@ -4,8 +4,6 @@ import Timeline from "./timeline"
 import Keywords from "./keywords"
 
 export default function TopicWrapper({ data }: { data: any }) {
-  console.log('TopicWrapper: data')
-  
   return (
     <article>
       <h3 className='mb-4 text-2xl font-bold'>

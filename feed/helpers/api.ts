@@ -76,8 +76,6 @@ export async function getSearchFeed(keywords: string[], page: number = 1) {
 }
 
 export async function getTopic(slug: string) {
-  console.log('getTopic', slug)
-
   try {
     const url = getApiUrl(slug, 0);
     const res = await fetch(url)
