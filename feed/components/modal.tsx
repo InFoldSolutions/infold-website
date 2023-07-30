@@ -58,6 +58,7 @@ export default function Modal({ children }: { children: React.ReactNode }) {
             </g>
           </svg>
         </div>
+
         {children}
       </div>
     </div>
