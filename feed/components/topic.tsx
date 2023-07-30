@@ -3,10 +3,10 @@
 import Timeline from "./timeline"
 import Keywords from "./keywords"
 
-export default function TopicWrapper({ data }: { data: any }) {
+export default function TopicWrapper({ data, modal = false }: { data: any, modal?: boolean }) {
   return (
     <article>
-      <h3 className='mb-4 text-2xl font-bold'>
+      <h3 className={`${modal ? 'mr-4' : ''} mb-4 text-2xl font-bold`}>
         {data.title}<br />
         <small className='text-sm'>Topic summarized from {data.sources.length} sources.</small>
       </h3>
@@ -35,7 +35,7 @@ export default function TopicWrapper({ data }: { data: any }) {
         <h3 className='mb-4 text-2xl font-bold'>Detailed summary</h3>
         <ul className='list-inside list-disc'>
           {data.outline.slice(2).map((outline: string, index: number) => (
-            <li className='mb-4' key={index}>
+            <li className='mb-4 last:mb-0' key={index}>
               {outline}
             </li>
           ))}
