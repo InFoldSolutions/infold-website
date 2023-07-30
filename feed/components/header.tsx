@@ -15,7 +15,7 @@ export default function Header() {
   })
 
   return (
-    <header className="flex pb-5 mb-8 border-b-2 border-dashed border-white dark:border-neutral-600">
+    <header className="flex pb-5 mb-8 border-b-2 border-dashed border-white dark:border-neutral-600 sticky">
       <div className="relative w-full flex items-center justify-between flex">
         <div className='w-auto'>
           <a href="/" className="navbar-logo flex items-center w-full">
