@@ -29,11 +29,11 @@ export default function TopicModal({ params }: { params: { slug: string } }) {
 
   return (
     <Modal isLoading={isLoading}>
-      {isLoading && <div className='w-auto text-center p-2 px-3 bg-neutral-200 dark:bg-black'>Loading topic ..</div>}
+      {isLoading && <div className='font-mono w-auto text-center p-2 px-3 bg-neutral-200 dark:bg-black'>Loading topic ..</div>}
       {!isLoading &&
         <main className='relative overflow-hidden'>
           <div className='w-full max-h-screen font-mono overflow-y-auto overflow-x-hidden no-scrollbar'>
-            <div className='md:mx-auto max-w-[820px] lg:w-[820px] p-4 md:p-8 md:px-12 lg:px-16'>
+            <div className='md:mx-auto max-w-[820px] lg:w-[820px] p-4 py-8 md:p-8 md:px-12 lg:px-16'>
               <TopicWrapper data={data} modal={true} />
             </div>
           </div>

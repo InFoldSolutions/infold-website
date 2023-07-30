@@ -85,7 +85,7 @@ export default function Keywords({ item }: { item: any }) {
       rightArrow.classList.add('hidden')
   }
 
-  const filteredKeywords = item.keywords.filter(filterKeywords);
+  const filteredKeywords = [...new Map(item.keywords.filter(filterKeywords).map((item: any) => [item['keyword'], item])).values()];
 
   return (
     <div className='relative mt-6'>
