@@ -25,7 +25,7 @@ export default function TopicModal({ params }: { params: { slug: string } }) {
 
     fetchTopicData()
       .catch(console.error)
-  });
+  }, [params.slug]);
 
   return (
     <Modal isLoading={isLoading}>
@@ -34,7 +34,9 @@ export default function TopicModal({ params }: { params: { slug: string } }) {
         <main className='relative overflow-hidden'>
           <div className='w-full max-h-screen font-mono overflow-y-auto overflow-x-hidden no-scrollbar'>
             <div className='md:mx-auto max-w-[820px] lg:w-[820px] p-4 py-8 md:p-8 md:px-12 lg:px-16'>
-              <TopicWrapper data={data} modal={true} />
+              {data &&
+                <TopicWrapper data={data} modal={true} />
+              }
             </div>
           </div>
         </main>
