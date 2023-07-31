@@ -51,12 +51,12 @@ export default function Modal({ children, isLoading }: { children: React.ReactNo
       >
 
         {!isLoading &&
-          <div className='absolute top-4 md:top-7 right-3 md:right-7 p-1 w-8 md:w-10 z-20 cursor-pointer dark:bg-black bg-neutral-200' onClick={onCloseClick}>
+          <div className='absolute top-4 md:top-7 right-3 md:right-7 p-1 w-8 md:w-10 z-20 cursor-pointer bg-gray-100' onClick={onCloseClick}>
             <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>
               <g>
                 <path
                   d='M10.59 12L4.54 5.96l1.42-1.42L12 10.59l6.04-6.05 1.42 1.42L13.41 12l6.05 6.04-1.42 1.42L12 13.41l-6.04 6.05-1.42-1.42L10.59 12z'
-                  className='fill-neutral-800 dark:fill-neutral-200' />
+                  className='fill-neutral-800' />
               </g>
             </svg>
           </div>
