@@ -160,7 +160,7 @@ export default function Wrapper({ initialData }: { initialData: any }) {
 
       <div
         id='back-to-top'
-        className='absolute bottom-4 md:bottom-2 right-2 py-2 px-3 w-auto flex bg-white dark:bg-neutral-800 font-mono hidden cursor-pointer'
+        className='absolute bottom-3 md:bottom-2 right-2 py-2 px-3 w-auto flex bg-white dark:bg-neutral-800 font-mono hidden cursor-pointer'
         onClick={backToTopHandler}>
         Back to top
       </div>
