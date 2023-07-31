@@ -117,7 +117,7 @@ export default function Timeline({ data }: { data: any }) {
                 height={18}
               />
             </picture>
-            <span className='hidden md:inline-block'>Related articles:</span>
+            <span className='hidden md:inline-block'>Articles:</span>
             <span className='ml-1'>56</span>
           </li>
           <li className='opacity-50 hover:opacity-100 flex items-center mr-2 cursor-pointer border-2 p-1 px-2 select-none' title='Toggle display'>

@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import Image from 'next/image'
 
 export default function AnalyzedIcon({ analyzed, keyword }: { analyzed: any, keyword: string }) {
@@ -22,11 +23,17 @@ export default function AnalyzedIcon({ analyzed, keyword }: { analyzed: any, key
   }
 
   return (
-    <a className='select-none flex border-solid border-r-neutral-50 border-r-2 bg-neutral-200 hover:bg-neutral-200 dark:bg-neutral-700 hover:dark:bg-neutral-600 justify-center h-full w-8 p-1 items-center dark:border-r-0' 
-       href={url} 
-       title={`${label} keyword`} 
-       target='_blank'>
-      <Image src={icon} alt={label} width={20} height={20} />
-    </a>
+    <Link className='select-none flex w-max items-center bg-neutral-100 hover:bg-neutral-200 cursor-pointer text-base dark:text-white dark:bg-neutral-900 dark:hover:bg-neutral-800'
+      href={url}
+      title={`Lookup on ${label}`}
+      target='_blank'>
+      <span className='bg-neutral-200 dark:bg-neutral-600 h-full p-1 flex items-center justify-center w-8'>
+        <Image src={icon} alt={label} width={22} height={22} className={`${label === 'Google' ? 'w-5' : ''} h-auto`} />
+      </span>
+
+      <span className='keyword py-1 px-3'>
+        {keyword}
+      </span>
+    </Link>
   )
 }

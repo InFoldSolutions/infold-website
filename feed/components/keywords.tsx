@@ -87,8 +87,10 @@ export default function Keywords({ item }: { item: any }) {
 
   const filteredKeywords = [...new Map(item.keywords.filter(filterKeywords).map((item: any) => [item['keyword'], item])).values()];
 
+  // onClick={onKeywordClick} on ul
+
   return (
-    <div className='relative mt-6'>
+    <div className='relative mt-8'>
       {isDesktop &&
         <div>
           <Arrow direction='left' clickFunction={prevClickHandler} visible={false} />
@@ -96,13 +98,10 @@ export default function Keywords({ item }: { item: any }) {
         </div>
       }
 
-      <ul className='max-w-screen-2xl flex flex-nowrap gap-x-2 overflow-x-scroll no-scrollbar keywords' onClick={onKeywordClick} onScroll={onScrollHandler}>
+      <ul className='max-w-screen-2xl flex flex-nowrap gap-x-2 overflow-x-scroll no-scrollbar keywords' onScroll={onScrollHandler}>
         {filteredKeywords.map((keyword: any, k: number) => (
           <li className='group w-auto flex items-center items-stretch whitespace-nowrap' key={k}>
             <AnalyzedIcon analyzed={keyword.analyzed} keyword={keyword.keyword} />
-            <span className='keyword bg-neutral-100 hover:bg-neutral-200 py-1 px-2 cursor-pointer text-base dark:text-white dark:bg-neutral-900 dark:hover:bg-neutral-800 select-none' title="Search topics for keyword">
-              {keyword.keyword}
-            </span>
           </li>
         ))}
       </ul>
