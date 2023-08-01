@@ -16,6 +16,12 @@ const nextConfig = {
             },
             {
                 protocol: 'https',
+                hostname: 'img.freepik.com',
+                port: '',
+                pathname: '/**',
+            },
+            {
+                protocol: 'https',
                 hostname: 'cdn.shopify.com',
                 port: '',
                 pathname: '/**',

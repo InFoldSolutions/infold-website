@@ -2,18 +2,14 @@
 
 import { UIEvent, useEffect, useState } from 'react';
 
-import TimeAgo from 'react-timeago'
-
 import Image from 'next/image'
 
 import Arrow from './arrow'
+import RelatedItem from './related';
 
 export default function Timeline({ data }: { data: any }) {
 
   let [isDesktop, setIsDesktop] = useState(false)
-  const sortedSources = data.sources.sort((a: any, b: any) => {
-    return new Date(b.articles[0].added_at).getTime() - new Date(a.articles[0].added_at).getTime()
-  })
 
   useEffect(() => {
     setIsDesktop(window.innerWidth > 820)
@@ -21,7 +17,7 @@ export default function Timeline({ data }: { data: any }) {
 
   function nextClickHandler(e: MouseEvent) {
     e.preventDefault();
-    
+
     const element = document.querySelector('.timeline');
 
     if (!element) return console.warn('Timeline: nextClickHandler: element not found')
@@ -78,33 +74,20 @@ export default function Timeline({ data }: { data: any }) {
         {isDesktop &&
           <div>
             <Arrow direction='left' clickFunction={prevClickHandler} visible={false} />
-            <Arrow direction='right' clickFunction={nextClickHandler} visible={(sortedSources.length > 4)} />
+            <Arrow direction='right' clickFunction={nextClickHandler} visible={(data.sources.length > 4)} />
           </div>
         }
 
         <div className='timeline relative max-w-screen-2xl overflow-x-scroll overflow-y-hidden no-scrollbar' onScroll={onScrollHandler}>
           <ul className='flex flex-nowrap h-[130px] relative pl-[35px]'>
-            {sortedSources.map((item: any, index: number) => (
-              <li className='group timeline-item select-none flex cursor-pointer relative items-center h-[50px] top-[75px] even:top-[5px] relative before:content-[""] before:absolute before:rounded before:-top-[15px] before:left-[16px] before:w-3 before:h-3 before:bg-neutral-800 dark:before:bg-neutral-400 before:border-[50%]'
-                onClick={() => window.open(item.articles[0].url, '_blank')}
-                title={item.articles[0].title}
-                key={index} >
-                <Image src={item.source.logo} alt={item.source.name} width={80} height={80} className='w-11 h-11 max-w-none rounded-full mr-2 border-2 border-transparent group-hover:border-sky-400' />
-                <div className='flex flex-col min-w-[110px] overflow-x-hidden'>
-                  <span className='leading-4'>{item.source.name}</span>
-                  <TimeAgo
-                    date={new Date(item.articles[0].added_at).getTime()}
-                    className='text-gray-600 dark:text-gray-300 text-xs'
-                    title={item.articles[0].title}
-                  />
-                </div>
-              </li>
+            {data.sources.map((item: any, index: number) => (
+              <RelatedItem item={item} index={index} key={index} />
             ))
             }
           </ul>
         </div>
       </div>
-      
+
       <div className='mt-9 flex items-center'>
         <ul className='flex ml-auto w-auto'>
           <li className='flex items-center mr-2 cursor-pointer border-2 p-1 px-2 select-none' title='Toggle display'>
