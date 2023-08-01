@@ -49,8 +49,6 @@ export default function Filters() {
   } else {
     return (
       <div>
-        <Link className={`${(endpoint === 'rising') ? 'underline' : ''} cursor-pointer filter hover:underline`} href={`?sort=rising`}>Latest</Link> |
-        <Link className={`${(endpoint === 'top' && bucket === 'day') ? 'underline' : ''} ml-3 cursor-pointer filter hover:underline`} href={`?sort=top&time=day`}>Top 24h</Link> |
         <Link className={`${(endpoint === 'top' && bucket === 'week') ? 'underline' : ''} ml-3 cursor-pointer filter hover:underline`} href={`?sort=top&time=week`}>Top 7d</Link> |
         <Link className={`${(endpoint === 'top' && bucket === 'month') ? 'underline' : ''} ml-3 cursor-pointer filter hover:underline`} href={`?sort=top&time=month`}>Top 30d</Link> |
         <Link className={`${(endpoint === 'top' && bucket === 'year') ? 'underline' : ''} ml-3 cursor-pointer filter hover:underline`} href={`?sort=top&time=year`}>Top 365d</Link>
@@ -58,3 +56,8 @@ export default function Filters() {
     )
   }
 }
+
+/*
+<Link className={`${(endpoint === 'rising') ? 'underline' : ''} cursor-pointer filter hover:underline`} href={`?sort=rising`}>Latest</Link> |
+<Link className={`${(endpoint === 'top' && bucket === 'day') ? 'underline' : ''} ml-3 cursor-pointer filter hover:underline`} href={`?sort=top&time=day`}>Top 24h</Link> |
+*/

@@ -4,7 +4,7 @@ import { filterKeyword } from '@/transformers/keyword';
 
 export function transformTopic(data: any) {
   if (data.sources) {
-    data.sources = data.sources.concat(config.mockTweets)
+    //data.sources = data.sources.concat(config.mockTweets)
 
     data.sources.sort((a: any, b: any) => {
       const bDate = b.articles ? b.articles[0].added_at : b.added_at
