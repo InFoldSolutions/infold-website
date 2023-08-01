@@ -1,6 +1,8 @@
 
 const API_URL = 'https://api.infold.ai';
 
+import { transformTopic, filterTopic } from '@/transformers/topic';
+
 export type Item = {
   slug: string
   title: string
@@ -42,7 +44,7 @@ export async function getFeed(endpoint = 'rising', limit: number = 0, bucket: an
     if (!data.topics)
       throw new Error('Topics not found');
 
-    return data.topics
+    return data.topics.filter(filterTopic).map(transformTopic)
   } catch (error) {
     console.error('Failed to fetch feed data', error)
     return { topics: [] };
@@ -68,7 +70,7 @@ export async function getSearchFeed(keywords: string[], page: number = 1) {
     if (!data.topics)
       throw new Error('Topics not found');
 
-    return data.topics
+    return data.topics.filter(filterTopic).map(transformTopic)
   } catch (error) {
     console.error('Failed to fetch search feed data', error)
     return { topics: [] };
@@ -88,7 +90,7 @@ export async function getTopic(slug: string) {
     if (!data.topic)
       throw new Error('Topic not found');
 
-    return data.topic
+    return transformTopic(data.topic)
   } catch (error) {
     console.error('Failed to fetch topic data', error)
     return { };

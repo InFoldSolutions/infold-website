@@ -14,14 +14,14 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
       <div className='text-left'>
         <ul className='list-inside list-disc'>
           {data.outline.slice(0, 2).map((outline: string, index: number) => (
-            <li className='mb-4' key={index}>
+            <li className='mb-4 last:mb-0' key={index}>
               {outline}
             </li>
           ))}
         </ul>
       </div>
 
-      <h3 className='text-2xl font-bold text-left'>Timeline</h3>
+      <h3 className='text-2xl font-bold text-left mt-6'>Timeline</h3>
       <Timeline data={data} />
 
       {data.keywords.length > 0 &&

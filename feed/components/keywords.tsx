@@ -4,8 +4,6 @@ import { UIEvent, useState, useEffect } from 'react';
 
 import { useRouter, useSearchParams } from 'next/navigation'
 
-import config from '@/config'
-
 import AnalyzedIcon from '@/components/icon'
 import Arrow from './arrow'
 import { findParentByCls } from '@/helpers/utils';
@@ -85,12 +83,12 @@ export default function Keywords({ item }: { item: any }) {
       rightArrow.classList.add('hidden')
   }
 
-  const filteredKeywords = [...new Map(item.keywords.filter(filterKeywords).map((item: any) => [item['keyword'], item])).values()];
+  const filteredKeywords = [...new Map(item.keywords.map((item: any) => [item['keyword'], item])).values()];
 
   // onClick={onKeywordClick} on ul
 
   return (
-    <div className='relative mt-8'>
+    <div className='relative'>
       {isDesktop &&
         <div>
           <Arrow direction='left' clickFunction={prevClickHandler} visible={false} />
@@ -107,22 +105,4 @@ export default function Keywords({ item }: { item: any }) {
       </ul>
     </div>
   )
-}
-
-// We filter some obvious false positives
-function filterKeywords(data: any) {
-  if (data.keyword.length < 3)
-    return false;
-
-  if (config.keywordsBlacklist.includes(data.keyword.toLowerCase()))
-    return false;
-
-  if (data.type === "person") { // check for type person to have at least two full words
-    const words = data.keyword.split(" ");
-
-    if (words.length < 2)
-      return false;
-  }
-
-  return true;
 }

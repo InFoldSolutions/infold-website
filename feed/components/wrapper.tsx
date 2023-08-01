@@ -112,7 +112,9 @@ export default function Wrapper({ initialData }: { initialData: any }) {
   function onScrollHandler(e: UIEvent<HTMLDivElement>) {
     const element = e.target as HTMLElement
     const backToTop = element.nextElementSibling as HTMLElement
-    const isBottom = Math.abs(element.scrollHeight - element.scrollTop - element.clientHeight) < 1
+
+    const { scrollTop, clientHeight, scrollHeight } = element
+    const isBottom = scrollTop + clientHeight >= scrollHeight
 
     if (element.scrollHeight <= document.body.clientHeight)
       return

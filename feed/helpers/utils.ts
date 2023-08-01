@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import config from '@/config';
 
 export function findParentByCls(node: HTMLElement, cls: string, maxTries: number = 0): HTMLElement {
   let tries = 0;
@@ -16,14 +16,4 @@ export function findParentByCls(node: HTMLElement, cls: string, maxTries: number
   }
 
   return node;
-}
-
-export function usePrevious(value: any): any {
-  const ref = useRef();
-
-  useEffect(() => {
-    ref.current = value;
-  }, [value]);
-  
-  return ref.current;
 }
