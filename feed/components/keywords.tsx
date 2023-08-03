@@ -4,8 +4,9 @@ import { UIEvent, useState, useEffect } from 'react';
 
 import { useRouter, useSearchParams } from 'next/navigation'
 
-import AnalyzedIcon from '@/components/icon'
-import Arrow from './arrow'
+import Keyword from '@/components/keyword'
+import Arrow from '@/components/arrow'
+
 import { findParentByCls } from '@/helpers/utils';
 
 export default function Keywords({ item }: { item: any }) {
@@ -83,7 +84,7 @@ export default function Keywords({ item }: { item: any }) {
       rightArrow.classList.add('hidden')
   }
 
-  const filteredKeywords = [...new Map(item.keywords.map((item: any) => [item['keyword'], item])).values()];
+  const filteredKeywords = [...new Map(item.keywords.map((item: any) => [item['keyword'], item])).values()].slice(0, 20);
 
   // onClick={onKeywordClick} on ul
 
@@ -99,7 +100,7 @@ export default function Keywords({ item }: { item: any }) {
       <ul className='max-w-screen-2xl flex flex-nowrap gap-x-2 overflow-x-scroll no-scrollbar keywords' onScroll={onScrollHandler}>
         {filteredKeywords.map((keyword: any, k: number) => (
           <li className='group w-auto flex items-center items-stretch whitespace-nowrap' key={k}>
-            <AnalyzedIcon analyzed={keyword.analyzed} keyword={keyword.keyword} />
+            <Keyword analyzed={keyword.analyzed} keyword={keyword.keyword} />
           </li>
         ))}
       </ul>

@@ -8,8 +8,8 @@ export default function Filters() {
   const searchParams: any = useSearchParams()
   
   const keywords = searchParams.get('keywords') || '';
-  const endpoint = searchParams.get('sort') || 'rising';
-  const bucket = searchParams.get('time') || null;
+  const endpoint = searchParams.get('sort') || 'top';
+  const bucket = searchParams.get('time') || 'hour';
 
   function removeKeywordFilter(e: any) {
     e.preventDefault();
@@ -49,7 +49,7 @@ export default function Filters() {
   } else {
     return (
       <div>
-        <Link className={`${(endpoint === 'rising') ? 'underline' : ''} cursor-pointer filter hover:underline`} href={`?sort=rising`}>Latest</Link> |
+        <Link className={`${(endpoint === 'top' && bucket === 'hour') ? 'underline' : ''} cursor-pointer filter hover:underline`} href={`?sort=top&time=hour`}>Top 1h</Link> |
         <Link className={`${(endpoint === 'top' && bucket === 'day') ? 'underline' : ''} ml-3 cursor-pointer filter hover:underline`} href={`?sort=top&time=day`}>Top 24h</Link> |
         <Link className={`${(endpoint === 'top' && bucket === 'week') ? 'underline' : ''} ml-3 cursor-pointer filter hover:underline`} href={`?sort=top&time=week`}>Top 7d</Link> |
         <Link className={`${(endpoint === 'top' && bucket === 'month') ? 'underline' : ''} ml-3 cursor-pointer filter hover:underline`} href={`?sort=top&time=month`}>Top 30d</Link> |

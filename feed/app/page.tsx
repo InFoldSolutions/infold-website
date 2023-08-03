@@ -1,22 +1,24 @@
-import Wrapper from '@/components/wrapper';
+import Wrapper from '@/components/wrapper'
 
-import { getFeed, getSearchFeed } from '@/helpers/api'
+import config from '@/config'
+
+import { getFeed, getSearchFeed, getTopKeywords } from '@/helpers/api'
 
 export default async function Home({ params, searchParams }: { params: any, searchParams: any }) {
-  const keywords = searchParams ? searchParams.keywords : '';
-  const endpoint = searchParams.sort || 'rising';
-  const bucket = searchParams.time || null;
+  const keywords = searchParams ? searchParams.keywords : ''
+  const endpoint = searchParams.sort || 'top'
+  const bucket = searchParams.time || 'hour'
 
-  let data = null;
+  let data = null
 
   if (keywords)
-    data = await getSearchFeed(keywords.split(','));
+    data = await getSearchFeed(keywords.split(','))
   else
-    data = await getFeed(endpoint, 20, bucket);
+    data = await getFeed(endpoint, config.defaultLimit, bucket)
+
+  const topKeywords = await getTopKeywords(bucket)
 
   return (
-    <main>
-      <Wrapper initialData={data} />
-    </main >
+    <Wrapper initialFeedData={data} topKeywords={topKeywords} />
   )
 }

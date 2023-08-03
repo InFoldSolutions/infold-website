@@ -9,13 +9,15 @@ import Filters from '@/components/filters'
 import Feed from '@/components/feed'
 import Footer from '@/components/footer'
 
-import { getFeed, getSearchFeed } from '@/helpers/api'
+import { getFeed, getSearchFeed, getTopKeywords } from '@/helpers/api'
+import config from '@/config'
 
 let loaded = false, backButtonWasClicked = false;
 
-export default function Wrapper({ initialData }: { initialData: any }) {
+export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedData: any, topKeywords: [] }) {
 
-  const [feedData, setFeedData] = useState(initialData)
+  const [topKeywordsData, setTopKeywordsData] = useState(topKeywords)
+  const [feedData, setFeedData] = useState(initialFeedData)
   const [offset, setOffset] = useState(1)
   const [isLoading, setIsLoading] = useState(false)
   const [isLoadMore, setIsLoadMore] = useState(false)
@@ -63,9 +65,12 @@ export default function Wrapper({ initialData }: { initialData: any }) {
         data = await getSearchFeed(keywords.split(','))
       } else {
         const endpoint = searchParams.get('sort') || 'rising'
-        const bucket = searchParams.get('time') || null;
+        const bucket = searchParams.get('time') || undefined;
 
-        data = await getFeed(endpoint, 20, bucket)
+        data = await getFeed(endpoint, config.defaultLimit, bucket)
+
+        const newTopKeywords = await getTopKeywords(bucket)
+        setTopKeywordsData(newTopKeywords)
       }
 
       setIsLoading(false);
@@ -93,7 +98,7 @@ export default function Wrapper({ initialData }: { initialData: any }) {
           const endpoint = searchParams.get('sort') || 'rising'
           const bucket = searchParams.get('time') || null
 
-          data = await getFeed(endpoint, 20, bucket, offset)
+          data = await getFeed(endpoint, config.defaultLimit, bucket, offset)
         }
 
         setIsLoadMore(false);
@@ -111,12 +116,12 @@ export default function Wrapper({ initialData }: { initialData: any }) {
 
   function onScrollHandler(e: UIEvent<HTMLDivElement>) {
     const element = e.target as HTMLElement
-    const backToTop = element.nextElementSibling as HTMLElement
+    const backToTop = element.parentElement?.nextElementSibling as HTMLElement
 
     const { scrollTop, clientHeight, scrollHeight } = element
     const isBottom = scrollTop + clientHeight >= scrollHeight
 
-    if (element.scrollHeight <= document.body.clientHeight)
+    if (element.scrollHeight <= clientHeight)
       return
 
     if (isBottom && !isLoadMore)
@@ -130,7 +135,7 @@ export default function Wrapper({ initialData }: { initialData: any }) {
 
   function backToTopHandler(e: UIEvent<HTMLDivElement>) {
     const element = e.target as HTMLElement
-    const scrollElement = element.previousElementSibling as HTMLElement
+    const scrollElement = element.previousElementSibling?.firstElementChild as HTMLElement
 
     if (!scrollElement) return console.warn('Wrapper: backToTopHandler: scrollElement not found')
 
@@ -141,16 +146,16 @@ export default function Wrapper({ initialData }: { initialData: any }) {
   }
 
   return (
-    <div className='relative overflow-hidden'>
-      <div className='w-full max-h-screen font-mono lg:flex overflow-y-auto overflow-x-hidden no-scrollbar' onScroll={onScrollHandler}>
-        <div className='md:mx-auto max-w-[780px] lg:w-[780px] p-4 md:p-8'>
-          <Header />
+    <div className='md:mx-auto w-full lg:max-w-[1060px] lg:w-[1060px] font-mono px-4 md:p-8 md:py-4'>
+      <Header />
 
-          <div
-            className='mb-4 mt-8 lg:mt-0 lg:mb-4 text-base sm:text-lg sm:leading-relaxed md:text-xl md:leading-relaxed text-body-color'>
-            <Filters />
-          </div>
+      <div
+        className='sticky top-[82.5px] z-40 bg-gray-300 dark:bg-black mb-4 mt-4 lg:mt-0 lg:mb-4 py-2 text-base sm:text-lg sm:leading-relaxed md:text-xl md:leading-relaxed text-body-color'>
+        <Filters />
+      </div>
 
+      <div className='flex items-start'>
+        <div className='md:mr-auto w-full max-w-[760px] lg:w-[720px]' onScroll={onScrollHandler}>
           {isLoading && (`Loading ...`)}
           {!isLoading && (<Feed data={feedData} />)}
 
@@ -158,11 +163,26 @@ export default function Wrapper({ initialData }: { initialData: any }) {
 
           <Footer />
         </div>
+
+        <div className='sticky top-[130px] h-auto w-[240px] p-4 bg-gray-200 dark:bg-gray-900 hidden lg:flex flex-col'>
+          <h3 className='mb-5 text-2xl font-bold'>Trending</h3>
+          <div className='pl-1'>
+            <ul>
+              {topKeywordsData.length > 0 && topKeywordsData.map((keyword: any, index: number) => (
+                <li className='group cursor-pointer pb-2 mb-2 last:pb-0 last:mb-0' key={index}>
+                  <span className='font-bold block leading-4 group-hover:underline'>{keyword.keyword}</span>
+                  <small>{keyword.topics} Topics</small>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
       </div>
 
       <div
         id='back-to-top'
-        className='absolute bottom-4 md:bottom-2 right-2 py-2 px-3 w-auto flex bg-white dark:bg-neutral-800 font-mono hidden cursor-pointer'
+        className='absolute bottom-4 md:bottom-2 right-0 py-2 px-3 w-auto flex bg-gray-200 dark:bg-neutral-800 font-mono hidden cursor-pointer'
         onClick={backToTopHandler}>
         Back to top
       </div>

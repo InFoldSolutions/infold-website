@@ -15,7 +15,7 @@ export function transformTopic(data: any) {
   }
   return {
     ...data,
-    keywords: data.keywords.filter(filterKeyword),
+    keywords: data.keywords?.data?.filter(filterKeyword),
   }
 }
 

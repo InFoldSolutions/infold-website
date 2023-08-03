@@ -1,6 +1,7 @@
 
 const API_URL = 'https://api.infold.ai';
 
+import config from '@/config';
 import { transformTopic, filterTopic } from '@/transformers/topic';
 
 export type Item = {
@@ -47,13 +48,13 @@ export async function getFeed(endpoint = 'rising', limit: number = 0, bucket: an
     return data.topics.filter(filterTopic).map(transformTopic)
   } catch (error) {
     console.error('Failed to fetch feed data', error)
-    return { topics: [] };
+    return [];
   }
 }
 
 export async function getSearchFeed(keywords: string[], page: number = 1) {
   try {
-    const url = getApiUrl('search', 20, null, page);
+    const url = getApiUrl('search', config.defaultLimit, null, page);
     const res = await fetch(url, {
       method: 'POST',
       headers: {
@@ -73,7 +74,7 @@ export async function getSearchFeed(keywords: string[], page: number = 1) {
     return data.topics.filter(filterTopic).map(transformTopic)
   } catch (error) {
     console.error('Failed to fetch search feed data', error)
-    return { topics: [] };
+    return [];
   }
 }
 
@@ -94,5 +95,25 @@ export async function getTopic(slug: string) {
   } catch (error) {
     console.error('Failed to fetch topic data', error)
     return { };
+  }
+}
+
+export async function getTopKeywords(bucket: string = 'day') {
+  try {
+    const url = `${API_URL}/keywords/top?bucket=${bucket}&limit=7`;
+    const res = await fetch(url)
+
+    if (!res.ok)
+      throw new Error('Response not ok');
+
+    const data = await res.json()
+
+    if (!data.keywords || !data.meta.success)
+      throw new Error('Keywords not found');
+
+    return data.keywords
+  } catch (error) {
+    console.error('Failed to fetch top keywords', error)
+    return [];
   }
 }

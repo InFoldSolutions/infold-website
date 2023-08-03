@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image'
 
-export default function AnalyzedIcon({ analyzed, keyword }: { analyzed: any, keyword: string }) {
+export default function Keyword({ analyzed, keyword }: { analyzed: any, keyword: string }) {
   const latestAnalyzed = (analyzed) ? analyzed[0] : null;
 
   let icon, label, url;
@@ -23,11 +23,11 @@ export default function AnalyzedIcon({ analyzed, keyword }: { analyzed: any, key
   }
 
   return (
-    <Link className='select-none flex w-max items-center bg-neutral-100 hover:bg-neutral-200 cursor-pointer text-base dark:text-white dark:bg-neutral-900 dark:hover:bg-neutral-800'
+    <Link className='select-none flex w-max items-center bg-gray-200 cursor-pointer text-base dark:text-white dark:bg-neutral-900 dark:hover:bg-gray-900'
       href={url}
       title={`Lookup on ${label}`}
       target='_blank'>
-      <span className='bg-neutral-200 dark:bg-neutral-600 h-full p-1 flex items-center justify-center w-8'>
+      <span className='bg-gray-100 dark:bg-gray-600 h-full p-1 flex items-center justify-center w-8'>
         <Image src={icon} alt={label} width={22} height={22} className={`${label === 'Google' ? 'w-5' : ''} h-auto`} />
       </span>
 
