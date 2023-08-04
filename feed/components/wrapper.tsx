@@ -1,7 +1,7 @@
 
 'use client'
 
-import { useState, useEffect, UIEvent } from 'react'
+import { useState, useEffect, UIEvent, useCallback } from 'react'
 import { useSearchParams, usePathname } from 'next/navigation'
 
 import Header from '@/components/header'
@@ -26,10 +26,43 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
   const pathname = usePathname()
   const searchParams = useSearchParams()
 
+  const onScrollHandler = useCallback((e: Event) => {
+    //console.log('onScrollHandler', isLoadMore)
+
+    const backToTop = document.getElementById('back-to-top') as HTMLElement;
+    const scrollHeight = document.body.scrollHeight
+    const innerHeight = window.innerHeight
+    const scrollTop = window.scrollY
+    const isBottom = scrollTop + innerHeight + 5 >= scrollHeight
+
+    //console.log('scrollTop, innerHeight, scrollHeight', scrollTop, innerHeight, scrollHeight)
+    //console.log('isBottom', isBottom)
+
+    if (scrollHeight <= innerHeight)
+      return
+
+    //console.log('isBottom, isLoadMore', isBottom, isLoadMore)
+
+    if (isBottom && !isLoadMore) {
+      //console.log('setOffset ?!?!')
+      setIsLoadMore(true)
+      setOffset((old: number) => old + 1);
+    }
+
+    if (scrollTop > 100 && backToTop.classList.contains('hidden'))
+      backToTop.classList.remove('hidden')
+    else if (scrollTop <= 100 && !backToTop.classList.contains('hidden'))
+      backToTop.classList.add('hidden')
+  }, [isLoadMore])
+
   useEffect(() => {
-    window.addEventListener("popstate", (e) => {
-      backButtonWasClicked = true
-    })
+    if (!loaded) {
+      window.addEventListener("popstate", (e) => {
+        backButtonWasClicked = true
+      })
+
+      window.addEventListener("scroll", onScrollHandler)
+    }
   }, [])
 
   useEffect(() => {
@@ -84,8 +117,10 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
   }, [pathname, searchParams])
 
   useEffect(() => {
+    //console.log('useEffect offset', offset, isLoadMore, endOfFeed)
+
     if (offset > 1 && !endOfFeed) {
-      setIsLoadMore(true)
+      setIsLoadMore(true);
 
       const fetchMoreData = async () => {
 
@@ -101,10 +136,10 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
           data = await getFeed(endpoint, config.defaultLimit, bucket, offset)
         }
 
-        setIsLoadMore(false);
-
-        if (data && data.length > 0)
+        if (data && data.length > 0) {
           setFeedData((prevData: any) => [...prevData, ...data])
+          setIsLoadMore(false);
+        }
         else
           setEndOfFeed(true)
       }
@@ -114,39 +149,15 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
     }
   }, [offset])
 
-  function onScrollHandler(e: UIEvent<HTMLDivElement>) {
-    const element = e.target as HTMLElement
-    const backToTop = element.parentElement?.nextElementSibling as HTMLElement
-
-    const { scrollTop, clientHeight, scrollHeight } = element
-    const isBottom = scrollTop + clientHeight >= scrollHeight
-
-    if (element.scrollHeight <= clientHeight)
-      return
-
-    if (isBottom && !isLoadMore)
-      setOffset(offset + 1);
-
-    if (element.scrollTop > 100 && backToTop.classList.contains('hidden'))
-      backToTop.classList.remove('hidden')
-    else if (element.scrollTop <= 100 && !backToTop.classList.contains('hidden'))
-      backToTop.classList.add('hidden')
-  }
-
   function backToTopHandler(e: UIEvent<HTMLDivElement>) {
-    const element = e.target as HTMLElement
-    const scrollElement = element.previousElementSibling?.firstElementChild as HTMLElement
-
-    if (!scrollElement) return console.warn('Wrapper: backToTopHandler: scrollElement not found')
-
-    scrollElement.scroll({
+    window.scroll({
       top: 0,
       behavior: 'smooth',
     });
   }
 
   return (
-    <div className='md:mx-auto w-full lg:max-w-[1060px] lg:w-[1060px] font-mono px-4 md:p-8 md:py-4'>
+    <div className='relative md:mx-auto w-full lg:max-w-[1060px] lg:w-[1060px] font-mono px-4 md:p-8 md:py-4'>
       <Header />
 
       <div
@@ -155,7 +166,7 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
       </div>
 
       <div className='flex items-start'>
-        <div className='md:mr-auto w-full max-w-[760px] lg:w-[720px]' onScroll={onScrollHandler}>
+        <div className='md:mr-auto w-full max-w-[760px] lg:w-[720px]'>
           {isLoading && (`Loading ...`)}
           {!isLoading && (<Feed data={feedData} />)}
 
@@ -182,7 +193,7 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
 
       <div
         id='back-to-top'
-        className='absolute bottom-4 md:bottom-2 right-0 py-2 px-3 w-auto flex bg-gray-200 dark:bg-neutral-800 font-mono hidden cursor-pointer'
+        className='fixed bottom-4 md:bottom-2 right-2 py-2 px-3 w-auto flex bg-gray-200 dark:bg-neutral-800 font-mono hidden cursor-pointer'
         onClick={backToTopHandler}>
         Back to top
       </div>
