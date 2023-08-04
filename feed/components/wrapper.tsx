@@ -158,7 +158,7 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
       </div>
 
       <div className='flex items-start'>
-        <div className='md:mr-auto w-full max-w-[760px] lg:w-[720px]'>
+        <div className='md:mr-auto w-full max-w-full max-w-[760px] lg:w-[720px] overflow-x-hidden'>
           {isLoading && (`Loading ...`)}
           {!isLoading && (<Feed data={feedData} />)}
 
