@@ -14,7 +14,7 @@ export default async function Home({ params, searchParams }: { params: any, sear
   if (keywords)
     data = await getSearchFeed(keywords.split(','))
   else
-    data = await getFeed(endpoint, config.defaultLimit, bucket)
+    data = await getFeed(endpoint, config.api.defaultLimit, bucket)
 
   const topKeywords = await getTopKeywords(bucket)
 

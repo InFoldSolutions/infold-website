@@ -72,7 +72,7 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
         const endpoint = searchParams.get('sort') || 'top'
         const bucket = searchParams.get('time') || 'day';
 
-        data = await getFeed(endpoint, config.defaultLimit, bucket)
+        data = await getFeed(endpoint, config.api.defaultLimit, bucket)
 
         const newTopKeywords = await getTopKeywords(bucket)
         setTopKeywordsData(newTopKeywords)
@@ -103,7 +103,7 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
           const endpoint = searchParams.get('sort') || 'rising'
           const bucket = searchParams.get('time') || null
 
-          data = await getFeed(endpoint, config.defaultLimit, bucket, offset)
+          data = await getFeed(endpoint, config.api.defaultLimit, bucket, offset)
         }
 
         if (data && data.length > 0) {

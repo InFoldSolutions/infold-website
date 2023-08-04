@@ -13,7 +13,7 @@ export type Item = {
   articles: number
 }
 
-export function getApiUrl(endpoint = 'rising', limit: number = 0, bucket: any = null, page: number = 1) {
+export function getApiUrl(endpoint = 'top', limit: number = 0, bucket: any = null, page: number = 1) {
   let url = `${API_URL}/topics/${endpoint}`;
   let separator = '?';
 
@@ -32,7 +32,7 @@ export function getApiUrl(endpoint = 'rising', limit: number = 0, bucket: any = 
   return url;
 }
 
-export async function getFeed(endpoint = 'rising', limit: number = 0, bucket: any = null, page: number = 1) {
+export async function getFeed(endpoint = 'top', limit: number = 0, bucket: any = null, page: number = 1) {
   try {
     const url = getApiUrl(endpoint, limit, bucket, page);
     const res = await fetch(url, { next: { revalidate: 5 } })
@@ -54,7 +54,7 @@ export async function getFeed(endpoint = 'rising', limit: number = 0, bucket: an
 
 export async function getSearchFeed(keywords: string[], page: number = 1) {
   try {
-    const url = getApiUrl('search', config.defaultLimit, null, page);
+    const url = getApiUrl('search', config.api.defaultLimit, null, page);
     const res = await fetch(url, {
       method: 'POST',
       headers: {
