@@ -1,7 +1,7 @@
 
 'use client'
 
-import { useState, useEffect, UIEvent, useCallback } from 'react'
+import { useState, useEffect, UIEvent, useCallback, useRef } from 'react'
 import { useSearchParams, usePathname } from 'next/navigation'
 
 import Header from '@/components/header'
@@ -26,34 +26,7 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
   const pathname = usePathname()
   const searchParams = useSearchParams()
 
-  const onScrollHandler = useCallback((e: Event) => {
-    //console.log('onScrollHandler', isLoadMore)
-
-    const backToTop = document.getElementById('back-to-top') as HTMLElement;
-    const scrollHeight = document.body.scrollHeight
-    const innerHeight = window.innerHeight
-    const scrollTop = window.scrollY
-    const isBottom = scrollTop + innerHeight + 5 >= scrollHeight
-
-    //console.log('scrollTop, innerHeight, scrollHeight', scrollTop, innerHeight, scrollHeight)
-    //console.log('isBottom', isBottom)
-
-    if (scrollHeight <= innerHeight)
-      return
-
-    //console.log('isBottom, isLoadMore', isBottom, isLoadMore)
-
-    if (isBottom && !isLoadMore) {
-      //console.log('setOffset ?!?!')
-      setIsLoadMore(true)
-      setOffset((old: number) => old + 1);
-    }
-
-    if (scrollTop > 100 && backToTop.classList.contains('hidden'))
-      backToTop.classList.remove('hidden')
-    else if (scrollTop <= 100 && !backToTop.classList.contains('hidden'))
-      backToTop.classList.add('hidden')
-  }, [isLoadMore])
+  const stateRef = useRef(isLoadMore) // this is crazy
 
   useEffect(() => {
     if (!loaded) {
@@ -90,15 +63,14 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
       backToTop.classList.add('hidden')
 
     const fetchFeedData = async () => {
-
       let data: any;
       const keywords = searchParams.get('keywords')
 
       if (keywords) {
         data = await getSearchFeed(keywords.split(','))
       } else {
-        const endpoint = searchParams.get('sort') || 'rising'
-        const bucket = searchParams.get('time') || undefined;
+        const endpoint = searchParams.get('sort') || 'top'
+        const bucket = searchParams.get('time') || 'day';
 
         data = await getFeed(endpoint, config.defaultLimit, bucket)
 
@@ -117,13 +89,11 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
   }, [pathname, searchParams])
 
   useEffect(() => {
-    //console.log('useEffect offset', offset, isLoadMore, endOfFeed)
-
     if (offset > 1 && !endOfFeed) {
-      setIsLoadMore(true);
+      setIsLoadMore(true)
+      stateRef.current = true
 
       const fetchMoreData = async () => {
-
         let data: any;
         const keywords = searchParams.get('keywords')
 
@@ -139,6 +109,7 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
         if (data && data.length > 0) {
           setFeedData((prevData: any) => [...prevData, ...data])
           setIsLoadMore(false);
+          stateRef.current = false;
         }
         else
           setEndOfFeed(true)
@@ -148,6 +119,27 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
         .catch(console.error)
     }
   }, [offset])
+
+  function onScrollHandler(e: Event) {
+    const backToTop = document.getElementById('back-to-top') as HTMLElement;
+    const scrollHeight = document.body.scrollHeight
+    const innerHeight = window.innerHeight
+    const scrollTop = window.scrollY
+    const isBottom = scrollTop + innerHeight + 5 >= scrollHeight
+
+    if (scrollHeight <= innerHeight)
+      return
+
+    if (isBottom && !stateRef.current) {
+      stateRef.current = true
+      setOffset((old: number) => old + 1)
+    }
+
+    if (scrollTop > 100 && backToTop.classList.contains('hidden'))
+      backToTop.classList.remove('hidden')
+    else if (scrollTop <= 100 && !backToTop.classList.contains('hidden'))
+      backToTop.classList.add('hidden')
+  }
 
   function backToTopHandler(e: UIEvent<HTMLDivElement>) {
     window.scroll({
