@@ -149,7 +149,7 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
   }
 
   return (
-    <div className='relative md:mx-auto w-full lg:max-w-[1060px] lg:w-[1060px] font-mono px-4 md:p-8 md:py-4'>
+    <div className='relative md:mx-auto w-full max-w-full lg:max-w-[1060px] lg:w-[1060px] font-mono px-4 md:p-8 md:py-4'>
       <Header />
 
       <div
