@@ -1,10 +1,10 @@
 
 'use client'
 
-import { useState, useEffect, UIEvent, useCallback, useRef } from 'react'
+import { useState, useEffect, UIEvent, useRef } from 'react'
 import { useSearchParams, usePathname } from 'next/navigation'
 
-import Header from '@/components/header'
+import Container from '@/components/container'
 import Filters from '@/components/filters'
 import Feed from '@/components/feed'
 import Footer from '@/components/footer'
@@ -122,6 +122,10 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
 
   function onScrollHandler(e: Event) {
     const backToTop = document.getElementById('back-to-top') as HTMLElement;
+
+    if (!backToTop)
+      return
+
     const scrollHeight = document.body.scrollHeight
     const innerHeight = window.innerHeight
     const scrollTop = window.scrollY
@@ -149,8 +153,7 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
   }
 
   return (
-    <div className='relative md:mx-auto w-full max-w-full lg:max-w-[1060px] lg:w-[1060px] font-mono px-4 md:p-8 md:py-4'>
-      <Header />
+    <Container>
 
       <div
         className='sticky top-[82.5px] z-40 bg-gray-300 dark:bg-black mb-4 mt-4 lg:mt-0 lg:mb-4 py-2 text-base sm:text-lg sm:leading-relaxed md:text-xl md:leading-relaxed text-body-color'>
@@ -158,7 +161,7 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
       </div>
 
       <div className='flex items-start'>
-        <div className='md:mr-auto w-full max-w-full max-w-[760px] lg:w-[720px] overflow-x-hidden'>
+        <div className='md:mr-auto w-full max-w-full max-w-[760px] lg:w-[680px] overflow-x-hidden'>
           {isLoading && (`Loading ...`)}
           {!isLoading && (<Feed data={feedData} />)}
 
@@ -167,7 +170,7 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
           <Footer />
         </div>
 
-        <div className='sticky top-[130px] h-auto w-[240px] p-4 bg-gray-200 dark:bg-gray-900 hidden lg:flex flex-col'>
+        <div className='sticky top-[130px] h-auto w-[270px] p-4 bg-gray-200 dark:bg-gray-600 dark:bg-opacity-20 hidden lg:flex flex-col'>
           <h3 className='mb-5 text-2xl font-bold'>Trending</h3>
           <div className='pl-1'>
             <ul>
@@ -189,6 +192,6 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
         onClick={backToTopHandler}>
         Back to top
       </div>
-    </div>
+    </Container>
   )
 }

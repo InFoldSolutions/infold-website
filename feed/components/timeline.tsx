@@ -87,6 +87,11 @@ export default function Timeline({ data }: { data: any }) {
           </ul>
         </div>
       </div>
+    </div>
+  )
+}
+
+/*
 
       <div className='mt-9 flex items-center'>
         <ul className='flex ml-auto w-auto'>
@@ -115,6 +120,4 @@ export default function Timeline({ data }: { data: any }) {
           </li>
         </ul>
       </div>
-    </div>
-  )
-}
+      */

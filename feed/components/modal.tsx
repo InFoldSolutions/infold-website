@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback, useRef, useEffect, MouseEventHandler } from 'react'
+import { useCallback, useRef, useEffect, MouseEventHandler } from 'react'
 import { useRouter } from 'next/navigation'
 
 export default function Modal({ children, isLoading }: { children: React.ReactNode, isLoading: boolean }) {
