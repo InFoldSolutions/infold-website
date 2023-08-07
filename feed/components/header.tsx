@@ -12,7 +12,7 @@ export default function Header() {
 
     if (isFirefox)
       setBrowserLink("https://addons.mozilla.org/en-US/firefox/addon/infold/");
-  })
+  }, [])
 
   return (
     <header className="bg-gray-300 dark:bg-black sticky top-0 z-40 pt-4 pb-5 mb-3 border-b-2 border-dashed border-white dark:border-neutral-600">

@@ -15,7 +15,7 @@ export default function Keywords({ item }: { item: any }) {
 
   useEffect(() => {
     setIsDesktop(window.innerWidth > 820)
-  })
+  }, [])
 
   const searchParams: any = useSearchParams()
   const router = useRouter()

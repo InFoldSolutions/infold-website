@@ -1,4 +1,3 @@
-import config from '@/config';
 
 export function findParentByCls(node: HTMLElement, cls: string, maxTries: number = 0): HTMLElement {
   let tries = 0;
@@ -16,4 +15,10 @@ export function findParentByCls(node: HTMLElement, cls: string, maxTries: number
   }
 
   return node;
+}
+export function getRandomInt(min: number, max: number) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  
+  return Math.floor(Math.random() * (max - min) + min);
 }

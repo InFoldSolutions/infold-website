@@ -2,20 +2,39 @@ const config = {
   'mockTweets': [
     {
       url: 'https://twitter.com/arstechnica/status/1686057171446906888',
-      type: 'tweet',
+      type: 'social',
       name: 'Ars Technica',
       handle: '@arstechnica',
-      added_at: '2023-07-26T20:00:00.000Z',
+      added_at: '2023-08-04T20:00:00.000Z',
       title: 'Europe turns its new $1.5 billion space telescope on, and happily it works',
-      logo: 'https://img.freepik.com/free-icon/twitter_318-674515.jpg',
+      logo: '/assets/images/twitter.svg',
     },
     {
       url: 'https://twitter.com/arstechnica/status/1686057171446906888',
-      type: 'post',
+      type: 'social',
       name: 'Ars Technica',
       handle: 'u/user',
+      added_at: '2023-07-29T10:00:00.000Z',
+      title: 'Europe turns its new $1.5 billion space telescope on, and happily it works',
+      logo: '/assets/images/reddit.svg',
+    },
+    {
+      url: 'https://twitter.com/arstechnica/status/1686057171446906888',
+      type: 'social',
+      name: 'Ars Technica',
+      handle: 'fbuser',
       added_at: '2023-07-25T10:00:00.000Z',
-      title: 'Europe turns its new $1.5 billion space telescope on, and happily it works'
+      title: 'Europe turns its new $1.5 billion space telescope on, and happily it works',
+      logo: '/assets/images/facebook.png',
+    },
+    {
+      url: 'https://twitter.com/arstechnica/status/1686057171446906888',
+      type: 'social',
+      name: 'Ars Technica',
+      handle: '@mastodon',
+      added_at: '2023-07-19T10:00:00.000Z',
+      title: 'Europe turns its new $1.5 billion space telescope on, and happily it works',
+      logo: '/assets/images/mastodon.png',
     }
   ],
 
