@@ -9,7 +9,7 @@ export default function Filters() {
   
   const keywords = searchParams.get('keywords') || '';
   const endpoint = searchParams.get('sort') || 'top';
-  const bucket = searchParams.get('time') || 'hour';
+  const bucket = searchParams.get('time') || 'week';
 
   function removeKeywordFilter(e: any) {
     e.preventDefault();

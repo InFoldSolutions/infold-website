@@ -35,15 +35,15 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
           <ul className='flex ml-auto w-auto'>
             <li className='flex items-center mr-2 cursor-pointer border-2 p-1 px-2 select-none' title='Toggle display'>
               <span className='hidden md:inline-block'>Positive:</span>
-              <span className='ml-1'>56</span>
+              <span className='md:ml-1'>56</span>
             </li>
             <li className='opacity-50 hover:opacity-100 flex items-center mr-2 cursor-pointer border-2 p-1 px-2 select-none' title='Toggle display'>
               <span className='hidden md:inline-block'>Negative:</span>
-              <span className='ml-1'>23</span>
+              <span className='md:ml-1'>23</span>
             </li>
             <li className='opacity-50 hover:opacity-100 flex items-center cursor-pointer border-2 p-1 px-2 select-none' title='Toggle display'>
               <span className='hidden md:inline-block'>Neutral:</span>
-              <span className='ml-1'>10</span>
+              <span className='md:ml-1'>10</span>
             </li>
           </ul>
         </div>
@@ -58,7 +58,7 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
                 <span>
                   <Image src={item.source.logo} alt={item.source.name} width={80} height={80} className='w-8 h-8 max-w-none mr-2 border-2 border-transparent group-hover:border-white' />
                 </span>
-                <span className='font-bold mr-2'>{item.source.name}</span>
+                <span className='font-bold mr-2 max-w-[110px] md:max-w-[200px]'>{item.source.name}</span>
                 <span className={`${item.articles[0].sentimentClass} text-white rounded text-sm px-2`}>{item.articles[0].sentiment}</span>
                 <span className="text-gray-600 dark:text-gray-300 text-xs ml-auto">
                   <TimeAgo
