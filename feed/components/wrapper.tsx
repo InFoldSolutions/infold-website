@@ -31,8 +31,20 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
   useEffect(() => {
     if (!loaded) {
       window.addEventListener("popstate", (e) => {
+        document.body.style.overflow = 'auto' // enable scrolling when modal is closed
         backButtonWasClicked = true
       })
+
+      window.history.pushState = new Proxy(window.history.pushState, { // this is hacky, no pushstate event ?!
+        apply: (target, thisArg: any, argArray: any) => {
+          const url = (argArray && argArray[2]) ? argArray[2] : null
+
+          if (url?.includes('/topics/'))
+            document.body.style.overflow = 'hidden' // disable scrolling when modal is open
+
+          return target.apply(thisArg, argArray);
+        },
+      });
 
       window.addEventListener("scroll", onScrollHandler)
     }

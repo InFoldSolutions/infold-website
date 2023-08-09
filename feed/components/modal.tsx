@@ -42,16 +42,15 @@ export default function Modal({ children, isLoading }: { children: React.ReactNo
   return (
     <div
       ref={overlay}
-      className='fixed z-[999] left-0 right-0 top-0 bottom-0 mx-auto bg-black dark:bg-gray-300 bg-opacity-80 dark:bg-opacity-10'
+      className='fixed z-[999] left-0 right-0 top-0 bottom-0 mx-auto bg-black bg-opacity-80 overflow-y-scroll flex justify-center'
       onClick={onClick}
     >
       <div
         ref={wrapper}
-        className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full lg:w-auto h-full lg:h-auto flex items-center justify-center bg-gray-300 dark:bg-black'
+        className='md:mx-auto w-auto max-w-full min-h-full h-fit lg:max-w-[1160px] flex justify-center lg:w-[1160px]'
       >
-
         {!isLoading &&
-          <div className='absolute top-4 md:top-7 right-3 md:right-7 p-1 w-8 md:w-10 z-20 cursor-pointer bg-gray-100' onClick={onCloseClick}>
+          <div className='fixed top-4 md:top-7 right-7 md:right-7 p-1 w-8 md:w-10 z-20 cursor-pointer bg-gray-100' onClick={onCloseClick}>
             <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>
               <g>
                 <path
