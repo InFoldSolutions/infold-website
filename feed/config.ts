@@ -6,7 +6,7 @@ const config = {
       name: 'Ars Technica',
       handle: '@arstechnica',
       added_at: '2023-08-04T20:00:00.000Z',
-      title: 'Europe turns its new $1.5 billion space telescope on, and happily it works',
+      summary: 'Europe turns its new $1.5 billion space telescope on, and happily it works',
       logo: '/assets/images/twitter.svg',
     },
     {
@@ -15,7 +15,7 @@ const config = {
       name: 'Ars Technica',
       handle: 'u/user',
       added_at: '2023-07-29T10:00:00.000Z',
-      title: 'Europe turns its new $1.5 billion space telescope on, and happily it works',
+      summary: 'Europe turns its new $1.5 billion space telescope on, and happily it works',
       logo: '/assets/images/reddit.svg',
     },
     {
@@ -24,7 +24,7 @@ const config = {
       name: 'Ars Technica',
       handle: 'fbuser',
       added_at: '2023-07-25T10:00:00.000Z',
-      title: 'Europe turns its new $1.5 billion space telescope on, and happily it works',
+      summary: 'Europe turns its new $1.5 billion space telescope on, and happily it works',
       logo: '/assets/images/facebook.png',
     },
     {
@@ -33,9 +33,18 @@ const config = {
       name: 'Ars Technica',
       handle: '@mastodon',
       added_at: '2023-07-19T10:00:00.000Z',
-      title: 'Europe turns its new $1.5 billion space telescope on, and happily it works',
+      summary: 'Europe turns its new $1.5 billion space telescope on, and happily it works',
       logo: '/assets/images/mastodon.png',
-    }
+    },
+    {
+      url: 'https://twitter.com/arstechnica/status/1686057171446906888',
+      type: 'social',
+      name: 'Ars Technica',
+      handle: 'u/user',
+      added_at: '2023-07-15T10:00:00.000Z',
+      summary: 'Europe turns its new $1.5 billion space telescope on, and happily it works',
+      logo: '/assets/images/reddit.svg',
+    },
   ],
 
   api: {

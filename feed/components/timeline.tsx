@@ -2,8 +2,6 @@
 
 import { UIEvent, useEffect, useState } from 'react';
 
-import Image from 'next/image'
-
 import Arrow from './arrow'
 import RelatedItem from './related';
 
@@ -69,17 +67,18 @@ export default function Timeline({ data }: { data: any }) {
   return (
     <div className='relative mt-4'>
       <div className='relative'>
-        <div className='top-1/2 -mt-[1px] absolute h-px bg-transparent w-full border-dashed border-b-2 border-white dark:border-neutral-600'></div>
+
+        <div className='bottom-3 absolute h-px bg-transparent w-full border-dashed border-b-2 border-white dark:border-neutral-600'></div>
 
         {isDesktop &&
           <div>
             <Arrow direction='left' clickFunction={prevClickHandler} visible={false} />
-            <Arrow direction='right' clickFunction={nextClickHandler} visible={(data.social.length > 4)} />
+            <Arrow direction='right' clickFunction={nextClickHandler} visible={(data.social.length > 2)} />
           </div>
         }
 
-        <div className='timeline relative max-w-screen-2xl overflow-x-scroll overflow-y-hidden no-scrollbar' onScroll={onScrollHandler}>
-          <ul className='flex flex-nowrap h-[130px] relative pl-[35px]'>
+        <div className='timeline relative max-w-screen-2xl overflow-x-scroll no-scrollbar pb-8' onScroll={onScrollHandler}>
+          <ul className='flex flex-nowrap h-[180px] relative'>
             {data.social.map((item: any, index: number) => (
               <RelatedItem item={item} index={index} key={index} />
             ))
