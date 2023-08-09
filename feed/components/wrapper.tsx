@@ -161,7 +161,7 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
       </div>
 
       <div className='flex items-start'>
-        <div className='md:mr-auto w-full max-w-full max-w-[760px] lg:w-[680px] overflow-x-hidden'>
+        <div className='md:mr-auto w-full max-w-full max-w-[780px] lg:w-[780px] overflow-x-hidden'>
           {isLoading && (`Loading ...`)}
           {!isLoading && (<Feed data={feedData} />)}
 
@@ -170,7 +170,7 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
           <Footer />
         </div>
 
-        <div className='sticky top-[130px] h-auto w-[270px] p-4 bg-gray-200 dark:bg-gray-600 dark:bg-opacity-20 hidden lg:flex flex-col'>
+        <div className='sticky top-[130px] h-auto w-[280px] p-4 bg-gray-200 dark:bg-gray-600 dark:bg-opacity-20 hidden lg:flex flex-col'>
           <h3 className='mb-5 text-2xl font-bold'>Trending</h3>
           <div className='pl-1'>
             <ul>
