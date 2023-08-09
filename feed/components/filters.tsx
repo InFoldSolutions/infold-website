@@ -4,10 +4,18 @@ import config from '@/config';
 import Link from 'next/link'
 import { useSearchParams, useRouter } from 'next/navigation'
 
+const topOptions = [
+  { label: 'Top 1h', value: 'hour' },
+  { label: 'Top 24h', value: 'day' },
+  { label: 'Top 7d', value: 'week' },
+  { label: 'Top 30d', value: 'month' },
+  { label: 'Top 365d', value: 'year' },
+]
+
 export default function Filters() {
   const router = useRouter()
   const searchParams: any = useSearchParams()
-  
+
   const keywords = searchParams.get('keywords') || '';
   const endpoint = searchParams.get('sort') || config.api.defaultSort;
   const bucket = searchParams.get('time') || config.api.defaultBucket;
@@ -49,12 +57,12 @@ export default function Filters() {
     )
   } else {
     return (
-      <div>
-        <Link className={`${(endpoint === 'top' && bucket === 'hour') ? 'underline' : ''} cursor-pointer filter hover:underline`} href={`?sort=top&time=hour`}>Top 1h</Link> |
-        <Link className={`${(endpoint === 'top' && bucket === 'day') ? 'underline' : ''} ml-3 cursor-pointer filter hover:underline`} href={`?sort=top&time=day`}>Top 24h</Link> |
-        <Link className={`${(endpoint === 'top' && bucket === 'week') ? 'underline' : ''} ml-3 cursor-pointer filter hover:underline`} href={`?sort=top&time=week`}>Top 7d</Link> |
-        <Link className={`${(endpoint === 'top' && bucket === 'month') ? 'underline' : ''} ml-3 cursor-pointer filter hover:underline`} href={`?sort=top&time=month`}>Top 30d</Link> |
-        <Link className={`${(endpoint === 'top' && bucket === 'year') ? 'underline' : ''} ml-3 cursor-pointer filter hover:underline`} href={`?sort=top&time=year`}>Top 365d</Link>
+      <div className='relative max-w-screen-2xl overflow-x-scroll no-scrollbar'>
+        <div className='flex flex-nowrap'>
+          {topOptions.map((option: any, index: number) => (
+            <Link className={`${(endpoint === 'top' && bucket === option.value) ? 'underline' : ''} md:ml-1 text-center min-w-[80px] cursor-pointer filter hover:underline`} href={`?sort=top&time=${option.value}`} key={index}>{option.label}</Link>
+          ))}
+        </div>
       </div>
     )
   }
