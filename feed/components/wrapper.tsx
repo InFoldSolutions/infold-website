@@ -69,8 +69,8 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
       if (keywords) {
         data = await getSearchFeed(keywords.split(','))
       } else {
-        const endpoint = searchParams.get('sort') || 'top'
-        const bucket = searchParams.get('time') || 'day';
+        const endpoint = searchParams.get('sort') || config.api.defaultSort
+        const bucket = searchParams.get('time') || config.api.defaultBucket
 
         data = await getFeed(endpoint, config.api.defaultLimit, bucket)
 
@@ -100,8 +100,8 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
         if (keywords) {
           data = await getSearchFeed(keywords.split(','), offset)
         } else {
-          const endpoint = searchParams.get('sort') || 'rising'
-          const bucket = searchParams.get('time') || null
+          const endpoint = searchParams.get('sort') || 'top'
+          const bucket = searchParams.get('time') || 'week'
 
           data = await getFeed(endpoint, config.api.defaultLimit, bucket, offset)
         }

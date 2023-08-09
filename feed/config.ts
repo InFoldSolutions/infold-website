@@ -49,6 +49,8 @@ const config = {
 
   api: {
     defaultLimit: 10,
+    defaultBucket: 'week',
+    defaultSort: 'top'
   },
 
   // temp keyword blacklist

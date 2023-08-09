@@ -6,8 +6,8 @@ import { getFeed, getSearchFeed, getTopKeywords } from '@/helpers/api'
 
 export default async function Home({ params, searchParams }: { params: any, searchParams: any }) {
   const keywords = searchParams ? searchParams.keywords : ''
-  const endpoint = searchParams.sort || 'top'
-  const bucket = searchParams.time || 'week'
+  const endpoint = searchParams.sort || config.api.defaultSort
+  const bucket = searchParams.time || config.api.defaultBucket
 
   let data = null
 

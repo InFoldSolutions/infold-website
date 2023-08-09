@@ -1,5 +1,6 @@
 'use client';
 
+import config from '@/config';
 import Link from 'next/link'
 import { useSearchParams, useRouter } from 'next/navigation'
 
@@ -8,8 +9,8 @@ export default function Filters() {
   const searchParams: any = useSearchParams()
   
   const keywords = searchParams.get('keywords') || '';
-  const endpoint = searchParams.get('sort') || 'top';
-  const bucket = searchParams.get('time') || 'week';
+  const endpoint = searchParams.get('sort') || config.api.defaultSort;
+  const bucket = searchParams.get('time') || config.api.defaultBucket;
 
   function removeKeywordFilter(e: any) {
     e.preventDefault();
