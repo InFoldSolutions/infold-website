@@ -33,14 +33,14 @@ export default function TopicModal({ params }: { params: { slug: string } }) {
   return (
     <Modal isLoading={isLoading}>
       {isLoading &&
-        <div className='flex mt-[40%] h-12 items-center justify-center font-mono w-auto px-6 bg-gray-300 dark:bg-black border-dashed border-2 border-black dark:border-gray-400 dark:text-gray-400'>
+        <div className='flex mt-[157%] md:mt-[220%] lg:mt-[40%] h-12 items-center justify-center font-mono w-auto px-6 bg-gray-300 dark:bg-black border-dashed border-2 border-black dark:border-gray-400 dark:text-gray-400'>
           <Spinner />
           Loading topic ..
         </div>
       }
 
       {!isLoading &&
-        <main className='font-mono bg-gray-300 dark:bg-black'>
+        <main className='max-w-full font-mono bg-gray-300 dark:bg-black'>
           {data &&
             <div className='p-4 py-12 md:p-8 md:px-12 max-w-[1260px] lg:w-[1260px] lg:px-20 flex items-start'>
 
