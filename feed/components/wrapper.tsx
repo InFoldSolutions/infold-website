@@ -168,7 +168,7 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
     <Container>
 
       <div
-        className='sticky top-[82.5px] z-40 bg-gray-300 dark:bg-black mb-2 mt-2 lg:mt-0 lg:mb-4 py-2 text-base sm:text-lg sm:leading-relaxed md:text-xl md:leading-relaxed text-body-color'>
+        className='sticky top-[78px] md:top-[82px] z-40 bg-gray-300 dark:bg-black mb-2 mt-2 lg:mt-0 lg:mb-4 py-2 text-base sm:text-lg sm:leading-relaxed md:text-xl md:leading-relaxed text-body-color'>
         <Filters />
       </div>
 

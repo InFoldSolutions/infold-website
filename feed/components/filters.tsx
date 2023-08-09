@@ -60,8 +60,12 @@ export default function Filters() {
       <div className='relative max-w-screen-2xl overflow-x-scroll no-scrollbar'>
         <div className='flex flex-nowrap'>
           {topOptions.map((option: any, index: number) => (
-            <Link className={`${(endpoint === 'top' && bucket === option.value) ? 'underline' : ''} md:ml-1 text-center min-w-[80px] cursor-pointer filter hover:underline`} href={`?sort=top&time=${option.value}`} key={index}>{option.label}</Link>
-          ))}
+            <span className='group min-w-[80px] md:min-w-[95px] mr-1 md:mr-2 cursor-pointer flex justify-center'>
+              <Link className={`${(endpoint === 'top' && bucket === option.value) ? 'underline' : ''} group-hover:underline`} href={`?sort=top&time=${option.value}`} key={index}>{option.label}</Link>
+              {(index + 1) < topOptions.length && <span className='ml-2'>|</span>}
+            </span>
+          )
+          )}
         </div>
       </div>
     )
