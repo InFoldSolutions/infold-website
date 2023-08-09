@@ -47,7 +47,7 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
             </li>
           </ul>
         </div>
-        <h3 className='text-2xl font-bold text-left mb-6'>Related articles</h3>
+        <h3 className='text-2xl font-bold text-left mb-6'>Articles</h3>
         <ul className='list-inside list-disc -m-2 -mx-4'>
           {data.sources.slice(0, 6).map((item: any, index: number) => (
             <li className='mb-1 p-4 last:mb-0 list-none border-bottom-2 border-bottom-white border-dashed cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 dark:hover:bg-opacity-60 rounded-4'
