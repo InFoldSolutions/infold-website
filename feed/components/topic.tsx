@@ -76,7 +76,7 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
               <h3 className="mb-2 text-xl font-bold">
                 {item.articles[0].title}
               </h3>
-              <div className="text-gray-600 dark:text-gray-400 truncate-2-lines">
+              <div className="text-sm truncate-2-lines">
                 {item.articles[0].summary}
               </div>
             </li>
