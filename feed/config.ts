@@ -49,7 +49,7 @@ const config = {
 
   api: {
     defaultLimit: 10,
-    defaultBucket: 'week',
+    defaultBucket: 'month',
     defaultSort: 'top'
   },
 

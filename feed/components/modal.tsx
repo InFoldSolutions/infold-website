@@ -47,7 +47,7 @@ export default function Modal({ children, isLoading }: { children: React.ReactNo
     >
       <div
         ref={wrapper}
-        className='md:mx-auto w-auto max-w-full min-h-full h-fit lg:max-w-[1160px] flex justify-center lg:w-[1160px]'
+        className='md:mx-auto w-auto max-w-full min-h-full h-fit flex justify-center'
       >
         {!isLoading &&
           <div className='fixed top-4 md:top-7 right-7 md:right-7 p-1 w-8 md:w-10 z-20 cursor-pointer bg-gray-100' onClick={onCloseClick}>
