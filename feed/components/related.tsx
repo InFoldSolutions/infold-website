@@ -31,8 +31,8 @@ export default function RelatedItem({ item, index }: { item: any, index: number 
               </span>
             </span>
             <span className='ml-auto mr-2 text-xs flex flex-col'>
-              <span className='leading-4 text-right'><b>{getRandomInt(1, 100)}</b> likes </span>
-              <span className='leading-4 text-right'><b>3k</b> views</span>
+              <span className='leading-4 text-right'><b>{item.likes}</b> likes </span>
+              <span className='leading-4 text-right'><b>{item.views}</b> views</span>
             </span>
           </div>
         </li>

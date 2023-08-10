@@ -7,7 +7,9 @@ const config = {
       handle: '@arstechnica',
       added_at: '2023-08-04T20:00:00.000Z',
       summary: 'New findings: potential cause of long Covid but frustratingly little funding to test treatments. Story by @cooney_liz',
-      logo: '/assets/images/twitter.svg',
+      logo: '/assets/images/twitter.svg',    
+      likes: '76',
+      views: '4k'
     },
     {
       url: 'https://twitter.com/arstechnica/status/1686057171446906888',
@@ -17,6 +19,8 @@ const config = {
       added_at: '2023-07-29T10:00:00.000Z',
       summary: 'After starting the year by lowering its 2023 revenue projections, San Diego-based genomics giant Illumina did so again.',
       logo: '/assets/images/reddit.svg',
+      likes: '16',
+      views: '1k'
     },
     {
       url: 'https://twitter.com/arstechnica/status/1686057171446906888',
@@ -26,6 +30,8 @@ const config = {
       added_at: '2023-07-25T10:00:00.000Z',
       summary: 'Europe turns its new $1.5 billion space telescope on, and happily it works',
       logo: '/assets/images/facebook.png',
+      likes: '430',
+      views: '42k'
     },
     {
       url: 'https://twitter.com/arstechnica/status/1686057171446906888',
@@ -35,6 +41,8 @@ const config = {
       added_at: '2023-07-19T10:00:00.000Z',
       summary: 'The NIH has finally launched clinical trials almost 3 years after the agency received a $1 billion mandate from Congress to study and treat #LongCovid. But scientists say the trials are unlikely to deliver meaningful treatments.',
       logo: '/assets/images/mastodon.png',
+      likes: '560',
+      views: '7.5k'
     },
     {
       url: 'https://twitter.com/arstechnica/status/1686057171446906888',
@@ -44,6 +52,8 @@ const config = {
       added_at: '2023-07-15T10:00:00.000Z',
       summary: 'The FTC is getting even more aggressive in its enforcement over digital health companies’ irresponsible data use.',
       logo: '/assets/images/reddit.svg',
+      likes: '23',
+      views: '2.1k'
     },
   ],
 
