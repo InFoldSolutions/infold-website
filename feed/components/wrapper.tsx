@@ -11,6 +11,7 @@ import Footer from '@/components/footer'
 
 import { getFeed, getSearchFeed, getTopKeywords } from '@/helpers/api'
 import config from '@/config'
+import Spinner from './spinner'
 
 let loaded = false, backButtonWasClicked = false;
 
@@ -26,15 +27,18 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
   const pathname = usePathname()
   const searchParams = useSearchParams()
 
-  const stateRef = useRef(isLoadMore) // this is crazy
+  const loadingStateRef = useRef(isLoadMore) // this is crazy
+  const backToTopRef = useRef(null)
 
   useEffect(() => {
     if (!loaded) {
+      // router navigation back
       window.addEventListener("popstate", (e) => {
         document.body.style.overflow = 'auto' // enable scrolling when modal is closed
         backButtonWasClicked = true
       })
 
+      // router navigation forward
       window.history.pushState = new Proxy(window.history.pushState, { // this is hacky, no pushstate event ?!
         apply: (target, thisArg: any, argArray: any) => {
           const url = (argArray && argArray[2]) ? argArray[2] : null
@@ -50,6 +54,7 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
     }
   }, [])
 
+  // query params and path change
   useEffect(() => {
     if (!loaded) {
       loaded = true
@@ -69,10 +74,12 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
     setOffset(1)
     setEndOfFeed(false)
 
-    const backToTop = document.getElementById('back-to-top') as HTMLElement;
+    const backToTop = (backToTopRef?.current) ? backToTopRef.current as HTMLElement : null
 
-    if (!backToTop.classList.contains('hidden'))
-      backToTop.classList.add('hidden')
+    if (backToTop) {
+      if (!backToTop.classList.contains('hidden'))
+        backToTop.classList.add('hidden')
+    }
 
     const fetchFeedData = async () => {
       let data: any;
@@ -100,10 +107,11 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
       .catch(console.error)
   }, [pathname, searchParams])
 
+  // load more
   useEffect(() => {
     if (offset > 1 && !endOfFeed) {
       setIsLoadMore(true)
-      stateRef.current = true
+      loadingStateRef.current = true
 
       const fetchMoreData = async () => {
         let data: any;
@@ -112,8 +120,8 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
         if (keywords) {
           data = await getSearchFeed(keywords.split(','), offset)
         } else {
-          const endpoint = searchParams.get('sort') || 'top'
-          const bucket = searchParams.get('time') || 'week'
+          const endpoint = searchParams.get('sort') || config.api.defaultSort
+          const bucket = searchParams.get('time') || config.api.defaultBucket
 
           data = await getFeed(endpoint, config.api.defaultLimit, bucket, offset)
         }
@@ -121,7 +129,7 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
         if (data && data.length > 0) {
           setFeedData((prevData: any) => [...prevData, ...data])
           setIsLoadMore(false);
-          stateRef.current = false;
+          loadingStateRef.current = false;
         }
         else
           setEndOfFeed(true)
@@ -133,7 +141,7 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
   }, [offset])
 
   function onScrollHandler(e: Event) {
-    const backToTop = document.getElementById('back-to-top') as HTMLElement;
+    const backToTop = (backToTopRef?.current) ? backToTopRef.current as HTMLElement : null
 
     if (!backToTop)
       return
@@ -146,8 +154,8 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
     if (scrollHeight <= innerHeight)
       return
 
-    if (isBottom && !stateRef.current) {
-      stateRef.current = true
+    if (isBottom && !loadingStateRef.current) {
+      loadingStateRef.current = true
       setOffset((old: number) => old + 1)
     }
 
@@ -174,10 +182,9 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
 
       <div className='flex items-start'>
         <div className='md:mr-auto w-full max-w-full max-w-[780px] lg:w-[780px] overflow-x-hidden'>
-          {isLoading && (`Loading ...`)}
+          {isLoading && (<div className='w-full justify-center mt-3 pt-2 flex items-center justify-center'><Spinner />Loading ...</div>)}
           {!isLoading && (<Feed data={feedData} />)}
-
-          {isLoadMore && (<div className='w-full justify-center mt-3 pt-2'>Loading more ...</div>)}
+          {isLoadMore && (<div className='w-full justify-center mt-3 pt-2 flex items-center justify-center'><Spinner />Loading more ...</div>)}
 
           <Footer />
         </div>
@@ -199,7 +206,7 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
       </div>
 
       <div
-        id='back-to-top'
+        ref={backToTopRef}
         className='fixed bottom-4 md:bottom-2 right-2 py-2 px-3 w-auto flex bg-gray-200 dark:bg-neutral-800 font-mono hidden cursor-pointer'
         onClick={backToTopHandler}>
         Back to top

@@ -42,7 +42,7 @@ export default function TopicModal({ params }: { params: { slug: string } }) {
       {!isLoading &&
         <main className='max-w-full font-mono bg-gray-300 dark:bg-black'>
           {data &&
-            <div className='p-4 md:p-8 md:px-12 max-w-[1300px] lg:w-[1300px] lg:px-20 flex items-start'>
+            <div className='p-4 md:p-8 md:px-12 max-w-[1257px] lg:w-[1257px] lg:px-20 flex items-start'>
 
               <div className='md:mr-auto w-full lg:w-[760px]'>
                 <TopicWrapper data={data} modal={true} />
