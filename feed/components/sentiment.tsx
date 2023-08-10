@@ -73,11 +73,11 @@ export default function Sentiment() {
     })
 
     setData({
-      labels: ['Positive', 'Neutral', 'Ambiguous', 'Negative'],
+      labels: ['Positive', 'Neutral', 'Negative'],
       datasets: [
         {
           label: 'Articles',
-          data: [10, 8, 4, 8],
+          data: [10, 8, 4],
           backgroundColor: (currentColorScheme === 'dark') ? 'rgba(255, 255, 255, 0.3)' : 'rgba(0, 0, 0, 0.3)',
           borderColor: (currentColorScheme === 'dark') ? 'rgba(255, 255, 255, 1)' : 'rgba(0, 0, 0, 1)',
           borderWidth: 2
