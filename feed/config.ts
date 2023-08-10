@@ -6,7 +6,7 @@ const config = {
       name: 'Ars Technica',
       handle: '@arstechnica',
       added_at: '2023-08-04T20:00:00.000Z',
-      summary: 'Europe turns its new $1.5 billion space telescope on, and happily it works',
+      summary: 'New findings: potential cause of long Covid but frustratingly little funding to test treatments. Story by @cooney_liz',
       logo: '/assets/images/twitter.svg',
     },
     {
@@ -15,7 +15,7 @@ const config = {
       name: 'Ars Technica',
       handle: 'u/user',
       added_at: '2023-07-29T10:00:00.000Z',
-      summary: 'Europe turns its new $1.5 billion space telescope on, and happily it works',
+      summary: 'After starting the year by lowering its 2023 revenue projections, San Diego-based genomics giant Illumina did so again.',
       logo: '/assets/images/reddit.svg',
     },
     {
@@ -33,7 +33,7 @@ const config = {
       name: 'Ars Technica',
       handle: '@mastodon',
       added_at: '2023-07-19T10:00:00.000Z',
-      summary: 'Europe turns its new $1.5 billion space telescope on, and happily it works',
+      summary: 'The NIH has finally launched clinical trials almost 3 years after the agency received a $1 billion mandate from Congress to study and treat #LongCovid. But scientists say the trials are unlikely to deliver meaningful treatments.',
       logo: '/assets/images/mastodon.png',
     },
     {
@@ -42,7 +42,7 @@ const config = {
       name: 'Ars Technica',
       handle: 'u/user',
       added_at: '2023-07-15T10:00:00.000Z',
-      summary: 'Europe turns its new $1.5 billion space telescope on, and happily it works',
+      summary: 'The FTC is getting even more aggressive in its enforcement over digital health companies’ irresponsible data use.',
       logo: '/assets/images/reddit.svg',
     },
   ],

@@ -1,4 +1,5 @@
 
+import { getRandomInt } from '@/helpers/utils'
 import Image from 'next/image'
 import TimeAgo from 'react-timeago'
 
@@ -6,12 +7,14 @@ export default function RelatedItem({ item, index }: { item: any, index: number 
   switch (item.type) {
     case 'social':
       return (
-        <li className='mr-4 min-w-[250px] group select-none cursor-pointer relative items-center relative before:content-[""] before:absolute before:rounded before:-bottom-6 before:left-16 before:w-3 before:h-3 before:bg-white before:border-[50%]'
+        <li className='mr-4 min-w-[250px] group select-none cursor-pointer relative items-center relative before:content-[""] before:absolute before:rounded before:-bottom-[17px] before:left-[70px] before:w-3 before:h-3 before:bg-white before:border-[50%]'
           onClick={() => window.open(item.url, '_blank')}
           title={item.title}
           key={index} >
-          <div className='block bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 p-4'>
-            {item.summary}
+          <div className='bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 p-4 rounded-md text-sm'>
+            <span className='truncate-4-lines box-border min-h-[80px]'>
+              {item.summary}
+            </span>
           </div>
           <div className='flex overflow-x-hidden items-center text-sm mt-3 ml-3'>
             <span className='mr-2'>
@@ -26,6 +29,10 @@ export default function RelatedItem({ item, index }: { item: any, index: number 
                   title={item.title}
                 />
               </span>
+            </span>
+            <span className='ml-auto mr-2 text-xs flex flex-col'>
+              <span className='leading-4 text-right'><b>{getRandomInt(1, 100)}</b> likes </span>
+              <span className='leading-4 text-right'><b>3k</b> views</span>
             </span>
           </div>
         </li>

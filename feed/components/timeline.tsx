@@ -77,7 +77,7 @@ export default function Timeline({ data }: { data: any }) {
           </div>
         }
 
-        <div className='timeline relative max-w-screen-2xl overflow-x-scroll no-scrollbar pb-8' onScroll={onScrollHandler}>
+        <div className='timeline relative max-w-screen-2xl overflow-x-scroll no-scrollbar pb-6' onScroll={onScrollHandler}>
           <ul className='flex flex-nowrap h-[180px] relative'>
             {data.social.map((item: any, index: number) => (
               <RelatedItem item={item} index={index} key={index} />
