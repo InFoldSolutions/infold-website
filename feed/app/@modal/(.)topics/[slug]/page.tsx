@@ -33,7 +33,7 @@ export default function TopicModal({ params }: { params: { slug: string } }) {
   return (
     <Modal isLoading={isLoading}>
       {isLoading &&
-        <div className='flex relative top-[50vh] -mt-6 h-12 items-center justify-center font-mono w-auto px-6 bg-gray-300 dark:bg-black border-dashed border-2 border-black dark:border-gray-400 dark:text-gray-400'>
+        <div className='flex relative top-[50vh] -mt-6 h-12 items-center justify-center font-mono w-auto px-6 bg-gray-300 dark:bg-black border-2 border-dashed border-black dark:border-gray-400 dark:text-gray-400'>
           <Spinner />
           Loading topic ..
         </div>

@@ -34,13 +34,13 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
         <div className='mt-6 flex items-center -mb-9'>
           <ul className='flex ml-auto w-auto'>
             <li className='flex items-center mr-2 cursor-pointer border-2 p-1 px-2 select-none' title='Toggle display'>
-              <span className='hidden md:inline-block'>
+              <span>
                 <b>56</b> 
                 <span className='hidden md:inline-block ml-2'>Positive</span>
               </span>
             </li>
             <li className='opacity-50 hover:opacity-100 flex items-center mr-2 cursor-pointer border-2 p-1 px-2 select-none' title='Toggle display'>
-              <span className='hidden md:inline-block'>
+              <span>
                 <b>23</b> 
                 <span className='hidden md:inline-block ml-2'>Negative</span>
               </span>
