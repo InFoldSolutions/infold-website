@@ -18,7 +18,7 @@ export default function RelatedItem({ item, index }: { item: any, index: number 
           </div>
           <div className='flex overflow-x-hidden items-center text-sm mt-3 ml-3'>
             <span className='mr-2'>
-              <Image src={item.logo} alt={item.name} width={35} height={35} className='h-[27px] w-auto max-w-none' />
+              <Image src={item.logo} alt={item.name} width={35} height={35} className='h-[28px] w-auto max-w-none' />
             </span>
             <span>
               <span className='leading-4 text-sm'>{item.handle}</span>

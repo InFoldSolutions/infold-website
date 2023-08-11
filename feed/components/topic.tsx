@@ -1,13 +1,21 @@
 'use client'
 
+import { useState } from "react"
+
 import Image from "next/image"
-import Link from "next/link"
 
 import TimeAgo from 'react-timeago'
 
 import Timeline from "@/components/timeline"
 
 export default function TopicWrapper({ data, modal = false }: { data: any, modal?: boolean }) {
+
+  const [expanded, setExpanded] = useState(false)
+
+  function toggleExpanded() {
+    setExpanded(!expanded)
+  }
+
   return (
     <article>
       <h3 className={`${modal ? 'mr-4' : ''} mb-4 text-3xl font-bold`}>
@@ -20,9 +28,20 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
           {data.outline.slice(0, 2).map((outline: string, index: number) => (
             <li className='mb-4 last:mb-0' key={index}>
               {outline}
+              {index === 1 && <span className={`${expanded ? 'hidden' : ''} text-blue-500 underline ml-2 cursor-pointer`} onClick={toggleExpanded}>more..</span>}
             </li>
           ))}
         </ul>
+
+        {expanded &&
+          <ul className='list-inside list-disc mt-4'>
+            {data.outline.slice(2).map((outline: string, index: number) => (
+              <li className='mb-4 last:mb-0' key={index}>
+                {outline}
+              </li>
+            ))}
+          </ul>
+        }
       </div>
 
       <h3 className='text-2xl font-bold text-left mt-6'>Social</h3>
@@ -35,19 +54,19 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
           <ul className='flex ml-auto w-auto'>
             <li className='flex items-center mr-2 cursor-pointer border-2 p-1 px-2 select-none' title='Toggle display'>
               <span>
-                <b>56</b> 
+                <b>56</b>
                 <span className='hidden md:inline-block ml-2'>Positive</span>
               </span>
             </li>
             <li className='opacity-50 hover:opacity-100 flex items-center mr-2 cursor-pointer border-2 p-1 px-2 select-none' title='Toggle display'>
               <span>
-                <b>23</b> 
+                <b>23</b>
                 <span className='hidden md:inline-block ml-2'>Negative</span>
               </span>
             </li>
             <li className='opacity-50 hover:opacity-100 flex items-center cursor-pointer border-2 p-1 px-2 select-none' title='Toggle display'>
               <span>
-                <b>10</b> 
+                <b>10</b>
                 <span className='hidden md:inline-block ml-2'>Neutral</span>
               </span>
             </li>
