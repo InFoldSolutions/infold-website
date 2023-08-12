@@ -8,6 +8,7 @@ export default function Arrow({ direction, clickFunction, visible = true }: { di
     <div
       className={ `${direction} ${direction === 'left' ? '-left-[41px]' : '-right-[41px]'} ${!visible ? 'hidden' : ''} arrow absolute z-9 top-1/2 -mt-[18px] w-7 h-9 p-1 rounded-full border-2 border-neutral-200 dark:border-neutral-600 flex items-center justify-center cursor-pointer` }
       onClick={ clickFunction }>
+      
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512" className="w-4/5">
         <g>
           <path d={svgPath} className="fill-neutral-800 dark:fill-neutral-200"/>

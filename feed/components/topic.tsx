@@ -54,19 +54,22 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
           <ul className='flex ml-auto w-auto'>
             <li className='flex items-center mr-2 cursor-pointer border-2 p-1 px-2 select-none' title='Toggle display'>
               <span>
-                <b>56</b>
+                <b className='text-green-500'>56</b>
+                <i className='fad text-green-500 fa-smile ml-2'></i>
                 <span className='hidden md:inline-block ml-2'>Positive</span>
               </span>
             </li>
-            <li className='opacity-50 hover:opacity-100 flex items-center mr-2 cursor-pointer border-2 p-1 px-2 select-none' title='Toggle display'>
+            <li className='flex items-center mr-2 cursor-pointer border-2 p-1 px-2 select-none' title='Toggle display'>
               <span>
-                <b>23</b>
+                <b className='text-red-500'>23</b>
+                <i className='fad fa-angry text-red-500 ml-2'></i>
                 <span className='hidden md:inline-block ml-2'>Negative</span>
               </span>
             </li>
-            <li className='opacity-50 hover:opacity-100 flex items-center cursor-pointer border-2 p-1 px-2 select-none' title='Toggle display'>
+            <li className='flex items-center cursor-pointer border-2 p-1 px-2 select-none' title='Toggle display'>
               <span>
-                <b>10</b>
+                <b className='text-slate-400'>10</b>
+                <i className='fad fa-meh text-slate-400 ml-2'></i>
                 <span className='hidden md:inline-block ml-2'>Neutral</span>
               </span>
             </li>
