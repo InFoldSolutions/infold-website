@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, MouseEventHandler } from "react"
+import { useState, useEffect, useCallback, MouseEventHandler } from "react"
 
 import Image from "next/image"
 
@@ -15,10 +15,6 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
   const [expanded, setExpanded] = useState(false)
   const [sentiment, setSentiment] = useState<any>('')
   const [filteredData, setFilteredData] = useState<any>(false)
-
-  function toggleExpanded() {
-    setExpanded(!expanded)
-  }
 
   useEffect(() => {
     setFilteredData(() => {
@@ -36,7 +32,11 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
     })
   }, [sentiment])
 
-  function sentimentClick(e: MouseEventHandler<HTMLLIElement>) {
+  const toggleExpanded: MouseEventHandler = useCallback(() => {
+    setExpanded(!expanded)
+  }, [])
+
+  const sentimentClick: MouseEventHandler = useCallback((e) => {
     // @ts-ignore
     const element = e.target as HTMLElement
 
@@ -67,7 +67,7 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
     if (!sentiment) return console.warn('TopicWrapper: sentimentClick: sentiment not found')
 
     setSentiment(sentiment)
-  }
+  }, [])
 
   return (
     <article>
