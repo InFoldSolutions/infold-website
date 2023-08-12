@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback, MouseEventHandler } from "react"
+import { useState, useEffect, useCallback, MouseEventHandler, use } from "react"
 
 import Image from "next/image"
 
@@ -10,11 +10,33 @@ import Timeline from "@/components/timeline"
 
 import { findParentByDataset } from '@/helpers/utils'
 
+let loaded = false
+
 export default function TopicWrapper({ data, modal = false }: { data: any, modal?: boolean }) {
 
   const [expanded, setExpanded] = useState(false)
   const [sentiment, setSentiment] = useState<any>('')
   const [filteredData, setFilteredData] = useState<any>(false)
+
+  useEffect(() => {
+    if (!loaded) {
+      window.matchMedia('(prefers-color-scheme: dark)')
+        .addEventListener('change', event => {
+          const newColorScheme = event.matches ? "dark" : "light";
+          const prevBgColor = newColorScheme === 'dark' ? 'bg-gray-200' : 'bg-gray-800'
+          const bgColor = newColorScheme === 'dark' ? 'bg-gray-800' : 'bg-gray-200'
+
+          const elements = document.querySelectorAll(`li.${prevBgColor}`)
+
+          elements.forEach((element: any) => {
+            element.classList.remove(prevBgColor)
+            element.classList.add(bgColor)
+          })
+        });
+
+      loaded = true
+    }
+  }, [])
 
   useEffect(() => {
     setFilteredData(() => {
@@ -39,14 +61,16 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
   const sentimentClick: MouseEventHandler = useCallback((e) => {
     // @ts-ignore
     const element = e.target as HTMLElement
+    const currentColorScheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "light";
+    const bgColor = currentColorScheme === 'dark' ? 'bg-gray-800' : 'bg-gray-200'
 
     if (!element) return console.warn('TopicWrapper: sentimentClick: element not found')
     const parent = findParentByDataset(element, 'sentiment')
 
     if (!parent) return console.warn('TopicWrapper: sentimentClick: parent not found')
 
-    if (parent.classList.contains('bg-gray-200')) {
-      parent.classList.remove('bg-gray-200')
+    if (parent.classList.contains(bgColor)) {
+      parent.classList.remove(bgColor)
       return setSentiment('')
     }
 
@@ -57,10 +81,10 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
     const items = wrapper?.querySelectorAll('li') || []
 
     items.forEach((item: any) => {
-      item.classList.remove('bg-gray-200')
+      item.classList.remove(bgColor)
     })
 
-    parent.classList.add('bg-gray-200')
+    parent.classList.add(bgColor)
 
     const sentiment = parent.dataset.sentiment
 
@@ -106,25 +130,25 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
       <div>
         <div className='mt-6 flex items-center -mb-9'>
           <ul className='flex ml-auto w-auto'>
-            <li className='flex items-center mr-2 cursor-pointer border-2 p-1 px-2 select-none' title='Toggle display' data-sentiment="positive" onClick={sentimentClick}>
-              <span>
+            <li className='flex items-center mr-2 cursor-pointer border-2 dark:border-gray-800 p-1 px-2 select-none' title='Toggle display' data-sentiment="positive" onClick={sentimentClick}>
+              <span className="flex items-center">
                 <b className='text-green-600'>56</b>
                 <i className='far text-green-600 fa-smile ml-2'></i>
-                <span className='hidden md:inline-block ml-2'>Positive</span>
+                <span className='hidden md:inline-block ml-2 text-sm'>Positive</span>
               </span>
             </li>
-            <li className='flex items-center mr-2 cursor-pointer border-2 p-1 px-2 select-none' title='Toggle display' data-sentiment="negative" onClick={sentimentClick}>
-              <span>
+            <li className='flex items-center mr-2 cursor-pointer border-2 dark:border-gray-800 p-1 px-2 select-none' title='Toggle display' data-sentiment="negative" onClick={sentimentClick}>
+              <span className="flex items-center">
                 <b className='text-red-600'>23</b>
                 <i className='far fa-frown text-red-600 ml-2'></i>
-                <span className='hidden md:inline-block ml-2'>Negative</span>
+                <span className='hidden md:inline-block ml-2 text-sm'>Negative</span>
               </span>
             </li>
-            <li className='flex items-center cursor-pointer border-2 p-1 px-2 select-none' title='Toggle display' data-sentiment="neutral" onClick={sentimentClick}>
-              <span>
+            <li className='flex items-center cursor-pointer border-2 dark:border-gray-800 p-1 px-2 select-none' title='Toggle display' data-sentiment="neutral" onClick={sentimentClick}>
+              <span className="flex items-center">
                 <b className='text-slate-500'>10</b>
                 <i className='far fa-meh text-slate-500 ml-2'></i>
-                <span className='hidden md:inline-block ml-2'>Neutral</span>
+                <span className='hidden md:inline-block ml-2 text-sm'>Neutral</span>
               </span>
             </li>
           </ul>
