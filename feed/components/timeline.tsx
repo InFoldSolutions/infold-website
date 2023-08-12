@@ -2,8 +2,13 @@
 
 import { UIEvent, useEffect, useState } from 'react';
 
-import Arrow from './arrow'
-import RelatedItem from './related';
+import Image from 'next/image'
+import TimeAgo from 'react-timeago'
+
+import Arrow from '@/components/arrow'
+import config from '@/config';
+
+const sentiment: any = config.sentiment
 
 export default function Timeline({ data }: { data: any }) {
 
@@ -79,8 +84,39 @@ export default function Timeline({ data }: { data: any }) {
 
         <div className='timeline relative max-w-screen-2xl overflow-x-scroll no-scrollbar pb-6' onScroll={onScrollHandler}>
           <ul className='flex flex-nowrap h-[180px] relative'>
-            {data.social.map((item: any, index: number) => (
-              <RelatedItem item={item} index={index} key={index} />
+            {data.social && data.social.map((item: any, index: number) => (
+              <li className='mr-4 min-w-[250px] group select-none cursor-pointer relative items-center relative before:content-[""] before:absolute before:rounded before:-bottom-[17px] before:left-[70px] before:w-3 before:h-3 before:bg-white before:border-[50%]'
+                onClick={() => window.open(item.url, '_blank')}
+                title={item.title}
+                key={index} >
+                <div className='bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 p-4 rounded-md text-sm relative'>
+                  <span className='truncate-4-lines box-border min-h-[80px] mr-1'>
+                    {item.summary}
+                  </span>
+                  <span className={`absolute top-0.5 right-0.5 ${sentiment[item.sentiment].bg} p-0.5 px-1 opacity-60 text-xs rounded`}>
+                    <i className={`far ${sentiment[item.sentiment].icon} text-white`} />
+                  </span> 
+                </div>
+                <div className='flex overflow-x-hidden items-center text-sm mt-3 ml-3'>
+                  <span className='mr-2'>
+                    <Image src={item.logo} alt={item.name} width={35} height={35} className='h-[28px] w-auto max-w-none' />
+                  </span>
+                  <span>
+                    <span className='leading-4 text-sm'>{item.handle}</span>
+                    <span className='block leading-4'>
+                      <TimeAgo
+                        date={new Date(item.added_at).getTime()}
+                        className='text-gray-600 dark:text-gray-300 text-xs'
+                        title={item.title}
+                      />
+                    </span>
+                  </span>
+                  <span className='ml-auto mr-2 text-xs flex flex-col'>
+                    <span className='leading-4 text-right'><b>{item.likes}</b> likes </span>
+                    <span className='leading-4 text-right'><b>{item.views}</b> views</span>
+                  </span>
+                </div>
+              </li>
             ))
             }
           </ul>

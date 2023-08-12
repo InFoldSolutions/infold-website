@@ -4,7 +4,7 @@ import { getRandomInt } from '@/helpers/utils';
 import { filterKeyword } from '@/transformers/keyword';
 
 const sentimentName: string[] = ['positive', 'negative', 'neutral']
-const sentimentColor: string[] = ['bg-green-500', 'bg-red-500', 'bg-slate-400']
+const sentiment: any = config.sentiment
 
 export function transformTopic(data: any) {
   if (data.sources) {
@@ -12,10 +12,14 @@ export function transformTopic(data: any) {
     data.sources = data.sources.map((source: any) => {
       if (source.articles) {
         source.articles = source.articles.map((article: any) => {
-          const sentiment = getRandomInt(0, 3)
+          const rand = getRandomInt(0, 3)
+          const name = sentimentName[rand]
 
           article.sentiment = sentimentName[sentiment]
-          article.sentimentClass = sentimentColor[sentiment]
+
+          article.sentimentBg = sentiment[name].bg
+          article.sentimentIcon = sentiment[name].icon
+          article.sentimentName = name
           return article
         })
       }

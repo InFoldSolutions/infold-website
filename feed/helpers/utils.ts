@@ -16,6 +16,22 @@ export function findParentByCls(node: HTMLElement, cls: string, maxTries: number
 
   return node;
 }
+
+export function findParentByDataset(node: HTMLElement, attr: string): HTMLElement {
+  while (!node.dataset[attr]) {
+    // @ts-ignore
+    node = node.parentElement;
+
+    if (!node) {
+      // @ts-ignore
+      return null;
+    }
+  }
+
+  return node;
+}
+
+
 export function getRandomInt(min: number, max: number) {
   min = Math.ceil(min);
   max = Math.floor(max);

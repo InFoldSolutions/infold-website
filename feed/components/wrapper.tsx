@@ -2,16 +2,18 @@
 'use client'
 
 import { useState, useEffect, UIEvent, useRef } from 'react'
+
 import { useSearchParams, usePathname } from 'next/navigation'
+import Link from 'next/link'
 
 import Container from '@/components/container'
 import Filters from '@/components/filters'
 import Feed from '@/components/feed'
 import Footer from '@/components/footer'
+import Spinner from '@/components/spinner'
 
 import { getFeed, getSearchFeed, getTopKeywords } from '@/helpers/api'
 import config from '@/config'
-import Spinner from './spinner'
 
 let loaded = false, backButtonWasClicked = false;
 
@@ -194,9 +196,11 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
           <div className='pl-1'>
             <ul>
               {topKeywordsData.length > 0 && topKeywordsData.map((keyword: any, index: number) => (
-                <li className='group cursor-pointer pb-2 mb-2 last:pb-0 last:mb-0' key={index}>
-                  <span className='font-bold block leading-4 group-hover:underline'>{keyword.keyword}</span>
-                  <small>{keyword.topics} Topics</small>
+                <li className='group cursor-pointer mb-2 last:mb-0' key={index}>
+                  <Link href={`/?keywords=${keyword.keyword}`} className='pb-2 last:pb-0'>
+                    <span className='font-bold block leading-4 group-hover:underline'>{keyword.keyword}</span>
+                    <small>{keyword.topics} Topics</small>
+                  </Link>
                 </li>
               ))}
             </ul>
