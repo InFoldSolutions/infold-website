@@ -59,7 +59,7 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
   }, [sentiment])
 
   const toggleExpanded: MouseEventHandler = useCallback(() => {
-    setExpanded(!expanded)
+    setExpanded((expanded) => !expanded)
   }, [])
 
   const sentimentClick: MouseEventHandler = useCallback((e) => {
