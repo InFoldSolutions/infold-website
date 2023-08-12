@@ -5,6 +5,7 @@ import { UIEvent, useEffect, useState } from 'react';
 import Image from 'next/image'
 import TimeAgo from 'react-timeago'
 
+import Spinner from '@/components/spinner';
 import Arrow from '@/components/arrow'
 import config from '@/config';
 
@@ -84,6 +85,7 @@ export default function Timeline({ data }: { data: any }) {
 
         <div className='timeline relative max-w-screen-2xl overflow-x-scroll no-scrollbar pb-6' onScroll={onScrollHandler}>
           <ul className='flex flex-nowrap h-[180px] relative'>
+            {!data.social || data.social.length === 0 && <li className='w-full justify-center mt-0 pt-0 flex items-center justify-center'><Spinner /> Loading social</li>}
             {data.social && data.social.map((item: any, index: number) => (
               <li className='mr-4 min-w-[250px] group select-none cursor-pointer relative items-center relative before:content-[""] before:absolute before:rounded before:-bottom-[17px] before:left-[70px] before:w-3 before:h-3 before:bg-white before:border-[50%]'
                 onClick={() => window.open(item.url, '_blank')}
@@ -95,7 +97,7 @@ export default function Timeline({ data }: { data: any }) {
                   </span>
                   <span className={`absolute top-0.5 right-0.5 ${sentiment[item.sentiment].bg} p-0.5 px-1 opacity-60 text-xs rounded`}>
                     <i className={`far ${sentiment[item.sentiment].icon} text-white`} />
-                  </span> 
+                  </span>
                 </div>
                 <div className='flex overflow-x-hidden items-center text-sm mt-3 ml-3'>
                   <span className='mr-2'>

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback, MouseEventHandler, use } from "react"
+import { useState, useEffect, useCallback, MouseEventHandler } from "react"
 
 import Image from "next/image"
 
@@ -9,6 +9,7 @@ import TimeAgo from 'react-timeago'
 import Timeline from "@/components/timeline"
 
 import { findParentByDataset } from '@/helpers/utils'
+import Spinner from "@/components/spinner"
 
 let loaded = false
 
@@ -16,7 +17,10 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
 
   const [expanded, setExpanded] = useState(false)
   const [sentiment, setSentiment] = useState<any>('')
-  const [filteredData, setFilteredData] = useState<any>(false)
+  const [filteredData, setFilteredData] = useState<any>({
+    sources: data.sources.filter((source: any) => source.articles[0].sentimentName === sentiment),
+    social: data.social.filter((social: any) => social.sentiment === sentiment)
+  })
 
   useEffect(() => {
     if (!loaded) {
@@ -154,7 +158,8 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
           </ul>
         </div>
         <h3 className='text-2xl font-bold text-left mb-6'>Articles</h3>
-        <ul className='list-inside list-disc -m-2 -mx-4'>
+        <ul className='list-inside list-disc -m-2 -mx-4 min-h-[250px]'>
+          {!filteredData || filteredData.sources.length === 0 && <li className='w-full justify-center relative top-10 pl-2 pt-2 flex items-center justify-center'><Spinner /> Loading articles</li>}
           {filteredData && filteredData.sources.slice(0, 8).map((item: any, index: number) => (
             <li className='mb-1 p-4 last:mb-0 list-none border-bottom-2 border-bottom-white border-dashed cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 dark:hover:bg-opacity-60 rounded-md'
               onClick={() => window.open(item.articles[0].url, '_blank')}
