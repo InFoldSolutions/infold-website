@@ -134,21 +134,21 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
       <div>
         <div className='mt-6 flex items-center -mb-9'>
           <ul className='flex ml-auto w-auto'>
-            <li className='flex items-center mr-2 cursor-pointer border-2 dark:border-gray-800 p-1 px-2 select-none' title='Toggle display' data-sentiment="positive" onClick={sentimentClick}>
+            <li className='flex items-center mr-2 cursor-pointer border-2 dark:border-gray-800 hover:bg-gray-200 dark:hover:bg-gray-800 p-1 px-2 select-none' title='Toggle display' data-sentiment="positive" onClick={sentimentClick}>
               <span className="flex items-center">
                 <b className='text-green-600'>56</b>
                 <i className='far text-green-600 fa-smile ml-2'></i>
                 <span className='hidden md:inline-block ml-2 text-sm'>Positive</span>
               </span>
             </li>
-            <li className='flex items-center mr-2 cursor-pointer border-2 dark:border-gray-800 p-1 px-2 select-none' title='Toggle display' data-sentiment="negative" onClick={sentimentClick}>
+            <li className='flex items-center mr-2 cursor-pointer border-2 dark:border-gray-800 hover:bg-gray-200 dark:hover:bg-gray-800 p-1 px-2 select-none' title='Toggle display' data-sentiment="negative" onClick={sentimentClick}>
               <span className="flex items-center">
                 <b className='text-red-600'>23</b>
                 <i className='far fa-frown text-red-600 ml-2'></i>
                 <span className='hidden md:inline-block ml-2 text-sm'>Negative</span>
               </span>
             </li>
-            <li className='flex items-center cursor-pointer border-2 dark:border-gray-800 p-1 px-2 select-none' title='Toggle display' data-sentiment="neutral" onClick={sentimentClick}>
+            <li className='flex items-center cursor-pointer border-2 dark:border-gray-800 hover:bg-gray-200 dark:hover:bg-gray-800 p-1 px-2 select-none' title='Toggle display' data-sentiment="neutral" onClick={sentimentClick}>
               <span className="flex items-center">
                 <b className='text-slate-500'>10</b>
                 <i className='far fa-meh text-slate-500 ml-2'></i>
@@ -159,7 +159,7 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
         </div>
         <h3 className='text-2xl font-bold text-left mb-6'>Articles</h3>
         <ul className='list-inside list-disc -m-2 -mx-4 min-h-[250px]'>
-          {!filteredData || filteredData.sources.length === 0 && <li className='w-full justify-center relative top-10 pl-2 pt-2 flex items-center justify-center'><Spinner /> Loading articles</li>}
+          {!filteredData || filteredData.sources.length === 0 && <li className='w-full justify-center mt-20 pl-2 pt-2 flex items-center justify-center'><Spinner /> Loading articles</li>}
           {filteredData && filteredData.sources.slice(0, 8).map((item: any, index: number) => (
             <li className='mb-1 p-4 last:mb-0 list-none border-bottom-2 border-bottom-white border-dashed cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 dark:hover:bg-opacity-60 rounded-md'
               onClick={() => window.open(item.articles[0].url, '_blank')}
