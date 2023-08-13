@@ -129,7 +129,7 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
       <h3 className='text-2xl font-bold text-left mt-6'>Social</h3>
       <Timeline data={filteredData} />
 
-      <span className='hidden bg-green-500 bg-red-500 bg-slate-400 bg-green-600 bg-red-600 bg-slate-500'>&nbsp;</span>
+      <span className='hidden hover:bg-green-500 bg-green-500 hover:bg-red-500 bg-red-500 hover:bg-slate-400 bg-slate-400 hover:bg-green-600 bg-green-600 hover:bg-red-600 bg-red-600 hover:bg-slate-500 bg-slate-500'>&nbsp;</span>
 
       <div>
         <div className='mt-6 flex items-center -mb-9'>

@@ -87,15 +87,15 @@ export default function Timeline({ data }: { data: any }) {
           <ul className='flex flex-nowrap h-[180px] relative'>
             {!data.social || data.social.length === 0 && <li className='w-full justify-center mt-0 pt-0 flex items-center justify-center'><Spinner /> Loading social</li>}
             {data.social && data.social.map((item: any, index: number) => (
-              <li className='mr-4 min-w-[250px] group select-none cursor-pointer relative items-center relative before:content-[""] before:absolute before:rounded before:-bottom-[17px] before:left-[70px] before:w-3 before:h-3 before:bg-white before:border-[50%]'
+              <li className={`hover:${sentiment[item.sentiment].bg} hover:bg-opacity-5 rounded mr-4 min-w-[260px] group select-none cursor-pointer relative items-center relative before:content-[""] before:absolute before:rounded before:-bottom-[17px] before:left-[70px] before:w-3 before:h-3 before:bg-white before:border-[50%]`}
                 onClick={() => window.open(item.url, '_blank')}
                 title={item.title}
                 key={index} >
-                <div className='bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 p-4 rounded-md text-sm relative'>
+                <div className='bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 p-4 rounded-md text-sm relative overflow-hidden'>
                   <span className='truncate-4-lines box-border min-h-[80px] mr-1'>
                     {item.summary}
                   </span>
-                  <span className={`absolute top-0.5 right-0.5 ${sentiment[item.sentiment].bg} p-0.5 px-1 opacity-60 text-xs rounded`}>
+                  <span className={`absolute top-0 right-0 ${sentiment[item.sentiment].bg} p-0.5 px-1 opacity-60 text-xs rounded`}>
                     <i className={`far ${sentiment[item.sentiment].icon} text-white`} />
                   </span>
                 </div>
