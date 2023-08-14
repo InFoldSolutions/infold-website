@@ -60,7 +60,7 @@ export default function Feed({ data }: { data: any, onScrollHandler?: any }) {
               <ul className='flex w-auto ml-auto'>
                 <li className='flex items-center mr-2 cursor-pointer border-2 dark:border-gray-800 hover:bg-gray-200 dark:hover:bg-gray-800 p-1 px-2 select-none'>
                   <span className="flex items-center">
-                    <b className='text-green-600'>56</b>
+                    <b className='text-green-600'>{item.articles}</b>
                     <i className='far text-green-600 fa-smile ml-2'></i>
                   </span>
                 </li>
