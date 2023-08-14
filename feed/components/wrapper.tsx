@@ -128,13 +128,13 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
           data = await getFeed(endpoint, config.api.defaultLimit, bucket, offset)
         }
 
+        setIsLoadMore(false)
+
         if (data && data.length > 0) {
           setFeedData((prevData: any) => [...prevData, ...data])
-          setIsLoadMore(false);
-          loadingStateRef.current = false;
+          loadingStateRef.current = false
         }
-        else
-          setEndOfFeed(true)
+        else setEndOfFeed(true)
       }
 
       fetchMoreData()
@@ -197,7 +197,7 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
             <ul>
               {topKeywordsData.length > 0 && topKeywordsData.map((keyword: any, index: number) => (
                 <li className='group cursor-pointer mb-2 last:mb-0' key={index}>
-                  <Link href={`/?keywords=${keyword.keyword}`} className='pb-2 last:pb-0'>
+                  <Link href={`/?keywords=${keyword.keyword}`} className='pb-2 last:pb-0' prefetch={false}>
                     <span className='font-bold block leading-4 group-hover:underline'>{keyword.keyword}</span>
                     <small>{keyword.topics} Topics</small>
                   </Link>
