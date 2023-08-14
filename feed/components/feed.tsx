@@ -16,15 +16,16 @@ export default function Feed({ data }: { data: any, onScrollHandler?: any }) {
     return (<div className='pl-2 text-center text-2xl'>No topics found.</div>)
 
   return (
-    <div className='pl-2'>
+    <div className='pl-3'>
       <ul>
         {data.map((item: Item, index: number) => (
-          <li className='py-10 pb-8 pl-5 pr-2 md:px-10 border-white border-l-2 border-b-2 border-dashed dark:border-neutral-600 last:border-b-0 last:pb-4 first:pt-4 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 dark:hover:bg-opacity-40 hover:bg-opacity-30'
+          <li className='pb-8 pl-5 pr-2 md:px-10 last:pb-4 pt-1 border-white border-l-2 border-b-2 border-dashed dark:border-neutral-600 last:border-b-0 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 dark:hover:bg-opacity-40 hover:bg-opacity-30'
             onClick={() => router.push(`/topics/${item.slug}`)}
             key={index}>
+              <i className='fad fa-square-full absolute -left-[54px] top-[27.5px] text-2xl text-gray-400'></i>
             <TimeAgo
               date={new Date(item.added_at).getTime()}
-              className='text-gray-600 dark:text-gray-300 flex text-base pb-2 relative before:content-[""] before:absolute before:rounded before:right-[100%] before:top-[50%] before:w-4 before:h-4 before:bg-black dark:before:bg-neutral-400 before:border-[50%] before:transform before:-translate-y-3 before:-translate-x-[13px] md:before:-translate-x-[32.5px]'
+              className='text-gray-600 dark:text-gray-300 flex text-base pb-2'
             />
             <h3 className='mb-4 text-3xl font-bold leading-snug text-left'>
               {item.title}<br />
