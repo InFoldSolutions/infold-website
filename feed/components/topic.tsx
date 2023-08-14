@@ -14,7 +14,6 @@ import Spinner from "@/components/spinner"
 let loaded = false
 
 export default function TopicWrapper({ data, modal = false }: { data: any, modal?: boolean }) {
-
   const [expanded, setExpanded] = useState(false)
   const [sentiment, setSentiment] = useState<any>('')
   const [filteredData, setFilteredData] = useState<any>({
@@ -98,6 +97,7 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
   }, [])
 
   return (
+
     <article>
       <h3 className={`${modal ? 'mr-4' : ''} mb-4 text-3xl font-bold`}>
         <span>{data.title}</span><br />

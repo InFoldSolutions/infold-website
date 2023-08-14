@@ -58,7 +58,7 @@ export default function TopicModal({ params }: { params: { slug: string } }) {
 
                 <div className='h-auto w-[280px] p-6 bg-gray-200 dark:bg-gray-600 dark:bg-opacity-20 hidden lg:flex flex-col'>
                   <ul>
-                    {data.keywords.length > 0 && data.keywords.slice(0, 6).map((keyword: any, index: number) => (
+                    {(data.keywords && data.keywords.length > 0) && data.keywords.slice(0, 6).map((keyword: any, index: number) => (
                       <li className='group cursor-pointer pb-2 mb-2 last:pb-0 last:mb-0' key={index}>
                         <Link href={`/?keywords=${keyword.keyword}`} prefetch={false}>
                           <span className='font-bold block leading-4 group-hover:underline'>{keyword.keyword}</span>
