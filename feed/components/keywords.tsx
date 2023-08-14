@@ -2,8 +2,6 @@
 
 import { UIEvent, useState, useEffect } from 'react';
 
-import { useRouter, useSearchParams } from 'next/navigation'
-
 import Keyword from '@/components/keyword'
 import Arrow from '@/components/arrow'
 
@@ -16,20 +14,6 @@ export default function Keywords({ item }: { item: any }) {
   useEffect(() => {
     setIsDesktop(window.innerWidth > 820)
   }, [])
-
-  const searchParams: any = useSearchParams()
-  const router = useRouter()
-
-  async function onKeywordClick(e: any) {
-    if (!e.target.classList.contains('keyword') || e.target.tagName === 'A' || e.target.parentNode.tagName === 'A') return;
-
-    e.preventDefault();
-
-    const keywords = searchParams.get('keywords') || '';
-    const queryString = keywords ? `${keywords},${e.target.innerText}` : e.target.innerText;
-
-    router.push(`/?keywords=${queryString}`)
-  }
 
   function nextClickHandler(e: UIEvent<HTMLDivElement>) {
     e.preventDefault();

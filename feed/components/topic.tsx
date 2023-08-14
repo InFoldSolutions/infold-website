@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from "react"
+import { useState, useEffect, useCallback, MouseEventHandler } from "react"
 
 import Image from "next/image"
 
@@ -8,13 +8,94 @@ import TimeAgo from 'react-timeago'
 
 import Timeline from "@/components/timeline"
 
+import { findParentByDataset } from '@/helpers/utils'
+import Spinner from "@/components/spinner"
+
+let loaded = false
+
 export default function TopicWrapper({ data, modal = false }: { data: any, modal?: boolean }) {
 
   const [expanded, setExpanded] = useState(false)
+  const [sentiment, setSentiment] = useState<any>('')
+  const [filteredData, setFilteredData] = useState<any>({
+    sources: data.sources.filter((source: any) => source.articles[0].sentimentName === sentiment),
+    social: data.social.filter((social: any) => social.sentiment === sentiment)
+  })
 
-  function toggleExpanded() {
-    setExpanded(!expanded)
-  }
+  useEffect(() => {
+    if (!loaded) {
+      window.matchMedia('(prefers-color-scheme: dark)')
+        .addEventListener('change', event => {
+          const newColorScheme = event.matches ? "dark" : "light";
+          const prevBgColor = newColorScheme === 'dark' ? 'bg-gray-200' : 'bg-gray-800'
+          const bgColor = newColorScheme === 'dark' ? 'bg-gray-800' : 'bg-gray-200'
+
+          const elements = document.querySelectorAll(`li.${prevBgColor}`)
+
+          elements.forEach((element: any) => {
+            element.classList.remove(prevBgColor)
+            element.classList.add(bgColor)
+          })
+        });
+
+      loaded = true
+    }
+  }, [])
+
+  useEffect(() => {
+    setFilteredData(() => {
+      if (!sentiment) {
+        return {
+          sources: data.sources,
+          social: data.social
+        }
+      } else {
+        return {
+          sources: data.sources.filter((source: any) => source.articles[0].sentimentName === sentiment),
+          social: data.social.filter((social: any) => social.sentiment === sentiment)
+        }
+      }
+    })
+  }, [sentiment])
+
+  const toggleExpanded: MouseEventHandler = useCallback(() => {
+    setExpanded((expanded) => !expanded)
+  }, [])
+
+  const sentimentClick: MouseEventHandler = useCallback((e) => {
+    // @ts-ignore
+    const element = e.target as HTMLElement
+    const currentColorScheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "light";
+    const bgColor = currentColorScheme === 'dark' ? 'bg-gray-800' : 'bg-gray-200'
+
+    if (!element) return console.warn('TopicWrapper: sentimentClick: element not found')
+    const parent = findParentByDataset(element, 'sentiment')
+
+    if (!parent) return console.warn('TopicWrapper: sentimentClick: parent not found')
+
+    if (parent.classList.contains(bgColor)) {
+      parent.classList.remove(bgColor)
+      return setSentiment('')
+    }
+
+    const wrapper = parent.parentElement
+
+    if (!wrapper) return console.warn('TopicWrapper: sentimentClick: wrapper not found')
+
+    const items = wrapper?.querySelectorAll('li') || []
+
+    items.forEach((item: any) => {
+      item.classList.remove(bgColor)
+    })
+
+    parent.classList.add(bgColor)
+
+    const sentiment = parent.dataset.sentiment
+
+    if (!sentiment) return console.warn('TopicWrapper: sentimentClick: sentiment not found')
+
+    setSentiment(sentiment)
+  }, [])
 
   return (
     <article>
@@ -28,7 +109,7 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
           {data.outline.slice(0, 2).map((outline: string, index: number) => (
             <li className='mb-4 last:mb-0' key={index}>
               {outline}
-              {index === 1 && <span className={`${expanded ? 'hidden' : ''} text-blue-500 underline ml-2 cursor-pointer`} onClick={toggleExpanded}>more..</span>}
+              {(index == 1 && !expanded) && <span className={`text-blue-500 underline ml-2 cursor-pointer`} onClick={toggleExpanded}>more..</span>}
             </li>
           ))}
         </ul>
@@ -38,6 +119,7 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
             {data.outline.slice(2).map((outline: string, index: number) => (
               <li className='mb-4 last:mb-0' key={index}>
                 {outline}
+                {(index + 3 == data.outline.length && expanded) && <span className={`text-blue-500 underline ml-2 cursor-pointer`} onClick={toggleExpanded}>less..</span>}
               </li>
             ))}
           </ul>
@@ -45,39 +127,40 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
       </div>
 
       <h3 className='text-2xl font-bold text-left mt-6'>Social</h3>
-      <Timeline data={data} />
+      <Timeline data={filteredData} />
 
-      <span className='hidden bg-green-500 bg-red-500 bg-slate-400'>&nbsp;</span>
+      <span className='hidden hover:bg-green-500 bg-green-500 hover:bg-red-500 bg-red-500 hover:bg-slate-400 bg-slate-400 hover:bg-green-600 bg-green-600 hover:bg-red-600 bg-red-600 hover:bg-slate-500 bg-slate-500'>&nbsp;</span>
 
       <div>
         <div className='mt-6 flex items-center -mb-9'>
           <ul className='flex ml-auto w-auto'>
-            <li className='flex items-center mr-2 cursor-pointer border-2 p-1 px-2 select-none' title='Toggle display'>
-              <span>
-                <b className='text-green-500'>56</b>
-                <i className='fad text-green-500 fa-smile ml-2'></i>
-                <span className='hidden md:inline-block ml-2'>Positive</span>
+            <li className='flex items-center mr-2 cursor-pointer border-2 dark:border-gray-800 hover:bg-gray-200 dark:hover:bg-gray-800 p-1 px-2 select-none' title='Toggle display' data-sentiment="positive" onClick={sentimentClick}>
+              <span className="flex items-center">
+                <b className='text-green-600'>56</b>
+                <i className='far text-green-600 fa-smile ml-2'></i>
+                <span className='hidden md:inline-block ml-2 text-sm'>Positive</span>
               </span>
             </li>
-            <li className='flex items-center mr-2 cursor-pointer border-2 p-1 px-2 select-none' title='Toggle display'>
-              <span>
-                <b className='text-red-500'>23</b>
-                <i className='fad fa-angry text-red-500 ml-2'></i>
-                <span className='hidden md:inline-block ml-2'>Negative</span>
+            <li className='flex items-center mr-2 cursor-pointer border-2 dark:border-gray-800 hover:bg-gray-200 dark:hover:bg-gray-800 p-1 px-2 select-none' title='Toggle display' data-sentiment="negative" onClick={sentimentClick}>
+              <span className="flex items-center">
+                <b className='text-red-600'>23</b>
+                <i className='far fa-frown text-red-600 ml-2'></i>
+                <span className='hidden md:inline-block ml-2 text-sm'>Negative</span>
               </span>
             </li>
-            <li className='flex items-center cursor-pointer border-2 p-1 px-2 select-none' title='Toggle display'>
-              <span>
-                <b className='text-slate-400'>10</b>
-                <i className='fad fa-meh text-slate-400 ml-2'></i>
-                <span className='hidden md:inline-block ml-2'>Neutral</span>
+            <li className='flex items-center cursor-pointer border-2 dark:border-gray-800 hover:bg-gray-200 dark:hover:bg-gray-800 p-1 px-2 select-none' title='Toggle display' data-sentiment="neutral" onClick={sentimentClick}>
+              <span className="flex items-center">
+                <b className='text-slate-500'>10</b>
+                <i className='far fa-meh text-slate-500 ml-2'></i>
+                <span className='hidden md:inline-block ml-2 text-sm'>Neutral</span>
               </span>
             </li>
           </ul>
         </div>
         <h3 className='text-2xl font-bold text-left mb-6'>Articles</h3>
-        <ul className='list-inside list-disc -m-2 -mx-4'>
-          {data.sources.slice(0, 8).map((item: any, index: number) => (
+        <ul className='list-inside list-disc -m-2 -mx-4 min-h-[250px]'>
+          {!filteredData || filteredData.sources.length === 0 && <li className='w-full justify-center mt-20 pl-2 pt-2 flex items-center justify-center'><Spinner /> Loading articles</li>}
+          {filteredData && filteredData.sources.slice(0, 8).map((item: any, index: number) => (
             <li className='mb-1 p-4 last:mb-0 list-none border-bottom-2 border-bottom-white border-dashed cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 dark:hover:bg-opacity-60 rounded-md'
               onClick={() => window.open(item.articles[0].url, '_blank')}
               title={item.title}
@@ -86,13 +169,16 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
                 <span>
                   <Image src={item.source.logo} alt={item.source.name} width={80} height={80} className='w-8 h-8 max-w-none mr-2 border-2 border-transparent group-hover:border-white' />
                 </span>
-                <span className='font-bold mr-2 max-w-[110px] md:max-w-[200px]'>{item.source.name}</span>
-                <span className={`${item.articles[0].sentimentClass} text-white rounded text-sm px-2`}>{item.articles[0].sentiment}</span>
-                <span className="text-gray-600 dark:text-gray-300 text-xs ml-auto">
+                <span className='font-bold mr-1 max-w-[110px] md:max-w-[200px]'>{item.source.name}</span>
+                <span className="mr-1 text-gray-600">-</span>
+                <span className="text-gray-600 dark:text-gray-300 text-xs">
                   <TimeAgo
                     date={new Date(item.articles[0].added_at).getTime()}
                     title={item.articles[0].title}
                   />
+                </span>
+                <span className={`${item.articles[0].sentimentBg} text-white rounded text-xs p-1 flex items-center justify-center ml-auto opacity-60 dark:opacity-80`}>
+                  <i className={`far ${item.articles[0].sentimentIcon} text-white`} />
                 </span>
               </div>
               <h3 className="mb-2 text-xl font-bold">

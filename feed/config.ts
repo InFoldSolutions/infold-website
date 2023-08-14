@@ -9,7 +9,8 @@ const config = {
       summary: 'New findings: potential cause of long Covid but frustratingly little funding to test treatments. Story by @cooney_liz',
       logo: '/assets/images/twitter.svg',    
       likes: '76',
-      views: '4k'
+      views: '4k',
+      sentiment: 'neutral',
     },
     {
       url: 'https://twitter.com/arstechnica/status/1686057171446906888',
@@ -20,7 +21,8 @@ const config = {
       summary: 'After starting the year by lowering its 2023 revenue projections, San Diego-based genomics giant Illumina did so again.',
       logo: '/assets/images/reddit.svg',
       likes: '16',
-      views: '1k'
+      views: '1k',
+      sentiment: 'positive',
     },
     {
       url: 'https://twitter.com/arstechnica/status/1686057171446906888',
@@ -31,7 +33,8 @@ const config = {
       summary: 'Europe turns its new $1.5 billion space telescope on, and happily it works',
       logo: '/assets/images/facebook.png',
       likes: '430',
-      views: '42k'
+      views: '42k',
+      sentiment: 'negative',
     },
     {
       url: 'https://twitter.com/arstechnica/status/1686057171446906888',
@@ -42,7 +45,8 @@ const config = {
       summary: 'The NIH has finally launched clinical trials almost 3 years after the agency received a $1 billion mandate from Congress to study and treat #LongCovid. But scientists say the trials are unlikely to deliver meaningful treatments.',
       logo: '/assets/images/mastodon.png',
       likes: '560',
-      views: '7.5k'
+      views: '7.5k',
+      sentiment: 'positive',
     },
     {
       url: 'https://twitter.com/arstechnica/status/1686057171446906888',
@@ -53,14 +57,57 @@ const config = {
       summary: 'The FTC is getting even more aggressive in its enforcement over digital health companies’ irresponsible data use.',
       logo: '/assets/images/reddit.svg',
       likes: '23',
-      views: '2.1k'
+      views: '2.1k',
+      sentiment: 'negative',
+    },
+    {
+      url: 'https://twitter.com/arstechnica/status/1686057171446906888',
+      type: 'social',
+      name: 'Ars Technica',
+      handle: 'fbuser',
+      added_at: '2023-07-15T10:00:00.000Z',
+      summary: 'The FTC is getting even more aggressive in its enforcement over digital health companies’ irresponsible data use.',
+      logo: '/assets/images/facebook.png',
+      likes: '990',
+      views: '9.1k',
+      sentiment: 'neutral',
+    },
+    {
+      url: 'https://twitter.com/arstechnica/status/1686057171446906888',
+      type: 'social',
+      name: 'Ars Technica',
+      handle: '@mastodon',
+      added_at: '2023-07-15T10:00:00.000Z',
+      summary: 'The FTC is getting even more aggressive in its enforcement over digital health companies’ irresponsible data use.',
+      logo: '/assets/images/mastodon.png',
+      likes: '335',
+      views: '3.1k',
+      sentiment: 'neutral',
     },
   ],
 
-  api: {
-    defaultLimit: 10,
-    defaultBucket: 'month',
-    defaultSort: 'top'
+  'sentiment': {
+    'positive': {
+      'bg': 'bg-green-600',
+      'icon': 'fa-smile',
+      'name': 'Positive'
+    }, 
+    'negative': {
+      'bg': 'bg-red-600',
+      'icon': 'fa-frown',
+      'name': 'Negative'
+    }, 
+    'neutral': {
+      'bg': 'bg-slate-500',
+      'icon': 'fa-meh',
+      'name': 'Neutral'
+    }
+  },
+
+  'api': {
+    'defaultLimit': 10,
+    'defaultBucket': 'month',
+    'defaultSort': 'top'
   },
 
   // temp keyword blacklist

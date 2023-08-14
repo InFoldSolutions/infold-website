@@ -3,6 +3,8 @@
 
 import { useState, useEffect } from 'react'
 
+import Link from 'next/link'
+
 import Modal from '@/components/modal';
 import TopicWrapper from '@/components/topic';
 import Sentiment from '@/components/sentiment';
@@ -58,10 +60,10 @@ export default function TopicModal({ params }: { params: { slug: string } }) {
                   <ul>
                     {data.keywords.length > 0 && data.keywords.slice(0, 6).map((keyword: any, index: number) => (
                       <li className='group cursor-pointer pb-2 mb-2 last:pb-0 last:mb-0' key={index}>
-                        <a href={`/?keywords=${keyword.keyword}`}>
+                        <Link href={`/?keywords=${keyword.keyword}`} prefetch={false}>
                           <span className='font-bold block leading-4 group-hover:underline'>{keyword.keyword}</span>
                           <small>{getRandomInt(1, 100)} Topics</small>
-                        </a>
+                        </Link>
                       </li>
                     ))}
                   </ul>

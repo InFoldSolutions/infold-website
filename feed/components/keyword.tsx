@@ -26,7 +26,8 @@ export default function Keyword({ analyzed, keyword }: { analyzed: any, keyword:
     <Link className='select-none flex w-max items-center bg-gray-200 cursor-pointer text-base dark:text-white dark:bg-neutral-900 dark:hover:bg-gray-900'
       href={url}
       title={`Lookup on ${label}`}
-      target='_blank'>
+      target='_blank'
+      prefetch={false}>
       <span className='bg-gray-100 dark:bg-gray-600 h-full p-1 flex items-center justify-center w-8'>
         <Image src={icon} alt={label} width={22} height={22} className={`${label === 'Google' ? 'w-5' : ''} h-auto`} />
       </span>
