@@ -61,7 +61,7 @@ export default function Filters() {
         <div className='flex flex-nowrap'>
           {topOptions.map((option: any, index: number) => (
             <span className='group min-w-[87px] md:min-w-[95px] mr-1 md:mr-2 cursor-pointer flex justify-center' key={index}>
-              <Link className={`${(endpoint === 'top' && bucket === option.value) ? 'underline' : ''} group-hover:underline`} href={`?sort=top&time=${option.value}`}>{option.label}</Link>
+              <Link className={`${(endpoint === 'top' && bucket === option.value) ? 'underline' : ''} group-hover:underline`} href={`?sort=top&time=${option.value}`} prefetch={false}>{option.label}</Link>
               {(index + 1) < topOptions.length && <span className='ml-2'>|</span>}
             </span>
           ))}

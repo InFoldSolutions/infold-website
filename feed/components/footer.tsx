@@ -19,7 +19,7 @@ export default function Footer() {
           {pathname !== '/privacy' &&
             <div className='text-sm -mt-[1px]'>
               <span >|</span>
-              <Link href='/privacy' className='ml-2 hover:underline'>Privacy</Link>
+              <Link href='/privacy' className='ml-2 hover:underline' prefetch={false}>Privacy</Link>
             </div>
           }
         </div>
