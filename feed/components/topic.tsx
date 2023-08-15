@@ -2,24 +2,30 @@
 
 import { useState, useEffect, useCallback, MouseEventHandler } from "react"
 
-import Image from "next/image"
-
-import TimeAgo from 'react-timeago'
-
 import Timeline from "@/components/timeline"
+import Spinner from "@/components/spinner"
+import RelatedArticle from "@/components/article"
 
 import { findParentByDataset } from '@/helpers/utils'
-import Spinner from "@/components/spinner"
+
 
 let loaded = false
 
 export default function TopicWrapper({ data, modal = false }: { data: any, modal?: boolean }) {
   const [expanded, setExpanded] = useState(false)
+  const [expandArticles, setExpandArticles] = useState(false)
   const [sentiment, setSentiment] = useState<any>('')
   const [filteredData, setFilteredData] = useState<any>({
     sources: data.sources.filter((source: any) => source.articles[0].sentimentName === sentiment),
     social: data.social.filter((social: any) => social.sentiment === sentiment)
   })
+
+  const toggleMoreArticles: MouseEventHandler = useCallback(
+    (e) => {
+      setExpandArticles(true)
+    },
+    [setExpandArticles]
+  )
 
   useEffect(() => {
     if (!loaded) {
@@ -97,7 +103,6 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
   }, [])
 
   return (
-
     <article>
       <h3 className={`${modal ? 'mr-4' : ''} mb-4 text-3xl font-bold`}>
         <span>{data.title}</span><br />
@@ -158,37 +163,23 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
           </ul>
         </div>
         <h3 className='text-2xl font-bold text-left mb-6'>Articles</h3>
-        <ul className='list-inside list-disc -m-2 -mx-4 min-h-[250px]'>
+        <ul className='list-inside list-disc -m-2 -mx-4 min-h-[100px]'>
           {!filteredData || filteredData.sources.length === 0 && <li className='w-full justify-center mt-20 pl-2 pt-2 flex items-center justify-center'><Spinner /> Loading articles</li>}
-          {filteredData && filteredData.sources.slice(0, 8).map((item: any, index: number) => (
-            <li className='mb-1 p-4 last:mb-0 list-none border-bottom-2 border-bottom-white border-dashed cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 dark:hover:bg-opacity-60 rounded-md'
-              onClick={() => window.open(item.articles[0].url, '_blank')}
-              title={item.title}
-              key={index}>
-              <div className="flex items-center mb-3">
-                <span>
-                  <Image src={item.source.logo} alt={item.source.name} width={80} height={80} className='w-8 h-8 max-w-none mr-2 border-2 border-transparent group-hover:border-white' />
-                </span>
-                <span className='font-bold mr-1 max-w-[110px] md:max-w-[200px]'>{item.source.name}</span>
-                <span className="mr-1 text-gray-600">-</span>
-                <span className="text-gray-600 dark:text-gray-300 text-xs">
-                  <TimeAgo
-                    date={new Date(item.articles[0].added_at).getTime()}
-                    title={item.articles[0].title}
-                  />
-                </span>
-                <span className={`${item.articles[0].sentimentBg} text-white rounded text-xs p-1 flex items-center justify-center ml-auto opacity-60 dark:opacity-80`}>
-                  <i className={`far ${item.articles[0].sentimentIcon} text-white`} />
-                </span>
-              </div>
-              <h3 className="mb-2 text-xl font-bold">
-                {item.articles[0].title}
-              </h3>
-              <div className="text-sm truncate-2-lines">
-                {item.articles[0].summary}
-              </div>
-            </li>
-          ))}
+          {filteredData && filteredData.sources.slice(0, 8).map((item: any, index: number) => {
+            if (index === 7)
+              return (
+                <div className={`${expandArticles ? 'hidden' : ''} w-full -mb-2 flex items-center justify-center cursor-pointer -mx-1 hover:bg-gray-200 dark:hover:bg-gray-600`} onClick={toggleMoreArticles}>
+                  <span className="py-3">more articles..</span>
+                </div>
+              )
+
+            return <RelatedArticle item={item} index={index} />
+          })}
+        </ul>
+        <ul className={`${!expandArticles ? 'hidden' : ''} list-inside list-disc -m-2 -mx-4`}>
+          {filteredData && filteredData.sources.slice(7).map((item: any, index: number) => {
+            return <RelatedArticle item={item} index={index} />
+          })}
         </ul>
       </div>
     </article>

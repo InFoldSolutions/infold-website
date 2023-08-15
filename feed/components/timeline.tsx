@@ -1,12 +1,13 @@
 'use client'
 
-import { UIEvent, useEffect, useState } from 'react';
+import { UIEvent, useEffect, useState } from 'react'
 
 import Image from 'next/image'
 import TimeAgo from 'react-timeago'
 
-import Spinner from '@/components/spinner';
+import Spinner from '@/components/spinner'
 import Arrow from '@/components/arrow'
+
 import config from '@/config';
 
 const sentiment: any = config.sentiment
