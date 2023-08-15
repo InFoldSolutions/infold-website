@@ -81,7 +81,7 @@ export async function getSearchFeed(keywords: string[], page: number = 1) {
 
 export async function getTopic(slug: string) {
   try {
-    const url = getApiUrl(slug, 0);
+    const url = `${API_URL}/topics/${slug}?group_limit=1`
     const res = await fetch(url, { next: { revalidate: 60 } })
 
     if (!res.ok)

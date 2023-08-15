@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image'
 
-export default function Keyword({ analyzed, keyword }: { analyzed: any, keyword: string }) {
+export default function Keyword({ analyzed, keyword, iconOnly = false }: { analyzed: any, keyword: string, iconOnly?: boolean }) {
   const latestAnalyzed = (analyzed) ? analyzed[0] : null;
 
   let icon, label, url;
@@ -23,18 +23,21 @@ export default function Keyword({ analyzed, keyword }: { analyzed: any, keyword:
   }
 
   return (
-    <Link className='select-none flex w-max items-center bg-gray-200 cursor-pointer text-base dark:text-white dark:bg-neutral-900 dark:hover:bg-gray-900'
+    <Link
       href={url}
       title={`Lookup on ${label}`}
       target='_blank'
-      prefetch={false}>
-      <span className='bg-gray-100 dark:bg-gray-600 h-full p-1 flex items-center justify-center w-8'>
+      prefetch={false}
+      className='group'>
+      <span className='group-hover:border-gray-400 border-2 bg-gray-100 dark:border-gray-400 dark:bg-gray-400 group-hover:dark:border-gray-200 p-1 flex items-center justify-center w-8'>
         <Image src={icon} alt={label} width={22} height={22} className={`${label === 'Google' ? 'w-5' : ''} h-auto`} />
       </span>
 
-      <span className='keyword py-1 px-3'>
-        {keyword}
-      </span>
+      {!iconOnly &&
+        <span className='keyword py-1 px-3'>
+          {keyword}
+        </span>
+      }
     </Link>
   )
 }

@@ -1,15 +1,12 @@
 import { Metadata } from 'next';
 
-import Link from 'next/link';
-
-import TopicWrapper from '@/components/topic';
-import Footer from '@/components/footer';
-import Container from '@/components/container';
-import Sentiment from '@/components/sentiment';
+import TopicWrapper from '@/components/topic'
+import Footer from '@/components/footer'
+import Container from '@/components/container'
+import Sentiment from '@/components/sentiment'
+import TrendingKeyword from '@/components/trending-keyword'
 
 import { getTopic } from '@/helpers/api'
-
-import { getRandomInt } from '@/helpers/utils';
 
 export async function generateMetadata(
   { params }: { params: any }
@@ -44,12 +41,7 @@ export default async function Topic({ params }: { params: { slug: string } }) {
           <div className='h-auto w-[280px] p-6 bg-gray-200 dark:bg-gray-600 dark:bg-opacity-20 hidden lg:flex flex-col'>
             <ul>
               {data.keywords.length > 0 && data.keywords.slice(0, 6).map((keyword: any, index: number) => (
-                <li className='group cursor-pointer pb-2 mb-2 last:pb-0 last:mb-0' key={index}>
-                  <Link href={`/?keywords=${keyword.keyword}`} prefetch={false}>
-                    <span className='font-bold block leading-4 group-hover:underline'>{keyword.keyword}</span>
-                    <small>{getRandomInt(1, 100)} Topics</small>
-                  </Link>
-                </li>
+                <TrendingKeyword keyword={keyword} key={index} />
               ))}
             </ul>
           </div>
