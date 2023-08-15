@@ -23,7 +23,7 @@ export default function RelatedArticle({ item }: IRelatedArticle) {
             title={item.articles[0].title}
           />
         </span>
-        <span className={`${item.articles[0].sentimentBg} text-white rounded text-xs p-1 flex items-center justify-center ml-auto opacity-60 dark:opacity-80`}>
+        <span className={`${item.articles[0].sentimentBg} text-white rounded text-xs p-1 flex items-center justify-center ml-auto opacity-80`}>
           <i className={`far ${item.articles[0].sentimentIcon} text-white`} />
         </span>
       </div>

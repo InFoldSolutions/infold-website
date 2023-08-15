@@ -168,7 +168,7 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
           {filteredData && filteredData.sources.slice(0, 8).map((item: any, index: number) => {
             if (index === 7 && filteredData.sources.length > 7)
               return (
-                <li className={`${expandArticles ? 'hidden' : ''} w-[97%] mx-auto rounded-md -mb-2 flex items-center justify-center cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 dark:hover:bg-opacity-60`}
+                <li className={`${expandArticles ? 'hidden' : ''} w-[98%] mx-auto rounded-md -mb-2 flex items-center justify-center cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 dark:hover:bg-opacity-60`}
                   onClick={toggleMoreArticles}
                   key={index}>
                   <span className="py-3">more articles..</span>

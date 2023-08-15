@@ -96,7 +96,7 @@ export default function Timeline({ data }: { data: any }) {
                   <span className='truncate-4-lines box-border min-h-[80px] mr-1'>
                     {item.summary}
                   </span>
-                  <span className={`absolute top-0 right-0 ${sentiment[item.sentiment].bg} p-0.5 px-1 opacity-60 dark:opacity-80 text-xs rounded`}>
+                  <span className={`absolute top-0 right-0 ${sentiment[item.sentiment].bg} p-0.5 px-1 opacity-80 text-xs rounded`}>
                     <i className={`far ${sentiment[item.sentiment].icon} text-white`} />
                   </span>
                 </div>
