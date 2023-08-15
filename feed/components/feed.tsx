@@ -22,7 +22,7 @@ export default function Feed({ data }: { data: any, onScrollHandler?: any }) {
           <li className='pb-8 pl-5 pr-2 md:px-10 last:pb-4 pt-1 border-white border-l-2 border-b-2 border-dashed dark:border-neutral-600 last:border-b-0 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 dark:hover:bg-opacity-40 hover:bg-opacity-30'
             onClick={() => router.push(`/topics/${item.slug}`)}
             key={index}>
-              <i className='fad fa-square-full absolute -left-[54px] top-[27.5px] text-2xl text-gray-400'></i>
+              <i className='fad fa-square-full absolute -left-[52px] top-[26.5px] text-xl text-gray-800 dark:text-gray-400'></i>
             <TimeAgo
               date={new Date(item.added_at).getTime()}
               className='text-gray-600 dark:text-gray-300 flex text-base pb-2'
