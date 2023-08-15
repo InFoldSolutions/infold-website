@@ -166,13 +166,13 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
         <ul className='list-inside list-disc -m-2 -mx-4 min-h-[100px]'>
           {!filteredData || filteredData.sources.length === 0 && <li className='w-full justify-center mt-24 pl-2 pt-2 flex items-center justify-center'><Spinner /> Loading articles</li>}
           {filteredData && filteredData.sources.slice(0, 8).map((item: any, index: number) => {
-            if (index === 7)
+            if (index === 7 && filteredData.sources.length > 7)
               return (
-                <div className={`${expandArticles ? 'hidden' : ''} w-[96.5%] mx-auto rounded-md -mb-2 flex items-center justify-center cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 dark:hover:bg-opacity-60`}
+                <li className={`${expandArticles ? 'hidden' : ''} w-[97%] mx-auto rounded-md -mb-2 flex items-center justify-center cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 dark:hover:bg-opacity-60`}
                   onClick={toggleMoreArticles}
                   key={index}>
                   <span className="py-3">more articles..</span>
-                </div>
+                </li>
               )
 
             return <RelatedArticle item={item} key={index} />
