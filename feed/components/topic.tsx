@@ -168,17 +168,19 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
           {filteredData && filteredData.sources.slice(0, 8).map((item: any, index: number) => {
             if (index === 7)
               return (
-                <div className={`${expandArticles ? 'hidden' : ''} w-full -mb-2 flex items-center justify-center cursor-pointer -mx-1 hover:bg-gray-200 dark:hover:bg-gray-600`} onClick={toggleMoreArticles}>
+                <div className={`${expandArticles ? 'hidden' : ''} w-full -mb-2 flex items-center justify-center cursor-pointer -mx-1 hover:bg-gray-200 dark:hover:bg-gray-600`}
+                  onClick={toggleMoreArticles}
+                  key={index}>
                   <span className="py-3">more articles..</span>
                 </div>
               )
 
-            return <RelatedArticle item={item} index={index} />
+            return <RelatedArticle item={item} key={index} />
           })}
         </ul>
         <ul className={`${!expandArticles ? 'hidden' : ''} list-inside list-disc -m-2 -mx-4`}>
           {filteredData && filteredData.sources.slice(7).map((item: any, index: number) => {
-            return <RelatedArticle item={item} index={index} />
+            return <RelatedArticle item={item} key={index} />
           })}
         </ul>
       </div>

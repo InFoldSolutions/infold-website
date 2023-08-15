@@ -2,17 +2,15 @@ import Image from 'next/image'
 import TimeAgo from 'react-timeago'
 
 interface IRelatedArticle {
-  item: any, 
-  index: number, 
+  item: any,
   children?: string, 
 }
 
-export default function RelatedArticle({ item, index }: IRelatedArticle) {
+export default function RelatedArticle({ item }: IRelatedArticle) {
   return (
     <li className='mb-1 p-4 last:mb-0 list-none border-bottom-2 border-bottom-white border-dashed cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 dark:hover:bg-opacity-60 rounded-md'
       onClick={() => window.open(item.articles[0].url, '_blank')}
-      title={item.title}
-      key={index}>
+      title={item.title}>
       <div className="flex items-center mb-3">
         <span>
           <Image src={item.source.logo} alt={item.source.name} width={80} height={80} className='w-8 h-8 max-w-none mr-2 border-2 border-transparent group-hover:border-white' />
