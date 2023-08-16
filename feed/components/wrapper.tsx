@@ -36,7 +36,7 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
     if (!loaded) {
       // router navigation back
       window.addEventListener("popstate", (e) => {
-        document.body.style.overflow = 'auto' // enable scrolling when modal is closed
+        document.body.style.overflowY = 'scroll' // enable scrolling when modal is closed
         backButtonWasClicked = true
       })
 
@@ -46,7 +46,7 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
           const url = (argArray && argArray[2]) ? argArray[2] : null
 
           if (url?.includes('/topics/'))
-            document.body.style.overflow = 'hidden' // disable scrolling when modal is open
+            document.body.style.overflowY = 'hidden' // disable scrolling when modal is open
 
           return target.apply(thisArg, argArray);
         },

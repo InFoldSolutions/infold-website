@@ -33,7 +33,7 @@ export default function Feed({ data }: { data: any, onScrollHandler?: any }) {
             </h3>
             <div className='text-left'>
               <ul className='list-inside list-disc'>
-                {item.outline.slice(0, 2).map((outline: string, index: number) => (
+                {item.outline.slice(0, 1).map((outline: string, index: number) => (
                   <li className='mb-4 last:mb-0' key={index}>
                     {outline}
                   </li>
