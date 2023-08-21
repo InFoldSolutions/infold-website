@@ -3,29 +3,52 @@ import config from '@/config';
 import { getRandomInt } from '@/helpers/utils';
 import { filterKeyword } from '@/transformers/keyword';
 
-const sentimentName: string[] = ['positive', 'negative', 'neutral']
-const sentiment: any = config.sentiment
-
 export function transformTopic(data: any) {
-  if (data.sources) {
-    data.social = config.mockTweets
-    data.sources = data.sources.map((source: any) => {
-      if (source.articles) {
-        source.articles = source.articles.map((article: any) => {
-          const rand = getRandomInt(0, 3)
-          const name = sentimentName[rand]
+  data.social = (data.social?.length > 0) ? data.social.map((social: any) => {
+    switch (social.source.name) {
+      case 'reddit.com':
+        social.logo = '/assets/images/reddit.svg'
+    }
 
-          article.sentiment = sentimentName[sentiment]
+    if (social.sentiment === 'slightly_positive')
+      social.sentiment = 'positive'
 
-          article.sentimentBg = sentiment[name].bg
-          article.sentimentIcon = sentiment[name].icon
-          article.sentimentName = name
-          return article
-        })
+    if (social.sentiment === 'slightly_negative')
+      social.sentimentt = 'negative'
+
+    return social
+  }).sort((a: any, b: any) => b.score - a.score) : config.mockTweets
+
+  if (data.sources?.length > 0) {
+    data.sentimentAgg = data.sources.reduce((aggregator: any, item: any) => {
+      if (item.articles?.length > 0) {
+        if (!item.articles[0].sentiment)
+          item.articles[0].sentiment = ['negative', 'positive', 'neutral'][getRandomInt(0,3)]
+
+        let articleSentiment = item.articles[0].sentiment
+
+        if (articleSentiment === 'slightly_positive') {
+          item.articles[0].sentiment = 'positive'
+          articleSentiment = 'positive'
+        }
+
+        if (articleSentiment === 'slightly_negative') {
+          item.articles[0].sentiment = 'negative'
+          articleSentiment = 'negative'
+        }
+
+        if (articleSentiment) // account for null
+          aggregator[articleSentiment]++
       }
-      return source
+
+      return aggregator
+    }, {
+      positive: 0,
+      negative: 0,
+      neutral: 0
     })
   }
+
   return {
     ...data,
     keywords: data.keywords?.data?.filter(filterKeyword),

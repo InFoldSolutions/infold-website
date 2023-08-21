@@ -23,8 +23,7 @@ ChartJS.register(
   Legend
 )
 
-export default function Sentiment() {
-
+export default function SentimentChart({ aggregation }: { aggregation: any }) {
   const [data, setData] = useState<any>(null)
   const [options, setOptions] = useState<any>(null)
 
@@ -77,7 +76,7 @@ export default function Sentiment() {
       datasets: [
         {
           label: 'Articles',
-          data: [10, 8, 4],
+          data: [aggregation['positive'], aggregation['neutral'], aggregation['negative']],
           backgroundColor: (currentColorScheme === 'dark') ? 'rgba(255, 255, 255, 0.3)' : 'rgba(0, 0, 0, 0.3)',
           borderColor: (currentColorScheme === 'dark') ? 'rgba(255, 255, 255, 1)' : 'rgba(0, 0, 0, 1)',
           borderWidth: 2

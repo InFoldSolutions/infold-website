@@ -1,66 +1,40 @@
 'use client'
 
-import { useState, useEffect, useCallback, MouseEventHandler } from "react"
+import { useState, useEffect, useCallback, MouseEventHandler } from 'react'
 
-import Timeline from "@/components/timeline"
-import Spinner from "@/components/spinner"
-import RelatedArticle from "@/components/article"
+import Timeline from '@/components/timeline'
+import Column from '@/components/article_column'
+/*import SentimentFilter from '@/components/sentiment_filter'
+import ArticleList from '@/components/article_list'*/
+
+import Outline from '@/components/outline'
 
 import { findParentByDataset } from '@/helpers/utils'
 
 
-let loaded = false
-
 export default function TopicWrapper({ data, modal = false }: { data: any, modal?: boolean }) {
   const [expanded, setExpanded] = useState(false)
-  const [expandArticles, setExpandArticles] = useState(false)
   const [sentiment, setSentiment] = useState<any>('')
-  const [filteredData, setFilteredData] = useState<any>({
-    sources: data.sources.filter((source: any) => source.articles[0].sentimentName === sentiment),
-    social: data.social.filter((social: any) => social.sentiment === sentiment)
-  })
-
-  const toggleMoreArticles: MouseEventHandler = useCallback(
-    (e) => {
-      setExpandArticles(true)
-    },
-    [setExpandArticles]
-  )
+  const [filteredData, setFilteredData] = useState<any>(filterData(data.sources, data.social, sentiment))
 
   useEffect(() => {
-    if (!loaded) {
-      window.matchMedia('(prefers-color-scheme: dark)')
-        .addEventListener('change', event => {
-          const newColorScheme = event.matches ? "dark" : "light";
-          const prevBgColor = newColorScheme === 'dark' ? 'bg-gray-200' : 'bg-gray-800'
-          const bgColor = newColorScheme === 'dark' ? 'bg-gray-800' : 'bg-gray-200'
+    window.matchMedia('(prefers-color-scheme: dark)')
+      .addEventListener('change', event => {
+        const newColorScheme = event.matches ? 'dark' : 'light';
+        const prevBgColor = newColorScheme === 'dark' ? 'bg-gray-200' : 'bg-gray-800'
+        const bgColor = newColorScheme === 'dark' ? 'bg-gray-800' : 'bg-gray-200'
 
-          const elements = document.querySelectorAll(`li.${prevBgColor}`)
+        const elements = document.querySelectorAll(`li.${prevBgColor}`)
 
-          elements.forEach((element: any) => {
-            element.classList.remove(prevBgColor)
-            element.classList.add(bgColor)
-          })
-        });
-
-      loaded = true
-    }
+        elements.forEach((element: any) => {
+          element.classList.remove(prevBgColor)
+          element.classList.add(bgColor)
+        })
+      });
   }, [])
 
   useEffect(() => {
-    setFilteredData(() => {
-      if (!sentiment) {
-        return {
-          sources: data.sources,
-          social: data.social
-        }
-      } else {
-        return {
-          sources: data.sources.filter((source: any) => source.articles[0].sentimentName === sentiment),
-          social: data.social.filter((social: any) => social.sentiment === sentiment)
-        }
-      }
-    })
+    setFilteredData(() => filterData(data.sources, data.social, sentiment))
   }, [sentiment])
 
   const toggleExpanded: MouseEventHandler = useCallback(() => {
@@ -70,7 +44,7 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
   const sentimentClick: MouseEventHandler = useCallback((e) => {
     // @ts-ignore
     const element = e.target as HTMLElement
-    const currentColorScheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "light";
+    const currentColorScheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     const bgColor = currentColorScheme === 'dark' ? 'bg-gray-800' : 'bg-gray-200'
 
     if (!element) return console.warn('TopicWrapper: sentimentClick: element not found')
@@ -109,81 +83,50 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
         <small className='text-sm'>Topic summarized from {data.sources.length} sources.</small>
       </h3>
 
-      <div className='text-left'>
-        <ul className='list-inside list-disc'>
-          {data.outline.slice(0, 2).map((outline: string, index: number) => (
-            <li className='mb-4 last:mb-0' key={index}>
-              {outline}
-              {(index == 1 && !expanded) && <span className={`text-blue-500 underline ml-2 cursor-pointer`} onClick={toggleExpanded}>more..</span>}
-            </li>
-          ))}
-        </ul>
+      <Outline outlines={data.outline} toggleExpanded={toggleExpanded} expanded={expanded} />
 
-        {expanded &&
-          <ul className='list-inside list-disc mt-4'>
-            {data.outline.slice(2).map((outline: string, index: number) => (
-              <li className='mb-4 last:mb-0' key={index}>
-                {outline}
-                {(index + 3 == data.outline.length && expanded) && <span className={`text-blue-500 underline ml-2 cursor-pointer`} onClick={toggleExpanded}>less..</span>}
-              </li>
-            ))}
-          </ul>
-        }
-      </div>
-
-      <h3 className='text-2xl font-bold text-left mt-6'>Social</h3>
+      <h3 className='text-2xl font-bold text-left mt-6'>Social Feedback</h3>
       <Timeline data={filteredData} />
 
-      <span className='hidden hover:bg-green-500 bg-green-500 hover:bg-red-500 bg-red-500 hover:bg-slate-400 bg-slate-400 hover:bg-green-600 bg-green-600 hover:bg-red-600 bg-red-600 hover:bg-slate-500 bg-slate-500'>&nbsp;</span>
-
-      <div>
-        <div className='mt-6 flex items-center -mb-9'>
-          <ul className='flex ml-auto w-auto'>
-            <li className='flex items-center mr-2 cursor-pointer border-2 dark:border-gray-800 hover:bg-gray-200 dark:hover:bg-gray-800 p-1 px-2 select-none' title='Toggle display' data-sentiment="positive" onClick={sentimentClick}>
-              <span className="flex items-center">
-                <b className='text-green-600'>56</b>
-                <i className='far text-green-600 fa-smile ml-2'></i>
-                <span className='hidden md:inline-block ml-2 text-sm'>Positive</span>
-              </span>
-            </li>
-            <li className='flex items-center mr-2 cursor-pointer border-2 dark:border-gray-800 hover:bg-gray-200 dark:hover:bg-gray-800 p-1 px-2 select-none' title='Toggle display' data-sentiment="negative" onClick={sentimentClick}>
-              <span className="flex items-center">
-                <b className='text-red-600'>23</b>
-                <i className='far fa-frown text-red-600 ml-2'></i>
-                <span className='hidden md:inline-block ml-2 text-sm'>Negative</span>
-              </span>
-            </li>
-            <li className='flex items-center cursor-pointer border-2 dark:border-gray-800 hover:bg-gray-200 dark:hover:bg-gray-800 p-1 px-2 select-none' title='Toggle display' data-sentiment="neutral" onClick={sentimentClick}>
-              <span className="flex items-center">
-                <b className='text-slate-500'>10</b>
-                <i className='far fa-meh text-slate-500 ml-2'></i>
-                <span className='hidden md:inline-block ml-2 text-sm'>Neutral</span>
-              </span>
-            </li>
-          </ul>
-        </div>
-        <h3 className='text-2xl font-bold text-left mb-6'>Articles</h3>
-        <ul className='list-inside list-disc -m-2 -mx-4 min-h-[100px]'>
-          {!filteredData || filteredData.sources.length === 0 && <li className='w-full justify-center mt-24 pl-2 pt-2 flex items-center justify-center'><Spinner /> Loading articles</li>}
-          {filteredData && filteredData.sources.slice(0, 8).map((item: any, index: number) => {
-            if (index === 7 && filteredData.sources.length > 7)
-              return (
-                <li className={`${expandArticles ? 'hidden' : ''} w-[98%] mx-auto rounded-md -mb-2 flex items-center justify-center cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 dark:hover:bg-opacity-60`}
-                  onClick={toggleMoreArticles}
-                  key={index}>
-                  <span className="py-3">more articles..</span>
-                </li>
-              )
-
-            return <RelatedArticle item={item} key={index} />
-          })}
-        </ul>
-        <ul className={`${!expandArticles ? 'hidden' : ''} list-inside list-disc -m-2 -mx-4`}>
-          {filteredData && filteredData.sources.slice(7).map((item: any, index: number) => {
-            return <RelatedArticle item={item} key={index} />
-          })}
-        </ul>
+      <h3 className='text-2xl font-bold text-left mt-6'>News Coverage</h3>
+      <div className='flex space-x-4 mt-4 justify-stretch'>
+        {data.sentimentAgg['positive'] > 0 && <Column data={filterData(data.sources, data.social, 'positive')} sentiment='positive' />}
+        {data.sentimentAgg['neutral'] > 0 && <Column data={filterData(data.sources, data.social, 'neutral')} sentiment='neutral' />}
+        {data.sentimentAgg['negative'] > 0 && <Column data={filterData(data.sources, data.social, 'negative')} sentiment='negative' />}
       </div>
     </article>
   )
 }
+
+function filterData(sources: any, social: any, sentiment: string) {
+  if (sentiment) {
+    sources = sources.filter((source: any) => source.articles[0].sentiment === sentiment)
+    social = social.filter((social: any) => social.sentiment === sentiment)
+  }
+
+  return {
+    sources,
+    social,
+    combined: sources.concat(social).sort((a: any, b: any) => {
+      const aTime = a.added_at || a.articles[0].added_at
+      const bTime = b.added_at || b.articles[0].added_at
+
+      return new Date(bTime).getTime() - new Date(aTime).getTime()
+    })
+  }
+} // move this somewhere
+
+/**
+ * 
+  <h3 className='text-2xl font-bold text-left mt-6'>Social</h3>
+  <Timeline data={filteredData} />
+
+  <span className='hidden hover:bg-green-500 bg-green-500 hover:bg-red-500 bg-red-500 hover:bg-slate-400 bg-slate-400 hover:bg-green-600 bg-green-600 hover:bg-red-600 bg-red-600 hover:bg-slate-500 bg-slate-500'>&nbsp;</span>
+
+  <div>
+    <SentimentFilter sentimentClick={sentimentClick} />
+
+    <h3 className='text-2xl font-bold text-left mb-6'>Articles</h3>
+    <ArticleList data={filteredData} />
+  </div>
+ */

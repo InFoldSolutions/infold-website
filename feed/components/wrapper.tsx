@@ -33,27 +33,25 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
   const backToTopRef = useRef(null)
 
   useEffect(() => {
-    if (!loaded) {
-      // router navigation back
-      window.addEventListener("popstate", (e) => {
-        document.body.style.overflowY = 'scroll' // enable scrolling when modal is closed
-        backButtonWasClicked = true
-      })
+    // router navigation back
+    window.addEventListener("popstate", (e) => {
+      document.body.style.overflowY = 'scroll' // enable scrolling when modal is closed
+      backButtonWasClicked = true
+    })
 
-      // router navigation forward
-      window.history.pushState = new Proxy(window.history.pushState, { // this is hacky, no pushstate event ?!
-        apply: (target, thisArg: any, argArray: any) => {
-          const url = (argArray && argArray[2]) ? argArray[2] : null
+    // router navigation forward
+    window.history.pushState = new Proxy(window.history.pushState, { // this is hacky, no pushstate event ?!
+      apply: (target, thisArg: any, argArray: any) => {
+        const url = (argArray && argArray[2]) ? argArray[2] : null
 
-          if (url?.includes('/topics/'))
-            document.body.style.overflowY = 'hidden' // disable scrolling when modal is open
+        if (url?.includes('/topics/'))
+          document.body.style.overflowY = 'hidden' // disable scrolling when modal is open
 
-          return target.apply(thisArg, argArray);
-        },
-      });
+        return target.apply(thisArg, argArray);
+      },
+    });
 
-      window.addEventListener("scroll", onScrollHandler)
-    }
+    window.addEventListener("scroll", onScrollHandler)
   }, [])
 
   // query params and path change
@@ -183,7 +181,7 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
       </div>
 
       <div className='flex items-start'>
-        <div className='md:mr-auto w-full max-w-full max-w-[780px] lg:w-[780px] overflow-x-hidden'>
+        <div className='md:mr-auto w-full max-w-full max-w-[880px] lg:w-[880px] overflow-x-hidden'>
           {isLoading && (<div className='w-full justify-center mt-3 pt-2 flex items-center justify-center'><Spinner />Loading ...</div>)}
           {!isLoading && (<Feed data={feedData} />)}
           {isLoadMore && (<div className='w-full justify-center mt-3 pt-2 flex items-center justify-center'><Spinner />Loading more ...</div>)}
@@ -206,7 +204,6 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
             </ul>
           </div>
         </div>
-
       </div>
 
       <div

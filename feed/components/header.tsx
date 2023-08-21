@@ -15,7 +15,7 @@ export default function Header() {
   }, [])
 
   return (
-    <header className="bg-gray-300 dark:bg-black sticky top-0 z-40 pt-4 pb-4 md:pb-5 mb-3 border-b-2 border-dashed border-white dark:border-neutral-600">
+    <header className="bg-gray-300 dark:bg-black sticky top-0 z-40 pt-4 pb-4 md:pb-5 mb-3 border-b-2 border-dashed border-gray-200 dark:border-neutral-600">
       <div className="relative w-full flex items-center justify-between flex">
         <div className='w-auto'>
           <a href="/" className="navbar-logo flex items-center w-full">
@@ -23,7 +23,7 @@ export default function Header() {
             <span className='text-2xl'>InFold</span>
           </a>
         </div>
-        <div className='text-sm mx-auto w-auto flex justify-center hidden md:flex'>we understand news</div>
+        <div className='text-sm mx-auto w-auto flex justify-center hidden md:flex'>we aggregate news</div>
         <div className="w-auto items-center justify-end flex text-sm">
           <ul className="ml-auto w-auto flex">
             <li className="mr-2">
