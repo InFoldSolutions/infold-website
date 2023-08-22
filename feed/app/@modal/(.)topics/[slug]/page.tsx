@@ -50,12 +50,12 @@ export default function TopicModal({ params }: { params: { slug: string } }) {
               </div>
 
               <div className='sticky top-[32px] h-auto hidden lg:flex flex-col'>
-                <div className='h-auto w-[280px] pt-4 px-4 bg-gray-200 dark:bg-gray-600 dark:bg-opacity-20 hidden lg:flex flex-col mb-4'>
+                <div className='h-auto w-[280px] pt-4 px-4 bg-gray-200 dark:bg-gray-600 dark:bg-opacity-20 hidden lg:flex flex-col mb-4 rounded'>
                   <h3 className='text-2xl font-bold'>Sentiment</h3>
                   <SentimentChart aggregation={data.sentimentAgg} />
                 </div>
 
-                <div className='h-auto w-[280px] p-6 bg-gray-200 dark:bg-gray-600 dark:bg-opacity-20 hidden lg:flex flex-col'>
+                <div className='h-auto w-[280px] p-6 bg-gray-200 dark:bg-gray-600 dark:bg-opacity-20 hidden lg:flex flex-col rounded'>
                   <ul>
                     {(data.keywords && data.keywords.length > 0) && data.keywords.slice(0, 6).map((keyword: any, index: number) => (
                       <TrendingKeyword keyword={keyword} key={index} />

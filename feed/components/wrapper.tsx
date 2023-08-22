@@ -189,7 +189,7 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
           <Footer />
         </div>
 
-        <div className='sticky top-[130px] h-auto w-[280px] p-4 bg-gray-200 dark:bg-gray-600 dark:bg-opacity-20 hidden lg:flex flex-col'>
+        <div className='sticky top-[130px] h-auto w-[280px] p-4 bg-gray-200 dark:bg-gray-600 dark:bg-opacity-20 hidden lg:flex flex-col rounded'>
           <h3 className='mb-5 text-2xl font-bold'>Trending</h3>
           <div className='pl-1'>
             <ul>

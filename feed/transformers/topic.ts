@@ -8,6 +8,8 @@ export function transformTopic(data: any) {
     switch (social.source.name) {
       case 'reddit.com':
         social.logo = '/assets/images/reddit.svg'
+        social.author = `u/${social.author}`
+        break
     }
 
     if (social.sentiment === 'slightly_positive')

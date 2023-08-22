@@ -84,6 +84,8 @@ export default function Timeline({ data }: { data: any }) {
           </div>
         }
 
+        <span className='bg-green-600 bg-red-600 bg-slate-500 text-slate-500 text-red-600 text-green-600 hidden'></span>
+
         <div className='timeline relative max-w-screen-2xl overflow-x-scroll no-scrollbar pb-6' onScroll={onScrollHandler}>
           <ul className='flex flex-nowrap h-[170px] relative'>
             {!data.social || data.social.length === 0 && <li className='w-full justify-center mt-0 pt-0 flex items-center justify-center'><Spinner /> Loading social</li>}
@@ -91,10 +93,10 @@ export default function Timeline({ data }: { data: any }) {
               const sentimentData = (item.sentiment && sentiment[item.sentiment]) ? sentiment[item.sentiment] : sentiment['neutral']
 
               return (
-                <li className={`hover:${sentimentData.bg} hover:bg-opacity-5 dark:hover:bg-opacity-10 rounded mr-4 min-w-[275px] group select-none cursor-pointer relative items-center relative before:content-[""] before:absolute before:rounded before:-bottom-[21px] before:left-[70px] before:w-3 before:h-3 before:bg-white before:border-[50%]`}
+                <li className={`group rounded mr-4 min-w-[275px] group select-none cursor-pointer relative items-center relative before:content-[""] before:absolute before:rounded before:-bottom-[21px] before:left-[70px] before:w-3 before:h-3 before:bg-white before:border-[50%]`}
                   onClick={() => window.open(item.url, '_blank')}
                   key={index} >
-                  <div className='bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 p-4 rounded-md text-sm relative overflow-hidden'>
+                  <div className='bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 group-hover:bg-opacity-80 group-hover:dark:bg-opacity-80 p-4 rounded-md text-sm relative overflow-hidden'>
                     <span className='truncate-4-lines box-border min-h-[80px] mr-1'>
                       {item.body}
                     </span>
@@ -113,8 +115,10 @@ export default function Timeline({ data }: { data: any }) {
                         />
                       </span>
                     </span>
-                    <span className='ml-auto mr-2 text-xs flex flex-col'>
-                      <span className='leading-4 text-right'><b>{item.score}</b> score </span>
+                    <span className='ml-auto mr-3 pl-3 text-xs flex flex-col items-center justify-center border-gray-200 border-dashed border-l-2'>
+                      <i className={`fas fa-arrow-alt-up text-gray-400 dark:text-gray-600`} />
+                      <span className='text-sm'>{item.score}</span>
+                      <i className={`fas fa-arrow-alt-down text-gray-400 dark:text-gray-600`} />
                     </span>
                   </div>
                 </li>
