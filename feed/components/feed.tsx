@@ -3,8 +3,6 @@
 
 import { useRouter } from 'next/navigation'
 
-import Link from 'next/link'
-
 import TimeAgo from 'react-timeago'
 
 import { Item } from '@/helpers/api'
@@ -19,7 +17,7 @@ export default function Feed({ data }: { data: any, onScrollHandler?: any }) {
     <div className='pl-3'>
       <ul>
         {data.map((item: Item, index: number) => (
-          <li className='relative pb-8 pl-5 pr-2 md:px-10 last:pb-4 pt-1 border-gray-200 border-l-2 border-b-2 border-dashed dark:border-neutral-600 last:border-b-0 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 dark:hover:bg-opacity-40 hover:bg-opacity-30'
+          <li className='relative pb-8 pl-5 pr-2 md:px-10 last:pb-4 pt-2 first:pt-1 border-gray-200 border-l-2 border-b-2 border-dashed dark:border-neutral-600 last:border-b-0 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 dark:hover:bg-opacity-40 hover:bg-opacity-30'
             onClick={() => router.push(`/topics/${item.slug}`)}
             key={index}>
               <i className='fad fa-square-full absolute -left-[30.5px] md:-left-[51.5px] top-[25.5px] md:top-[26.5px] text-lg md:text-xl text-gray-800 dark:text-gray-400'></i>
@@ -52,7 +50,7 @@ export default function Feed({ data }: { data: any, onScrollHandler?: any }) {
                 </li>
                 <li className='flex items-center mr-2 cursor-pointer border-2 dark:border-gray-800 hover:bg-gray-200 dark:hover:bg-gray-800 p-1 px-2 select-none'>
                   <span className="flex items-center">
-                    <b>23</b>
+                    <b>{item.social.length}</b>
                     <i className='fad fa-comments ml-2'></i>
                     <span className='hidden md:inline-block ml-2 text-sm'>Social feedback</span>
                   </span>

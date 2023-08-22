@@ -10,7 +10,9 @@ export type Item = {
   outline: string[]
   keywords: any
   added_at: number
-  articles: number
+  articles: number,
+  social: any,
+  sentimentAgg: any
 }
 
 export function getApiUrl(endpoint = 'top', limit: number = 0, bucket: any = null, page: number = 1) {
