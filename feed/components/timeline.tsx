@@ -18,7 +18,7 @@ export default function Timeline({ data }: { data: any }) {
 
   useEffect(() => {
     setIsDesktop(window.innerWidth > 820)
-  })
+  }, [])
 
   function nextClickHandler(e: MouseEvent) {
     e.preventDefault();

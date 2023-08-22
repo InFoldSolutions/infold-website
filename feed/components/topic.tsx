@@ -42,9 +42,20 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
       </h3>
 
       <div className='flex space-x-4 mt-4 justify-stretch flex-col md:flex-row'>
-        {data.sentimentAgg['positive'] > 0 && <Column data={filterData(data.sources, data.social, 'positive')} sentiment='positive' expanded={expandArticles} />}
-        {data.sentimentAgg['neutral'] > 0 && <Column data={filterData(data.sources, data.social, 'neutral')} sentiment='neutral' expanded={expandArticles} />}
-        {data.sentimentAgg['negative'] > 0 && <Column data={filterData(data.sources, data.social, 'negative')} sentiment='negative' expanded={expandArticles} />}
+        {data.sentimentAgg['positive'] > 0 && 
+          <Column data={filterData(data.sources, data.social, 'positive')} 
+                  sentiment='positive' 
+                  expanded={expandArticles} />}
+
+        {data.sentimentAgg['neutral'] > 0 && 
+          <Column data={filterData(data.sources, data.social, 'neutral')} 
+                  sentiment='neutral' 
+                  expanded={expandArticles} />}
+                  
+        {data.sentimentAgg['negative'] > 0 && 
+          <Column data={filterData(data.sources, data.social, 'negative')} 
+                  sentiment='negative' 
+                  expanded={expandArticles} />}
       </div>
 
       <div className={`${expandArticles ? 'hidden' : ''} w-[98%] mx-auto rounded-md -mb-2 flex items-center justify-center cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 dark:hover:bg-opacity-60`}
