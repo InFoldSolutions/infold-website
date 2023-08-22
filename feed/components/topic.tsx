@@ -89,7 +89,7 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
       <Timeline data={filteredData} />
 
       <h3 className='text-2xl font-bold text-left mt-6'>News Coverage</h3>
-      <div className='flex space-x-4 mt-4 justify-stretch'>
+      <div className='flex space-x-4 mt-4 justify-stretch flex-col md:flex-row'>
         {data.sentimentAgg['positive'] > 0 && <Column data={filterData(data.sources, data.social, 'positive')} sentiment='positive' />}
         {data.sentimentAgg['neutral'] > 0 && <Column data={filterData(data.sources, data.social, 'neutral')} sentiment='neutral' />}
         {data.sentimentAgg['negative'] > 0 && <Column data={filterData(data.sources, data.social, 'negative')} sentiment='negative' />}
