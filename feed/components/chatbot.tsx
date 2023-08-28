@@ -62,23 +62,28 @@ export default function ChatBot({ onSubmit, chatMessages }: { onSubmit: any, cha
         </div>
       ))}
 
-      <div className="flex flex-col w-full p-4 flex-grow relative bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 rounded-md mt-4">
-        <TextareaAutosize
-          ref={textareaRef}
-          onKeyDown={onKeyDown}
-          minRows={1}
-          rows={1}
-          placeholder="Ask a question about this topic"
-          className="w-auto resize-none bg-transparent focus-visible:outline-none dark:bg-transparent" />
-        <button className="absolute p-1 rounded-md md:bottom-3 md:p-2 md:right-3 dark:hover:bg-gray-900 dark:disabled:hover:bg-transparent right-2 disabled:text-gray-400 enabled:bg-brand-purple text-white bottom-1.5 transition-colors disabled:opacity-40">
-          <span onClick={onBtnSubmit} className={`${activeBtn ? 'text-black dark:text-white' : 'text-gray-400 dark:text-gray-800'}`}>
-            <svg xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 16 16" fill="none"
-              className="h-4 w-4 m-1 md:m-0">
-              <path d="M.5 1.163A1 1 0 0 1 1.97.28l12.868 6.837a1 1 0 0 1 0 1.766L1.969 15.72A1 1 0 0 1 .5 14.836V10.33a1 1 0 0 1 .816-.983L8.5 8 1.316 6.653A1 1 0 0 1 .5 5.67V1.163Z" fill="currentColor"></path>
-            </svg>
-          </span>
-        </button>
+      <div className='flex items-stretch w-full items-center mt-4'>
+        <div className="flex flex-grow p-4 bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 rounded-md">
+          <TextareaAutosize
+            ref={textareaRef}
+            onKeyDown={onKeyDown}
+            minRows={1}
+            rows={1}
+            placeholder="Ask a question about this topic"
+            className="w-full resize-none bg-transparent focus-visible:outline-none dark:bg-transparent" />
+          <button className="p-1 rounded-md disabled:text-gray-400 disabled:opacity-40 ml-2 -mr-1">
+            <span onClick={onBtnSubmit} className={`${activeBtn ? 'text-black dark:text-white' : 'text-gray-400 dark:text-gray-800'}`}>
+              <svg xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 16 16" fill="none"
+                className="h-4 w-4 m-1 md:m-0">
+                <path d="M.5 1.163A1 1 0 0 1 1.97.28l12.868 6.837a1 1 0 0 1 0 1.766L1.969 15.72A1 1 0 0 1 .5 14.836V10.33a1 1 0 0 1 .816-.983L8.5 8 1.316 6.653A1 1 0 0 1 .5 5.67V1.163Z" fill="currentColor"></path>
+              </svg>
+            </span>
+          </button>
+        </div>
+        <div className='ml-2 rounded-md border-2 border-gray-200 dark:border-gray-800 dark:border-opacity-60 p-4 flex items-center'>
+          <i className='fad fa-robot mr-3 -mt-0.5' /> Ask Foldy
+        </div>
       </div>
     </div>
   )
