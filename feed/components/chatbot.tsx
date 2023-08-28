@@ -82,7 +82,7 @@ export default function ChatBot({ onSubmit, chatMessages }: { onSubmit: any, cha
           </button>
         </div>
         <div className='ml-2 rounded-md border-2 border-gray-200 dark:border-gray-800 dark:border-opacity-60 p-4 flex items-center'>
-          <i className='fad fa-robot mr-3 -mt-0.5' /> Ask Foldy
+          <i className='fad fa-robot mr-3 -mt-1' /> Ask Foldy
         </div>
       </div>
     </div>
