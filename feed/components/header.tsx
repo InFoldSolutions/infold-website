@@ -23,7 +23,7 @@ export default function Header() {
             <span className='text-2xl'>InFold</span>
           </a>
         </div>
-        <div className='text-sm mx-auto w-auto flex justify-center hidden md:flex'>we aggregate news</div>
+        <div className='text-sm mx-auto w-auto flex justify-center hidden md:flex'>we understand news</div>
         <div className="w-auto items-center justify-end flex text-sm">
           <ul className="ml-auto w-auto flex">
             <li className="mr-2">

@@ -1,21 +1,19 @@
 'use client'
 
-import { useState, useEffect, useCallback, MouseEventHandler } from 'react'
+import { useState, useCallback, MouseEventHandler } from 'react'
 
 import Timeline from '@/components/timeline'
 import Column from '@/components/article_column'
-/*import SentimentFilter from '@/components/sentiment_filter'
-import ArticleList from '@/components/article_list'*/
-
 import Outline from '@/components/outline'
+import ChatBot from '@/components/chatbot'
 
 export default function TopicWrapper({ data, modal = false }: { data: any, modal?: boolean }) {
-  const [expanded, setExpanded] = useState(false)
+  const [expandedOutline, setExpandedOutline] = useState(false)
   const [expandArticles, setExpandArticles] = useState(false)
   const [filteredData] = useState<any>(filterData(data.sources, data.social))
 
   const toggleExpanded: MouseEventHandler = useCallback(() => {
-    setExpanded((expanded) => !expanded)
+    setExpandedOutline((expanded) => !expanded)
   }, [])
 
   const toggleExpandedArticles: MouseEventHandler = useCallback(() => {
@@ -29,7 +27,9 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
         <small className='text-sm'>Topic summarized from {data.sources.length} sources.</small>
       </h3>
 
-      <Outline outlines={data.outline} toggleExpanded={toggleExpanded} expanded={expanded} />
+      <Outline outlines={data.outline} toggleExpanded={toggleExpanded} expanded={expandedOutline} />
+
+      <ChatBot />
 
       <h3 className='text-2xl font-bold text-left mt-6'>
         Social Feedback
