@@ -1,6 +1,10 @@
 'use client'
 
-import { useState, useCallback, MouseEventHandler } from 'react'
+import { useEffect, useState, useCallback, MouseEventHandler } from 'react'
+
+import { usePathname } from 'next/navigation'
+
+import config from '@/config';
 
 import Timeline from '@/components/timeline'
 import Column from '@/components/article_column'
@@ -10,7 +14,35 @@ import ChatBot from '@/components/chatbot'
 export default function TopicWrapper({ data, modal = false }: { data: any, modal?: boolean }) {
   const [expandedOutline, setExpandedOutline] = useState(false)
   const [expandArticles, setExpandArticles] = useState(false)
+  const [chatMessages, setChatMessages] = useState<any>([])
   const [filteredData] = useState<any>(filterData(data.sources, data.social))
+
+  const pathname = usePathname()
+  const topicName = pathname.split('/').pop()
+
+  let webSocket: any = null;
+
+  useEffect((): any => {
+    const socketURL = `${config.ws.chat}/${config.ws.path}/${topicName}`;
+
+    webSocket = new WebSocket(socketURL);
+
+    webSocket.onopen = (event: any) => {
+      console.log("SOCKET OPEN", event)
+    };
+
+    webSocket.onmessage = (event: any) => {
+      setChatMessages((messages: any) => {
+        messages[messages.length - 1].message = event.data
+        return [...messages]
+      })
+    };
+
+    /*if (webSocket) return () => { 
+      console.log('websocket close ??'); 
+      webSocket.close() 
+    };*/
+  }, [])
 
   const toggleExpanded: MouseEventHandler = useCallback(() => {
     setExpandedOutline((expanded) => !expanded)
@@ -18,6 +50,20 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
 
   const toggleExpandedArticles: MouseEventHandler = useCallback(() => {
     setExpandArticles((expanded) => !expanded)
+  }, [])
+
+  const onSubmit: MouseEventHandler = useCallback((e) => {
+    if (!webSocket) return;
+
+    setChatMessages((messages: any) => [...messages, {
+      user: 'me',
+      message: e
+    }, {
+      user: 'bot',
+      message: ''
+    }])
+
+    webSocket.send(e);
   }, [])
 
   return (
@@ -29,7 +75,7 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
 
       <Outline outlines={data.outline} toggleExpanded={toggleExpanded} expanded={expandedOutline} />
 
-      <ChatBot />
+      <ChatBot onSubmit={onSubmit} chatMessages={chatMessages} />
 
       <h3 className='text-2xl font-bold text-left mt-6'>
         Social Feedback
@@ -42,20 +88,20 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
       </h3>
 
       <div className='flex space-x-4 mt-4 justify-stretch flex-col md:flex-row'>
-        {data.sentimentAgg['positive'] > 0 && 
-          <Column data={filterData(data.sources, data.social, 'positive')} 
-                  sentiment='positive' 
-                  expanded={expandArticles} />}
+        {data.sentimentAgg['positive'] > 0 &&
+          <Column data={filterData(data.sources, data.social, 'positive')}
+            sentiment='positive'
+            expanded={expandArticles} />}
 
-        {data.sentimentAgg['neutral'] > 0 && 
-          <Column data={filterData(data.sources, data.social, 'neutral')} 
-                  sentiment='neutral' 
-                  expanded={expandArticles} />}
-                  
-        {data.sentimentAgg['negative'] > 0 && 
-          <Column data={filterData(data.sources, data.social, 'negative')} 
-                  sentiment='negative' 
-                  expanded={expandArticles} />}
+        {data.sentimentAgg['neutral'] > 0 &&
+          <Column data={filterData(data.sources, data.social, 'neutral')}
+            sentiment='neutral'
+            expanded={expandArticles} />}
+
+        {data.sentimentAgg['negative'] > 0 &&
+          <Column data={filterData(data.sources, data.social, 'negative')}
+            sentiment='negative'
+            expanded={expandArticles} />}
       </div>
 
       <div className={`${expandArticles ? 'hidden' : ''} w-[98%] mx-auto rounded-md -mb-2 flex items-center justify-center cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 dark:hover:bg-opacity-60`}

@@ -108,9 +108,15 @@ const config = {
   },
 
   'api': {
+    'url': 'https://api.infold.ai',
     'defaultLimit': 10,
     'defaultBucket': 'day',
     'defaultSort': 'top'
+  },
+
+  'ws': {
+    'chat': 'wss://api.infold.ai',
+    'path': 'chat/foldy'
   },
 
   // temp keyword blacklist

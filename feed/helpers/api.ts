@@ -1,6 +1,3 @@
-
-const API_URL = 'https://api.infold.ai';
-
 import config from '@/config';
 import { transformTopic, filterTopic } from '@/transformers/topic';
 
@@ -16,7 +13,7 @@ export type Item = {
 }
 
 export function getApiUrl(endpoint = 'top', limit: number = 0, bucket: any = null, page: number = 1) {
-  let url = `${API_URL}/topics/${endpoint}`;
+  let url = `${config.api.url}/topics/${endpoint}`;
   let separator = '?';
 
   if (bucket) {
@@ -83,7 +80,7 @@ export async function getSearchFeed(keywords: string[], page: number = 1) {
 
 export async function getTopic(slug: string) {
   try {
-    const url = `${API_URL}/topics/${slug}?group_limit=1`
+    const url = `${config.api.url}/topics/${slug}?group_limit=1`
     const res = await fetch(url, { next: { revalidate: 60 } })
 
     if (!res.ok)
@@ -103,7 +100,7 @@ export async function getTopic(slug: string) {
 
 export async function getTopKeywords(bucket: string = 'day') {
   try {
-    const url = `${API_URL}/keywords/top?bucket=${bucket}&limit=7`;
+    const url = `${config.api.url}/keywords/top?bucket=${bucket}&limit=7`;
     const res = await fetch(url, { next: { revalidate: 60 } })
 
     if (!res.ok)
