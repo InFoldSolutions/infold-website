@@ -65,7 +65,7 @@ export default function ChatBot({ onSubmit, chatMessages }: { onSubmit: any, cha
       ))}
 
       <div className='flex items-stretch w-full items-center mt-4'>
-        <div className="flex flex-grow p-4 bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 rounded-md">
+        <div className="flex flex-grow p-4 bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 rounded-md items-center">
           <TextareaAutosize
             ref={textareaRef}
             onKeyDown={onKeyDown}
@@ -84,7 +84,7 @@ export default function ChatBot({ onSubmit, chatMessages }: { onSubmit: any, cha
           </button>
         </div>
         <Tooltip message={"Foldy is powered by Llama 2 and fine-tuned for each topic to provide you with the most relevant information"}>
-          <div className='ml-2 rounded-md border-2 border-gray-200 dark:border-gray-800 dark:border-opacity-60 p-4 flex items-center cursor-pointer select-none' onClick={onBtnSubmit}>
+          <div className='ml-2 rounded-md border-2 border-gray-200 dark:border-gray-800 dark:border-opacity-60 p-4 hidden md:flex items-center cursor-pointer select-none' onClick={onBtnSubmit}>
             <i className='fad fa-robot mr-3 -mt-1 text-xl' /> Ask Foldy
           </div>
         </Tooltip>
