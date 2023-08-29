@@ -84,8 +84,8 @@ export default function ChatBot({ onSubmit, chatMessages }: { onSubmit: any, cha
           </button>
         </div>
         <Tooltip message={"Foldy is powered by Llama 2 and fine-tuned for each topic to provide you with the most relevant information"}>
-          <div className='ml-2 rounded-md border-2 border-gray-200 dark:border-gray-800 dark:border-opacity-60 p-4 flex items-center'>
-            <i className='fad fa-robot mr-3 -mt-1 text-xl' /> Ask Foldy ?
+          <div className='ml-2 rounded-md border-2 border-gray-200 dark:border-gray-800 dark:border-opacity-60 p-4 flex items-center cursor-pointer select-none' onClick={onBtnSubmit}>
+            <i className='fad fa-robot mr-3 -mt-1 text-xl' /> Ask Foldy
           </div>
         </Tooltip>
       </div>
