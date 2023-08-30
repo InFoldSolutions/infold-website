@@ -4,6 +4,8 @@ import { useEffect, useState, useCallback, MouseEventHandler } from 'react'
 
 import { usePathname } from 'next/navigation'
 
+import ReconnectingWebSocket from 'reconnecting-websocket'
+
 import config from '@/config';
 
 import Timeline from '@/components/timeline'
@@ -25,23 +27,13 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
   useEffect((): any => {
     const socketURL = `${config.ws.chat}/${config.ws.path}/${topicName}`;
 
-    webSocket = new WebSocket(socketURL);
-
-    webSocket.onopen = (event: any) => {
-      console.log("SOCKET OPEN", event)
-    };
-
+    webSocket = new ReconnectingWebSocket(socketURL);
     webSocket.onmessage = (event: any) => {
       setChatMessages((messages: any) => {
         messages[messages.length - 1].message = event.data
         return [...messages]
       })
     };
-
-    /*if (webSocket) return () => { 
-      console.log('websocket close ??'); 
-      webSocket.close() 
-    };*/
   }, [])
 
   const toggleExpanded: MouseEventHandler = useCallback(() => {
