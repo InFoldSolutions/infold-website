@@ -17,7 +17,7 @@ export default function Feed({ data }: { data: any, onScrollHandler?: any }) {
     <div>
       <ul>
         {data.map((item: Item, index: number) => (
-          <li className='relative md:py-6 md:px-6 border-gray-200 border-b-2 border-dashed dark:border-gray-800 dark:border-opacity-80 rounded last:border-b-0 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 dark:hover:bg-opacity-40 hover:bg-opacity-30'
+          <li className='relative md:py-6 py-4 first:pt-2 md:px-6 px-2 border-gray-200 border-b-2 border-dashed dark:border-gray-800 dark:border-opacity-80 rounded last:border-b-0 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 dark:hover:bg-opacity-40 hover:bg-opacity-30'
             onClick={() => router.push(`/topics/${item.slug}`)}
             key={index}>
             <TimeAgo
