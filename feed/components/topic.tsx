@@ -96,7 +96,7 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
             expanded={expandArticles} />}
       </div>
 
-      <div className={`${expandArticles ? 'hidden' : ''} w-[98%] mx-auto rounded-md -mb-2 flex items-center justify-center cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 dark:hover:bg-opacity-60`}
+      <div className={`${expandArticles ? 'hidden' : ''} w-[98%] mx-auto rounded-md -mb-2 flex items-center justify-center cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 dark:hover:bg-opacity-40`}
         onClick={toggleExpandedArticles}>
         <span className='py-3'>more articles..</span>
       </div>

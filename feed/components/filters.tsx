@@ -3,16 +3,19 @@
 import config from '@/config';
 import Link from 'next/link'
 import { useSearchParams, useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
 
 const topOptions = [
-  { label: 'Top 1h', value: 'hour' },
-  { label: 'Top 24h', value: 'day' },
-  { label: 'Top 7d', value: 'week' },
-  { label: 'Top 30d', value: 'month' },
-  { label: 'Top 365d', value: 'year' },
+  { label: 'Hour', value: 'hour' },
+  { label: 'Today', value: 'day' },
+  { label: 'This Week', value: 'week' },
+  { label: 'This Month', value: 'month' },
+  { label: 'This Year', value: 'year' },
 ]
 
 export default function Filters() {
+  const [menuOpen, setMenuOpen] = useState(false)
+
   const router = useRouter()
   const searchParams: any = useSearchParams()
 
@@ -41,7 +44,7 @@ export default function Filters() {
 
   if (keywords) {
     return (
-      <div>
+      <div className='dark:bg-gray-800 dark:bg-opacity-60 rounded'>
         <span className='mr-2'>Keywords:</span>
         {keywords.split(',').map((keyword: string, index: number) => (
           <span
@@ -57,16 +60,40 @@ export default function Filters() {
     )
   } else {
     return (
-      <div className='relative max-w-screen-2xl overflow-x-scroll no-scrollbar'>
-        <div className='flex flex-nowrap'>
-          {topOptions.map((option: any, index: number) => (
-            <span className='group min-w-[87px] md:min-w-[95px] mr-1 md:mr-2 cursor-pointer flex justify-center' key={index}>
-              <Link className={`${(endpoint === 'top' && bucket === option.value) ? 'underline' : ''} group-hover:underline`} href={`?sort=top&time=${option.value}`} prefetch={false}>{option.label}</Link>
-              {(index + 1) < topOptions.length && <span className='ml-2'>|</span>}
-            </span>
-          ))}
+      <div className='relative max-w-screen-2xl flex py-3 px-5 dark:bg-gray-800 dark:bg-opacity-60 rounded'>
+        <div>
+          <Link className='hover:underline' href={`#`}>Feed</Link>
+          <span className='ml-3 mr-3'>|</span>
+        </div>
+        <div>
+          <Link className='hover:underline' href={`#`}>Latest</Link>
+          <span className='ml-3 mr-3'>|</span>
+        </div>
+        <div className="relative inline-block text-left">
+          <div>
+            <button type="button"
+              className="flex w-full justify-center gap-x-1.5 rounded items-center"
+              onClick={() => { setMenuOpen(current => !current) }}>
+              Top
+              <svg className="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" />
+              </svg>
+            </button>
+          </div>
+
+          <div className={`${!menuOpen ? 'hidden' : ''} absolute -right-10 z-10 mt-5 w-40 rounded bg-gray-200 dark:bg-black`}>
+            <div className='dark:bg-gray-800 dark:bg-opacity-60 py-2 rounded'>
+              {topOptions.map((option: any, index: number) => (
+                <span className='group cursor-pointer flex justify-center' key={index}>
+                  <Link className={`${(endpoint === 'top' && bucket === option.value) ? 'underline' : ''} group-hover:underline`} href={`?sort=top&time=${option.value}`} prefetch={false}>{option.label}</Link>
+                </span>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     )
   }
 }
+
+//  <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->

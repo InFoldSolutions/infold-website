@@ -176,12 +176,12 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
     <Container>
 
       <div
-        className='sticky top-[78px] md:top-[82px] z-40 bg-gray-300 dark:bg-black mb-2 mt-2 lg:mt-0 lg:mb-3 py-2 text-base sm:text-lg sm:leading-relaxed md:text-xl md:leading-relaxed text-body-color'>
+        className='sticky top-[78px] md:top-[80px] z-40 bg-gray-200 dark:bg-black mb-2 lg:mt-0 lg:mb-3 rounded text-base sm:text-lg sm:leading-relaxed md:text-xl md:leading-relaxed text-body-color'>
         <Filters />
       </div>
 
       <div className='flex items-start'>
-        <div className='md:mr-auto w-full max-w-full max-w-[880px] lg:w-[880px] overflow-x-hidden'>
+        <div className='md:mr-auto w-full max-w-full max-w-[900px] lg:w-[900px] overflow-x-hidden'>
           {isLoading && (<div className='w-full justify-center mt-3 pt-2 flex items-center justify-center'><Spinner />Loading ...</div>)}
           {!isLoading && (<Feed data={feedData} />)}
           {isLoadMore && (<div className='w-full justify-center mt-3 pt-2 flex items-center justify-center'><Spinner />Loading more ...</div>)}
@@ -189,7 +189,7 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
           <Footer />
         </div>
 
-        <div className='sticky top-[130px] h-auto w-[280px] p-4 bg-gray-200 dark:bg-gray-600 dark:bg-opacity-20 hidden lg:flex flex-col rounded'>
+        <div className='sticky top-[150px] h-auto w-[280px] p-4 bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 hidden lg:flex flex-col rounded'>
           <h3 className='mb-5 text-2xl font-bold'>Trending</h3>
           <div className='pl-1'>
             <ul>
@@ -208,7 +208,7 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
 
       <div
         ref={backToTopRef}
-        className='fixed bottom-4 md:bottom-2 right-2 py-2 px-3 w-auto flex bg-gray-200 dark:bg-neutral-800 font-mono hidden cursor-pointer'
+        className='fixed bottom-4 md:bottom-2 right-2 py-2 px-3 w-auto flex bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 font-mono hidden cursor-pointer'
         onClick={backToTopHandler}>
         Back to top
       </div>
