@@ -13,7 +13,7 @@ export default function Interests({ interests, saveInterests }: { interests: str
       <h4 className='flex justify-center mb-6'>Minimum 4 interests</h4>
       <ul className='flex flex-wrap text-xl justify-center'>
         {interests.map((interest: string, index: number) => (
-          <li className={`border-2 py-2 px-3 cursor-pointer m-2 ${selected.includes(interest) ? `border-gray-200 bg-white` : `bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 hover:bg-gray-100 hover:border-gray-200 dark:hover:bg-gray-700`} `}
+          <li className={`py-2 px-3 cursor-pointer m-2 ${selected.includes(interest) ? `bg-white dark:bg-white dark:text-black` : `bg-gray-200 dark:bg-gray-600 dark:bg-opacity-40 hover:bg-gray-100 dark:hover:text-black`} `}
             onClick={() => setSelected((current) => {
               if (current.includes(interest))
                 return current.filter((item) => item !== interest)
@@ -25,7 +25,7 @@ export default function Interests({ interests, saveInterests }: { interests: str
           </li>
         ))}
       </ul>
-      <button className={`${selected.length > 3 ? 'bg-black' : 'bg-gray-500 cursor-not-allowed'} text-white font-bold py-2 px-4 rounded mt-6`} onClick={() => saveInterests(selected)}>
+      <button className={`${selected.length > 3 ? 'bg-black dark:bg-white dark:text-black' : 'bg-gray-500 dark:bg-gray-500 dark:bg-opacity:80 cursor-not-allowed'} text-white font-bold py-2 px-4 rounded mt-6`} onClick={() => saveInterests(selected)}>
         Continue
       </button>
       <span className={`text-sm mt-2 ${selected.length > 3 ? 'hidden' : ''} `}>Select {4 - selected.length} more</span>
