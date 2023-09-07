@@ -13,7 +13,7 @@ export default function Interests({ interests, saveInterests }: { interests: str
       <h4 className='flex justify-center mb-6'>Minimum 4 interests</h4>
       <ul className='flex flex-wrap text-xl justify-center'>
         {interests.map((interest: string, index: number) => (
-          <li className={`py-2 px-3 cursor-pointer m-2 ${selected.includes(interest) ? `bg-white dark:bg-white dark:text-black` : `bg-gray-200 dark:bg-gray-600 dark:bg-opacity-40 hover:bg-gray-100 dark:hover:text-black`} `}
+          <li className={`rounded py-2 px-3 cursor-pointer m-2 ${selected.includes(interest) ? `bg-black text-white dark:bg-white dark:text-black` : `bg-gray-200 dark:bg-gray-600 dark:bg-opacity-40 hover:bg-gray-100 dark:hover:text-black`} `}
             onClick={() => setSelected((current) => {
               if (current.includes(interest))
                 return current.filter((item) => item !== interest)
