@@ -32,7 +32,7 @@ export default function Column({ data, sentiment, expanded }: { data: any, senti
           const url = item.url || item.articles[0].url
 
           return (
-            <li className='flex dark:hover:bg-gray-800 dark:hover:bg-opacity-40 hover:bg-gray-200 hover:bg-opacity-70 p-4 px-2 relative cursor-pointer border-b-2 border-gray-200 border-dashed dark:border-neutral-600 last:border-b-0'
+            <li className='flex dark:hover:bg-gray-800 dark:hover:bg-opacity-40 hover:bg-gray-200 hover:bg-opacity-70 p-4 px-2 relative cursor-pointer border-b-2 border-gray-200 border-dashed dark:border-gray-800 dark:border-opacity-80 last:border-b-0'
               onClick={() => window.open(url, '_blank')}
               title={item.summary || item.articles[0].title}
               key={index}>

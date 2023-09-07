@@ -27,6 +27,9 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
   useEffect((): any => {
     const socketURL = `${config.ws.chat}/${config.ws.path}/${topicName}`;
 
+    if (webSocket)
+      webSocket.close();
+
     webSocket = new ReconnectingWebSocket(socketURL);
     webSocket.onmessage = (event: any) => {
       setChatMessages((messages: any) => {
@@ -56,7 +59,7 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
     }])
 
     webSocket.send(e);
-  }, [])
+  }, [webSocket])
 
   return (
     <article>

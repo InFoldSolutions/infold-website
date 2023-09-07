@@ -75,7 +75,7 @@ export default function Timeline({ data }: { data: any }) {
     <div className='relative mt-4'>
       <div className='relative'>
 
-        <div className='bottom-2 absolute h-px bg-transparent w-full border-dashed border-b-2 border-gray-200 dark:border-neutral-600'></div>
+        <div className='bottom-2 absolute h-px bg-transparent w-full border-dashed border-b-2 border-gray-200 dark:border-gray-800 dark:border-opacity-80'></div>
 
         {isDesktop &&
           <div>
@@ -115,7 +115,7 @@ export default function Timeline({ data }: { data: any }) {
                         />
                       </span>
                     </span>
-                    <span className='ml-auto mr-3 pl-3 text-xs flex flex-col items-center justify-center border-gray-200 dark:border-neutral-600 border-dashed border-l-2'>
+                    <span className='ml-auto mr-3 pl-3 text-xs flex flex-col items-center justify-center border-gray-200 dark:border-gray-800 dark:border-opacity-80 border-dashed border-l-2'>
                       <i className={`fas fa-arrow-alt-up text-gray-400 dark:text-gray-600`} />
                       <span className='text-sm'>{item.score}</span>
                       <i className={`fas fa-arrow-alt-down text-gray-400 dark:text-gray-600`} />
