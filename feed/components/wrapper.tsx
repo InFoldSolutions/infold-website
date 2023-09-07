@@ -210,6 +210,9 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
   }
 
   function saveInterests(interests: string[]) {
+    if (interests.length < 4)
+      return
+    
     localStorage.setItem("interests", JSON.stringify(interests));
 
     // @ts-ignore
