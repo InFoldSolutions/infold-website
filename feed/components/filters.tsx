@@ -1,9 +1,11 @@
 'use client';
 
-import config from '@/config';
+import { useState } from 'react'
+
 import Link from 'next/link'
 import { useSearchParams, useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
+
+import config from '@/config'
 
 const topOptions = [
   { label: 'Hour', value: 'hour' },
@@ -60,28 +62,34 @@ export default function Filters() {
     )
   } else {
     return (
-      <div className='relative max-w-screen-2xl flex py-3 px-5 dark:bg-gray-800 dark:bg-opacity-60 rounded'>
-        <div>
-          <Link className='hover:underline' href={`#`}>Feed</Link>
+      <div className='relative max-w-screen-2xl flex py-3 px-5 pr-3 dark:bg-gray-800 dark:bg-opacity-60 rounded items-center'>
+        <div className='flex items-center'>
+          <Link className='group flex items-center' href={`#`}>
+            <i className='fad fa-head-side-brain mr-3'></i>
+            <span className='group-hover:underline'>Feed</span>
+          </Link>
           <span className='ml-3 mr-3'>|</span>
         </div>
-        <div>
-          <Link className='hover:underline' href={`#`}>Latest</Link>
+        <div className='flex items-center'>
+          <Link className='group flex items-center' href={`#`}>
+            <i className='fad fa-pepper-hot mr-3'></i>
+            <span className='group-hover:underline'>Latest</span>
+          </Link>
           <span className='ml-3 mr-3'>|</span>
         </div>
         <div className="relative inline-block text-left">
           <div>
-            <button type="button"
-              className="flex w-full justify-center gap-x-1.5 rounded items-center"
+            <button className="group flex w-full justify-center gap-x-1.5 rounded items-center"
               onClick={() => { setMenuOpen(current => !current) }}>
-              Top
-              <svg className="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+              <i className='fad fa-fire mr-1'></i>
+              <span className='group-hover:underline'>Top</span>
+              <svg className={`${(menuOpen) ? 'rotate-180' : ''} h-5 w-5 text-gray-400`} viewBox="0 0 20 20" fill="currentColor">
                 <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" />
               </svg>
             </button>
           </div>
 
-          <div className={`${!menuOpen ? 'hidden' : ''} absolute -right-10 z-10 mt-5 w-40 rounded bg-gray-200 dark:bg-black`}>
+          <div className={`${!menuOpen ? 'hidden' : ''} absolute -right-9 z-10 mt-5 md:mt-6 w-40 rounded bg-gray-200 dark:bg-black`}>
             <div className='dark:bg-gray-800 dark:bg-opacity-60 py-2 rounded'>
               {topOptions.map((option: any, index: number) => (
                 <span className='group cursor-pointer flex justify-center' key={index}>
@@ -90,6 +98,10 @@ export default function Filters() {
               ))}
             </div>
           </div>
+        </div>
+        <div className='ml-auto bg-gray-300 dark:bg-black hidden md:flex items-center rounded'>
+          <input type='text' placeholder='Search' className='bg-transparent focus:outline-none p-1 px-3 max-w-[231px]' />
+          <i className='fad fa-search mr-3' />
         </div>
       </div>
     )
