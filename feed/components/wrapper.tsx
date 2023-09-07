@@ -28,6 +28,7 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
   const [endOfFeed, setEndOfFeed] = useState(false)
   const [selectedInterests, setSelectedInterests] = useState([])
   const [loaded, setLoaded] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const pathname = usePathname()
   const searchParams = useSearchParams()
@@ -105,6 +106,7 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
 
     setOffset(1)
     setEndOfFeed(false)
+    setIsMenuOpen(false)
 
     const backToTop = (backToTopRef?.current) ? backToTopRef.current as HTMLElement : null
 
@@ -219,7 +221,7 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
 
       <div
         className='sticky top-[75px] md:top-[80px] z-40 bg-gray-200 dark:bg-black mb-2 lg:mt-0 lg:mb-3 rounded text-base sm:text-lg sm:leading-relaxed md:text-xl md:leading-relaxed text-body-color'>
-        <Filters />
+        <Filters isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
       </div>
 
       <div className='flex items-start'>
