@@ -1,7 +1,9 @@
 'use client'
 
-import Image from 'next/image'
 import { useState, useEffect } from 'react';
+
+import Image from 'next/image'
+import Link from 'next/link'
 
 export default function Header() {
 
@@ -18,10 +20,10 @@ export default function Header() {
     <header className="bg-gray-300 dark:bg-black sticky top-0 z-40 pt-4 pb-4 md:pb-5 px-2">
       <div className="relative w-full flex items-center justify-between flex">
         <div className='w-auto'>
-          <a href="/" className="navbar-logo flex items-center w-full">
+          <Link href="/" className="navbar-logo flex items-center w-full">
             <Image src="/assets/images/logo-infold-black.png" alt="InFold - logo" width={45} height={45} className="rounded mr-3 dark:-ml-1" />
             <span className='text-2xl'>InFold</span>
-          </a>
+          </Link>
         </div>
         <div className='text-sm mx-auto w-auto flex justify-center hidden md:flex'>we understand news</div>
         <div className="w-auto items-center justify-end flex text-sm">
