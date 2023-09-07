@@ -196,7 +196,7 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
       setOffset((old: number) => old + 1)
     }
 
-    if (scrollTop > 100 && backToTop.classList.contains('hidden'))
+    if (feedData && scrollTop > 100 && backToTop.classList.contains('hidden'))
       backToTop.classList.remove('hidden')
     else if (scrollTop <= 100 && !backToTop.classList.contains('hidden'))
       backToTop.classList.add('hidden')
@@ -212,7 +212,7 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
   function saveInterests(interests: string[]) {
     if (interests.length < 4)
       return
-    
+
     localStorage.setItem("interests", JSON.stringify(interests));
 
     // @ts-ignore

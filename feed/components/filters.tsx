@@ -84,7 +84,7 @@ export default function Filters({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: boo
                 <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" />
               </svg>
             </button>
-            <span className='flex ml-1.5 underline'>{endpoint === 'top' && capitalize(bucket)}</span>
+            <span className={`hidden md:flex ml-1.5 underline`}>{endpoint === 'top' && capitalize(bucket)}</span>
           </div>
 
           <div className={`${!isMenuOpen ? 'hidden' : ''} absolute left-[50%] -ml-[80px] r-auto z-10 mt-5 md:mt-6 w-40 rounded bg-gray-200 dark:bg-black`}>
