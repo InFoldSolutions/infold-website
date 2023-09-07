@@ -130,6 +130,10 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
         setTopKeywordsData(newTopKeywords)
       } else if (selectedInterests.length > 0) {
         data = await getInterestsFeed(selectedInterests)
+
+        const bucket = searchParams.get('time') || config.api.defaultBucket
+        const newTopKeywords = await getTopKeywords(bucket)
+        setTopKeywordsData(newTopKeywords)
       } else
         setFeedData(null)
 

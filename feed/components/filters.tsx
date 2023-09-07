@@ -61,14 +61,14 @@ export default function Filters({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: boo
     return (
       <div className='relative max-w-screen-2xl flex py-3 px-5 pr-3 dark:bg-gray-800 dark:bg-opacity-60 rounded items-center'>
         <div className='flex items-center'>
-          <Link className='group flex items-center' href={`/`}>
+          <Link className='group flex items-center' href={`/`} prefetch={false}>
             <i className='fad fa-head-side-brain mr-3'></i>
             <span className={`${!endpoint ? 'underline' : ''} group-hover:underline`}>Feed</span>
           </Link>
           <span className='ml-3 mr-3'>|</span>
         </div>
         <div className='flex items-center'>
-          <Link className='group flex items-center' href={`?sort=rising`}>
+          <Link className='group flex items-center' href={`?sort=rising`} prefetch={false}>
             <i className='fad fa-pepper-hot mr-3'></i>
             <span className={`${endpoint === 'rising' ? 'underline' : ''} group-hover:underline`}>Rising</span>
           </Link>
