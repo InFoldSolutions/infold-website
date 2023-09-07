@@ -31,6 +31,9 @@ export function findParentByDataset(node: HTMLElement, attr: string): HTMLElemen
   return node;
 }
 
+export function capitalize(str: string) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
 
 export function getRandomInt(min: number, max: number) {
   min = Math.ceil(min);

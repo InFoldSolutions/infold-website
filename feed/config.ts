@@ -7,7 +7,7 @@ const config = {
       author: '@arstechnica',
       added_at: '2023-08-20T20:00:00.000Z',
       body: 'New findings: potential cause of long Covid but frustratingly little funding to test treatments. Story by @cooney_liz',
-      logo: '/assets/images/twitter.svg',    
+      logo: '/assets/images/twitter.svg',
       likes: '76',
       views: '4k',
       sentiment: 'neutral',
@@ -92,13 +92,13 @@ const config = {
       'textColor': 'text-green-600',
       'icon': 'fa-smile',
       'name': 'Positive'
-    }, 
+    },
     'negative': {
       'bg': 'bg-red-600',
       'textColor': 'text-red-600',
       'icon': 'fa-frown',
       'name': 'Negative'
-    }, 
+    },
     'neutral': {
       'bg': 'bg-slate-500',
       'textColor': 'text-slate-500',
@@ -107,10 +107,14 @@ const config = {
     }
   },
 
+  'interests': [
+    'World News', 'Ukraine', 'Taiwan', 'America', 'China', 'Europe', 'Tech', 'Business', 'Stocks', 'Space', 'Science', 'Crypto', 'Gaming', 'Cars', 'Programming', 'Fitness', 'Health', 'Sports', 'NBA', 'NFL', 'UFC'
+  ],
+
   'api': {
     'url': 'https://api.infold.ai',
     'defaultLimit': 10,
-    'defaultBucket': 'day',
+    'defaultBucket': 'month',
     'defaultSort': 'top'
   },
 

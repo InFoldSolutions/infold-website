@@ -12,10 +12,11 @@ import Feed from '@/components/feed'
 import Footer from '@/components/footer'
 import Spinner from '@/components/spinner'
 
-import { getFeed, getSearchFeed, getTopKeywords } from '@/helpers/api'
+import { getFeed, getSearchFeed, getTopKeywords, getInterestsFeed } from '@/helpers/api'
 import config from '@/config'
+import Interests from './interests'
 
-let loaded = false, backButtonWasClicked = false;
+let backButtonWasClicked = false;
 
 export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedData: any, topKeywords: [] }) {
 
@@ -25,6 +26,8 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
   const [isLoading, setIsLoading] = useState(false)
   const [isLoadMore, setIsLoadMore] = useState(false)
   const [endOfFeed, setEndOfFeed] = useState(false)
+  const [selectedInterests, setSelectedInterests] = useState([])
+  const [loaded, setLoaded] = useState(false)
 
   const pathname = usePathname()
   const searchParams = useSearchParams()
@@ -33,6 +36,10 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
   const backToTopRef = useRef(null)
 
   useEffect(() => {
+
+    // @ts-ignore
+    setSelectedInterests(localStorage.getItem("interests") ? JSON.parse(localStorage.getItem("interests")) : [])
+
     // router navigation back
     window.addEventListener("popstate", (e) => {
       document.body.style.overflowY = 'scroll' // enable scrolling when modal is closed
@@ -54,13 +61,33 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
     window.addEventListener("scroll", onScrollHandler)
   }, [])
 
-  // query params and path change
+  // interests change
   useEffect(() => {
-    if (!loaded) {
-      loaded = true
+    if (selectedInterests.length === 0 || feedData)
       return
+
+    setIsLoading(true)
+
+    const fetchInterestFeedData = async () => {
+      let data: any;
+
+      data = await getInterestsFeed(selectedInterests)
+
+      const newTopKeywords = await getTopKeywords(config.api.defaultBucket)
+      setTopKeywordsData(newTopKeywords)
+
+      setIsLoading(false);
+
+      if (data)
+        setFeedData(data);
     }
 
+    fetchInterestFeedData()
+      .catch(console.error)
+  }, [selectedInterests])
+
+  // query params and path change
+  useEffect(() => {
     if (backButtonWasClicked) {
       backButtonWasClicked = false
       return
@@ -68,6 +95,11 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
 
     if (pathname.includes('/topics/'))
       return
+
+    if (!loaded) {
+      setLoaded(true)
+      return
+    }
 
     setIsLoading(true)
 
@@ -84,18 +116,20 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
     const fetchFeedData = async () => {
       let data: any;
       const keywords = searchParams.get('keywords')
+      const endpoint = searchParams.get('sort')
 
       if (keywords) {
         data = await getSearchFeed(keywords.split(','))
-      } else {
-        const endpoint = searchParams.get('sort') || config.api.defaultSort
+      } else if (endpoint) {
         const bucket = searchParams.get('time') || config.api.defaultBucket
-
         data = await getFeed(endpoint, config.api.defaultLimit, bucket)
 
         const newTopKeywords = await getTopKeywords(bucket)
         setTopKeywordsData(newTopKeywords)
-      }
+      } else if (selectedInterests.length > 0) {
+        data = await getInterestsFeed(selectedInterests)
+      } else
+        setFeedData(null)
 
       setIsLoading(false);
 
@@ -116,14 +150,15 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
       const fetchMoreData = async () => {
         let data: any;
         const keywords = searchParams.get('keywords')
+        const endpoint = searchParams.get('sort')
 
         if (keywords) {
           data = await getSearchFeed(keywords.split(','), offset)
-        } else {
-          const endpoint = searchParams.get('sort') || config.api.defaultSort
+        } else if (endpoint) {
           const bucket = searchParams.get('time') || config.api.defaultBucket
-
           data = await getFeed(endpoint, config.api.defaultLimit, bucket, offset)
+        } else if (selectedInterests.length > 0) {
+          data = await getInterestsFeed(selectedInterests, offset)
         }
 
         setIsLoadMore(false)
@@ -172,6 +207,13 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
     });
   }
 
+  function saveInterests(interests: string[]) {
+    localStorage.setItem("interests", JSON.stringify(interests));
+
+    // @ts-ignore
+    setSelectedInterests(interests)
+  }
+
   return (
     <Container>
 
@@ -182,8 +224,9 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
 
       <div className='flex items-start'>
         <div className='md:mr-auto w-full max-w-full max-w-[900px] lg:w-[900px] overflow-x-hidden'>
-          {isLoading && (<div className='w-full justify-center mt-3 pt-2 flex items-center justify-center'><Spinner />Loading ...</div>)}
-          {!isLoading && (<Feed data={feedData} />)}
+          {(isLoading || (!loaded && !feedData)) && (<div className='w-full justify-center mt-3 pt-2 flex items-center justify-center'><Spinner />Loading ...</div>)}
+          {!feedData && selectedInterests.length === 0 && loaded && !isLoading && <Interests interests={config.interests} saveInterests={saveInterests} />}
+          {feedData && !isLoading && (<Feed data={feedData} />)}
           {isLoadMore && (<div className='w-full justify-center mt-3 pt-2 flex items-center justify-center'><Spinner />Loading more ...</div>)}
 
           <Footer />

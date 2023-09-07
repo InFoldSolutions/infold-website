@@ -78,6 +78,35 @@ export async function getSearchFeed(keywords: string[], page: number = 1) {
   }
 }
 
+export async function getInterestsFeed(interests: string[], page: number = 1) {
+  try {
+    const url = `${config.api.url}/feed/personal?page=${page}`
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ keywords: {
+        positive: interests,
+      } }),
+      next: { revalidate: 10 }
+    })
+
+    if (!res.ok)
+      throw new Error('Response not ok');
+
+    const data = await res.json()
+
+    if (!data.topics)
+      throw new Error('Topics not found');
+
+    return data.topics.filter(filterTopic).map(transformTopic)
+  } catch (error) {
+    console.error('Failed to fetch search feed data', error)
+    return [];
+  }
+}
+
 export async function getTopic(slug: string) {
   try {
     const url = `${config.api.url}/topics/${slug}?group_limit=1`
