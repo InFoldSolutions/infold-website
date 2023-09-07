@@ -60,8 +60,8 @@ export default function Filters({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: boo
   if (keywords) {
     return (
       <div className='flex py-4 px-5 pr-3 dark:bg-gray-800 dark:bg-opacity-60 rounded items-center'>
-        <span className='mr-2 flex items-center'>
-          <i className='fad fa-search mr-2'></i>
+        <span className='mr-3 flex items-center'>
+          <i className='fad fa-search mr-3'></i>
           Search:
         </span>
         {keywords.split(',').map((keyword: string, index: number) => (
@@ -70,7 +70,7 @@ export default function Filters({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: boo
             title="Remove filter for keyword"
             onClick={removeKeywordFilter}
             key={index}>
-            <i className='fad fa-minus-square mr-2' />
+            <i className='fad fa-window-close mr-2' />
             {keyword}
           </span>
         ))}
