@@ -1,4 +1,6 @@
-'use client';
+'use client'
+
+import { useRef } from 'react'
 
 import Link from 'next/link'
 import { useSearchParams, useRouter } from 'next/navigation'
@@ -18,9 +20,11 @@ export default function Filters({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: boo
   const router = useRouter()
   const searchParams: any = useSearchParams()
 
-  const keywords = searchParams.get('keywords') || '';
-  const endpoint = searchParams.get('sort');
-  const bucket = searchParams.get('time') || config.api.defaultBucket;
+  const keywords = searchParams.get('keywords') || ''
+  const endpoint = searchParams.get('sort')
+  const bucket = searchParams.get('time') || config.api.defaultBucket
+
+  const searchInputRef = useRef(null)
 
   function removeKeywordFilter(e: any) {
     e.preventDefault();
@@ -41,17 +45,32 @@ export default function Filters({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: boo
       router.push('/')
   }
 
+  function onKeyDown(e: any) {
+    if (e.key === 'Enter') {
+      // @ts-ignore
+      const keywordText = searchInputRef?.current?.value.trim()
+
+      if (keywordText && keywordText.length > 3)
+        router.push(`/?keywords=${keywordText}`)
+      else
+        router.push('/')
+    }
+  }
+
   if (keywords) {
     return (
-      <div className='dark:bg-gray-800 dark:bg-opacity-60 rounded'>
-        <span className='mr-2'>Keywords:</span>
+      <div className='flex py-4 px-5 pr-3 dark:bg-gray-800 dark:bg-opacity-60 rounded items-center'>
+        <span className='mr-2 flex items-center'>
+          <i className='fad fa-search mr-2'></i>
+          Search:
+        </span>
         {keywords.split(',').map((keyword: string, index: number) => (
           <span
-            className='keyword bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 py-1 px-2 cursor-pointer dark:text-white dark:bg-neutral-800 dark:hover:bg-neutral-700 mr-2'
+            className='keyword cursor-pointer mr-2 flex items-center'
             title="Remove filter for keyword"
             onClick={removeKeywordFilter}
             key={index}>
-            <span className='mr-2 text-xl'>&times;</span>
+            <i className='fad fa-minus-square mr-2' />
             {keyword}
           </span>
         ))}
@@ -98,7 +117,7 @@ export default function Filters({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: boo
           </div>
         </div>
         <div className='ml-auto bg-gray-300 dark:bg-black hidden md:flex items-center rounded'>
-          <input type='text' placeholder='Search' className='bg-transparent focus:outline-none p-1 px-3 max-w-[231px]' />
+          <input ref={searchInputRef} type='text' placeholder='Search' className='bg-transparent focus:outline-none p-1 px-3 max-w-[231px]' onKeyDown={onKeyDown} />
           <i className='fad fa-search mr-3' />
         </div>
       </div>
