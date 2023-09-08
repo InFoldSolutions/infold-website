@@ -72,11 +72,15 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
 
       <ChatBot onSubmit={onSubmit} chatMessages={chatMessages} />
 
-      <h3 className='text-2xl font-bold text-left mt-6'>
-        Social Feedback
-      </h3>
+      {filteredData?.social?.length > 0 &&
+        <div>
+          <h3 className='text-2xl font-bold text-left mt-6'>
+            Social Feedback
+          </h3>
 
-      <Timeline data={filteredData} />
+          <Timeline data={filteredData} />
+        </div>
+      }
 
       <h3 className='text-2xl font-bold text-left mt-6'>
         News Coverage

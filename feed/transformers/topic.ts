@@ -19,7 +19,7 @@ export function transformTopic(data: any) {
       social.sentimentt = 'negative'
 
     return social
-  }).sort((a: any, b: any) => b.score - a.score) : config.mockTweets
+  }).sort((a: any, b: any) => b.score - a.score) : []
 
   if (data.sources?.length > 0) {
     data.sentimentAgg = data.sources.reduce((aggregator: any, item: any) => {

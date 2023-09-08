@@ -88,7 +88,6 @@ export default function Timeline({ data }: { data: any }) {
 
         <div className='timeline relative max-w-screen-2xl overflow-x-scroll no-scrollbar pb-6' onScroll={onScrollHandler}>
           <ul className='flex flex-nowrap h-[170px] relative'>
-            {!data.social || data.social.length === 0 && <li className='w-full justify-center mt-0 pt-0 flex items-center justify-center'><Spinner /> Loading social</li>}
             {data.social && data.social.map((item: any, index: number) => {
               const sentimentData = (item.sentiment && sentiment[item.sentiment]) ? sentiment[item.sentiment] : sentiment['neutral']
 
