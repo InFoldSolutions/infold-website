@@ -8,7 +8,7 @@ export default function Interests({ interests, saveInterests }: { interests: str
   const [selected, setSelected] = useState<string[]>([])
 
   return (
-    <div className='flex items-center flex-col'>
+    <div className='flex items-center flex-col my-auto'>
       <h3 className='text-2xl font-bold mt-6 mb-2 flex justify-center'>Select your interests</h3>
       <h4 className='flex justify-center mb-6'>Minimum 4 interests</h4>
       <ul className='flex flex-wrap text-xl justify-center'>

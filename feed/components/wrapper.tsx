@@ -1,7 +1,7 @@
 
 'use client'
 
-import { useState, useEffect, UIEvent, useRef } from 'react'
+import { useState, useEffect, UIEvent, useRef, useMemo } from 'react'
 
 import { useSearchParams, usePathname } from 'next/navigation'
 import Link from 'next/link'
@@ -35,6 +35,12 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
 
   const loadingStateRef = useRef(isLoadMore) // this is crazy
   const backToTopRef = useRef(null)
+
+  const isSelectScreen = useMemo(() => { // do we display interests screen ?
+    const keywords = searchParams.get('keywords')
+    const endpoint = searchParams.get('sort')
+    return !feedData && selectedInterests.length === 0 && (!pathname || pathname === '/') && !keywords && !endpoint && loaded
+  }, [feedData, selectedInterests, pathname, searchParams])
 
   useEffect(() => {
 
@@ -117,8 +123,11 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
 
     const fetchFeedData = async () => {
       let data: any;
+
       const keywords = searchParams.get('keywords')
       const endpoint = searchParams.get('sort')
+
+      setFeedData(null)
 
       if (keywords) {
         data = await getSearchFeed(keywords.split(','))
@@ -134,17 +143,15 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
         const bucket = searchParams.get('time') || config.api.defaultBucket
         const newTopKeywords = await getTopKeywords(bucket)
         setTopKeywordsData(newTopKeywords)
-      } else
-        setFeedData(null)
-
-      setIsLoading(false);
-
+      }
+        
       if (data)
         setFeedData(data);
     }
 
     fetchFeedData()
       .catch(console.error)
+      .finally(() => setIsLoading(false))
   }, [pathname, searchParams])
 
   // load more
@@ -167,8 +174,6 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
           data = await getInterestsFeed(selectedInterests, offset)
         }
 
-        setIsLoadMore(false)
-
         if (data && data.length > 0) {
           setFeedData((prevData: any) => [...prevData, ...data])
           loadingStateRef.current = false
@@ -178,6 +183,7 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
 
       fetchMoreData()
         .catch(console.error)
+        .finally(() => setIsLoadMore(false))
     }
   }, [offset])
 
@@ -231,17 +237,28 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
         <Filters isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
       </div>
 
-      <div className='flex items-start'>
-        <div className='md:mr-auto w-full max-w-full max-w-[900px] lg:w-[900px] overflow-x-hidden'>
-          {(isLoading || (!loaded && !feedData)) && (<div className='w-full justify-center mt-3 pt-2 flex items-center justify-center'><Spinner />Loading ...</div>)}
-          {!feedData && selectedInterests.length === 0 && loaded && !isLoading && <Interests interests={config.interests} saveInterests={saveInterests} />}
-          {feedData && !isLoading && (<Feed data={feedData} />)}
-          {isLoadMore && (<div className='w-full justify-center mt-3 pt-2 flex items-center justify-center'><Spinner />Loading more ...</div>)}
+      <div className='flex items-start flex-row'>
+        <div className={`flex md:mr-auto flex-col ${isSelectScreen || !feedData ? 'm-auto flex-row' : ''} pb-4 min-h-[77.5vh] lg:min-h-[42vh] w-full max-w-full max-w-[900px] lg:w-[900px] overflow-x-hidden`}>
+          {isLoading &&
+            <div className='w-full justify-center my-auto flex items-center'>
+              <Spinner />Loading ...
+            </div>
+          }
 
-          <Footer />
+          {isSelectScreen &&
+            <Interests interests={config.interests} saveInterests={saveInterests} />
+          }
+
+          {feedData && !isLoading &&
+            <Feed data={feedData} />
+          }
+
+          {isLoadMore &&
+            <div className='w-full justify-center mt-3 pt-2 flex items-center'><Spinner />Loading more ...</div>
+          }
         </div>
 
-        <div className='sticky top-[155px] h-auto w-[280px] p-4 bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 hidden lg:flex flex-col rounded'>
+        <div className={`sticky top-[155px] h-auto w-[280px] p-4 bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 hidden lg:flex flex-col rounded ${isSelectScreen || !feedData ? 'lg:hidden' : ''} `}>
           <h3 className='mb-5 text-2xl font-bold flex items-center'>
             <i className='fad fa-rocket-launch mr-3 text-xl'></i>
             Trending
@@ -260,6 +277,8 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
           </div>
         </div>
       </div>
+
+      <Footer />
 
       <div
         ref={backToTopRef}
