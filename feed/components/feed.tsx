@@ -10,9 +10,6 @@ import { Item } from '@/helpers/api'
 export default function Feed({ data }: { data: any, onScrollHandler?: any }) {
   const router = useRouter()
 
-  if (!data || data.length === 0)
-    return (<div className='my-auto pl-2 text-center text-2xl'>No topics found.</div>)
-
   return (
     <div>
       <ul>

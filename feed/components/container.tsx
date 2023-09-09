@@ -2,7 +2,7 @@ import Header from '@/components/header';
 
 export default function Container({ children, header = true }: { children: React.ReactNode, header?: boolean }) {
   return (
-    <div className='relative md:mx-auto w-full max-w-full lg:max-w-[1260px] lg:w-[1260px] font-mono px-4 md:p-8 md:py-4'>
+    <div className='relative md:mx-auto w-full max-w-full lg:max-w-[1260px] lg:w-[1260px] font-mono px-4 md:px-8'>
       {header && <Header />}
 
       {children}

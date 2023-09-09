@@ -49,8 +49,10 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
 
     // router navigation back
     window.addEventListener("popstate", (e) => {
-      document.body.style.overflowY = 'scroll' // enable scrolling when modal is closed
-      backButtonWasClicked = true
+      if (!backButtonWasClicked) {
+        document.body.style.overflowY = 'scroll' // enable scrolling when modal is closed
+        backButtonWasClicked = true
+      }
     })
 
     // router navigation forward
@@ -239,7 +241,7 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
       </div>
 
       <div className='flex items-start flex-row'>
-        <div className={`flex md:mr-auto flex-col ${isSelectScreen || feedData.length === 0 ? 'm-auto flex-row' : ''} pb-4 min-h-[77.5vh] w-full max-w-full max-w-[900px] lg:w-[900px] overflow-x-hidden`}>
+        <div className={`flex md:mr-auto flex-col ${isSelectScreen || feedData.length === 0 ? 'm-auto flex-row' : ''} pb-4 min-h-[79vh] w-full max-w-full max-w-[900px] lg:w-[900px] overflow-x-hidden`}>
           {isLoading &&
             <div className='w-full justify-center my-auto flex items-center'>
               <Spinner />Loading ...
@@ -252,6 +254,10 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
 
           {feedData?.length > 0 && !isLoading &&
             <Feed data={feedData} />
+          }
+
+          {!isSelectScreen && feedData.length === 0 && !isLoading &&
+            <div className='my-auto pl-2 text-center text-2xl'>No topics found.</div>
           }
 
           {isLoadMore &&

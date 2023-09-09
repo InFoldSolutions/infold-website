@@ -9,7 +9,10 @@ export default function Interests({ interests, saveInterests }: { interests: str
 
   return (
     <div className='flex items-center flex-col my-auto'>
-      <h3 className='text-2xl font-bold mt-6 mb-2 flex justify-center text-center'>What do you like to read about ?</h3>
+      <h3 className='text-3xl font-bold mt-6 mb-2 flex justify-center text-center'>Get The Full Story</h3>
+      <h4 className='flex justify-center mb-6 text-center max-w-[80%]'>News is broken and driven by different agendas. We're here to help you get context, delve deeper, and learn more.</h4>
+      <p className='mt-4 w-[50%] border-b-2 border-gray-200 border-dashed dark:border-gray-800 dark:border-opacity-80'></p>
+      <h3 className='text-2xl font-bold mt-6 mb-2 flex justify-center text-center'>Tell us what you like to read about</h3>
       <h4 className='flex justify-center mb-6'>Select at least <b className='mx-2'>4</b> interests</h4>
       <ul className='flex flex-wrap text-xl justify-center'>
         {interests.map((interest: string, index: number) => (
