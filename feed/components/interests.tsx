@@ -9,8 +9,8 @@ export default function Interests({ interests, saveInterests }: { interests: str
 
   return (
     <div className='flex items-center flex-col my-auto'>
-      <h3 className='text-2xl font-bold mt-6 mb-2 flex justify-center'>Select your interests</h3>
-      <h4 className='flex justify-center mb-6'>Minimum 4 interests</h4>
+      <h3 className='text-2xl font-bold mt-6 mb-2 flex justify-center text-center'>What do you like to read about ?</h3>
+      <h4 className='flex justify-center mb-6'>Select at least <b className='mx-2'>4</b> interests</h4>
       <ul className='flex flex-wrap text-xl justify-center'>
         {interests.map((interest: string, index: number) => (
           <li className={`rounded py-2 px-3 cursor-pointer m-2 ${selected.includes(interest) ? `bg-black text-white dark:bg-white dark:text-black` : `bg-gray-200 dark:bg-gray-600 dark:bg-opacity-40 hover:bg-gray-100 dark:hover:text-black`} `}
@@ -28,7 +28,7 @@ export default function Interests({ interests, saveInterests }: { interests: str
       <button className={`${selected.length > 3 ? 'bg-black dark:bg-white dark:text-black' : 'bg-gray-500 dark:bg-gray-500 dark:bg-opacity:80 cursor-not-allowed'} text-white font-bold py-2 px-4 rounded mt-6`} onClick={() => saveInterests(selected)}>
         Continue
       </button>
-      <span className={`text-sm mt-2 ${selected.length > 3 ? 'hidden' : ''} `}>Select {4 - selected.length} more</span>
+      <span className={`text-sm mt-2 ${selected.length > 3 ? 'hidden' : ''} `}>Select <b>{4 - selected.length}</b> more</span>
       <span className={`cursor-pointer text-sm mt-2 ${selected.length > 3 ? '' : 'hidden'} `}>Show more</span>
     </div >
   )

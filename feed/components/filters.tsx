@@ -65,14 +65,14 @@ export default function Filters({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: boo
           Search:
         </span>
         {keywords.split(',').map((keyword: string, index: number) => (
-          <span
+          <div
             className='keyword cursor-pointer mr-2 flex items-center'
             title="Remove filter for keyword"
             onClick={removeKeywordFilter}
             key={index}>
             <i className='fad fa-window-close mr-2' />
             {keyword}
-          </span>
+          </div>
         ))}
       </div>
     )

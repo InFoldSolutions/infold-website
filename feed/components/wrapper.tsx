@@ -21,7 +21,7 @@ let backButtonWasClicked = false;
 export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedData: any, topKeywords: [] }) {
 
   const [topKeywordsData, setTopKeywordsData] = useState(topKeywords)
-  const [feedData, setFeedData] = useState(initialFeedData)
+  const [feedData, setFeedData] = useState(initialFeedData || [])
   const [offset, setOffset] = useState(1)
   const [isLoading, setIsLoading] = useState(false)
   const [isLoadMore, setIsLoadMore] = useState(false)
@@ -39,7 +39,7 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
   const isSelectScreen = useMemo(() => { // do we display interests screen ?
     const keywords = searchParams.get('keywords')
     const endpoint = searchParams.get('sort')
-    return !feedData && selectedInterests.length === 0 && (!pathname || pathname === '/') && !keywords && !endpoint && loaded
+    return feedData?.length === 0 && selectedInterests.length === 0 && (!pathname || pathname === '/') && !keywords && !endpoint && loaded
   }, [feedData, selectedInterests, pathname, searchParams])
 
   useEffect(() => {
@@ -70,7 +70,7 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
 
   // interests change
   useEffect(() => {
-    if (selectedInterests.length === 0 || feedData)
+    if (selectedInterests.length === 0 || feedData?.length > 0)
       return
 
     setIsLoading(true)
@@ -127,7 +127,8 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
       const keywords = searchParams.get('keywords')
       const endpoint = searchParams.get('sort')
 
-      setFeedData(null)
+      if (feedData?.length > 0)
+        setFeedData([])
 
       if (keywords) {
         data = await getSearchFeed(keywords.split(','))
@@ -144,7 +145,7 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
         const newTopKeywords = await getTopKeywords(bucket)
         setTopKeywordsData(newTopKeywords)
       }
-        
+
       if (data)
         setFeedData(data);
     }
@@ -238,7 +239,7 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
       </div>
 
       <div className='flex items-start flex-row'>
-        <div className={`flex md:mr-auto flex-col ${isSelectScreen || !feedData ? 'm-auto flex-row' : ''} pb-4 min-h-[77.5vh] lg:min-h-[42vh] w-full max-w-full max-w-[900px] lg:w-[900px] overflow-x-hidden`}>
+        <div className={`flex md:mr-auto flex-col ${isSelectScreen || feedData.length === 0 ? 'm-auto flex-row' : ''} pb-4 min-h-[77.5vh] lg:min-h-[45vh] w-full max-w-full max-w-[900px] lg:w-[900px] overflow-x-hidden`}>
           {isLoading &&
             <div className='w-full justify-center my-auto flex items-center'>
               <Spinner />Loading ...
@@ -249,7 +250,7 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
             <Interests interests={config.interests} saveInterests={saveInterests} />
           }
 
-          {feedData && !isLoading &&
+          {feedData?.length > 0 && !isLoading &&
             <Feed data={feedData} />
           }
 
@@ -258,7 +259,7 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
           }
         </div>
 
-        <div className={`sticky top-[155px] h-auto w-[280px] p-4 bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 hidden lg:flex flex-col rounded ${isSelectScreen || !feedData ? 'lg:hidden' : ''} `}>
+        <div className={`sticky top-[155px] h-auto w-[280px] p-4 bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 hidden lg:flex flex-col rounded ${isSelectScreen || feedData.length === 0 ? 'lg:hidden' : ''} `}>
           <h3 className='mb-5 text-2xl font-bold flex items-center'>
             <i className='fad fa-rocket-launch mr-3 text-xl'></i>
             Trending
