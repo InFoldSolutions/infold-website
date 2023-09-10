@@ -244,7 +244,7 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
       </div>
 
       <div className='flex items-start flex-row'>
-        <div className={`flex md:mr-auto flex-col ${isSelectScreen || feedData.length === 0 ? 'm-auto flex-row' : ''} min-h-[780px] w-full max-w-full max-w-[900px] lg:w-[900px] overflow-x-hidden`}>
+        <div className={`flex md:mr-auto flex-col ${isSelectScreen || feedData.length === 0 ? 'm-auto flex-row' : ''} min-h-[78vh] w-full max-w-full max-w-[900px] lg:w-[900px] overflow-x-hidden`}>
           {isLoading &&
             <div className='w-full justify-center my-auto flex items-center'>
               <Spinner />Loading ...
