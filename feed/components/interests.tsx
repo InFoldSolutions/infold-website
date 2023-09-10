@@ -7,9 +7,9 @@ export default function Interests({ interests, saveInterests }: { interests: str
   const [selected, setSelected] = useState<string[]>([])
 
   return (
-    <div className='flex items-center flex-col my-auto py-8'>
+    <div className='flex items-center flex-col my-auto py-12'>
       <h3 className='text-2xl md:text-3xl font-bold mb-6 flex justify-center text-center items-center'>
-        <i className='fad fa-newspaper mr-6' /> Get The Full Story
+        <i className='fad fa-newspaper mr-4 md:mr-6' /> Get The Full Story
       </h3>
       <h4 className='flex justify-center mb-4 text-center max-w-[80%]'>
         {`News is broken and driven by different agendas. We're here to help you get context, delve deeper, and learn more.`}
