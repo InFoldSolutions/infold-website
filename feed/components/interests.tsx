@@ -11,13 +11,10 @@ export default function Interests({ interests, saveInterests }: { interests: str
       <h3 className='text-2xl md:text-3xl font-bold mb-6 flex justify-center text-center items-center'>
         <i className='fad fa-newspaper mr-4 md:mr-6' /> Get The Full Story
       </h3>
-      <h4 className='flex justify-center mb-4 text-center max-w-[80%]'>
+      <h4 className='mb-6 text-center max-w-[80%]'>
         {`News is broken and driven by different agendas. We're here to help you get context, delve deeper, and learn more.`}
       </h4>
-      <p className='mb-2 underline text-center cursor-pointer text-sm'>
-        Read more
-      </p>
-      <p className='mt-4 w-[50%] border-b-2 border-gray-200 border-dashed dark:border-gray-800 dark:border-opacity-80'></p>
+      <p className='mt-1 w-[50%] border-b-2 border-gray-200 border-dashed dark:border-gray-800 dark:border-opacity-80'></p>
       <h3 className='text-2xl font-bold mt-6 mb-2 flex justify-center text-center'>
         Tell us what you like to read about
       </h3>

@@ -97,6 +97,8 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
 
   // query params and path change
   useEffect(() => {
+    console.log('useEffect pathname', pathname, searchParams, backButtonWasClicked)
+
     if (backButtonWasClicked) {
       backButtonWasClicked = false
       return
@@ -244,7 +246,7 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
       </div>
 
       <div className='flex items-start flex-row'>
-        <div className={`flex md:mr-auto flex-col ${isSelectScreen || feedData.length === 0 ? 'm-auto flex-row' : ''} min-h-[78vh] w-full max-w-full max-w-[900px] lg:w-[900px] overflow-x-hidden`}>
+        <div className={`flex md:mr-auto ${isSelectScreen || feedData.length === 0 ? 'm-auto flex-row' : 'flex-col'} min-h-[78vh] w-full max-w-full pb-4 max-w-[900px] lg:w-[900px] overflow-x-hidden`}>
           {isLoading &&
             <div className='w-full justify-center my-auto flex items-center'>
               <Spinner />Loading ...
@@ -260,7 +262,7 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
           }
 
           {!isSelectScreen && feedData.length === 0 && !isLoading && loaded &&
-            <div className='my-auto pl-2 text-center text-2xl'>No topics found.</div>
+            <div className='my-auto pl-2 text-center text-2xl w-full'>No topics found.</div>
           }
 
           {isLoadMore && loaded &&
