@@ -196,6 +196,9 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
     if (!backToTop)
       return
 
+    if (isSelectScreen || feedData.length === 0)
+      return
+
     const scrollHeight = document.body.scrollHeight
     const innerHeight = window.innerHeight
     const scrollTop = window.scrollY
@@ -236,12 +239,12 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
     <Container>
 
       <div
-        className='sticky top-[75px] md:top-[80px] z-40 bg-gray-200 dark:bg-black mb-2 -mt-[3px] lg:mb-3 rounded text-base sm:text-lg sm:leading-relaxed md:text-xl md:leading-relaxed text-body-color'>
+        className='sticky top-[87px] md:top-[91px] z-40 bg-gray-200 dark:bg-black mb-2 -mt-[3px] lg:mb-3 rounded text-base sm:text-lg sm:leading-relaxed md:text-xl md:leading-relaxed text-body-color'>
         <Filters isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
       </div>
 
       <div className='flex items-start flex-row'>
-        <div className={`flex md:mr-auto flex-col ${isSelectScreen || feedData.length === 0 ? 'm-auto flex-row' : ''} pb-4 min-h-[79vh] w-full max-w-full max-w-[900px] lg:w-[900px] overflow-x-hidden`}>
+        <div className={`flex md:mr-auto flex-col ${isSelectScreen || feedData.length === 0 ? 'm-auto flex-row' : ''} min-h-[780px] w-full max-w-full max-w-[900px] lg:w-[900px] overflow-x-hidden`}>
           {isLoading &&
             <div className='w-full justify-center my-auto flex items-center'>
               <Spinner />Loading ...
@@ -256,16 +259,16 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
             <Feed data={feedData} />
           }
 
-          {!isSelectScreen && feedData.length === 0 && !isLoading &&
+          {!isSelectScreen && feedData.length === 0 && !isLoading && loaded &&
             <div className='my-auto pl-2 text-center text-2xl'>No topics found.</div>
           }
 
-          {isLoadMore &&
+          {isLoadMore && loaded &&
             <div className='w-full justify-center mt-3 pt-2 flex items-center'><Spinner />Loading more ...</div>
           }
         </div>
 
-        <div className={`sticky top-[155px] h-auto w-[280px] p-4 bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 hidden lg:flex flex-col rounded ${isSelectScreen || feedData.length === 0 ? 'lg:hidden' : ''} `}>
+        <div className={`sticky top-[168px] h-auto w-[280px] p-4 bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 hidden lg:flex flex-col rounded ${isSelectScreen || feedData.length === 0 ? 'lg:hidden' : ''} `}>
           <h3 className='mb-5 text-2xl font-bold flex items-center'>
             <i className='fad fa-rocket-launch mr-3 text-xl'></i>
             Trending
