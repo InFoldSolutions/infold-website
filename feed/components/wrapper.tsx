@@ -62,7 +62,6 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
 
     // router navigation back
     window.addEventListener("popstate", (e) => {
-      console.log('popstate', e.state, document.location)
       if (!backButtonWasClicked) {
         document.body.style.overflowY = 'scroll' // enable scrolling when modal is closed
         backButtonWasClicked = true
@@ -86,7 +85,7 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
     // @ts-ignore
     document.addEventListener('scroll', onScrollHandler);
 
-    return function () {
+    return () => {
       // @ts-ignore
       document.removeEventListener('scroll', onScrollHandler);
     }
@@ -136,12 +135,11 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
     setEndOfFeed(false)
     setIsMenuOpen(false)
 
+    setFeedData([])
     setIsLoading(true)
 
     const fetchFeedData = async () => {
       let res: any;
-
-      setFeedData([])
 
       const keywords = searchParams.get('keywords')
       const endpoint = searchParams.get('sort')
@@ -214,7 +212,7 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
     <Container>
 
       <div
-        className='sticky top-[87px] md:top-[91px] z-40 bg-gray-200 dark:bg-black mb-2 -mt-[3px] lg:mb-3 rounded text-base sm:text-lg sm:leading-relaxed md:text-xl md:leading-relaxed text-body-color'>
+        className='sticky top-2 z-40 bg-gray-200 dark:bg-black mb-2 -mt-[3px] lg:mb-3 rounded text-base sm:text-lg sm:leading-relaxed md:text-xl md:leading-relaxed text-body-color'>
         <Filters isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} totalResults={searchTotalResults} />
       </div>
 
@@ -243,7 +241,7 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
           }
         </div>
 
-        <div className={`sticky top-[168px] h-auto w-[280px] p-4 bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 hidden lg:flex flex-col rounded ${isSelectScreen || feedData.length === 0 ? 'lg:hidden' : ''} `}>
+        <div className={`sticky top-20 h-auto w-[280px] p-4 bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 hidden lg:flex flex-col rounded ${isSelectScreen || feedData.length === 0 ? 'lg:hidden' : ''} `}>
           <h3 className='mb-5 text-2xl font-bold flex items-center'>
             <i className='fad fa-rocket-launch mr-3 text-xl'></i>
             Trending

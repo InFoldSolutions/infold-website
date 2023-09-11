@@ -37,6 +37,10 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
         return [...messages]
       })
     };
+
+    return () => {
+      webSocket.close();
+    }
   }, [])
 
   const toggleExpanded: MouseEventHandler = useCallback(() => {
