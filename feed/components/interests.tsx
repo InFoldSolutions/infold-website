@@ -9,7 +9,7 @@ export default function Interests({ interests, saveInterests }: { interests: str
   const [selected, setSelected] = useState<string[]>([])
 
   return (
-    <div className='flex items-center flex-col my-auto py-12'>
+    <div className='flex items-center flex-col my-auto py-6 md:py-12'>
       <h3 className='text-2xl md:text-3xl font-bold mb-6 flex justify-center text-center items-center'>
         <i className='fad fa-newspaper mr-4 md:mr-6' /> Get The Full Story
       </h3>
@@ -18,7 +18,7 @@ export default function Interests({ interests, saveInterests }: { interests: str
       </h4>
       <Link href={'https://infold.medium.com/a-lot-of-knowledge-is-a-dangerous-thing-6a4d2560cc83'}
         target={'blank'}
-        className='text-sm hover:underline cursor-pointer text-center w-full mb-2'
+        className='text-sm hover:underline cursor-pointer text-center w-fit mb-2'
         title='A Lot of Knowledge is a Dangerous Thing - Read on Medium'>
         Read more <i className='fad fa-external-link text-xs' />
       </Link>

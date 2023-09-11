@@ -116,9 +116,6 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
 
     setIsLoading(true)
 
-    if (feedData?.length > 0)
-      setFeedData([])
-
     const backToTop = (backToTopRef?.current) ? backToTopRef.current as HTMLElement : null
 
     if (backToTop) {
@@ -129,15 +126,17 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
     const fetchFeedData = async () => {
       let data: any;
 
+      setFeedData([])
+
       const keywords = searchParams.get('keywords')
       const endpoint = searchParams.get('sort')
       const bucket = searchParams.get('time') || config.api.defaultBucket
 
-      if (keywords) 
+      if (keywords)
         data = await getSearchFeed(keywords.split(','))
-      else if (endpoint) 
+      else if (endpoint)
         data = await getFeed(endpoint, config.api.defaultLimit, bucket)
-      else if (selectedInterests.length > 0) 
+      else if (selectedInterests.length > 0)
         data = await getInterestsFeed(selectedInterests)
 
       if (data)
@@ -187,10 +186,10 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
   }, [offset])
 
   function onScrollHandler(e: Event) {
-    const backToTop = (backToTopRef?.current) ? backToTopRef.current as HTMLElement : null
+    /*const backToTop = (backToTopRef?.current) ? backToTopRef.current as HTMLElement : null
 
     if (!backToTop)
-      return
+      return*/
 
     if (isSelectScreen || feedData.length === 0)
       return
@@ -208,18 +207,18 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
       setOffset((old: number) => old + 1)
     }
 
-    if (feedData.length > 0 && scrollTop > 100 && backToTop.classList.contains('hidden'))
+    /*if (feedData.length > 0 && scrollTop > 100 && backToTop.classList.contains('hidden'))
       backToTop.classList.remove('hidden')
     else if (scrollTop <= 100 && !backToTop.classList.contains('hidden'))
-      backToTop.classList.add('hidden')
+      backToTop.classList.add('hidden')*/
   }
 
-  function backToTopHandler(e: UIEvent<HTMLDivElement>) {
+  /*function backToTopHandler(e: UIEvent<HTMLDivElement>) {
     window.scroll({
       top: 0,
       behavior: 'smooth',
     });
-  }
+  }*/
 
   function saveInterests(interests: string[]) {
     if (interests.length < 4)
@@ -282,15 +281,6 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
             </ul>
           </div>
         </div>
-      </div>
-
-      <Footer />
-
-      <div
-        ref={backToTopRef}
-        className='fixed bottom-4 md:bottom-2 right-2 py-2 px-3 w-auto flex bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 font-mono hidden cursor-pointer'
-        onClick={backToTopHandler}>
-        Back to top
       </div>
     </Container>
   )

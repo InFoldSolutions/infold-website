@@ -1,4 +1,5 @@
 import Header from '@/components/header';
+import Footer from '@/components/footer';
 
 export default function Container({ children, header = true }: { children: React.ReactNode, header?: boolean }) {
   return (
@@ -6,6 +7,8 @@ export default function Container({ children, header = true }: { children: React
       {header && <Header />}
 
       {children}
+
+      <Footer />
     </div>
   )
 }

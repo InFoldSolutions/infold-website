@@ -34,7 +34,7 @@ export function getApiUrl(endpoint = 'top', limit: number = 0, bucket: any = nul
 export async function getFeed(endpoint = 'top', limit: number = 0, bucket: any = null, page: number = 1) {
   try {
     const url = getApiUrl(endpoint, limit, bucket, page);
-    const res = await fetch(url, { next: { revalidate: 10 } })
+    const res = await fetch(url, { next: { revalidate: 0 } })
 
     if (!res.ok)
       throw new Error('Response not ok');
@@ -60,7 +60,7 @@ export async function getSearchFeed(keywords: string[], page: number = 1) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ keywords }),
-      next: { revalidate: 10 }
+      next: { revalidate: 0 }
     })
 
     if (!res.ok)
@@ -89,7 +89,7 @@ export async function getInterestsFeed(interests: string[], page: number = 1) {
       body: JSON.stringify({ keywords: {
         positive: interests,
       } }),
-      next: { revalidate: 10 }
+      next: { revalidate: 0 }
     })
 
     if (!res.ok)
