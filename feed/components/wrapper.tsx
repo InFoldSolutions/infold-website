@@ -33,11 +33,10 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
   const pathname = usePathname()
   const searchParams = useSearchParams()
 
-  const loadingStateRef = useRef(isLoadMore) // this is crazy
   const isSelectScreen = useMemo(() => { // do we display interests screen ?
     const keywords = searchParams.get('keywords')
     const endpoint = searchParams.get('sort')
-    return feedData?.length === 0 && selectedInterests.length === 0 && (!pathname || pathname === '/') && !keywords && !endpoint && loaded
+    return selectedInterests.length === 0 && (!pathname || pathname === '/') && !keywords && !endpoint && loaded
   }, [feedData, selectedInterests, pathname, searchParams])
 
   const onScrollHandler = useCallback((e: UIEvent) => {
@@ -52,11 +51,10 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
     if (scrollHeight <= innerHeight)
       return
 
-    if (isBottom && !loadingStateRef.current) {
-      loadingStateRef.current = true
+    if (isBottom && !isLoadMore)
       setOffset((old: number) => old + 1)
-    }
-  }, [isSelectScreen, feedData, loadingStateRef])
+
+  }, [isSelectScreen, feedData, isLoadMore])
 
   useEffect(() => {
     // @ts-ignore
@@ -82,10 +80,17 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
         return target.apply(thisArg, argArray);
       },
     });
-
-    // @ts-ignore
-    window.addEventListener("scroll", onScrollHandler)
   }, [])
+
+  useEffect(() => {
+    // @ts-ignore
+    document.addEventListener('scroll', onScrollHandler);
+
+    return function () {
+      // @ts-ignore
+      document.removeEventListener('scroll', onScrollHandler);
+    }
+  }, [onScrollHandler]);
 
   // interests change
   useEffect(() => {
@@ -167,7 +172,6 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
   useEffect(() => {
     if (offset > 1 && !endOfFeed) {
       setIsLoadMore(true)
-      loadingStateRef.current = true
 
       const fetchMoreData = async () => {
         let res: any;
@@ -184,10 +188,9 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
           res = await getInterestsFeed(selectedInterests, offset)
         }
 
-        if (res?.data?.length > 0) {
+        if (res?.data?.length > 0)
           setFeedData((prevData: any) => [...prevData, ...res.data])
-          loadingStateRef.current = false
-        } else
+        else
           setEndOfFeed(true)
       }
 

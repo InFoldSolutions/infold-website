@@ -33,7 +33,7 @@ export default function Footer() {
                   <span className='hidden md:inline-block'>Patreon</span>
                 </a>
               </li>
-              <li className="mr-3">
+              <li>
                 <a href="https://www.twitter.com/infoldai/" target="_blank"
                   className="h-full text-center flex items-center">
                   <Image src="/assets/images/twitter.svg" width="19" height="19" alt="Follow InFold on Twitter" className='mr-1' />
