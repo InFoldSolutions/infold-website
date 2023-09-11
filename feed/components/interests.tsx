@@ -40,17 +40,15 @@ export default function Interests({ interests, saveInterests }: { interests: str
       <h3 className='text-2xl md:text-3xl font-bold mb-6 flex justify-center text-center items-center'>
         <i className='fad fa-newspaper mr-4 md:mr-6' /> Get The Full Story
       </h3>
-      <h4 className='mb-6 text-center max-w-[80%]'>
+      <h4 className='mb-4 text-center max-w-[80%]'>
         {`News is broken and driven by different agendas. We're here to help you get context, delve deeper, and learn more.`}
-        <Link href={'https://infold.medium.com/a-lot-of-knowledge-is-a-dangerous-thing-6a4d2560cc83'}
+      </h4>
+      <Link href={'https://infold.medium.com/a-lot-of-knowledge-is-a-dangerous-thing-6a4d2560cc83'}
           target={'blank'}
-          className='underline cursor-pointer ml-2'
+          className='underline cursor-pointer w-full text-center'
           title='A Lot of Knowledge is a Dangerous Thing - Read on Medium'>
           read more..
         </Link>
-      </h4>
-      <p className='mt-0.5 w-[50%] border-b-2 border-gray-200 border-dashed dark:border-gray-800 dark:border-opacity-80'></p>
-
     </div >
   )
 }

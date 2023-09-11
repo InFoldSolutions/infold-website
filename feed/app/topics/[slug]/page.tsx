@@ -31,7 +31,7 @@ export default async function Topic({ params }: { params: { slug: string } }) {
           {data && <TopicWrapper data={data} />}
         </div>
 
-        <div className='sticky top-[100px] h-auto hidden lg:flex flex-col'>
+        <div className='sticky top-4 h-auto hidden lg:flex flex-col'>
           <div className='h-auto w-[280px] pt-4 px-4 bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 hidden lg:flex flex-col mb-4 rounded'>
             <h3 className='text-2xl font-bold'>Sentiment</h3>
             <SentimentChart aggregation={data.sentimentAgg} />
