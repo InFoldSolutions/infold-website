@@ -97,8 +97,6 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
 
   // query params and path change
   useEffect(() => {
-    console.log('useEffect pathname', pathname, searchParams, backButtonWasClicked)
-
     if (backButtonWasClicked) {
       backButtonWasClicked = false
       return
@@ -112,11 +110,14 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
       return
     }
 
-    setIsLoading(true)
-
     setOffset(1)
     setEndOfFeed(false)
     setIsMenuOpen(false)
+
+    setIsLoading(true)
+
+    if (feedData?.length > 0)
+      setFeedData([])
 
     const backToTop = (backToTopRef?.current) ? backToTopRef.current as HTMLElement : null
 
@@ -130,28 +131,20 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
 
       const keywords = searchParams.get('keywords')
       const endpoint = searchParams.get('sort')
+      const bucket = searchParams.get('time') || config.api.defaultBucket
 
-      if (feedData?.length > 0)
-        setFeedData([])
-
-      if (keywords) {
+      if (keywords) 
         data = await getSearchFeed(keywords.split(','))
-      } else if (endpoint) {
-        const bucket = searchParams.get('time') || config.api.defaultBucket
+      else if (endpoint) 
         data = await getFeed(endpoint, config.api.defaultLimit, bucket)
-
-        const newTopKeywords = await getTopKeywords(bucket)
-        setTopKeywordsData(newTopKeywords)
-      } else if (selectedInterests.length > 0) {
+      else if (selectedInterests.length > 0) 
         data = await getInterestsFeed(selectedInterests)
-
-        const bucket = searchParams.get('time') || config.api.defaultBucket
-        const newTopKeywords = await getTopKeywords(bucket)
-        setTopKeywordsData(newTopKeywords)
-      }
 
       if (data)
         setFeedData(data);
+
+      const newTopKeywords = await getTopKeywords(bucket)
+      setTopKeywordsData(newTopKeywords)
     }
 
     fetchFeedData()
@@ -167,6 +160,7 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
 
       const fetchMoreData = async () => {
         let data: any;
+
         const keywords = searchParams.get('keywords')
         const endpoint = searchParams.get('sort')
 
@@ -182,8 +176,8 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
         if (data && data.length > 0) {
           setFeedData((prevData: any) => [...prevData, ...data])
           loadingStateRef.current = false
-        }
-        else setEndOfFeed(true)
+        } else
+          setEndOfFeed(true)
       }
 
       fetchMoreData()
@@ -247,7 +241,7 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
 
       <div className='flex items-start flex-row'>
         <div className={`flex md:mr-auto ${isSelectScreen || feedData.length === 0 ? 'm-auto flex-row' : 'flex-col'} min-h-[78vh] w-full max-w-full pb-4 max-w-[900px] lg:w-[900px] overflow-x-hidden`}>
-          {isLoading &&
+          {isLoading && !isSelectScreen &&
             <div className='w-full justify-center my-auto flex items-center'>
               <Spinner />Loading ...
             </div>

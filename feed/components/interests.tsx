@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 
+import Link from 'next/link';
+
 export default function Interests({ interests, saveInterests }: { interests: string[], saveInterests: any }) {
 
   const [selected, setSelected] = useState<string[]>([])
@@ -14,6 +16,12 @@ export default function Interests({ interests, saveInterests }: { interests: str
       <h4 className='mb-6 text-center max-w-[80%]'>
         {`News is broken and driven by different agendas. We're here to help you get context, delve deeper, and learn more.`}
       </h4>
+      <Link href={'https://infold.medium.com/a-lot-of-knowledge-is-a-dangerous-thing-6a4d2560cc83'}
+        target={'blank'}
+        className='text-sm hover:underline cursor-pointer text-center w-full mb-2'
+        title='A Lot of Knowledge is a Dangerous Thing - Read on Medium'>
+        Read more <i className='fad fa-external-link text-xs' />
+      </Link>
       <p className='mt-1 w-[50%] border-b-2 border-gray-200 border-dashed dark:border-gray-800 dark:border-opacity-80'></p>
       <h3 className='text-2xl font-bold mt-6 mb-2 flex justify-center text-center'>
         Tell us what you like to read about
@@ -40,7 +48,7 @@ export default function Interests({ interests, saveInterests }: { interests: str
         Continue <i className={`fad ${selected.length > 3 ? 'fa-check-circle' : 'fa-ban'} ml-2`}></i>
       </button>
       <span className={`text-sm mt-2 ${selected.length > 3 ? 'hidden' : ''} `}>Select <b>{4 - selected.length}</b> more</span>
-      <span className={`cursor-pointer text-sm mt-2 hover:underline ${selected.length > 3 ? '' : 'hidden'} `}>Show more</span>
+      <span className={`cursor-pointer text-sm mt-2 hover:underline ${selected.length > 3 ? '' : 'hidden'} `}>Get personal feed</span>
     </div >
   )
 }
