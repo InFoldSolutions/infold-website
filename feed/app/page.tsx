@@ -1,4 +1,5 @@
 import Wrapper from '@/components/wrapper'
+import Footer from '@/components/footer'
 
 import config from '@/config'
 
@@ -9,16 +10,17 @@ export default async function Home({ params, searchParams }: { params: any, sear
   const endpoint = searchParams.sort
   const bucket = searchParams.time || config.api.defaultBucket
 
-  let data = null
+  let res: any = null
 
   if (keywords)
-    data = await getSearchFeed(keywords.split(','))
+    res = await getSearchFeed(keywords.split(','))
   else if (endpoint)
-    data = await getFeed(endpoint, config.api.defaultLimit, bucket)
+    res = await getFeed(endpoint, config.api.defaultLimit, bucket)
 
   const topKeywords = await getTopKeywords(bucket)
+  const totalResults = res?.meta?.total_results || 0
 
   return (
-    <Wrapper initialFeedData={data} topKeywords={topKeywords} />
+    <Wrapper initialFeedData={res?.data} topKeywords={topKeywords} totalResults={totalResults} />
   )
 }

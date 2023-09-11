@@ -9,7 +9,7 @@ export default function Footer() {
   const pathname = usePathname()
 
   return (
-    <footer className="flex py-3 pb-4 border-t-2 border-gray-200 border-dashed dark:border-gray-800 dark:border-opacity-80 bg-gray-300 dark:bg-black w-full sticky -bottom-px z-40 mr-8">
+    <footer className="flex py-3 pb-4 border-t-2 border-gray-200 border-dashed dark:border-gray-800 dark:border-opacity-80 bg-gray-300 dark:bg-black w-full fixed max-w-[1196px] -bottom-px z-40 mr-8">
       <div className="relative w-full flex items-center justify-between flex">
         <div className='w-auto flex items-center ml-1'>
           <a href="/" className="flex items-center w-full mr-2">

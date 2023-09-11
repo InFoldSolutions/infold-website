@@ -17,7 +17,7 @@ import config from '@/config'
 
 let backButtonWasClicked = false;
 
-export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedData: any, topKeywords: [] }) {
+export default function Wrapper({ initialFeedData, topKeywords, totalResults }: { initialFeedData: any, topKeywords: [], totalResults: number }) {
 
   const [topKeywordsData, setTopKeywordsData] = useState(topKeywords)
   const [feedData, setFeedData] = useState(initialFeedData || [])
@@ -28,7 +28,7 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
   const [selectedInterests, setSelectedInterests] = useState([])
   const [loaded, setLoaded] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [totalResults, setTotalResults] = useState(0)
+  const [searchTotalResults, setSearchTotalResults] = useState(totalResults)
 
   const pathname = usePathname()
   const searchParams = useSearchParams()
@@ -104,7 +104,7 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
 
       if (res.data && res.meta?.total_results > 0) {
         setFeedData(res.data);
-        setTotalResults(res.meta.total_results)
+        setSearchTotalResults(res.meta.total_results)
       }
     }
 
@@ -149,9 +149,9 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
       else if (selectedInterests.length > 0)
         res = await getInterestsFeed(selectedInterests)
 
-      if (res.data && res.meta?.total_results > 0) {
+      if (res?.data && res?.meta?.total_results > 0) {
         setFeedData(res.data);
-        setTotalResults(res.meta.total_results)
+        setSearchTotalResults(res.meta.total_results)
       }
 
       const newTopKeywords = await getTopKeywords(bucket)
@@ -160,7 +160,7 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
 
     fetchFeedData()
       .catch(console.error)
-      .finally(() => { console.log('finally setIsLoading'); setIsLoading(false) })
+      .finally(() => setIsLoading(false))
   }, [pathname, searchParams])
 
   // load more
@@ -184,7 +184,7 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
           res = await getInterestsFeed(selectedInterests, offset)
         }
 
-        if (res.data && res.data.length > 0) {
+        if (res?.data?.length > 0) {
           setFeedData((prevData: any) => [...prevData, ...res.data])
           loadingStateRef.current = false
         } else
@@ -193,7 +193,7 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
 
       fetchMoreData()
         .catch(console.error)
-        .finally(() => { console.log('finally setIsLoadMore'); setIsLoadMore(false) })
+        .finally(() => setIsLoadMore(false))
     }
   }, [offset])
 
@@ -212,7 +212,7 @@ export default function Wrapper({ initialFeedData, topKeywords }: { initialFeedD
 
       <div
         className='sticky top-[87px] md:top-[91px] z-40 bg-gray-200 dark:bg-black mb-2 -mt-[3px] lg:mb-3 rounded text-base sm:text-lg sm:leading-relaxed md:text-xl md:leading-relaxed text-body-color'>
-        <Filters isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} totalResults={totalResults} />
+        <Filters isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} totalResults={searchTotalResults} />
       </div>
 
       <div className='flex items-start flex-row'>
