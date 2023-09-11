@@ -47,7 +47,7 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
     const scrollHeight = document.body.scrollHeight
     const innerHeight = window.innerHeight
     const scrollTop = window.scrollY
-    const isBottom = scrollTop + innerHeight + 5 >= scrollHeight
+    const isBottom = scrollTop + innerHeight + 50 >= scrollHeight
 
     if (scrollHeight <= innerHeight)
       return
