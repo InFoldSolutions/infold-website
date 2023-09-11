@@ -110,7 +110,7 @@ export default function Filters({ isMenuOpen, setIsMenuOpen, totalResults }: { i
             <span className={`hidden md:flex ml-1.5 underline`}>{endpoint === 'top' && capitalize(bucket)}</span>
           </div>
 
-          <div className={`${!isMenuOpen ? 'hidden' : ''} absolute left-[50%] -ml-[80px] r-auto z-10 mt-5 md:mt-6 w-40 rounded bg-gray-200 dark:bg-black`}>
+          <div className={`${!isMenuOpen ? 'hidden' : ''} absolute left-[50%] -ml-[85px] r-auto z-10 mt-5 md:mt-6 w-40 rounded bg-gray-200 dark:bg-black`}>
             <div className='dark:bg-gray-800 dark:bg-opacity-60 py-2 rounded'>
               {topOptions.map((option: any, index: number) => (
                 <span className='group cursor-pointer flex justify-center' key={index}>

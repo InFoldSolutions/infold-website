@@ -9,9 +9,11 @@ export default function Interests({ interests, saveInterests }: { interests: str
   const [selected, setSelected] = useState<string[]>([])
 
   return (
-    <div className='flex items-center flex-col my-auto py-2 md:py-10'>
-      <h3 className='text-2xl font-bold mt-6 mb-2 flex justify-center text-center'>
-        Tell us what you like to read about
+    <div className='flex items-center flex-col my-auto py-2 md:py-8'>
+      <h3 className='text-2xl md:text-3xl font-bold mt-6 mb-2 flex justify-center text-center items-center max-w-[80%]'>
+        <span className='hidden lg:flex'>
+          <i className='fad fa-newspaper mr-4 md:mr-6' />
+        </span> Tell us what you like to read about
       </h3>
       <h4 className='flex justify-center mb-6'>
         Select at least <b className='mx-2'>4</b> interests
@@ -35,20 +37,20 @@ export default function Interests({ interests, saveInterests }: { interests: str
         Continue <i className={`fad ${selected.length > 3 ? 'fa-check-circle' : 'fa-ban'} ml-2`}></i>
       </button>
       <span className={`text-sm mt-2 ${selected.length > 3 ? 'hidden' : ''} `}>Select <b>{4 - selected.length}</b> more</span>
-      <span className={`cursor-pointer text-sm mt-2 hover:underline ${selected.length > 3 ? '' : 'hidden'} `}>Get personal feed</span>
+      <span className={`text-sm mt-2 ${selected.length > 3 ? '' : 'hidden'} `}>Get personal feed</span>
       <p className='my-6 w-[50%] border-b-2 border-gray-200 border-dashed dark:border-gray-800 dark:border-opacity-80'></p>
       <h3 className='text-2xl md:text-3xl font-bold mb-6 flex justify-center text-center items-center'>
-        <i className='fad fa-newspaper mr-4 md:mr-6' /> Get The Full Story
+        Get The Full Story
       </h3>
       <h4 className='mb-4 text-center max-w-[80%]'>
         {`News is broken and driven by different agendas. We're here to help you get context, delve deeper, and learn more.`}
       </h4>
       <Link href={'https://infold.medium.com/a-lot-of-knowledge-is-a-dangerous-thing-6a4d2560cc83'}
-          target={'blank'}
-          className='underline cursor-pointer w-full text-center'
-          title='A Lot of Knowledge is a Dangerous Thing - Read on Medium'>
-          read more..
-        </Link>
+        target={'blank'}
+        className='underline cursor-pointer w-fit text-center'
+        title='A Lot of Knowledge is a Dangerous Thing - Read on Medium'>
+        read more..
+      </Link>
     </div >
   )
 }

@@ -36,7 +36,7 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
   const isSelectScreen = useMemo(() => { // do we display interests screen ?
     const keywords = searchParams.get('keywords')
     const endpoint = searchParams.get('sort')
-    return selectedInterests.length === 0 && (!pathname || pathname === '/') && !keywords && !endpoint && loaded
+    return feedData?.length === 0 && selectedInterests.length === 0 && (!pathname || pathname === '/') && !keywords && !endpoint && loaded
   }, [feedData, selectedInterests, pathname, searchParams])
 
   const onScrollHandler = useCallback((e: UIEvent) => {
