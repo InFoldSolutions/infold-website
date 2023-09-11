@@ -219,7 +219,7 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
       </div>
 
       <div className='flex items-start flex-row'>
-        <div className={`flex md:mr-auto ${isSelectScreen || feedData.length === 0 ? 'm-auto flex-row' : 'flex-col'} min-h-[78vh] w-full max-w-full pb-4 max-w-[900px] lg:w-[900px] overflow-x-hidden`}>
+        <div className={`flex md:mr-auto ${isSelectScreen || feedData.length === 0 ? 'm-auto flex-row' : 'flex-col'} min-h-[70vh] w-full max-w-full pb-4 max-w-[900px] lg:w-[900px] overflow-x-hidden`}>
           {isLoading && !isSelectScreen &&
             <div className='w-full justify-center my-auto flex items-center'>
               <Spinner />Loading ...
