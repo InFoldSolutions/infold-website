@@ -19,7 +19,7 @@ export function getApiUrl(endpoint = 'top', limit: number = 0, bucket: any = nul
   if (bucket) {
     url += `${separator}bucket=${bucket}`
     separator = '&';
-  } 
+  }
   if (limit) {
     url += `${separator}limit=${limit}`
     separator = '&';
@@ -44,7 +44,10 @@ export async function getFeed(endpoint = 'top', limit: number = 0, bucket: any =
     if (!data.topics)
       throw new Error('Topics not found');
 
-    return data.topics.filter(filterTopic).map(transformTopic)
+    return {
+      meta: data.meta,
+      data: data.topics.filter(filterTopic).map(transformTopic)
+    }
   } catch (error) {
     console.error('Failed to fetch feed data', error)
     return [];
@@ -71,7 +74,10 @@ export async function getSearchFeed(keywords: string[], page: number = 1) {
     if (!data.topics)
       throw new Error('Topics not found');
 
-    return data.topics.filter(filterTopic).map(transformTopic)
+    return {
+      meta: data.meta,
+      data: data.topics.filter(filterTopic).map(transformTopic)
+    }
   } catch (error) {
     console.error('Failed to fetch search feed data', error)
     return [];
@@ -86,9 +92,11 @@ export async function getInterestsFeed(interests: string[], page: number = 1) {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ keywords: {
-        positive: interests,
-      } }),
+      body: JSON.stringify({
+        keywords: {
+          positive: interests,
+        }
+      }),
       next: { revalidate: 0 }
     })
 
@@ -100,7 +108,10 @@ export async function getInterestsFeed(interests: string[], page: number = 1) {
     if (!data.topics)
       throw new Error('Topics not found');
 
-    return data.topics.filter(filterTopic).map(transformTopic)
+    return {
+      meta: data.meta,
+      data: data.topics.filter(filterTopic).map(transformTopic)
+    }
   } catch (error) {
     console.error('Failed to fetch search feed data', error)
     return [];
@@ -123,7 +134,7 @@ export async function getTopic(slug: string) {
     return transformTopic(data.topic)
   } catch (error) {
     console.error('Failed to fetch topic data', error)
-    return { };
+    return {};
   }
 }
 

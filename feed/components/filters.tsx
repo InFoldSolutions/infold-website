@@ -16,7 +16,7 @@ const topOptions = [
   { label: 'This Year', value: 'year' },
 ]
 
-export default function Filters({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: boolean, setIsMenuOpen: any }) {
+export default function Filters({ isMenuOpen, setIsMenuOpen, totalResults }: { isMenuOpen: boolean, setIsMenuOpen: any, totalResults: number }) {
   const router = useRouter()
   const searchParams: any = useSearchParams()
 
@@ -70,10 +70,14 @@ export default function Filters({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: boo
             title="Remove filter for keyword"
             onClick={removeKeywordFilter}
             key={index}>
-            <i className='fad fa-window-close mr-2' />
+            <i className='fad fa-minus-square mr-2 text-gray-800' />
             {keyword}
           </div>
         ))}
+        <span className={`${!totalResults ? 'hidden' : ''} ml-auto mr-3 flex items-center`}>
+          <i className='fad fa-books mr-2'></i>
+          {totalResults} results
+        </span>
       </div>
     )
   } else {

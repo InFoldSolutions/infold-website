@@ -9,7 +9,7 @@ export default function Interests({ interests, saveInterests }: { interests: str
   const [selected, setSelected] = useState<string[]>([])
 
   return (
-    <div className='flex items-center flex-col my-auto py-6 md:py-12'>
+    <div className='flex items-center flex-col my-auto pt-6 pb-2 md:py-12'>
       <h3 className='text-2xl md:text-3xl font-bold mb-6 flex justify-center text-center items-center'>
         <i className='fad fa-newspaper mr-4 md:mr-6' /> Get The Full Story
       </h3>

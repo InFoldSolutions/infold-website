@@ -29,7 +29,6 @@ export default async function Topic({ params }: { params: { slug: string } }) {
         <div className='md:mr-auto w-full max-w-full max-w-[860px] lg:w-[860px]'>
           {!data && <div className='w-auto text-center p-2 px-3'>Loading topic ..</div>}
           {data && <TopicWrapper data={data} />}
-          <Footer />
         </div>
 
         <div className='sticky top-[100px] h-auto hidden lg:flex flex-col'>

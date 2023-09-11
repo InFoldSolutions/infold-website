@@ -62,7 +62,7 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
   }, [webSocket])
 
   return (
-    <article>
+    <article className='pb-2'>
       <h3 className={`${modal ? 'mr-4' : ''} mb-4 text-3xl font-bold`}>
         <span>{data.title}</span><br />
         <small className='text-sm'>Topic summarized from {data.sources.length} sources.</small>
