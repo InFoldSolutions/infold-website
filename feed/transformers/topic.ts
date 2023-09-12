@@ -25,7 +25,7 @@ export function transformTopic(data: any) {
     data.sentimentAgg = data.sources.reduce((aggregator: any, item: any) => {
       if (item.articles?.length > 0) {
         if (!item.articles[0].sentiment)
-          item.articles[0].sentiment = ['negative', 'positive', 'neutral'][getRandomInt(0,3)]
+          item.articles[0].sentiment = ['negative', 'positive', 'neutral'][getRandomInt(0, 3)]
 
         let articleSentiment = item.articles[0].sentiment
 
@@ -51,9 +51,17 @@ export function transformTopic(data: any) {
     })
   }
 
+  let keywords: any = [], uniqueKeywords: any = []
+
+  if (data.keywords?.data) {
+    keywords = data.keywords?.data?.filter(filterKeyword)
+    uniqueKeywords = [...new Map(keywords.map((item: any) => [item['keyword'], item])).values()]
+    uniqueKeywords.sort((a: any) => a.type === 'person' ? -1 : 1)
+  }
+
   return {
     ...data,
-    keywords: data.keywords?.data?.filter(filterKeyword),
+    keywords: uniqueKeywords,
   }
 }
 
