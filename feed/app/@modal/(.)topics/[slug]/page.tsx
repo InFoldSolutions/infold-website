@@ -7,8 +7,7 @@ import Modal from '@/components/modal'
 import TopicWrapper from '@/components/topic'
 import SentimentChart from '@/components/sentiment_chart'
 import Spinner from '@/components/spinner'
-
-import TrendingKeyword from '@/components/trending_keyword'
+import TopicKeywords from '@/components/topic_keywords'
 
 import { getTopic } from '@/helpers/api'
 
@@ -16,6 +15,7 @@ export default function TopicModal({ params }: { params: { slug: string } }) {
 
   let [isLoading, setIsLoading] = useState(true);
   let [data, setData] = useState<any>(null);
+  
 
   useEffect(() => {
     const fetchTopicData = async () => {
@@ -56,11 +56,7 @@ export default function TopicModal({ params }: { params: { slug: string } }) {
                 </div>
 
                 <div className='h-auto w-[280px] p-6 bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 hidden lg:flex flex-col rounded'>
-                  <ul>
-                    {(data.keywords && data.keywords.length > 0) && data.keywords.slice(0, 6).map((keyword: any, index: number) => (
-                      <TrendingKeyword keyword={keyword} key={index} />
-                    ))}
-                  </ul>
+                  <TopicKeywords data={data} />
                 </div>
               </div>
             </div>

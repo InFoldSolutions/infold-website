@@ -137,11 +137,12 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
     setEndOfFeed(false)
     setIsMenuOpen(false)
 
-    setFeedData([])
     setIsLoading(true)
 
     const fetchFeedData = async () => {
       let res: any;
+
+      setFeedData([])
 
       const keywords = searchParams.get('keywords')
       const endpoint = searchParams.get('sort')
@@ -159,13 +160,15 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
         setSearchTotalResults(res.meta.total_results)
       }
 
+      setIsLoading(false)
+
       const newTopKeywords = await getTopKeywords(bucket)
       setTopKeywordsData(newTopKeywords)
     }
 
     fetchFeedData()
-      .catch(console.error)
-      .finally(() => setTimeout(() => setIsLoading(false), 1))
+      .catch((error) => {console.error(error); setIsLoading(false)})
+
   }, [pathname, searchParams])
 
   // load more

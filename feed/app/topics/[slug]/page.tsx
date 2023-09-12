@@ -1,12 +1,11 @@
 import { Metadata } from 'next';
 
 import TopicWrapper from '@/components/topic'
-import Footer from '@/components/footer'
 import Container from '@/components/container'
 import SentimentChart from '@/components/sentiment_chart'
-import TrendingKeyword from '@/components/trending_keyword'
 
 import { getTopic } from '@/helpers/api'
+import TopicKeywords from '@/components/topic_keywords';
 
 export async function generateMetadata(
   { params }: { params: any }
@@ -38,11 +37,7 @@ export default async function Topic({ params }: { params: { slug: string } }) {
           </div>
 
           <div className='h-auto w-[280px] p-6 bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 hidden lg:flex flex-col rounded'>
-            <ul>
-              {data.keywords.length > 0 && data.keywords.slice(0, 6).map((keyword: any, index: number) => (
-                <TrendingKeyword keyword={keyword} key={index} />
-              ))}
-            </ul>
+            <TopicKeywords data={data} />
           </div>
         </div>
       </div>
