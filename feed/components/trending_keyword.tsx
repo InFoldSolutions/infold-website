@@ -18,8 +18,11 @@ export default function TrendingKeyword({ keyword }: { keyword: any }) {
         </span>
       </Link>
 
-      <div className='ml-auto cursor-pointer transition text-blue-500 opacity-10 group-hover/item:opacity-60 hover:opacity-100 flex items-center group/follow'>
-        <span className='group-hover/follow:underline'>Follow</span> <i className='fad fa-toggle-off ml-2' /> 
+      <div className='ml-auto cursor-pointer transition text-blue-500 opacity-30 group-hover/item:opacity-100 flex items-center group/follow'
+        title='Follow keyword'>
+        <span className='opacity-50 border-2 border-transparent group-hover/follow:opacity-100 group-hover/follow:border-blue-500 rounded-md'>
+          <i className='fad fa-layer-plus p-1' />
+        </span>
       </div>
     </li>
   )
