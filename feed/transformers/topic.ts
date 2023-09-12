@@ -56,7 +56,6 @@ export function transformTopic(data: any) {
   if (data.keywords?.data) {
     keywords = data.keywords?.data?.filter(filterKeyword)
     uniqueKeywords = [...new Map(keywords.map((item: any) => [item['keyword'], item])).values()]
-    uniqueKeywords.sort((a: any) => a.type === 'person' ? -1 : 1)
   }
 
   return {
