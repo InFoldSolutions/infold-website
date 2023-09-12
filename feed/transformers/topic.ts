@@ -51,6 +51,12 @@ export function transformTopic(data: any) {
     })
   }
 
+  /*data.politicsAgg = {
+    left: 23,
+    right: 77,
+    center: 42
+  }*/
+
   let keywords: any = [], uniqueKeywords: any = []
 
   if (data.keywords?.data) {

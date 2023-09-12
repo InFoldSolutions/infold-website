@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 
 import TopicWrapper from '@/components/topic'
 import Container from '@/components/container'
-import SentimentChart from '@/components/sentiment_chart'
+import TagsChart from '@/components/tags_chart'
 
 import { getTopic } from '@/helpers/api'
 import TopicKeywords from '@/components/topic_keywords';
@@ -31,10 +31,17 @@ export default async function Topic({ params }: { params: { slug: string } }) {
         </div>
 
         <div className='sticky top-4 h-auto hidden lg:flex flex-col'>
-          <div className='h-auto w-[280px] pt-4 px-4 bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 hidden lg:flex flex-col mb-4 rounded'>
-            <h3 className='text-2xl font-bold'>Sentiment</h3>
-            <SentimentChart aggregation={data.sentimentAgg} />
+          <div className='h-auto w-[280px] p-6 bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 hidden lg:flex flex-col mb-4 rounded'>
+            <h3 className='text-2xl font-bold mb-2'>Sentiment</h3>
+            <TagsChart aggregation={data.sentimentAgg} />
           </div>
+
+          {data.politicsAgg &&
+            <div className='h-auto w-[280px] p-6 bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 hidden lg:flex flex-col mb-4 rounded'>
+              <h3 className='text-2xl font-bold mb-2'>Politics</h3>
+              <TagsChart aggregation={data.politicsAgg} />
+            </div>
+          }
 
           <div className='h-auto w-[280px] p-6 bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 hidden lg:flex flex-col rounded'>
             <TopicKeywords data={data} />

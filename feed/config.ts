@@ -111,6 +111,39 @@ const config = {
     'World News', 'Ukraine', 'Taiwan', 'America', 'China', 'Europe', 'Tech', 'Business', 'Stocks', 'Space', 'Science', 'Crypto', 'Gaming', 'Cars', 'Programming', 'Fitness', 'Health', 'Sports', 'NBA', 'NFL', 'UFC'
   ],
 
+  'tagsAggs': {
+    'positive': {
+      'label': 'Positive',
+      'backgroundColor': 'rgba(22, 163, 74, 0.2)',
+      'borderColor': 'rgb(22, 163, 74)'
+    },
+    'negative': {
+      'label': 'Negative',
+      'backgroundColor': 'rgba(220, 38, 38, 0.2)',
+      'borderColor': 'rgb(220, 38, 38)'
+    }, 
+    'neutral': {
+      'label': 'Neutral',
+      'backgroundColor': 'rgba(100, 116, 139, 0.2)',
+      'borderColor': 'rgb(100, 116, 139)'
+    },
+    'left': {
+      'label': 'Left',
+      'backgroundColor': 'rgba(0, 0, 255, 0.2)',
+      'borderColor': 'rgb(0, 0, 255)'
+    }, 
+    'right': {
+      'label': 'Right',
+      'backgroundColor': 'rgba(255, 0, 0, 0.2)',
+      'borderColor': 'rgb(255, 0, 0)'
+    },
+    'center': {
+      'label': 'Center',
+      'backgroundColor': 'rgba(255, 255, 0, 0.2)',
+      'borderColor': 'rgb(255, 255, 0)'
+    }
+  },
+
   'api': {
     'url': 'https://api.infold.ai',
     'defaultLimit': 10,

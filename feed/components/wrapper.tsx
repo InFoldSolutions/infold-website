@@ -17,7 +17,7 @@ import Interests from '@/components/interests'
 import { getFeed, getSearchFeed, getTopKeywords, getInterestsFeed } from '@/helpers/api'
 import config from '@/config'
 
-let backButtonWasClicked = false;
+let backButtonWasClicked = false, fromTopic = false;
 
 export default function Wrapper({ initialFeedData, topKeywords, totalResults }: { initialFeedData: any, topKeywords: [], totalResults: number }) {
 
@@ -75,8 +75,11 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
       apply: (target, thisArg: any, argArray: any) => {
         const url = (argArray && argArray[2]) ? argArray[2] : null
 
-        if (url?.includes('/topics/'))
+        if (url?.includes('/topics/')) {
           document.body.style.overflowY = 'hidden' // disable scrolling when modal is open
+          fromTopic = true
+        } else
+          fromTopic = false
 
         return target.apply(thisArg, argArray);
       },
@@ -120,10 +123,10 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
 
   // query params and path change
   useEffect(() => {
-    if (backButtonWasClicked) {
-      backButtonWasClicked = false
+    if (backButtonWasClicked && fromTopic)
       return
-    }
+
+    backButtonWasClicked = false
 
     if (pathname.includes('/topics/'))
       return
@@ -167,7 +170,7 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
     }
 
     fetchFeedData()
-      .catch((error) => {console.error(error); setIsLoading(false)})
+      .catch((error) => { console.error(error); setIsLoading(false) })
 
   }, [pathname, searchParams])
 
@@ -216,9 +219,11 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
   return (
     <Container>
 
-      <div
-        className='sticky top-2 z-40 bg-gray-200 dark:bg-black mb-2 -mt-[2px] lg:mb-3 rounded text-base sm:text-lg sm:leading-relaxed md:text-xl md:leading-relaxed text-body-color'>
-        <Filters isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} totalResults={searchTotalResults} />
+      <div className='bg-gray-300 dark:bg-black sticky top-0 z-40 mb-2 -mt-[5px] lg:mb-3 pt-2'>
+        <div
+          className='bg-gray-200 dark:bg-black rounded text-base sm:text-lg sm:leading-relaxed md:text-xl md:leading-relaxed text-body-color'>
+          <Filters isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} totalResults={searchTotalResults} />
+        </div>
       </div>
 
       <div className='flex items-start flex-row'>
