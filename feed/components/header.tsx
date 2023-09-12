@@ -21,7 +21,7 @@ export default function Header() {
       <div className="relative w-full flex items-center justify-between flex">
         <div className='w-auto'>
           <Link href="/" className="navbar-logo flex items-center w-full">
-            <Image src="/assets/images/logo-infold-black.png" alt="InFold - logo" width={45} height={45} className="rounded mr-3 dark:-ml-1" />
+            <Image src="/assets/images/logo-infold-black.png" alt="InFold - logo" width={42} height={42} className="rounded mr-3 dark:-ml-1" />
             <span className='text-2xl'>InFold</span>
           </Link>
         </div>

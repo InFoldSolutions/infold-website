@@ -3,12 +3,14 @@
 
 import { useState, useEffect, UIEvent, useRef, useMemo, useCallback } from 'react'
 
+import { Suspense } from 'react'
 import { useSearchParams, usePathname } from 'next/navigation'
 import Link from 'next/link'
 
 import Container from '@/components/container'
 import Filters from '@/components/filters'
 import Feed from '@/components/feed'
+import Loading from '@/components/loading'
 import Spinner from '@/components/spinner'
 import Interests from '@/components/interests'
 
@@ -163,7 +165,7 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
 
     fetchFeedData()
       .catch(console.error)
-      .finally(() => setIsLoading(false))
+      .finally(() => setTimeout(() => setIsLoading(false), 1))
   }, [pathname, searchParams])
 
   // load more
@@ -212,25 +214,23 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
     <Container>
 
       <div
-        className='sticky top-2 z-40 bg-gray-200 dark:bg-black mb-2 -mt-[3px] lg:mb-3 rounded text-base sm:text-lg sm:leading-relaxed md:text-xl md:leading-relaxed text-body-color'>
+        className='sticky top-2 z-40 bg-gray-200 dark:bg-black mb-2 -mt-[2px] lg:mb-3 rounded text-base sm:text-lg sm:leading-relaxed md:text-xl md:leading-relaxed text-body-color'>
         <Filters isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} totalResults={searchTotalResults} />
       </div>
 
       <div className='flex items-start flex-row'>
         <div className={`flex md:mr-auto ${isSelectScreen || feedData.length === 0 ? 'm-auto flex-row' : 'flex-col'} min-h-[70vh] w-full max-w-full pb-4 max-w-[900px] lg:w-[900px] overflow-x-hidden`}>
-          {isLoading && !isSelectScreen &&
-            <div className='w-full justify-center my-auto flex items-center'>
-              <Spinner />Loading ...
-            </div>
+          {isLoading && !isSelectScreen && feedData.length === 0 &&
+            <Loading />
           }
 
           {isSelectScreen &&
             <Interests interests={config.interests} saveInterests={saveInterests} />
           }
 
-          {feedData?.length > 0 && !isLoading &&
+          <Suspense fallback={<Loading />}>
             <Feed data={feedData} />
-          }
+          </Suspense>
 
           {!isSelectScreen && feedData.length === 0 && !isLoading && loaded &&
             <div className='my-auto pl-2 text-center text-2xl w-full'>No topics found.</div>
