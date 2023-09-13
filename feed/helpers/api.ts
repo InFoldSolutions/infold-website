@@ -120,7 +120,7 @@ export async function getInterestsFeed(interests: string[], page: number = 1) {
 
 export async function getTopic(slug: string) {
   try {
-    const url = `${config.api.url}/topics/${slug}?group_limit=1`
+    const url = `${config.api.url}/topics/${slug}?group_limit=1&keyword_limit=30`
     const res = await fetch(url, { next: { revalidate: 60 } })
 
     if (!res.ok)
