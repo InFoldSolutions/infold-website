@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import Link from 'next/link';
 
-export default function Interests({ interests, saveInterests }: { interests: string[], saveInterests: any }) {
+export default function Interests({ interests, saveInterests, setSelectedInterests }: { interests: string[], saveInterests: any, setSelectedInterests: any }) {
 
   const [selected, setSelected] = useState<string[]>([])
 
@@ -33,7 +33,10 @@ export default function Interests({ interests, saveInterests }: { interests: str
         ))}
       </ul>
       <p className='mt-6 w-[50%] border-b-2 border-gray-200 border-dashed dark:border-gray-800 dark:border-opacity-80'></p>
-      <button className={`${selected.length > 3 ? 'bg-black dark:bg-white dark:text-black' : 'bg-gray-500 dark:bg-gray-500 dark:bg-opacity:80 cursor-not-allowed'} text-white font-bold py-2 px-4 rounded mt-5 flex items-center`} onClick={() => saveInterests(selected)}>
+      <button className={`${selected.length > 3 ? 'bg-black dark:bg-white dark:text-black' : 'bg-gray-500 dark:bg-gray-500 dark:bg-opacity:80 cursor-not-allowed'} text-white font-bold py-2 px-4 rounded mt-5 flex items-center`} onClick={() => {
+        saveInterests(selected)
+        setSelectedInterests(selected)
+      }}>
         Continue <i className={`fad ${selected.length > 3 ? 'fa-check-circle' : 'fa-ban'} ml-2`}></i>
       </button>
       <span className={`text-sm mt-2 ${selected.length > 3 ? 'hidden' : ''} `}>Select <b>{4 - selected.length}</b> more</span>

@@ -19,7 +19,7 @@ export default function TopicKeywords({ data }: { data: any }) {
         </span>
       }
       {showMore && (data.keywords && data.keywords.length > 6) &&
-        data.keywords.slice(6, 12).map((keyword: any, index: number) => (
+        data.keywords.slice(6).map((keyword: any, index: number) => (
           <TrendingKeyword keyword={keyword} key={index} />
         ))
       }

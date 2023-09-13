@@ -15,6 +15,7 @@ import Spinner from '@/components/spinner'
 import Interests from '@/components/interests'
 
 import { getFeed, getSearchFeed, getTopKeywords, getInterestsFeed } from '@/helpers/api'
+import { saveInterests, getInterests } from '@/helpers/localstorage'
 import config from '@/config'
 
 let backButtonWasClicked = false, fromTopic = false;
@@ -60,7 +61,7 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
 
   useEffect(() => {
     // @ts-ignore
-    setSelectedInterests(localStorage.getItem("interests") ? JSON.parse(localStorage.getItem("interests")) : [])
+    setSelectedInterests(getInterests())
 
     // router navigation back
     window.addEventListener("popstate", (e) => {
@@ -206,16 +207,6 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
     }
   }, [offset])
 
-  function saveInterests(interests: string[]) {
-    if (interests.length < 4)
-      return
-
-    localStorage.setItem("interests", JSON.stringify(interests));
-
-    // @ts-ignore
-    setSelectedInterests(interests)
-  }
-
   return (
     <Container>
 
@@ -233,7 +224,7 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
           }
 
           {isSelectScreen &&
-            <Interests interests={config.interests} saveInterests={saveInterests} />
+            <Interests interests={config.interests} saveInterests={saveInterests} setSelectedInterests={setSelectedInterests} />
           }
 
           <Suspense fallback={<Loading />}>
