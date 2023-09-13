@@ -249,21 +249,12 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
             </h3>
             <div className='pl-1'>
               <Keywords keywords={topKeywordsData} />
-
-              {/*topKeywordsData.length > 0 && topKeywordsData.map((keyword: any, index: number) => (
-                  <li className='group cursor-pointer mb-2 last:mb-0' key={index}>
-                    <Link href={`/?keywords=${keyword.keyword}`} className='pb-2 last:pb-0' prefetch={false}>
-                      <span className='font-bold block leading-4 group-hover:underline'>{keyword.keyword}</span>
-                      <small>{keyword.topics} Topics</small>
-                    </Link>
-                  </li>
-                ))*/}
             </div>
           </div>
 
           <div className={`h-auto w-[280px] p-4 mt-4 bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 hidden lg:flex flex-col rounded ${isSelectScreen || feedData.length === 0 ? 'lg:hidden' : ''} `}>
             <div className='flex items-center justify-center'>
-              <i className='fad fa-shield text-3xl mr-4' />
+              <i className='fad fa-shield-alt text-3xl mr-4' />
               <p className='text-xl mr-4'>
                 InFold Premium
               </p>

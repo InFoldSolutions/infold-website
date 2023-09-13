@@ -1,5 +1,3 @@
-import config from '@/config';
-
 import { getRandomInt } from '@/helpers/utils';
 import { filterKeyword } from '@/transformers/keyword';
 
@@ -39,7 +37,7 @@ export function transformTopic(data: any) {
           articleSentiment = 'negative'
         }
 
-        if (articleSentiment) // account for null
+        if (articleSentiment)
           aggregator[articleSentiment]++
       }
 
@@ -62,6 +60,9 @@ export function transformTopic(data: any) {
   if (data.keywords?.data) {
     keywords = data.keywords?.data?.filter(filterKeyword)
     uniqueKeywords = [...new Map(keywords.map((item: any) => [item['keyword'], item])).values()]
+    uniqueKeywords.sort((a: any) => {
+      return data.title.toLowerCase().includes(a.keyword.toLowerCase()) ? -1 : 0
+    })
   }
 
   return {
