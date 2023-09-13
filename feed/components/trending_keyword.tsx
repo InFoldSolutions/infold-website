@@ -7,6 +7,7 @@ import Link from 'next/link'
 import Keyword from '@/components/keyword';
 
 import { getInterests, addInterest, removeInterest } from '@/helpers/localstorage';
+import Tooltip from './tooltip';
 
 export default function TrendingKeyword({ keyword }: { keyword: any }) {
   const [interests, setInterests] = useState<string[]>([])
@@ -41,10 +42,12 @@ export default function TrendingKeyword({ keyword }: { keyword: any }) {
       </Link>
 
       <div className='ml-auto cursor-pointer transition opacity-30 group-hover/item:opacity-100 flex items-center group/follow'
-        title={`${interests.includes(keyword.keyword) ? 'Unfollow keyword' : 'Follow keyword'}`} onClick={() => toggleInterest(keyword.keyword)}>
-        <span className={`opacity-50 border-2 border-transparent group-hover/follow:opacity-100 group-hover/follow:border-blue-500 group-hover/follow:text-blue-500 rounded-md ${interests.includes(keyword.keyword) ? 'opacity-100 text-blue-500' : ''}`}>
-          <i className={`fad ${interests.includes(keyword.keyword) ? 'fa-layer-group group-hover/follow:fa-layer-minus' : 'fa-layer-plus'}  p-1`} />
-        </span>
+           onClick={() => toggleInterest(keyword.keyword)}>
+        <Tooltip message={`${interests.includes(keyword.keyword) ? 'Unfollow' : 'Follow'}`} bottom={1} left={10} padding={1}>
+          <span className={`opacity-50 border-2 border-transparent group-hover/follow:opacity-100 group-hover/follow:border-blue-500 group-hover/follow:text-blue-500 rounded-md ${interests.includes(keyword.keyword) ? 'opacity-100 text-blue-500' : ''}`}>
+            <i className={`fad ${interests.includes(keyword.keyword) ? 'fa-layer-group group-hover/follow:fa-layer-minus' : 'fa-layer-plus'}  p-1`} />
+          </span>
+        </Tooltip>
       </div>
     </li>
   )
