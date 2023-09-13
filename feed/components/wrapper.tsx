@@ -5,7 +5,6 @@ import { useState, useEffect, UIEvent, useRef, useMemo, useCallback } from 'reac
 
 import { Suspense } from 'react'
 import { useSearchParams, usePathname } from 'next/navigation'
-import Link from 'next/link'
 
 import Container from '@/components/container'
 import Filters from '@/components/filters'
@@ -13,6 +12,7 @@ import Feed from '@/components/feed'
 import Loading from '@/components/loading'
 import Spinner from '@/components/spinner'
 import Interests from '@/components/interests'
+import Keywords from '@/components/keywords'
 
 import { getFeed, getSearchFeed, getTopKeywords, getInterestsFeed } from '@/helpers/api'
 import { saveInterests, getInterests } from '@/helpers/localstorage'
@@ -124,10 +124,11 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
 
   // query params and path change
   useEffect(() => {
-    if (backButtonWasClicked && fromTopic)
+    if (backButtonWasClicked && fromTopic) {
+      fromTopic = false
+      backButtonWasClicked = false
       return
-
-    backButtonWasClicked = false
+    }
 
     if (pathname.includes('/topics/'))
       return
@@ -240,25 +241,40 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
           }
         </div>
 
-        <div className={`sticky top-20 h-auto w-[280px] p-4 bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 hidden lg:flex flex-col rounded ${isSelectScreen || feedData.length === 0 ? 'lg:hidden' : ''} `}>
-          <h3 className='mb-5 text-2xl font-bold flex items-center'>
-            <i className='fad fa-rocket-launch mr-3 text-xl'></i>
-            Trending
-          </h3>
-          <div className='pl-1'>
-            <ul>
-              {topKeywordsData.length > 0 && topKeywordsData.map((keyword: any, index: number) => (
-                <li className='group cursor-pointer mb-2 last:mb-0' key={index}>
-                  <Link href={`/?keywords=${keyword.keyword}`} className='pb-2 last:pb-0' prefetch={false}>
-                    <span className='font-bold block leading-4 group-hover:underline'>{keyword.keyword}</span>
-                    <small>{keyword.topics} Topics</small>
-                  </Link>
-                </li>
-              ))}
-            </ul>
+        <div className='sticky top-20'>
+          <div className={`h-auto w-[280px] p-4 bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 hidden lg:flex flex-col rounded ${isSelectScreen || feedData.length === 0 ? 'lg:hidden' : ''} `}>
+            <h3 className='mb-5 text-2xl font-bold flex items-center'>
+              <i className='fad fa-rocket-launch mr-3 text-xl'></i>
+              Trending
+            </h3>
+            <div className='pl-1'>
+              <Keywords keywords={topKeywordsData} />
+
+              {/*topKeywordsData.length > 0 && topKeywordsData.map((keyword: any, index: number) => (
+                  <li className='group cursor-pointer mb-2 last:mb-0' key={index}>
+                    <Link href={`/?keywords=${keyword.keyword}`} className='pb-2 last:pb-0' prefetch={false}>
+                      <span className='font-bold block leading-4 group-hover:underline'>{keyword.keyword}</span>
+                      <small>{keyword.topics} Topics</small>
+                    </Link>
+                  </li>
+                ))*/}
+            </div>
+          </div>
+
+          <div className={`h-auto w-[280px] p-4 mt-4 bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 hidden lg:flex flex-col rounded ${isSelectScreen || feedData.length === 0 ? 'lg:hidden' : ''} `}>
+            <div className='flex items-center justify-center'>
+              <i className='fad fa-shield text-3xl mr-4' />
+              <p className='text-xl mr-4'>
+                InFold Premium
+              </p>
+            </div>
+            <div className='flex items-center justify-center text-sm mt-2'>
+              The best InFold experience.
+            </div>
+            <button className='rounded-md bg-black text-white dark:bg-white dark:text-black p-2 w-full text-center mt-3'>Try Now</button>
           </div>
         </div>
       </div>
-    </Container>
+    </Container >
   )
 }

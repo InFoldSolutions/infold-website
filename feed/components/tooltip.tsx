@@ -15,7 +15,7 @@ export default function Tooltip({ message, top, left, right, bottom, padding, mi
         {message}
       </span>
 
-      <span className='hidden bottom-1 left-10 top-20 right-6 min-w-[220px]'></span>
+      <span className='hidden bottom-1 p-3 left-10 top-20 right-6 min-w-[220px] w-0 h-0'></span>
     </div>
   )
 }

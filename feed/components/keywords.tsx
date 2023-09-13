@@ -1,93 +1,33 @@
 'use client'
 
-import { UIEvent, useState, useEffect } from 'react';
+import { useState } from 'react';
 
-import Keyword from '@/components/keyword'
-import Arrow from '@/components/arrow'
+import Keyword from '@/components/keyword';
 
-import { findParentByCls } from '@/helpers/utils';
+export default function Keywords({ keywords }: { keywords: any }) {
 
-export default function Keywords({ item }: { item: any }) {
-
-  let [isDesktop, setIsDesktop] = useState(false)
-
-  useEffect(() => {
-    setIsDesktop(window.innerWidth > 820)
-  }, [])
-
-  function nextClickHandler(e: UIEvent<HTMLDivElement>) {
-    e.preventDefault();
-    
-    let target = findParentByCls(e.target as HTMLElement, 'arrow', 4);
-    const element = target.parentElement?.parentElement?.querySelector('.keywords');
-
-    if (!element) return console.warn('Keywords: nextClickHandler: element not found')
-
-    const x = element.clientWidth / 2 + element.scrollLeft + 0;
-
-    element.scroll({
-      left: x,
-      behavior: 'smooth',
-    });
-  }
-
-  function prevClickHandler(e: UIEvent<HTMLDivElement>) {
-    e.preventDefault();
-
-    let target = findParentByCls(e.target as HTMLElement, 'arrow', 4);
-    const element = target.parentElement?.parentElement?.querySelector('.keywords');
-
-    if (!element) return console.warn('Keywords: prevClickHandler: element not found')
-
-    const x = element.clientWidth / 2 - element.scrollLeft + 0;
-
-    element.scroll({
-      left: -x,
-      behavior: 'smooth',
-    });
-  }
-
-  function onScrollHandler(e: UIEvent<HTMLUListElement>) {
-    const element = e.target as HTMLElement;
-
-    const leftArrow = element.parentElement?.querySelector('.left.arrow') as HTMLElement
-    const rightArrow = element.parentElement?.querySelector('.right.arrow') as HTMLElement
-
-    if (!leftArrow || !rightArrow) return;
-
-    if (element.scrollLeft === 0)
-      leftArrow.classList.add('hidden')
-
-    if (element.scrollLeft > 0)
-      leftArrow.classList.remove('hidden')
-
-    if ((element.scrollLeft + element.clientWidth) < element.scrollWidth)
-      rightArrow.classList.remove('hidden')
-
-    if ((element.scrollLeft + element.clientWidth + 10) >= element.scrollWidth)
-      rightArrow.classList.add('hidden')
-  }
-
-  const filteredKeywords = [...new Map(item.keywords.map((item: any) => [item['keyword'], item])).values()].slice(0, 20);
-
-  // onClick={onKeywordClick} on ul
+  let [showMore, setShowMore] = useState(false);
 
   return (
-    <div className='relative'>
-      {isDesktop &&
-        <div>
-          <Arrow direction='left' clickFunction={prevClickHandler} visible={false} />
-          <Arrow direction='right' clickFunction={nextClickHandler} visible={(filteredKeywords.length > 3)} />
-        </div>
+    <ul>
+      {!showMore && (keywords && keywords.length > 0) && keywords.slice(0, 6).map((keyword: any, index: number) => (
+        <Keyword keyword={keyword} key={index} />
+      ))}
+      {!showMore &&
+        <span className='cursor-pointer text-center text-sm text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 flex items-center' onClick={() => setShowMore(true)}>
+          Show more <i className='fad fa-long-arrow-alt-right ml-2 mt-px' />
+        </span>
       }
-
-      <ul className='max-w-screen-2xl flex flex-nowrap gap-x-2 overflow-x-scroll no-scrollbar keywords' onScroll={onScrollHandler}>
-        {filteredKeywords.map((keyword: any, k: number) => (
-          <li className='group w-auto flex items-center items-stretch whitespace-nowrap' key={k}>
-            <Keyword analyzed={keyword.analyzed} keyword={keyword.keyword} />
-          </li>
-        ))}
-      </ul>
-    </div>
+      {showMore && (keywords && keywords.length > 6) &&
+        keywords.slice(6).map((keyword: any, index: number) => (
+          <Keyword keyword={keyword} key={index} />
+        ))
+      }
+      {showMore &&
+        <span className='cursor-pointer text-center text-sm text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 flex items-center' onClick={() => setShowMore(false)}>
+          <i className='fad fa-long-arrow-alt-left mr-2 mt-px' /> {'Back'}
+        </span>
+      }
+    </ul>
   )
 }

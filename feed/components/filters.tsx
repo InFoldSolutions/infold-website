@@ -114,7 +114,7 @@ export default function Filters({ isMenuOpen, setIsMenuOpen, totalResults }: { i
             <div className='dark:bg-gray-800 dark:bg-opacity-60 py-2 rounded'>
               {topOptions.map((option: any, index: number) => (
                 <span className='group cursor-pointer flex justify-center' key={index}>
-                  <Link className={`${(endpoint === 'top' && bucket === option.value) ? 'underline' : ''} group-hover:underline`} href={`?sort=top&time=${option.value}`} prefetch={false}>{option.label}</Link>
+                  <Link className={`${(endpoint === 'top' && bucket === option.value) ? 'underline' : ''} group-hover:underline block w-full text-center`} href={`?sort=top&time=${option.value}`} prefetch={false}>{option.label}</Link>
                 </span>
               ))}
             </div>

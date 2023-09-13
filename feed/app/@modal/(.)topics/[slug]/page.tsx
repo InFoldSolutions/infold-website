@@ -7,7 +7,8 @@ import Modal from '@/components/modal'
 import TopicWrapper from '@/components/topic'
 import TagsChart from '@/components/tags_chart'
 import Spinner from '@/components/spinner'
-import TopicKeywords from '@/components/topic_keywords'
+import Keywords from '@/components/keywords'
+import Premium from '@/components/premium'
 
 import { getTopic } from '@/helpers/api'
 
@@ -62,10 +63,12 @@ export default function TopicModal({ params }: { params: { slug: string } }) {
                   </div>
                 }
 
-                <div className='h-auto w-[280px] p-5 bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 hidden lg:flex flex-col rounded'>
+                <div className='h-auto w-[280px] p-5 bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 hidden lg:flex flex-col mb-4 rounded'>
                   <h3 className='text-2xl font-bold mb-5'>Keywords</h3>
-                  <TopicKeywords data={data} />
+                  <Keywords keywords={data.keywords} />
                 </div>
+
+                <Premium />
               </div>
             </div>
           }
