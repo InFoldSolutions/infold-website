@@ -41,8 +41,8 @@ export default function Keywords({ keywords }: { keywords: any }) {
           </span>
         }
         {currentPage > 1 && moreKeywords &&
-          <span className='cursor-pointer text-center text-sm text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 flex items-center ml-1.5 pl-1.5 border-gray-300 border-l-2 border-dashed dark:border-gray-800 dark:border-opacity-80' onClick={() => setCurrentPage(current => current + 1)}>
-            {'MoreN'} <i className='fad fa-long-arrow-alt-right ml-2 mt-px' />
+          <span className='cursor-pointer text-center text-sm text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 flex items-center ml-2 pl-2 border-gray-100 border-l-2 border-dashed dark:border-gray-800 dark:border-opacity-80' onClick={() => setCurrentPage(current => current + 1)}>
+            {'More'} <i className='fad fa-long-arrow-alt-right ml-2 mt-px' />
           </span>
         }
       </div>
