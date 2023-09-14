@@ -61,7 +61,10 @@ export function transformTopic(data: any) {
     keywords = data.keywords?.data?.filter(filterKeyword)
     uniqueKeywords = [...new Map(keywords.map((item: any) => [item['keyword'], item])).values()]
     uniqueKeywords.sort((a: any) => {
-      return data.title.toLowerCase().includes(a.keyword.toLowerCase()) ? -1 : 0
+      if (data.title.toLowerCase().includes(a.keyword.toLowerCase()) || data.outline.join('. ').toLowerCase().includes(a.keyword.toLowerCase()))
+        return -1 
+      else
+        return 0
     })
   }
 
