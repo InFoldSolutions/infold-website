@@ -64,10 +64,11 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
     setSelectedInterests(getInterests())
 
     // router navigation back
-    window.addEventListener("popstate", (e) => {
-      if (!backButtonWasClicked) {
-        document.body.style.overflowY = 'scroll' // enable scrolling when modal is closed
+    window.addEventListener("popstate", () => {
+      if (!backButtonWasClicked && fromTopic) {
+        document.body.style.overflowY = 'scroll' // re-enable scrolling when modal is closed
         backButtonWasClicked = true
+        fromTopic = false
       }
     })
 
@@ -124,8 +125,7 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
 
   // query params and path change
   useEffect(() => {
-    if (backButtonWasClicked && fromTopic) {
-      fromTopic = false
+    if (backButtonWasClicked) {
       backButtonWasClicked = false
       return
     }
@@ -242,7 +242,7 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
         </div>
 
         <div className='sticky top-20'>
-          <div className={`h-auto w-[280px] p-4 bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 hidden lg:flex flex-col rounded ${isSelectScreen || feedData.length === 0 ? 'lg:hidden' : ''} `}>
+          <div className={`h-auto w-[280px] p-4 bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 hidden lg:flex flex-col rounded ${isSelectScreen ? 'lg:hidden' : ''} `}>
             <h3 className='mb-5 text-2xl font-bold flex items-center'>
               <i className='fad fa-rocket-launch mr-3 text-xl'></i>
               Trending
@@ -252,7 +252,7 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
             </div>
           </div>
 
-          <div className={`h-auto w-[280px] p-4 mt-4 bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 hidden lg:flex flex-col rounded ${isSelectScreen || feedData.length === 0 ? 'lg:hidden' : ''} `}>
+          <div className={`h-auto w-[280px] p-4 mt-4 bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 hidden lg:flex flex-col rounded ${isSelectScreen ? 'lg:hidden' : ''} `}>
             <div className='flex items-center justify-center'>
               <i className='fad fa-shield-alt text-3xl mr-4' />
               <p className='text-xl mr-4'>
