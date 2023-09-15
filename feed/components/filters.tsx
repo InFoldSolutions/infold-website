@@ -98,15 +98,15 @@ export default function Filters({ isMenuOpen, setIsMenuOpen, totalResults, showT
         }
         <div className='flex items-center'>
           <Link className='group flex items-center' href={`/`} prefetch={false}>
-            <i className='fad fa-head-side-brain mr-3'></i>
-            <span className={`${!endpoint ? 'underline' : ''} group-hover:underline`}>Feed</span>
+            <i className={`${!endpoint ? 'mr-3' : 'md:mr-3'} fad fa-head-side-brain`}></i>
+            <span className={`${!endpoint ? 'underline flex' : 'hidden md:flex'} group-hover:underline`}>Feed</span>
           </Link>
           <span className='ml-3 mr-3'>|</span>
         </div>
         <div className='flex items-center'>
           <Link className='group flex items-center' href={`?sort=rising`} prefetch={false}>
-            <i className='fad fa-pepper-hot mr-3'></i>
-            <span className={`${endpoint === 'rising' ? 'underline' : ''} group-hover:underline`}>Rising</span>
+            <i className={`fad fa-pepper-hot ${endpoint === 'rising' ? 'mr-3' : 'md:mr-3'}`}></i>
+            <span className={`${endpoint === 'rising' ? 'underline flex' : 'hidden md:flex'} group-hover:underline`}>Rising</span>
           </Link>
           <span className='ml-3 mr-3'>|</span>
         </div>
@@ -115,7 +115,7 @@ export default function Filters({ isMenuOpen, setIsMenuOpen, totalResults, showT
             <button className="group flex w-full justify-center gap-x-1.5 rounded items-center"
               onClick={() => { setIsMenuOpen((current: boolean) => !current) }}>
               <i className='fad fa-fire mr-1'></i>
-              <span className={`${endpoint === 'top' ? 'underline' : ''} group-hover:underline`}>Top</span>
+              <span className={`${endpoint === 'top' ? 'underline flex' : 'hidden md:flex'} group-hover:underline`}>Top</span>
               <svg className={`${(isMenuOpen) ? 'rotate-180' : ''} h-5 w-5 text-gray-400`} viewBox="0 0 20 20" fill="currentColor">
                 <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" />
               </svg>
