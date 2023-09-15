@@ -24,7 +24,7 @@ export default function Keyword({ keyword }: { keyword: any }) {
       label = "Wikipedia";
     }
   } else {
-    url = `https://www.google.com/search?q=${keyword}`;
+    url = `https://www.google.com/search?q=${keyword.keyword}`;
     icon = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/1200px-Google_%22G%22_Logo.svg.png";
     label = "Google";
   }

@@ -63,8 +63,10 @@ export function transformTopic(data: any) {
     uniqueKeywords.sort((a: any) => {
       if (data.title.toLowerCase().includes(a.keyword.toLowerCase()) || data.outline.join('. ').toLowerCase().includes(a.keyword.toLowerCase()))
         return -1 
-      else
+      else if (a.type === 'person')
         return 0
+      else
+        return 1
     })
   }
 
