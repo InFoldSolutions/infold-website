@@ -71,6 +71,7 @@ function Comment({ socialItem }: { socialItem: any }) {
         <div className='truncate-4-lines w-full'>
           {socialItem.body}
         </div>
+        
         <span className={`absolute top-2 right-2 ${sentimentData.bg} w-2 h-2 opacity-80 rounded`}></span>
       </div>
     </li>

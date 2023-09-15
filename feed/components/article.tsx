@@ -13,7 +13,7 @@ export default function RelatedArticle({ item, last }: IRelatedArticle) {
   const firstArticle: any = item.articles[0]
 
   return (
-    <li className={`${last ? 'border-b-0' : 'border-b-2'} p-4 list-none rounded-md border-gray-200 dark:border-gray-800 dark:border-opacity-80 border-dashed last:border-b-0 last:mb-0 group`}
+    <li className={`${last ? 'border-b-0' : 'border-b-2'} py-5 list-none rounded-md border-gray-200 dark:border-gray-800 dark:border-opacity-80 border-dashed last:border-b-0 last:mb-0 group`}
       title={item.title}>
       <div className="flex items-center mb-3">
         <span>
