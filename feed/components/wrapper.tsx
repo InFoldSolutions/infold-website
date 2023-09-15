@@ -32,6 +32,7 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
   const [loaded, setLoaded] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [searchTotalResults, setSearchTotalResults] = useState(totalResults)
+  const [showToTop, setShowToTop] = useState(false)
 
   const pathname = usePathname()
   const searchParams = useSearchParams()
@@ -51,13 +52,18 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
     const scrollTop = window.scrollY
     const isBottom = scrollTop + innerHeight + 50 >= scrollHeight
 
+    if (scrollTop > 90 && !showToTop)
+      setShowToTop(true)
+    else if (scrollTop <= 90 && showToTop)
+      setShowToTop(false)
+
     if (scrollHeight <= innerHeight)
       return
 
     if (isBottom && !isLoadMore)
       setOffset((old: number) => old + 1)
 
-  }, [isSelectScreen, feedData, isLoadMore])
+  }, [isSelectScreen, feedData, isLoadMore, showToTop, setShowToTop])
 
   useEffect(() => {
     // @ts-ignore
@@ -214,7 +220,7 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
       <div className='bg-gray-300 dark:bg-black sticky top-0 z-40 mb-2 -mt-[5px] lg:mb-3 pt-2'>
         <div
           className='bg-gray-200 dark:bg-black rounded text-base sm:text-lg sm:leading-relaxed md:text-xl md:leading-relaxed text-body-color'>
-          <Filters isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} totalResults={searchTotalResults} />
+          <Filters isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} totalResults={searchTotalResults} showToTop={showToTop} />
         </div>
       </div>
 

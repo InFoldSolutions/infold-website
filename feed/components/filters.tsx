@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef } from 'react'
+import { useRef, useCallback } from 'react'
 
 import Link from 'next/link'
 import { useSearchParams, useRouter } from 'next/navigation'
@@ -16,7 +16,7 @@ const topOptions = [
   { label: 'This Year', value: 'year' },
 ]
 
-export default function Filters({ isMenuOpen, setIsMenuOpen, totalResults }: { isMenuOpen: boolean, setIsMenuOpen: any, totalResults: number }) {
+export default function Filters({ isMenuOpen, setIsMenuOpen, totalResults, showToTop }: { isMenuOpen: boolean, setIsMenuOpen: any, totalResults: number, showToTop: boolean }) {
   const router = useRouter()
   const searchParams: any = useSearchParams()
 
@@ -26,7 +26,11 @@ export default function Filters({ isMenuOpen, setIsMenuOpen, totalResults }: { i
 
   const searchInputRef = useRef(null)
 
-  function removeKeywordFilter(e: any) {
+  const backToTop = useCallback(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [])
+
+  const removeKeywordFilter = useCallback((e: any) => {
     e.preventDefault();
 
     let target = e.target;
@@ -43,9 +47,11 @@ export default function Filters({ isMenuOpen, setIsMenuOpen, totalResults }: { i
       router.push(`/?keywords=${queryString}`)
     else
       router.push('/')
-  }
+  }, [searchParams, router])
 
-  function onKeyDown(e: any) {
+  const onKeyDown = useCallback((e: any) => {
+    e.preventDefault();
+
     if (e.key === 'Enter') {
       // @ts-ignore
       const keywordText = searchInputRef?.current?.value.trim()
@@ -55,7 +61,7 @@ export default function Filters({ isMenuOpen, setIsMenuOpen, totalResults }: { i
       else
         router.push('/')
     }
-  }
+  }, [searchInputRef, router])
 
   if (keywords) {
     return (
@@ -83,6 +89,13 @@ export default function Filters({ isMenuOpen, setIsMenuOpen, totalResults }: { i
   } else {
     return (
       <div className='relative max-w-screen-2xl flex py-3 px-5 pr-3 dark:bg-gray-800 dark:bg-opacity-60 rounded items-center'>
+        {showToTop &&
+          <div className='flex items-center cursor-pointer group/top' onClick={backToTop}>
+            <i className='fad fa-chevron-circle-up mr-3 text-xl' />
+            <span className='group-hover/top:underline'>Top</span>
+            <span className='ml-3 mr-3'>|</span>
+          </div>
+        }
         <div className='flex items-center'>
           <Link className='group flex items-center' href={`/`} prefetch={false}>
             <i className='fad fa-head-side-brain mr-3'></i>
