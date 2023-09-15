@@ -8,8 +8,7 @@ import ReconnectingWebSocket from 'reconnecting-websocket'
 
 import config from '@/config';
 
-import Timeline from '@/components/timeline'
-import Column from '@/components/article_column'
+import ArticleList from '@/components/article_list'
 import Outline from '@/components/outline'
 import ChatBot from '@/components/chatbot'
 
@@ -76,41 +75,7 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
 
       <ChatBot onSubmit={onSubmit} chatMessages={chatMessages} />
 
-      {filteredData?.social?.length > 0 &&
-        <div>
-          <h3 className='text-2xl font-bold text-left mt-6'>
-            Social Feedback
-          </h3>
-
-          <Timeline data={filteredData} />
-        </div>
-      }
-
-      <h3 className='text-2xl font-bold text-left mt-6'>
-        News Coverage
-      </h3>
-
-      <div className='flex md:space-x-4 mt-4 justify-stretch flex-col md:flex-row'>
-        {data.sentimentAgg['positive'] > 0 &&
-          <Column data={filterData(data.sources, data.social, 'positive')}
-            sentiment='positive'
-            expanded={expandArticles} />}
-
-        {data.sentimentAgg['neutral'] > 0 &&
-          <Column data={filterData(data.sources, data.social, 'neutral')}
-            sentiment='neutral'
-            expanded={expandArticles} />}
-
-        {data.sentimentAgg['negative'] > 0 &&
-          <Column data={filterData(data.sources, data.social, 'negative')}
-            sentiment='negative'
-            expanded={expandArticles} />}
-      </div>
-
-      <div className={`${expandArticles ? 'hidden' : ''} w-[98%] mx-auto rounded-md -mb-2 flex items-center justify-center cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 dark:hover:bg-opacity-40`}
-        onClick={toggleExpandedArticles}>
-        <span className='py-3'>more articles..</span>
-      </div>
+      <ArticleList data={filteredData} />
     </article>
   )
 }

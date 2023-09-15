@@ -74,9 +74,6 @@ export default function Timeline({ data }: { data: any }) {
   return (
     <div className='relative mt-4'>
       <div className='relative'>
-
-        <div className='bottom-2 absolute h-px bg-transparent w-full border-dashed border-b-2 border-gray-200 dark:border-gray-800 dark:border-opacity-80'></div>
-
         {isDesktop &&
           <div>
             <Arrow direction='left' clickFunction={prevClickHandler} visible={false} />
@@ -86,13 +83,13 @@ export default function Timeline({ data }: { data: any }) {
 
         <span className='bg-green-600 bg-red-600 bg-slate-500 text-slate-500 text-red-600 text-green-600 hidden'></span>
 
-        <div className='timeline relative max-w-screen-2xl overflow-x-scroll no-scrollbar pb-6' onScroll={onScrollHandler}>
+        <div className='timeline relative max-w-screen-2xl overflow-x-scroll no-scrollbar' onScroll={onScrollHandler}>
           <ul className='flex flex-nowrap h-[170px] relative'>
             {data.social && data.social.map((item: any, index: number) => {
               const sentimentData = (item.sentiment && sentiment[item.sentiment]) ? sentiment[item.sentiment] : sentiment['neutral']
 
               return (
-                <li className={`group rounded mr-4 min-w-[275px] group select-none cursor-pointer relative items-center relative before:content-[""] before:absolute before:rounded before:-bottom-[21px] before:left-[70px] before:w-3 before:h-3 before:bg-white before:border-[50%]`}
+                <li className={`group rounded mr-4 min-w-[275px] group select-none cursor-pointer relative items-center relative`}
                   onClick={() => window.open(item.url, '_blank')}
                   key={index} >
                   <div className='bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 group-hover:bg-opacity-80 group-hover:dark:bg-opacity-80 p-4 rounded-md text-sm relative overflow-hidden'>
