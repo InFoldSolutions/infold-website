@@ -17,7 +17,7 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
   const [chatMessages, setChatMessages] = useState<any>([])
   const [latestArticles] = useState<any>(filterData(data.sources, data.social, 'latest'))
   const [popularArticles] = useState<any>(filterData(data.sources, data.social, 'popular'))
-  const [initialCount] = useState(popularArticles.sources.length > 4 ? 4 : popularArticles.sources.length > 0 ? popularArticles.sources.length : 4)
+  const [initialCount] = useState(popularArticles.sources.length > 0 ? popularArticles.sources.length : 5)
   let [isDesktop, setIsDesktop] = useState(false)
 
   const pathname = usePathname()

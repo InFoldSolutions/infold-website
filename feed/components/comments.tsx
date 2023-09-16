@@ -59,13 +59,8 @@ function Comment({ socialItem }: { socialItem: any }) {
             <Image src={'/assets/images/reddit.svg'} alt={socialItem.name || socialItem.source.name} width={35} height={35} className='h-[20px] w-auto max-w-none' />
           </span>
           <span className='leading-4'>{`u/${socialItem.author}`}</span>
-          <span className='leading-4 ml-2'>
-            <TimeAgo
-              date={new Date(socialItem.added_at).getTime()}
-              className='text-gray-600 dark:text-gray-300 text-xs'
-            />
-          </span>
-          <span className='ml-3 flex items-center text-xs'>
+          <span className='ml-2 mr-2'>·</span>
+          <span className='flex items-center text-xs'>
             <i className={`fas fa-arrow-alt-up text-gray-400 dark:text-gray-600 mr-1`} />
             {socialItem.score}
           </span>

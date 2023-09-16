@@ -74,7 +74,7 @@ export default function Filters({ isMenuOpen, setIsMenuOpen, totalResults, showT
             title="Remove filter for keyword"
             onClick={removeKeywordFilter}
             key={index}>
-            <i className='fad fa-minus-square mr-2 text-gray-800 dark:text-gray-200' />
+            <i className='fad fa-window-close mr-2 text-gray-800 dark:text-gray-200' />
             {keyword}
           </div>
         ))}
