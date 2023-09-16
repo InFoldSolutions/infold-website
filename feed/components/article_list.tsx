@@ -13,7 +13,7 @@ export default function ArticleList({ sources, initialCount = 4 }: { sources: an
   )
 
   return (
-    <div className='flex flex-col'>
+    <div className='flex flex-col p-1 md:px-2'>
       <ul className='list-inside list-disc min-h-[100px]'>
         {sources.length === 0 && <li className='w-full justify-center mt-24 pl-2 pt-2 flex items-center justify-center'><Spinner /> Loading articles</li>}
         {sources.slice(0, initialCount + 1).map((item: any, index: number) => {
