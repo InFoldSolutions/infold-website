@@ -84,7 +84,7 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
         <div className='lg:flex'>
           <div className='lg:basis-1/2 lg:mr-4'>
             <div className={`p-2 px-3 mt-4 items-center justify-center bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 rounded hidden lg:flex`}>
-              <i className='fad fa-comment-alt-lines mr-2' /> Popular
+              <i className='fad fa-comments mr-2' /> Popular
 
               <span className='ml-auto flex items-center'>
                 <i className={`fad fa-chart-bar mr-2`} />

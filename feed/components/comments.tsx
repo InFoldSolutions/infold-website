@@ -43,12 +43,6 @@ export default function SocialComments({ data }: { data: any }) {
           return <Comment socialItem={socialItem} key={index} />
         })}
       </ul>
-
-      {expandComments &&
-        <div className='w-[98%] mx-auto rounded-md mt-5 flex items-center justify-center cursor-pointer hover:underline'>
-          <span className='py-1 cursor-pointer hover:underline' onClick={() => setExpandComments(false)}>less ..</span>
-        </div>
-      }
     </div>
 
   )
@@ -76,7 +70,7 @@ function Comment({ socialItem }: { socialItem: any }) {
             {socialItem.score}
           </span>
         </div>
-        <div className='truncate-4-lines w-full'>
+        <div className='truncate-4-lines w-auto'>
           {socialItem.body}
         </div>
 
