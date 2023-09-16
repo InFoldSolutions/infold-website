@@ -17,7 +17,7 @@ export default function RelatedArticle({ item, last }: IRelatedArticle) {
       title={item.title}>
       <div className="flex items-center mb-3">
         <span>
-          <Image src={item.source.logo} alt={item.source.name} width={80} height={80} className='w-8 h-8 max-w-none mr-2 rounded-full' />
+          <Image src={item.source.logo} alt={item.source.name} width={80} height={80} className='w-8 h-8 max-w-none mr-2' />
         </span>
         <span className='font-bold mr-1'>{item.source.name}</span>
         <span className="text-gray-600 dark:text-gray-300 text-xs ml-auto">

@@ -26,7 +26,7 @@ export default function ArticleList({ sources, initialCount = 4 }: { sources: an
               </li>
             )
 
-          return <RelatedArticle item={item} key={index} last={(index === initialCount - 1)} />
+          return <RelatedArticle item={item} key={index} last={index === initialCount - 1} />
         })}
       </ul>
       <ul className={`${!expandArticles ? 'hidden' : ''} list-inside list-disc -mx-2 border-t-2 border-gray-200 dark:border-gray-800 dark:border-opacity-80 border-dashed`}>

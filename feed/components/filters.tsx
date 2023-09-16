@@ -91,7 +91,7 @@ export default function Filters({ isMenuOpen, setIsMenuOpen, totalResults, showT
       <div className='relative flex py-3 px-5 pr-3 dark:bg-gray-800 dark:bg-opacity-60 rounded items-center'>
         {showToTop &&
           <div className='flex items-center cursor-pointer group/top' onClick={backToTop}>
-            <i className={`fad fa-chevron-circle-up md:mr-3 text-xl`} />
+            <i className={`fad fa-chevron-circle-up md:mr-3`} />
             <span className='group-hover/top:underline hidden md:flex'>Top</span>
             <span className='ml-3 mr-3'>|</span>
           </div>

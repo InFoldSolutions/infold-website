@@ -18,6 +18,7 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
   const [latestArticles] = useState<any>(filterData(data.sources, data.social, 'latest'))
   const [popularArticles] = useState<any>(filterData(data.sources, data.social, 'popular'))
   const [initialCount] = useState(popularArticles.sources.length > 4 ? 4 : popularArticles.sources.length > 0 ? popularArticles.sources.length : 4)
+  let [isDesktop, setIsDesktop] = useState(false)
 
   const pathname = usePathname()
   const topicName = pathname.split('/').pop()
@@ -38,6 +39,8 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
       })
     };
 
+    setIsDesktop(window.innerWidth > 820)
+
     return () => {
       webSocket.close();
     }
@@ -50,7 +53,7 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
   const onSubmit: MouseEventHandler = useCallback((e) => {
     if (!webSocket) return
 
-    if (chatMessages[chatMessages.length - 1].message === '')
+    if (chatMessages.length > 0 && chatMessages[chatMessages.length - 1].message === '')
       return
 
     setChatMessages((messages: any) => [...messages, {
@@ -81,7 +84,7 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
         <div className='lg:flex'>
           <div className='lg:basis-1/2 lg:mr-4'>
             <div className={`p-2 px-3 mt-4 items-center justify-center bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 rounded hidden lg:flex`}>
-              <i className='fad fa-comments mr-2' /> Popular
+              <i className='fad fa-comment-alt-lines mr-2' /> Popular
 
               <span className='ml-auto flex items-center'>
                 <i className={`fad fa-chart-bar mr-2`} />
@@ -89,7 +92,7 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
               </span>
             </div>
 
-            <ArticleList sources={popularArticles.sources} initialCount={initialCount} />
+            <ArticleList sources={popularArticles.sources} initialCount={(isDesktop) ? initialCount : popularArticles.sources.length} />
           </div>
 
           <div className='lg:basis-1/2 lg:ml-4'>
