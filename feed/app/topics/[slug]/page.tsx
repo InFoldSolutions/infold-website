@@ -26,7 +26,7 @@ export default async function Topic({ params }: { params: { slug: string } }) {
   return (
     <Container>
       <div className='flex items-start mt-6'>
-        <div className='md:mr-auto w-full max-w-full max-w-[860px] lg:w-[860px]'>
+        <div className='md:mr-auto w-full max-w-full max-w-[880px] lg:w-[880px]'>
           {!data && <div className='w-auto text-center p-2 px-3'>Loading topic ..</div>}
           {data && <TopicWrapper data={data} />}
         </div>

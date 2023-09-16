@@ -14,9 +14,10 @@ import ChatBot from '@/components/chatbot'
 
 export default function TopicWrapper({ data, modal = false }: { data: any, modal?: boolean }) {
   const [expandedOutline, setExpandedOutline] = useState(false)
-  const [expandArticles, setExpandArticles] = useState(false)
   const [chatMessages, setChatMessages] = useState<any>([])
-  const [filteredData] = useState<any>(filterData(data.sources, data.social))
+  const [latestArticles] = useState<any>(filterData(data.sources, data.social, 'latest'))
+  const [popularArticles] = useState<any>(filterData(data.sources, data.social, 'popular'))
+  const [initialCount] = useState(popularArticles.sources.length > 4 ? 4 : popularArticles.sources.length > 0 ? popularArticles.sources.length : 4)
 
   const pathname = usePathname()
   const topicName = pathname.split('/').pop()
@@ -46,12 +47,11 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
     setExpandedOutline((expanded) => !expanded)
   }, [])
 
-  const toggleExpandedArticles: MouseEventHandler = useCallback(() => {
-    setExpandArticles((expanded) => !expanded)
-  }, [])
-
   const onSubmit: MouseEventHandler = useCallback((e) => {
-    if (!webSocket) return;
+    if (!webSocket) return
+
+    if (chatMessages[chatMessages.length - 1].message === '')
+      return
 
     setChatMessages((messages: any) => [...messages, {
       user: 'me',
@@ -75,20 +75,67 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
 
       <ChatBot onSubmit={onSubmit} chatMessages={chatMessages} />
 
-      <ArticleList data={filteredData} />
+      <h3 className='mt-6 text-2xl font-bold'>News Coverage</h3>
+
+      {popularArticles.sources.length > 0 && latestArticles.sources.length > 0 &&
+        <div className='lg:flex'>
+          <div className='lg:basis-1/2 lg:mr-4'>
+            <div className={`p-2 px-3 mt-4 items-center justify-center bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 rounded hidden lg:flex`}>
+              <i className='fad fa-comments mr-2' /> Popular
+
+              <span className='ml-auto flex items-center'>
+                <i className={`fad fa-chart-bar mr-2`} />
+                {popularArticles.sources.length}
+              </span>
+            </div>
+
+            <ArticleList sources={popularArticles.sources} initialCount={initialCount} />
+          </div>
+
+          <div className='lg:basis-1/2 lg:ml-4'>
+            <div className={`p-2 px-3 mt-4 items-center justify-center bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 rounded hidden lg:flex`}>
+              <i className='fad fa-history mr-2' />Latest
+
+              <span className='ml-auto flex items-center'>
+                <i className={`fad fa-chart-bar mr-2`} />
+                {latestArticles.sources.length}
+              </span>
+            </div>
+
+            <ArticleList sources={latestArticles.sources} initialCount={initialCount * 2} />
+          </div>
+        </div>
+      }
+
+      {popularArticles.sources.length === 0 && latestArticles.sources.length > 0 &&
+        <div>
+          <ArticleList sources={latestArticles.sources} initialCount={initialCount * 2} />
+        </div>
+      }
+
     </article>
   )
 }
 
-function filterData(sources: any, social: any, sentiment: string = '') {
-  if (sentiment) {
-    sources = sources.filter((source: any) => source.articles[0].sentiment === sentiment)
-    social = social.filter((social: any) => social.sentiment === sentiment)
+function filterData(sources: any, social: any, sort: string = '') {
+  switch (sort) {
+    case 'latest':
+      sources = sources.filter((source: any) => !source.social || source.social.length === 0)
+      sources.sort((a: any, b: any) => new Date(b.articles[0].added_at).getTime() - new Date(a.articles[0].added_at).getTime())
+      break;
+    case 'popular':
+      sources = sources.filter((source: any) => source.social?.length > 0)
+      sources.sort((a: any, b: any) => b.social.length - a.social.length)
+      break;
+    default:
+      break;
   }
 
   return {
     sources,
-    social,
+    social: social.sort((a: any, b: any) => {
+      return b.score - a.score
+    }),
     combined: sources.concat(social).sort((a: any, b: any) => {
       const aTime = a.added_at || a.articles[0].added_at
       const bTime = b.added_at || b.articles[0].added_at

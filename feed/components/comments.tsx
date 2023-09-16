@@ -10,6 +10,8 @@ const sentiment: any = config.sentiment
 
 export default function SocialComments({ data }: { data: any }) {
   const [expandComments, setExpandComments] = useState(false)
+  const [sortedComments] = useState(data.social.sort((a: any, b: any) => b.score - a.score) || [])
+
   const toggleMoreComments: MouseEventHandler = useCallback(
     (e) => {
       setExpandComments(true)
@@ -20,13 +22,13 @@ export default function SocialComments({ data }: { data: any }) {
   return (
     <div>
       <ul className='flex flex-col'>
-        {data.social?.length > 0 && data.social.slice(0, 2).map((socialItem: any, index: number) => {
-          if (index === 1 && data.social.length > 1)
+        {sortedComments.length > 0 && sortedComments.slice(0, 2).map((socialItem: any, index: number) => {
+          if (index === 1 && sortedComments.length > 1)
             return (
               <li className={`${expandComments ? 'hidden' : ''} w-[98%] mx-auto rounded-md mt-5 flex items-center justify-center cursor-pointer hover:underline`}
                 onClick={toggleMoreComments}
                 key={index}>
-                <span className='py-1'>expand {data.social.length - 1} more..</span>
+                <span className='py-1'>expand {sortedComments.length - 1} more..</span>
               </li>
             )
 
@@ -37,10 +39,11 @@ export default function SocialComments({ data }: { data: any }) {
         }
       </ul>
       <ul className={`${!expandComments ? 'hidden' : 'flex flex-col'}`}>
-        {data && data.social.slice(1).map((socialItem: any, index: number) => {
+        {data && sortedComments.slice(1).map((socialItem: any, index: number) => {
           return <Comment socialItem={socialItem} key={index} />
         })}
       </ul>
+
       {expandComments &&
         <div className='w-[98%] mx-auto rounded-md mt-5 flex items-center justify-center cursor-pointer hover:underline'>
           <span className='py-1 cursor-pointer hover:underline' onClick={() => setExpandComments(false)}>less ..</span>
