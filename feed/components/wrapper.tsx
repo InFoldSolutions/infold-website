@@ -44,6 +44,10 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
     return feedData?.length === 0 && selectedInterests.length === 0 && (!pathname || pathname === '/') && !keywords && !endpoint && loaded
   }, [feedData, selectedInterests, pathname, searchParams])
 
+  const backToTop = useCallback(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [])
+
   const onScrollHandler = useCallback((e: UIEvent) => {
     if (isSelectScreen)
       return
@@ -156,8 +160,12 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
 
       setIsLoading(false)
 
-      const newTopKeywords = await getTopKeywords(bucket)
-      setTopKeywordsData(newTopKeywords)
+      try {
+        const newTopKeywords = await getTopKeywords(bucket)
+        setTopKeywordsData(newTopKeywords)
+      } catch (error) {
+        console.warn('Top keywords fetch failed')
+      }
     }
 
     fetchFeedData()
@@ -255,6 +263,13 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
           </div>
         </div>
       </div>
+
+      {showToTop &&
+        <div className='sticky bottom-14 ml-auto flex items-center justify-end cursor-pointer z-50 px-5 py-2 bg-gray-200 w-fit rounded' onClick={backToTop}>
+          <i className={`fad fa-chevron-circle-up md:mr-3`} />
+          <span className='group-hover/top:underline hidden lg:flex'>Back to Top</span>
+        </div>
+      }
     </Container >
   )
 }

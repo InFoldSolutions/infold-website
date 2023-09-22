@@ -16,7 +16,7 @@ const topOptions = [
   //{ label: 'This Year', value: 'year' },
 ]
 
-export default function Filters({ isMenuOpen, setIsMenuOpen, totalResults, showToTop }: { isMenuOpen: boolean, setIsMenuOpen: any, totalResults: number, showToTop: boolean }) {
+export default function Filters({ isMenuOpen, setIsMenuOpen, totalResults }: { isMenuOpen: boolean, setIsMenuOpen: any, totalResults: number, showToTop: boolean }) {
   const router = useRouter()
   const searchParams: any = useSearchParams()
 
@@ -25,10 +25,6 @@ export default function Filters({ isMenuOpen, setIsMenuOpen, totalResults, showT
   const bucket = searchParams.get('time') || config.api.defaultBucket
 
   const searchInputRef = useRef(null)
-
-  const backToTop = useCallback(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }, [])
 
   const removeKeywordFilter = useCallback((e: any) => {
     e.preventDefault();
@@ -87,13 +83,6 @@ export default function Filters({ isMenuOpen, setIsMenuOpen, totalResults, showT
   } else {
     return (
       <div className='relative flex py-3 px-5 pr-3 dark:bg-gray-800 dark:bg-opacity-60 rounded items-center'>
-        {showToTop &&
-          <div className='flex items-center cursor-pointer group/top' onClick={backToTop}>
-            <i className={`fad fa-chevron-circle-up lg:mr-3`} />
-            <span className='group-hover/top:underline hidden lg:flex'>Top</span>
-            <span className='ml-3 mr-3'>|</span>
-          </div>
-        }
         <div className='flex items-center'>
           <Link className='group flex items-center' href={`/`} prefetch={false}>
             <i className={`${!endpoint ? 'mr-3' : 'lg:mr-3'} fad fa-head-side-brain`}></i>
@@ -131,7 +120,7 @@ export default function Filters({ isMenuOpen, setIsMenuOpen, totalResults, showT
             </div>
           </div>
         </div>
-        <div className='ml-auto bg-gray-300 dark:bg-black hidden md:flex items-center rounded'>
+        <div className={`ml-auto bg-gray-300 dark:bg-black hidden md:flex items-center rounded`}>
           <input ref={searchInputRef} type='text' placeholder='Search' className='bg-transparent focus:outline-none p-1 px-3 max-w-[231px]' onKeyDown={onKeyDown} />
           <i className='fad fa-search mr-3' />
         </div>
