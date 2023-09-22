@@ -1,7 +1,7 @@
 
 'use client'
 
-import { useState, useEffect, UIEvent, useRef, useMemo, useCallback } from 'react'
+import { useState, useEffect, UIEvent, useMemo, useCallback, use } from 'react'
 
 import { Suspense } from 'react'
 import { useSearchParams, usePathname } from 'next/navigation'
@@ -16,9 +16,10 @@ import Keywords from '@/components/keywords'
 
 import { getFeed, getSearchFeed, getTopKeywords, getInterestsFeed } from '@/helpers/api'
 import { saveInterests, getInterests } from '@/helpers/localstorage'
+
 import config from '@/config'
 
-let backButtonWasClicked = false, fromTopic = false;
+let fromTopic = false;
 
 export default function Wrapper({ initialFeedData, topKeywords, totalResults }: { initialFeedData: any, topKeywords: [], totalResults: number }) {
 
@@ -65,35 +66,7 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
 
   }, [isSelectScreen, feedData, isLoadMore, showToTop, setShowToTop])
 
-  useEffect(() => {
-    // @ts-ignore
-    setSelectedInterests(getInterests())
-
-    // router navigation back
-    window.addEventListener("popstate", () => {
-      if (!backButtonWasClicked && fromTopic) {
-        document.body.style.overflowY = 'scroll' // re-enable scrolling when modal is closed
-        backButtonWasClicked = true
-        fromTopic = false
-      }
-    })
-
-    // router navigation forward
-    window.history.pushState = new Proxy(window.history.pushState, { // this is hacky, no pushstate event ?!
-      apply: (target, thisArg: any, argArray: any) => {
-        const url = (argArray && argArray[2]) ? argArray[2] : null
-
-        if (url?.includes('/topics/')) {
-          document.body.style.overflowY = 'hidden' // disable scrolling when modal is open
-          fromTopic = true
-        } else
-          fromTopic = false
-
-        return target.apply(thisArg, argArray);
-      },
-    });
-  }, [])
-
+  // for scrollHandler
   useEffect(() => {
     // @ts-ignore
     document.addEventListener('scroll', onScrollHandler);
@@ -103,6 +76,12 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
       document.removeEventListener('scroll', onScrollHandler);
     }
   }, [onScrollHandler]);
+
+  // on initial load get interests from localstorage
+  useEffect(() => {
+    // @ts-ignore
+    setSelectedInterests(getInterests())
+  }, [])
 
   // interests change
   useEffect(() => {
@@ -131,16 +110,20 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
 
   // query params and path change
   useEffect(() => {
-    if (backButtonWasClicked) {
-      backButtonWasClicked = false
+    if (!loaded) {
+      setLoaded(true)
       return
     }
 
-    if (pathname.includes('/topics/'))
+    if (pathname.startsWith('/topics/')) {
+      fromTopic = true
+      document.body.style.overflowY = 'hidden' // disable scrolling when modal is open
       return
+    }
 
-    if (!loaded) {
-      setLoaded(true)
+    if (fromTopic) {
+      fromTopic = false
+      document.body.style.overflowY = 'scroll' // enable scrolling when modal is closed
       return
     }
 

@@ -13,7 +13,7 @@ const topOptions = [
   { label: 'Today', value: 'day' },
   { label: 'This Week', value: 'week' },
   { label: 'This Month', value: 'month' },
-  { label: 'This Year', value: 'year' },
+  //{ label: 'This Year', value: 'year' },
 ]
 
 export default function Filters({ isMenuOpen, setIsMenuOpen, totalResults, showToTop }: { isMenuOpen: boolean, setIsMenuOpen: any, totalResults: number, showToTop: boolean }) {

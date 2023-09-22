@@ -95,7 +95,8 @@ export async function getInterestsFeed(interests: string[], page: number = 1) {
       body: JSON.stringify({
         keywords: {
           positive: interests,
-        }
+        },
+        bias: 300,
       }),
       next: { revalidate: 1 }
     })
