@@ -3,7 +3,7 @@
 import { useRef, useCallback } from 'react'
 
 import Link from 'next/link'
-import { useSearchParams, useRouter } from 'next/navigation'
+import { useSearchParams, useRouter, usePathname } from 'next/navigation'
 
 import config from '@/config'
 import { capitalize } from '@/helpers/utils'
@@ -19,10 +19,13 @@ const topOptions = [
 export default function Filters({ isMenuOpen, setIsMenuOpen, totalResults }: { isMenuOpen: boolean, setIsMenuOpen: any, totalResults: number, showToTop: boolean }) {
   const router = useRouter()
   const searchParams: any = useSearchParams()
+  const pathname: string = usePathname()
 
   const keywords = searchParams.get('keywords') || ''
-  const endpoint = searchParams.get('sort')
-  const bucket = searchParams.get('time') || config.api.defaultBucket
+
+  const pathnameParts = pathname.split('/')
+  const endpoint = pathnameParts[1]
+  const bucket = pathnameParts[2] || config.api.defaultBucket
 
   const searchInputRef = useRef(null)
 
@@ -91,7 +94,7 @@ export default function Filters({ isMenuOpen, setIsMenuOpen, totalResults }: { i
           <span className='ml-3 mr-3'>|</span>
         </div>
         <div className='flex items-center'>
-          <Link className='group flex items-center' href={`?sort=rising`} prefetch={false}>
+          <Link className='group flex items-center' href={`/rising`} prefetch={false}>
             <i className={`fad fa-pepper-hot ${endpoint === 'rising' ? 'mr-3' : 'lg:mr-3'}`}></i>
             <span className={`${endpoint === 'rising' ? 'underline flex' : 'hidden lg:flex'} group-hover:underline`}>Rising</span>
           </Link>
@@ -106,15 +109,19 @@ export default function Filters({ isMenuOpen, setIsMenuOpen, totalResults }: { i
               <svg className={`${(isMenuOpen) ? 'rotate-180' : ''} h-5 w-5 text-gray-400`} viewBox="0 0 20 20" fill="currentColor">
                 <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" />
               </svg>
+              <span className={`underline`}>{endpoint === 'top' && capitalize(bucket)}</span>
             </button>
-            <span className={`ml-1.5 underline`}>{endpoint === 'top' && capitalize(bucket)}</span>
           </div>
 
-          <div className={`${!isMenuOpen ? 'hidden' : ''} absolute left-[50%] -ml-[85px] r-auto z-10 mt-5 md:mt-6 w-40 rounded bg-gray-200 dark:bg-black`}>
+          <div className={`${!isMenuOpen ? 'hidden' : ''} absolute left-[50%] -ml-[80px] r-auto z-10 mt-5 md:mt-6 w-40 rounded bg-gray-200 dark:bg-black`}>
             <div className='dark:bg-gray-800 dark:bg-opacity-60 py-2 rounded'>
               {topOptions.map((option: any, index: number) => (
                 <span className='group cursor-pointer flex justify-center' key={index}>
-                  <Link className={`${(endpoint === 'top' && bucket === option.value) ? 'underline' : ''} group-hover:underline block w-full text-center`} href={`?sort=top&time=${option.value}`} prefetch={false}>{option.label}</Link>
+                  <Link className={`${(endpoint === 'top' && bucket === option.value) ? 'underline' : ''} group-hover:underline block w-full text-center`}
+                    href={`/top/${option.value}`}
+                    prefetch={false}>
+                    {option.label}
+                  </Link>
                 </span>
               ))}
             </div>

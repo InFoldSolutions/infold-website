@@ -141,7 +141,7 @@ export async function getTopic(slug: string) {
 
 export async function getTopKeywords(bucket: string = 'day') {
   try {
-    const url = `${config.api.url}/keywords/top?bucket=${bucket}&limit=7`;
+    const url = `${config.api.url}/keywords/top?bucket=${bucket}&limit=30`;
     const res = await fetch(url, { next: { revalidate: 60 } })
 
     if (!res.ok)

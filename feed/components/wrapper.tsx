@@ -19,29 +19,26 @@ import { saveInterests, getInterests } from '@/helpers/localstorage'
 
 import config from '@/config'
 
-let fromTopic = false;
-
 export default function Wrapper({ initialFeedData, topKeywords, totalResults }: { initialFeedData: any, topKeywords: [], totalResults: number }) {
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
 
   const [topKeywordsData, setTopKeywordsData] = useState(topKeywords)
   const [feedData, setFeedData] = useState(initialFeedData || [])
-  const [offset, setOffset] = useState(1)
+  const [offset, setOffset] = useState<number>(1)
   const [isLoading, setIsLoading] = useState(false)
   const [isLoadMore, setIsLoadMore] = useState(false)
   const [endOfFeed, setEndOfFeed] = useState(false)
   const [selectedInterests, setSelectedInterests] = useState([])
-  const [loaded, setLoaded] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [searchTotalResults, setSearchTotalResults] = useState(totalResults)
   const [showToTop, setShowToTop] = useState(false)
-
-  const pathname = usePathname()
-  const searchParams = useSearchParams()
+  const [isLoaded, setIsLoaded] = useState(false)
+  const [endpoint, setEndpoint] = useState((!pathname || pathname === '/') ? null : pathname.split('/')[2])
 
   const isSelectScreen = useMemo(() => { // do we display interests screen ?
     const keywords = searchParams.get('keywords')
-    const endpoint = searchParams.get('sort')
-    return feedData?.length === 0 && selectedInterests.length === 0 && (!pathname || pathname === '/') && !keywords && !endpoint && loaded
+    return feedData?.length === 0 && selectedInterests.length === 0 && (!pathname || pathname === '/') && !keywords
   }, [feedData, selectedInterests, pathname, searchParams])
 
   const backToTop = useCallback(() => {
@@ -68,7 +65,7 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
     if (isBottom && !isLoadMore)
       setOffset((old: number) => old + 1)
 
-  }, [isSelectScreen, feedData, isLoadMore, showToTop, setShowToTop])
+  }, [isSelectScreen, isLoadMore, showToTop, setShowToTop])
 
   // for scrollHandler
   useEffect(() => {
@@ -83,12 +80,16 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
 
   // on initial load get interests from localstorage
   useEffect(() => {
+    setIsLoaded(true)
+
     // @ts-ignore
     setSelectedInterests(getInterests())
   }, [])
 
-  // interests change
   useEffect(() => {
+    if ((pathname && pathname !== '/'))
+      return
+
     if (selectedInterests.length === 0 || feedData?.length > 0)
       return
 
@@ -97,87 +98,15 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
     const fetchInterestFeedData = async () => {
       let res: any = await getInterestsFeed(selectedInterests)
 
-      const newTopKeywords = await getTopKeywords(config.api.defaultBucket)
-      setTopKeywordsData(newTopKeywords)
-
-      setIsLoading(false);
-
       if (res.data && res.meta?.total_results > 0) {
         setFeedData(res.data);
-        setSearchTotalResults(res.meta.total_results)
+        setIsLoading(false);
       }
     }
 
     fetchInterestFeedData()
       .catch(console.error)
-  }, [selectedInterests])
-
-  // query params and path change
-
-  useEffect(() => {
-    console.log('query params and path change: fromTopic', loaded, fromTopic, pathname.startsWith('/topics/'))
-
-    if (!loaded) {
-      console.log('loaded, skipping')
-      setLoaded(true)
-      return
-    }
-
-    if (pathname.startsWith('/topics/')) {
-      console.log('to topic, skipping')
-      fromTopic = true
-      document.body.style.overflowY = 'hidden' // disable scrolling when modal is open
-      return
-    }
-
-    if (fromTopic) {
-      console.log('from topic, skipping')
-      fromTopic = false
-      document.body.style.overflowY = 'scroll' // enable scrolling when modal is closed
-      return
-    }
-
-    setOffset(1)
-    setEndOfFeed(false)
-    setIsMenuOpen(false)
-
-    setIsLoading(true)
-
-    const fetchFeedData = async () => {
-      let res: any;
-
-      setFeedData([])
-
-      const keywords = searchParams.get('keywords')
-      const endpoint = searchParams.get('sort')
-      const bucket = searchParams.get('time') || config.api.defaultBucket
-
-      if (keywords)
-        res = await getSearchFeed(keywords.split(','))
-      else if (endpoint)
-        res = await getFeed(endpoint, config.api.defaultLimit, bucket)
-      else if (selectedInterests.length > 0)
-        res = await getInterestsFeed(selectedInterests)
-
-      if (res?.data && res?.meta?.total_results > 0) {
-        setFeedData(res.data);
-        setSearchTotalResults(res.meta.total_results)
-      }
-
-      setIsLoading(false)
-
-      try {
-        const newTopKeywords = await getTopKeywords(bucket)
-        setTopKeywordsData(newTopKeywords)
-      } catch (error) {
-        console.warn('Top keywords fetch failed')
-      }
-    }
-
-    fetchFeedData()
-      .catch((error) => { console.error(error); setIsLoading(false) })
-
-  }, [pathname, searchParams])
+  }, [selectedInterests, pathname])
 
   // load more
   useEffect(() => {
@@ -188,16 +117,16 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
         let res: any;
 
         const keywords = searchParams.get('keywords')
-        const endpoint = searchParams.get('sort')
+        const pathnameParts = pathname.split('/')
+        const endpoint = pathnameParts[1]
+        const bucket = pathnameParts[2] || config.api.defaultBucket
 
-        if (keywords) {
+        if (keywords)
           res = await getSearchFeed(keywords.split(','), offset)
-        } else if (endpoint) {
-          const bucket = searchParams.get('time') || config.api.defaultBucket
+        else if (endpoint)
           res = await getFeed(endpoint, config.api.defaultLimit, bucket, offset)
-        } else if (selectedInterests.length > 0) {
+        else if (selectedInterests.length > 0)
           res = await getInterestsFeed(selectedInterests, offset)
-        }
 
         if (res?.data?.length > 0)
           setFeedData((prevData: any) => [...prevData, ...res.data])
@@ -227,7 +156,7 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
             <Loading />
           }
 
-          {isSelectScreen &&
+          {isSelectScreen && isLoaded &&
             <Interests interests={config.interests} saveInterests={saveInterests} setSelectedInterests={setSelectedInterests} />
           }
 
@@ -235,11 +164,11 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
             <Feed data={feedData} />
           </Suspense>
 
-          {!isSelectScreen && feedData.length === 0 && !isLoading && loaded &&
-            <div className='my-auto pl-2 text-center text-2xl w-full'>No topics found.</div>
+          {!isSelectScreen && feedData.length === 0 && !isLoading &&
+            <div className='my-auto pl-2 text-center text-2xl w-full'>No topics {endpoint ? `in the last ${endpoint}` : `found`}</div>
           }
 
-          {isLoadMore && loaded &&
+          {isLoadMore &&
             <div className='w-full justify-center mt-3 pt-2 flex items-center'><Spinner />Loading more ...</div>
           }
         </div>
