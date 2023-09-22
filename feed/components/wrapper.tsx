@@ -109,11 +109,12 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
 
   // pathname changed
   useEffect(() => {
-    if (pathname.startsWith('/topics/'))
+    if (pathname.startsWith('/topics/')) { // going to topic
       document.body.style.overflowY = 'hidden' // disable scrolling when modal is open
-    else
+    } else if (document.body.style.overflowY === 'hidden') { // comming from topic
       document.body.style.overflowY = 'scroll' // enable scrolling when modal is closed
-  }, [pathname])
+    }
+  }, [pathname, searchParams])
 
   // load more
   useEffect(() => {
@@ -172,7 +173,7 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
           </Suspense>
 
           {!isSelectScreen && feedData.length === 0 && !isLoading &&
-            <div className='my-auto pl-2 text-center text-2xl w-full'>No topics {endpoint ? `in the last ${endpoint}` : `found`}</div>
+            <div className='my-auto pl-2 text-center text-2xl w-full'>No topics found</div>
           }
 
           {isLoadMore &&
