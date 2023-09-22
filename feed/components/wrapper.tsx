@@ -14,7 +14,7 @@ import Spinner from '@/components/spinner'
 import Interests from '@/components/interests'
 import Keywords from '@/components/keywords'
 
-import { getFeed, getSearchFeed, getTopKeywords, getInterestsFeed } from '@/helpers/api'
+import { getFeed, getSearchFeed, getInterestsFeed } from '@/helpers/api'
 import { saveInterests, getInterests } from '@/helpers/localstorage'
 
 import config from '@/config'
@@ -23,7 +23,6 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
   const pathname = usePathname()
   const searchParams = useSearchParams()
 
-  const [topKeywordsData, setTopKeywordsData] = useState(topKeywords)
   const [feedData, setFeedData] = useState(initialFeedData || [])
   const [offset, setOffset] = useState<number>(1)
   const [isLoading, setIsLoading] = useState(false)
@@ -31,7 +30,6 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
   const [endOfFeed, setEndOfFeed] = useState(false)
   const [selectedInterests, setSelectedInterests] = useState([])
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [searchTotalResults, setSearchTotalResults] = useState(totalResults)
   const [showToTop, setShowToTop] = useState(false)
   const [isLoaded, setIsLoaded] = useState(false)
   const [endpoint, setEndpoint] = useState((!pathname || pathname === '/') ? null : pathname.split('/')[2])
@@ -86,6 +84,7 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
     setSelectedInterests(getInterests())
   }, [])
 
+  // selected interests changed
   useEffect(() => {
     if ((pathname && pathname !== '/'))
       return
@@ -106,7 +105,15 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
 
     fetchInterestFeedData()
       .catch(console.error)
-  }, [selectedInterests, pathname])
+  }, [selectedInterests])
+
+  // pathname changed
+  useEffect(() => {
+    if (pathname.startsWith('/topics/'))
+      document.body.style.overflowY = 'hidden' // disable scrolling when modal is open
+    else
+      document.body.style.overflowY = 'scroll' // enable scrolling when modal is closed
+  }, [pathname])
 
   // load more
   useEffect(() => {
@@ -146,7 +153,7 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
       <div className='bg-gray-300 dark:bg-black sticky top-0 z-40 mb-2 -mt-[5px] lg:mb-3 pt-2'>
         <div
           className='bg-gray-200 dark:bg-black rounded text-base sm:text-lg sm:leading-relaxed md:text-xl md:leading-relaxed text-body-color'>
-          <Filters isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} totalResults={searchTotalResults} showToTop={showToTop} />
+          <Filters isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} totalResults={totalResults} showToTop={showToTop} />
         </div>
       </div>
 
@@ -180,7 +187,7 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
               Trending
             </h3>
             <div className='pl-1'>
-              <Keywords keywords={topKeywordsData} />
+              <Keywords keywords={topKeywords} />
             </div>
           </div>
 
