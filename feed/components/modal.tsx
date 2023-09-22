@@ -42,7 +42,7 @@ export default function Modal({ children, isLoading }: { children: React.ReactNo
   return (
     <div
       ref={overlay}
-      className='fixed z-[999] left-0 right-0 top-0 bottom-0 mx-auto bg-black bg-opacity-80 overflow-y-scroll flex justify-center'
+      className='fixed z-[999] left-0 right-0 top-0 bottom-0 mx-auto bg-neutral-950 bg-opacity-90 overflow-y-scroll flex justify-center'
       onClick={onClick}
     >
       <div
