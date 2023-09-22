@@ -113,19 +113,25 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
   }, [selectedInterests])
 
   // query params and path change
+
   useEffect(() => {
+    console.log('query params and path change: fromTopic', loaded, fromTopic, pathname.startsWith('/topics/'))
+
     if (!loaded) {
+      console.log('loaded, skipping')
       setLoaded(true)
       return
     }
 
     if (pathname.startsWith('/topics/')) {
+      console.log('to topic, skipping')
       fromTopic = true
       document.body.style.overflowY = 'hidden' // disable scrolling when modal is open
       return
     }
 
     if (fromTopic) {
+      console.log('from topic, skipping')
       fromTopic = false
       document.body.style.overflowY = 'scroll' // enable scrolling when modal is closed
       return
