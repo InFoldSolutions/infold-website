@@ -265,9 +265,9 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
       </div>
 
       {showToTop &&
-        <div className='sticky bottom-14 ml-auto flex items-center justify-end cursor-pointer z-50 px-5 py-2 bg-gray-200 w-fit rounded' onClick={backToTop}>
+        <div className='sticky bottom-16 ml-auto flex items-center justify-end cursor-pointer z-50 px-5 py-2 bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 w-fit rounded' onClick={backToTop}>
           <i className={`fad fa-chevron-circle-up md:mr-3`} />
-          <span className='group-hover/top:underline hidden lg:flex'>Back to Top</span>
+          <span className='hidden lg:flex'>Back to Top</span>
         </div>
       }
     </Container >
