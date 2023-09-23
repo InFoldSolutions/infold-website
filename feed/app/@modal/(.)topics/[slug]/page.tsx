@@ -68,7 +68,7 @@ export default function TopicModal({ params }: { params: { slug: string } }) {
                   <Keywords keywords={data.keywords} />
                 </div>
 
-                <Premium />
+                <Premium isSelectScreen={false} />
               </div>
             </div>
           }

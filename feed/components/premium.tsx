@@ -64,7 +64,7 @@ export default function Premium({ isSelectScreen }: { isSelectScreen: boolean })
             </span>
           </div>
           <div className="flex w-full items-stretch">
-            <Tooltip message={`Login with link`} top={12} left={3} padding={1}>
+            <Tooltip message={`Login with link`} top={12} left={4} padding={1}>
               <span className='shrink w-40 bg-gray-300 dark:bg-black rounded'>
                 <input type="email" ref={emailRef} placeholder='Enter e-mail ..' className='bg-transparent focus:outline-none bg-gray-100 py-2 px-3 w-full h-full text-sm' onKeyDown={onKeyDown} />
               </span>
