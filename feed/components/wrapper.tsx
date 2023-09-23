@@ -159,7 +159,7 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
 
       <div className='bg-gray-300 dark:bg-black sticky top-0 z-40 mb-2 -mt-[5px] lg:mb-3 pt-2'>
         <div
-          className='bg-gray-200 dark:bg-black rounded text-base sm:text-lg sm:leading-relaxed md:text-xl md:leading-relaxed text-body-color'>
+          className='bg-gray-200 dark:bg-black rounded text-xl text-body-color'>
           <Filters isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} totalResults={totalResults} showToTop={showToTop} />
         </div>
       </div>

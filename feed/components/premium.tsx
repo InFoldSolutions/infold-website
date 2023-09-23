@@ -55,7 +55,7 @@ export default function Premium({ isSelectScreen }: { isSelectScreen: boolean })
 
       {login &&
         <div className="flex flex-col items-center justify-center mt-1">
-          <div className='text-sm mt-1 mb-3 text-gray-600 dark:text-gray-400'>
+          <div className='text-sm mt-1 mb-3 text-gray-600 dark:text-gray-400 flex items-center'>
             <span className='group/nav cursor-pointer' onClick={() => setLogin(false)}>
               <i className='fad fa-long-arrow-alt-left mr-1 mt-px' />
             </span>
