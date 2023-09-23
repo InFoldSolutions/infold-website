@@ -49,7 +49,7 @@ export default async function Topic({ params }: { params: { slug: string } }) {
             <Keywords keywords={data.keywords} />
           </div>
 
-          <Premium />
+          <Premium isSelectScreen={false} />
         </div>
       </div>
     </Container>

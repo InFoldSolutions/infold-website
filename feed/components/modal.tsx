@@ -60,7 +60,6 @@ export default function Modal({ children, isLoading }: { children: React.ReactNo
             </svg>
           </div>
         }
-
         {children}
       </div>
     </div>

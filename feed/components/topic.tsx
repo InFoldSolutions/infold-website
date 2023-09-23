@@ -1,71 +1,23 @@
 'use client'
 
-import { useEffect, useState, useCallback, MouseEventHandler } from 'react'
-
-import { usePathname } from 'next/navigation'
-
-import ReconnectingWebSocket from 'reconnecting-websocket'
-
-import config from '@/config';
+import { useState, useCallback, MouseEventHandler } from 'react'
 
 import ArticleList from '@/components/article_list'
 import Outline from '@/components/outline'
 import ChatBot from '@/components/chatbot'
 
 export default function TopicWrapper({ data, modal = false }: { data: any, modal?: boolean }) {
+  const isBrowser = typeof window !== "undefined";
+
   const [expandedOutline, setExpandedOutline] = useState(false)
-  const [chatMessages, setChatMessages] = useState<any>([])
   const [latestArticles] = useState<any>(filterData(data.sources, data.social, 'latest'))
   const [popularArticles] = useState<any>(filterData(data.sources, data.social, 'popular'))
   const [initialCount] = useState(popularArticles.sources.length > 0 ? popularArticles.sources.length : 5)
-  let [isDesktop, setIsDesktop] = useState(false)
-
-  const pathname = usePathname()
-  const topicName = pathname.split('/').pop()
-
-  let webSocket: any = null;
-
-  useEffect((): any => {
-    const socketURL = `${config.ws.chat}/${config.ws.path}/${topicName}`;
-
-    if (webSocket)
-      webSocket.close();
-
-    webSocket = new ReconnectingWebSocket(socketURL);
-    webSocket.onmessage = (event: any) => {
-      setChatMessages((messages: any) => {
-        messages[messages.length - 1].message = event.data
-        return [...messages]
-      })
-    };
-
-    setIsDesktop(window.innerWidth > 820)
-
-    return () => {
-      webSocket.close();
-    }
-  }, [])
+  const [isDesktop, setIsDesktop] = useState((isBrowser) ? window.innerWidth > 820 : false)
 
   const toggleExpanded: MouseEventHandler = useCallback(() => {
     setExpandedOutline((expanded) => !expanded)
-  }, [])
-
-  const onSubmit: MouseEventHandler = useCallback((e) => {
-    if (!webSocket) return
-
-    if (chatMessages.length > 0 && chatMessages[chatMessages.length - 1].message === '')
-      return
-
-    setChatMessages((messages: any) => [...messages, {
-      user: 'me',
-      message: e
-    }, {
-      user: 'bot',
-      message: ''
-    }])
-
-    webSocket.send(e);
-  }, [webSocket])
+  }, [setExpandedOutline])
 
   return (
     <article className='pb-2'>
@@ -76,7 +28,7 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
 
       <Outline outlines={data.outline} toggleExpanded={toggleExpanded} expanded={expandedOutline} />
 
-      <ChatBot onSubmit={onSubmit} chatMessages={chatMessages} />
+      <ChatBot />
 
       <h3 className='mt-6 text-2xl font-bold'>News Coverage</h3>
 

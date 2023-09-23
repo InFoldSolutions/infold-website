@@ -38,6 +38,10 @@ export function capitalize(str: string) {
 export function getRandomInt(min: number, max: number) {
   min = Math.ceil(min);
   max = Math.floor(max);
-  
+
   return Math.floor(Math.random() * (max - min) + min);
+}
+
+export function isValidEmail(email: string) {
+  return /\S+@\S+\.\S+/.test(email);
 }

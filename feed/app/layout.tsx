@@ -4,11 +4,13 @@ import './icons.min.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 
+import { AuthContextProvider } from '@/context/auth'
+
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'InFold - Get The Full Story',
-  description: '🔍 Get context, delve deeper, learn more. We read and compare thousands of sources, so you don\'t have to. 📚 Analyze articles, discover new sources.',
+  description: 'News is broken and driven by different agendas. We\'re here to help you get context, delve deeper, and learn more.',
 }
 
 export default function RootLayout({
@@ -21,8 +23,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} bg-gray-300 dark:bg-black overflow-y-scroll overflow-x-hidden w-full`}>
-        {modal}
-        {children}
+        <AuthContextProvider>
+          {modal}
+          {children}
+        </AuthContextProvider>
       </body>
     </html>
   )

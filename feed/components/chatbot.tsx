@@ -1,21 +1,42 @@
-import { useRef, useState, useCallback, KeyboardEventHandler } from 'react';
+'use client'
+
+import { useEffect, useMemo, useRef, useState, useCallback, KeyboardEventHandler, MouseEventHandler } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
+
+import { getWebsocket, closeWebsocket } from '@/websocket';
+
+import { usePathname } from 'next/navigation'
 
 import Tooltip from '@/components/tooltip';
 
-export default function ChatBot({ onSubmit, chatMessages }: { onSubmit: any, chatMessages: any }) {
+import config from '@/config';
+
+export default function ChatBot() {
   const textareaRef = useRef(null)
+
+  const pathname = usePathname()
+  const topicName = pathname.split('/').pop()
+
+  const isBrowser = typeof window !== "undefined";
+  const socketURL = `${config.ws.chat}/${config.ws.path}/${topicName}`;
+
+  const webSocket = useMemo(() => {
+    if (!isBrowser) return null
+
+    return getWebsocket(socketURL)
+  }, []);
+
+  const [chatMessages, setChatMessages] = useState<any>([])
   const [activeBtn, setActiveBtn] = useState(false)
 
   const onKeyDown: KeyboardEventHandler = useCallback((e) => {
     // @ts-ignore
     const textLength = textareaRef?.current?.value.length
 
-    if (textLength > 0) {
+    if (textLength > 0) 
       setActiveBtn(true)
-    } else {
+    else
       setActiveBtn(false)
-    }
 
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault()
@@ -28,16 +49,38 @@ export default function ChatBot({ onSubmit, chatMessages }: { onSubmit: any, cha
   }, [])
 
   const onBtnSubmit = useCallback(() => {
+    if (!webSocket) return
+
     // @ts-ignore
-    const textLength = textareaRef?.current?.value.length
+    const text = textareaRef?.current?.value
+    const textLength = text.length
 
     if (textLength > 0) {
-      // @ts-ignore
-      onSubmit(textareaRef?.current?.value)
+      setChatMessages((messages: any) => [...messages, {
+        user: 'me',
+        message: text
+      }, {
+        user: 'bot',
+        message: ''
+      }])
+
+      webSocket.send(text)
+
       // @ts-ignore
       textareaRef.current.value = ''
       setActiveBtn(false)
     }
+  }, [webSocket, textareaRef, setChatMessages])
+
+  useEffect((): any => {
+    if (!webSocket) return
+
+    webSocket.onmessage = (event: any) => {
+      setChatMessages((messages: any) => {
+        messages[messages.length - 1].message = event.data
+        return [...messages]
+      })
+    };
   }, [])
 
   return (

@@ -17,7 +17,10 @@ import Keywords from '@/components/keywords'
 import { getFeed, getSearchFeed, getInterestsFeed } from '@/helpers/api'
 import { saveInterests, getInterests } from '@/helpers/localstorage'
 
+import { closeWebsocket } from '@/websocket'
+
 import config from '@/config'
+import Premium from './premium'
 
 export default function Wrapper({ initialFeedData, topKeywords, totalResults }: { initialFeedData: any, topKeywords: [], totalResults: number }) {
   const pathname = usePathname()
@@ -32,11 +35,10 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [showToTop, setShowToTop] = useState(false)
   const [isLoaded, setIsLoaded] = useState(false)
-  const [endpoint, setEndpoint] = useState((!pathname || pathname === '/') ? null : pathname.split('/')[2])
 
   const isSelectScreen = useMemo(() => { // do we display interests screen ?
     const keywords = searchParams.get('keywords')
-    return feedData?.length === 0 && selectedInterests.length === 0 && (!pathname || pathname === '/') && !keywords
+    return selectedInterests.length === 0 && (!pathname || pathname === '/') && !keywords
   }, [feedData, selectedInterests, pathname, searchParams])
 
   const backToTop = useCallback(() => {
@@ -60,10 +62,11 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
     if (scrollHeight <= innerHeight)
       return
 
-    if (isBottom && !isLoadMore)
+    if (isBottom && !isLoadMore) {
+      setIsLoadMore(true)
       setOffset((old: number) => old + 1)
-
-  }, [isSelectScreen, isLoadMore, showToTop, setShowToTop])
+    }
+  }, [isSelectScreen, isLoadMore, showToTop, setShowToTop, setOffset, setIsLoadMore])
 
   // for scrollHandler
   useEffect(() => {
@@ -113,6 +116,7 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
       document.body.style.overflowY = 'hidden' // disable scrolling when modal is open
     } else if (document.body.style.overflowY === 'hidden') { // comming from topic
       document.body.style.overflowY = 'scroll' // enable scrolling when modal is closed
+      closeWebsocket()
     }
   }, [pathname, searchParams])
 
@@ -140,6 +144,8 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
           setFeedData((prevData: any) => [...prevData, ...res.data])
         else
           setEndOfFeed(true)
+
+        setIsLoadMore(false)
       }
 
       fetchMoreData()
@@ -160,7 +166,7 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
 
       <div className='flex items-start flex-row'>
         <div className={`flex md:mr-auto ${isSelectScreen || feedData.length === 0 ? 'm-auto flex-row' : 'flex-col'} min-h-[70vh] w-full max-w-full pb-4 max-w-[900px] lg:w-[900px] overflow-x-hidden`}>
-          {isLoading && !isSelectScreen && feedData.length === 0 &&
+          {!isLoaded && isLoading && !isSelectScreen && feedData.length === 0 &&
             <Loading />
           }
 
@@ -182,7 +188,7 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
         </div>
 
         <div className='sticky top-20'>
-          <div className={`h-auto w-[280px] p-4 bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 hidden lg:flex flex-col rounded ${isSelectScreen ? 'lg:hidden' : ''} `}>
+          <div className={`h-auto w-[280px] mb-4 p-4 bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 hidden lg:flex flex-col rounded ${isSelectScreen ? 'lg:hidden' : ''} `}>
             <h3 className='mb-5 text-2xl font-bold flex items-center'>
               <i className='fad fa-rocket-launch mr-3 text-xl'></i>
               Trending
@@ -192,18 +198,7 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
             </div>
           </div>
 
-          <div className={`h-auto w-[280px] p-4 mt-4 bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 hidden lg:flex flex-col rounded ${isSelectScreen ? 'lg:hidden' : ''} `}>
-            <div className='flex items-center justify-center'>
-              <i className='fad fa-shield-alt text-3xl mr-4' />
-              <p className='text-xl mr-4'>
-                InFold Premium
-              </p>
-            </div>
-            <div className='flex items-center justify-center text-sm mt-2'>
-              The best InFold experience.
-            </div>
-            <button className='rounded-md bg-black text-white dark:bg-white dark:text-black p-2 w-full text-center mt-3'>Try Now</button>
-          </div>
+          <Premium isSelectScreen={isSelectScreen} />
         </div>
       </div>
 
