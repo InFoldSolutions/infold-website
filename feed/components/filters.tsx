@@ -127,7 +127,7 @@ export default function Filters({ isMenuOpen, setIsMenuOpen, totalResults }: { i
             </div>
           </div>
         </div>
-        <div className={`ml-auto bg-gray-300 dark:bg-black hidden md:flex items-center rounded`}>
+        <div className={`ml-auto bg-gray-100 dark:bg-black hidden md:flex items-center rounded`}>
           <input ref={searchInputRef} type='text' placeholder='Search' className='bg-transparent focus:outline-none p-1 px-3 max-w-[231px]' onKeyDown={onKeyDown} />
           <i className='fad fa-search mr-3' />
         </div>
