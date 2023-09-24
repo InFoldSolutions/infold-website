@@ -113,11 +113,11 @@ export default function Filters({ isMenuOpen, setIsMenuOpen, totalResults }: { i
             </button>
           </div>
 
-          <div className={`${!isMenuOpen ? 'hidden' : ''} absolute left-[50%] -ml-[80px] r-auto z-10 mt-5 md:mt-6 w-40 rounded bg-gray-200 dark:bg-black`}>
-            <div className='dark:bg-gray-800 dark:bg-opacity-60 py-2 rounded'>
+          <div className={`${!isMenuOpen ? 'hidden' : ''} absolute left-[50%] -ml-[80px] r-auto z-10 mt-4 md:mt-5 w-40 rounded bg-gray-200 dark:bg-black`}>
+            <div className='dark:bg-gray-800 dark:bg-opacity-60 py-1 rounded'>
               {topOptions.map((option: any, index: number) => (
-                <span className='group cursor-pointer flex justify-center' key={index}>
-                  <Link className={`${(endpoint === 'top' && bucket === option.value) ? 'underline' : ''} group-hover:underline block w-full text-center`}
+                <span className='group cursor-pointer flex justify-center border-b-2 border-dashed border-gray-100 dark:border-black last:border-transparent' key={index}>
+                  <Link className={`${(endpoint === 'top' && bucket === option.value) ? 'underline' : ''} group-hover:underline block w-full text-center py-0.5`}
                     href={`/top/${option.value}`}
                     prefetch={false}>
                     {option.label}

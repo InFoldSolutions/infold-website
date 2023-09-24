@@ -1,4 +1,8 @@
-export default function Outline({ outlines, expanded, toggleExpanded }: { outlines: string[], expanded: boolean, toggleExpanded: any }) {
+import { useState } from 'react'
+
+export default function Outline({ outlines }: { outlines: string[] }) {
+  const [expanded, setExpanded] = useState<boolean>(false)
+
   return (
     <div className='text-left'>
       <ul className='list-inside list-disc'>
@@ -6,7 +10,7 @@ export default function Outline({ outlines, expanded, toggleExpanded }: { outlin
           <li className='mb-4 last:mb-0' key={index}>
             {outline}
             {(index == 1 && !expanded) &&
-              <span className={`text-blue-500 underline ml-2 cursor-pointer`} onClick={toggleExpanded}>more..</span>
+              <span className={`text-blue-500 underline ml-2 cursor-pointer`} onClick={() => setExpanded(true)}>more..</span>
             }
           </li>
         ))}
@@ -18,7 +22,7 @@ export default function Outline({ outlines, expanded, toggleExpanded }: { outlin
             <li className='mb-4 last:mb-0' key={index}>
               {outline}
               {(index + 3 == outlines.length && expanded) &&
-                <span className={`text-blue-500 underline ml-2 cursor-pointer`} onClick={toggleExpanded}>less..</span>
+                <span className={`text-blue-500 underline ml-2 cursor-pointer`} onClick={() => setExpanded(false)}>less..</span>
               }
             </li>
           ))}

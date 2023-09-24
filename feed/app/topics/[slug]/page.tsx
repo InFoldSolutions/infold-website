@@ -21,6 +21,7 @@ export async function generateMetadata(
 }
 
 export default async function Topic({ params }: { params: { slug: string } }) {
+  console.log('Topic params', params.slug)
   const data = await getTopic(params.slug);
 
   return (

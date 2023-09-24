@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback, MouseEventHandler } from 'react'
+import { useState } from 'react'
 
 import ArticleList from '@/components/article_list'
 import Outline from '@/components/outline'
@@ -9,15 +9,10 @@ import ChatBot from '@/components/chatbot'
 export default function TopicWrapper({ data, modal = false }: { data: any, modal?: boolean }) {
   const isBrowser = typeof window !== "undefined";
 
-  const [expandedOutline, setExpandedOutline] = useState(false)
   const [latestArticles] = useState<any>(filterData(data.sources, data.social, 'latest'))
   const [popularArticles] = useState<any>(filterData(data.sources, data.social, 'popular'))
   const [initialCount] = useState(popularArticles.sources.length > 0 ? popularArticles.sources.length : 5)
   const [isDesktop, setIsDesktop] = useState((isBrowser) ? window.innerWidth > 820 : false)
-
-  const toggleExpanded: MouseEventHandler = useCallback(() => {
-    setExpandedOutline((expanded) => !expanded)
-  }, [setExpandedOutline])
 
   return (
     <article className='pb-2'>
@@ -26,7 +21,7 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
         <small className='text-sm'>Topic summarized from {data.sources.length} sources.</small>
       </h3>
 
-      <Outline outlines={data.outline} toggleExpanded={toggleExpanded} expanded={expandedOutline} />
+      <Outline outlines={data.outline} />
 
       <ChatBot />
 

@@ -10,6 +10,7 @@ import { usePathname } from 'next/navigation'
 import Tooltip from '@/components/tooltip';
 
 import config from '@/config';
+import TypeWriter from './typewriter';
 
 export default function ChatBot() {
   const textareaRef = useRef(null)
@@ -98,10 +99,11 @@ export default function ChatBot() {
                 <span className="bg-black dark:bg-gray-200 p-1 w-2 h-2 rounded-full animate-bounce animation-delay-3"></span>
               </span>
             }
-            {chat.message !== '' &&
-              <pre className="whitespace-pre-wrap">
-                {chat.message.trim()}
-              </pre>
+            {chat.user === 'me' && chat.message !== '' &&
+              <pre className="whitespace-pre-wrap">{chat.message.trim()}</pre>
+            }
+            {chat.user === 'bot' && chat.message !== '' &&
+              <TypeWriter text={chat.message} className="whitespace-pre-wrap" />
             }
           </span>
         </div>

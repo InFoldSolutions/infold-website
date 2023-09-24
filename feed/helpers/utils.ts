@@ -1,4 +1,3 @@
-
 export function findParentByCls(node: HTMLElement, cls: string, maxTries: number = 0): HTMLElement {
   let tries = 0;
 

@@ -1,7 +1,7 @@
 
 'use client'
 
-import { useState, useEffect, UIEvent, useMemo, useCallback, use } from 'react'
+import { useState, useEffect, UIEvent, useMemo, useCallback } from 'react'
 
 import { Suspense } from 'react'
 import { useSearchParams, usePathname } from 'next/navigation'
@@ -165,7 +165,7 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
       </div>
 
       <div className='flex items-start flex-row'>
-        <div className={`flex md:mr-auto ${isSelectScreen || feedData.length === 0 ? 'm-auto flex-row' : 'flex-col'} min-h-[70vh] w-full max-w-full pb-4 max-w-[900px] lg:w-[900px] overflow-x-hidden`}>
+        <div className={`flex md:mr-auto ${isSelectScreen || feedData.length === 0 ? 'm-auto flex-row' : 'flex-col'} min-h-[70vh] w-full max-w-full pb-1 max-w-[900px] lg:w-[900px] overflow-x-hidden`}>
           {!isLoaded && isLoading && !isSelectScreen && feedData.length === 0 &&
             <Loading />
           }
@@ -183,7 +183,7 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
           }
 
           {isLoadMore &&
-            <div className='w-full justify-center mt-3 pt-2 flex items-center'><Spinner />Loading more ...</div>
+            <div className='w-full justify-center mt-4 pt-2 flex items-center'><Spinner />Loading more ...</div>
           }
         </div>
 
