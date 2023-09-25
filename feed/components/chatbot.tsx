@@ -128,7 +128,7 @@ export default function ChatBot() {
             </span>
           </button>
         </div>
-        <Tooltip message={"Foldy is powered by Llama 2 and fine-tuned for each topic to provide you with the most relevant information possible"} top={20} right={6} minWidth={220} padding={2}>
+        <Tooltip message={"Foldy is powered by Llama 2 and customized for each topic to provide you with the most relevant information possible"} top={20} right={6} minWidth={220} padding={2}>
           <div className='ml-2 rounded-md border-2 border-gray-200 dark:border-gray-800 dark:border-opacity-60 p-4 hidden md:flex items-center cursor-pointer select-none' onClick={onBtnSubmit}>
             <i className='fad fa-robot mr-3 -mt-1 text-xl' /> Ask Foldy
           </div>

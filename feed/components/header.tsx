@@ -20,7 +20,7 @@ export default function Header() {
     <header className="border-b-2 border-dashed bg-gray-300 dark:bg-black dark:border-gray-800 dark:border-opacity-80 pt-6 pb-4 px-2 pl-1">
       <div className="relative w-full flex items-center justify-between flex">
         <div className='w-auto'>
-          <Link href="/" className="navbar-logo flex items-center w-full">
+          <Link href={`/`} prefetch={false} className="navbar-logo flex items-center w-full">
             <Image src="/assets/images/logo-infold-black.png" alt="InFold - logo" width={42} height={42} className="rounded mr-3 dark:-ml-1" />
             <span className='text-2xl'>InFold</span>
           </Link>
