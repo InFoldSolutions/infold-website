@@ -29,7 +29,7 @@ export default function RelatedArticle({ item, last }: IRelatedArticle) {
         </span>
       </div>
       <h3 className="mb-2 text-xl font-bold flex-inline items-center">
-        {firstArticle.title} <span className={`text-blue-500 underline cursor-pointer text-base opacity-50 group-hover:opacity-100`} onClick={() => window.open(firstArticle.url, '_blank')}>more..</span>
+        {firstArticle.title} <span className={`text-blue-500 hover:underline cursor-pointer text-base opacity-50 group-hover:opacity-100`} onClick={() => window.open(firstArticle.url, '_blank')}>more..</span>
       </h3>
 
       <div className="text-sm truncate-2-lines">

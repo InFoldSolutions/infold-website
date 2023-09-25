@@ -93,7 +93,7 @@ export default function YTMedia({ data }: { data: any }) {
                       height='320'
                       alt={item.title}
                       className='-mt-7' />
-                    <span className='absolute top-0 bottom-0 left- right-0 w-full bg-black opacity-0 group-hover:opacity-60 flex items-center justify-center z-40 transition-all text-4xl text-white'>
+                    <span className='absolute top-0 bottom-0 left- right-0 w-full bg-black opacity-0 group-hover:opacity-60 flex items-center justify-center z-40 transition-all text-5xl text-white'>
                       <i className='fad fa-play z-50' />
                     </span>
                   </div>

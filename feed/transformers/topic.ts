@@ -2,6 +2,7 @@ import { getRandomInt } from '@/helpers/utils';
 import { filterKeyword } from '@/transformers/keyword';
 
 export function transformTopic(data: any) {
+  data.title = data.title.replace(/\"/g, '')
   data.social = (data.social?.length > 0) ? data.social.map((social: any) => {
     switch (social.source.name) {
       case 'reddit.com':

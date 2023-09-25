@@ -28,7 +28,6 @@ export default function Column({ data, sentiment, expanded }: { data: any, senti
       </div>
       <ul className='grow-0 mt-2'>
         {filteredData.map((item: any, index: number) => {
-          const itemSentiment = item.sentiment || item.articles[0].sentiment
           const url = item.url || item.articles[0].url
 
           return (

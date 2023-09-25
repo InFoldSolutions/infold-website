@@ -10,7 +10,7 @@ export default function Outline({ outlines }: { outlines: string[] }) {
           <li className='mb-4 last:mb-0' key={index}>
             {outline}
             {(index == 1 && !expanded) &&
-              <span className={`text-blue-500 underline ml-2 cursor-pointer`} onClick={() => setExpanded(true)}>more..</span>
+              <span className={`text-blue-500 hover:underline ml-2 cursor-pointer`} onClick={() => setExpanded(true)}>more..</span>
             }
           </li>
         ))}
@@ -22,7 +22,7 @@ export default function Outline({ outlines }: { outlines: string[] }) {
             <li className='mb-4 last:mb-0' key={index}>
               {outline}
               {(index + 3 == outlines.length && expanded) &&
-                <span className={`text-blue-500 underline ml-2 cursor-pointer`} onClick={() => setExpanded(false)}>less..</span>
+                <span className={`text-blue-500 hover:underline ml-2 cursor-pointer`} onClick={() => setExpanded(false)}>less..</span>
               }
             </li>
           ))}

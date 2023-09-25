@@ -51,10 +51,12 @@ export default function TopicModal({ params }: { params: { slug: string } }) {
               </div>
 
               <div className='sticky top-[32px] h-auto hidden lg:flex flex-col'>
-                <div className='h-auto w-[280px] p-5 bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 hidden lg:flex flex-col mb-4 rounded'>
-                  <h3 className='text-2xl font-bold mb-2'>Sentiment</h3>
-                  <TagsChart aggregation={data.sentimentAgg} />
-                </div>
+                {data.sentimentAgg &&
+                  <div className='h-auto w-[280px] p-5 bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 hidden lg:flex flex-col mb-4 rounded'>
+                    <h3 className='text-2xl font-bold mb-2'>Sentiment</h3>
+                    <TagsChart aggregation={data.sentimentAgg} />
+                  </div>
+                }
 
                 {data.politicsAgg &&
                   <div className='h-auto w-[280px] p-5 bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 hidden lg:flex flex-col mb-4 rounded'>
