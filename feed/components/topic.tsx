@@ -76,18 +76,18 @@ function filterData(sources: any, social: any, sort: string = '') {
   switch (sort) {
     case 'latest':
       sources = sources.filter((source: any) => !source.social || source.social.length === 0)
-      sources.sort((a: any, b: any) => new Date(b.articles[0].added_at).getTime() - new Date(a.articles[0].added_at).getTime())
       break;
     case 'popular':
       sources = sources.filter((source: any) => source.social?.length > 0)
-      sources.sort((a: any, b: any) => b.social.length - a.social.length)
       break;
     default:
       break;
   }
 
   return {
-    sources,
+    sources: sources.sort((a: any, b: any) => {
+      return new Date(b.articles[0].added_at).getTime() - new Date(a.articles[0].added_at).getTime()
+    }),
     social: social.sort((a: any, b: any) => {
       return b.score - a.score
     }),
