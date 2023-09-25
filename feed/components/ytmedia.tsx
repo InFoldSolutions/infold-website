@@ -5,14 +5,13 @@ import { UIEvent, useEffect, useState } from 'react'
 import Image from 'next/image'
 import TimeAgo from 'react-timeago'
 
-import Spinner from '@/components/spinner'
 import Arrow from '@/components/arrow'
 
 import config from '@/config';
 
 const sentiment: any = config.sentiment
 
-export default function Timeline({ data }: { data: any }) {
+export default function YTMedia({ data }: { data: any }) {
 
   let [isDesktop, setIsDesktop] = useState(false)
 
@@ -72,49 +71,48 @@ export default function Timeline({ data }: { data: any }) {
   }
 
   return (
-    <div className='relative mt-4'>
+    <div className='relative mt-6'>
       <div className='relative'>
         {isDesktop &&
           <div>
             <Arrow direction='left' clickFunction={prevClickHandler} visible={false} />
-            <Arrow direction='right' clickFunction={nextClickHandler} visible={(data.social.length > 3)} />
+            <Arrow direction='right' clickFunction={nextClickHandler} visible={(data.length > 3)} />
           </div>
         }
 
         <span className='bg-green-600 bg-red-600 bg-slate-500 text-slate-500 text-red-600 text-green-600 hidden'></span>
 
         <div className='timeline relative max-w-screen-2xl overflow-x-scroll no-scrollbar' onScroll={onScrollHandler}>
-          <ul className='flex flex-nowrap h-[170px] relative'>
-            {data.social && data.social.map((item: any, index: number) => {
-              const sentimentData = (item.sentiment && sentiment[item.sentiment]) ? sentiment[item.sentiment] : sentiment['neutral']
-
+          <ul className='flex flex-nowrap relative'>
+            {data.map((item: any, index: number) => {
               return (
                 <li className={`group rounded mr-4 min-w-[275px] group select-none cursor-pointer relative items-center relative`}
                   onClick={() => window.open(item.url, '_blank')}
+                  title={`Youtube: ${item.title}`}
                   key={index} >
-                  <div className='bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 group-hover:bg-opacity-80 group-hover:dark:bg-opacity-80 p-4 rounded-md text-sm relative overflow-hidden'>
-                    <span className='truncate-4-lines box-border min-h-[80px] mr-1'>
-                      {item.body}
-                    </span>
-                    <span className={`absolute top-2 right-2 ${sentimentData.bg} w-2 h-2 opacity-80 rounded`}></span>
+                  <div className='h-[150px] rounded-md relative overflow-hidden'>
+                    <Image src={item.thumbnails.high.url}
+                      width='480'
+                      height='320'
+                      alt={item.title}
+                      className='-mt-7' />
+                      <span className='absolute top-0 bottom-0 left- right-0 w-full bg-black opacity-0 group-hover:opacity-60 flex items-center justify-center z-40 transition-all text-4xl text-white'>
+                        <i className='fad fa-play z-50'/>
+                      </span>
                   </div>
-                  <div className='flex overflow-x-hidden items-center text-sm mt-3 ml-3'>
-                    <span className='mr-2'>
-                      <Image src={item.logo} alt={item.name || item.source.name} width={35} height={35} className='h-[28px] w-auto max-w-none' />
+                  <div className='flex overflow-x-hidden items-center text-sm mt-3 ml-1'>
+                    <span className='mr-3 text-2xl self-start'>
+                      <i className='fab fa-youtube text-red-600' />
                     </span>
-                    <span>
-                      <span className='leading-4 text-sm'>{item.author}</span>
-                      <span className='block leading-4'>
+                    <span className='flex flex-col'>
+                      <span className='leading-4 text-sm font-medium truncate-2-lines'>{item.title}</span>
+                      <span className='text-gray-600 dark:text-gray-300 text-xs mt-1'>
+                        {item.channel.name}
+                        <span className='ml-1.5 mr-1.5'>•</span>
                         <TimeAgo
-                          date={new Date(item.added_at).getTime()}
-                          className='text-gray-600 dark:text-gray-300 text-xs'
+                          date={new Date(item.published_at).getTime()}
                         />
                       </span>
-                    </span>
-                    <span className='ml-auto mr-3 pl-3 text-xs flex flex-col items-center justify-center border-gray-200 dark:border-gray-800 dark:border-opacity-80 border-dashed border-l-2'>
-                      <i className={`fas fa-arrow-alt-up text-gray-400 dark:text-gray-600`} />
-                      <span className='text-sm'>{item.score}</span>
-                      <i className={`fas fa-arrow-alt-down text-gray-400 dark:text-gray-600`} />
                     </span>
                   </div>
                 </li>

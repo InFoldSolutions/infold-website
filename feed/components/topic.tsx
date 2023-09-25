@@ -5,6 +5,7 @@ import { useState } from 'react'
 import ArticleList from '@/components/article_list'
 import Outline from '@/components/outline'
 import ChatBot from '@/components/chatbot'
+import YTMedia from './ytmedia'
 
 export default function TopicWrapper({ data, modal = false }: { data: any, modal?: boolean }) {
   const isBrowser = typeof window !== "undefined";
@@ -25,7 +26,11 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
 
       <ChatBot />
 
-      <h3 className='mt-6 text-2xl font-bold'>News Coverage</h3>
+      {data.media && data.media.length > 0 &&
+        <YTMedia data={data.media} />
+      }
+
+      <h3 className='mt-4 text-2xl font-bold'>News Coverage</h3>
 
       {popularArticles.sources.length > 0 && latestArticles.sources.length > 0 &&
         <div className='lg:flex'>
