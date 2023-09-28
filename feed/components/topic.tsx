@@ -5,15 +5,18 @@ import { useState } from 'react'
 import ArticleList from '@/components/article_list'
 import Outline from '@/components/outline'
 import ChatBot from '@/components/chatbot'
-import YTMedia from './ytmedia'
+import YTMedia from '@/components/ytmedia'
+
+import { isBrowser } from '@/helpers/utils'
+
+import { filterData } from '@/transformers/topic'
 
 export default function TopicWrapper({ data, modal = false }: { data: any, modal?: boolean }) {
-  const isBrowser = typeof window !== "undefined";
 
   const [latestArticles] = useState<any>(filterData(data.sources, data.social, 'latest'))
   const [popularArticles] = useState<any>(filterData(data.sources, data.social, 'popular'))
   const [initialCount] = useState(popularArticles.sources.length > 0 ? popularArticles.sources.length : 5)
-  const [isDesktop, setIsDesktop] = useState((isBrowser) ? window.innerWidth > 820 : false)
+  const [isDesktop] = useState((isBrowser) ? window.innerWidth > 820 : false)
 
   return (
     <article className='pb-2'>
@@ -71,31 +74,3 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
     </article>
   )
 }
-
-function filterData(sources: any, social: any, sort: string = '') {
-  switch (sort) {
-    case 'latest':
-      sources = sources.filter((source: any) => !source.social || source.social.length === 0)
-      break;
-    case 'popular':
-      sources = sources.filter((source: any) => source.social?.length > 0)
-      break;
-    default:
-      break;
-  }
-
-  return {
-    sources: sources.sort((a: any, b: any) => {
-      return new Date(b.articles[0].added_at).getTime() - new Date(a.articles[0].added_at).getTime()
-    }),
-    social: social.sort((a: any, b: any) => {
-      return b.score - a.score
-    }),
-    combined: sources.concat(social).sort((a: any, b: any) => {
-      const aTime = a.added_at || a.articles[0].added_at
-      const bTime = b.added_at || b.articles[0].added_at
-
-      return new Date(bTime).getTime() - new Date(aTime).getTime()
-    })
-  }
-} // move this somewhere

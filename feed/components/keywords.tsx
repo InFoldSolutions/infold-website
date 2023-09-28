@@ -1,14 +1,19 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import Keyword from '@/components/keyword';
 
+import { getInterests, addInterest, removeInterest } from '@/helpers/localstorage';
+
+import { isBrowser } from '@/helpers/utils';
+
 export default function Keywords({ keywords }: { keywords: any }) {
 
-  let [showMore, setShowMore] = useState(false);
-  let [currentPage, setCurrentPage] = useState(1);
-  let [pageSize] = useState(6);
+  const [showMore, setShowMore] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize] = useState(6);
+  const [interests, setInterests] = useState<string[]>((isBrowser) ? getInterests() : [])
 
   const moreKeywords = useMemo(() => keywords && keywords.length > pageSize * currentPage, [keywords, currentPage, pageSize]);
 
@@ -19,14 +24,24 @@ export default function Keywords({ keywords }: { keywords: any }) {
       setShowMore(false);
   }, [keywords, currentPage, pageSize, moreKeywords]);
 
+  const toggleInterest = useCallback((interest: string) => {
+    if (interests.includes(interest)) {
+      removeInterest(interest)
+      setInterests((current: string[]) => current.filter((item) => item !== interest))
+    } else {
+      addInterest(interest)
+      setInterests((current: string[]) => [...current, interest])
+    }
+  }, [interests, setInterests])
+
   return (
     <ul>
       {currentPage === 1 && (keywords && keywords.length > 0) && keywords.slice(0, pageSize).map((keyword: any, index: number) => (
-        <Keyword keyword={keyword} key={index} />
+        <Keyword keyword={keyword} interests={interests} toggleInterest={toggleInterest} key={index} />
       ))}
       {currentPage > 1 &&
         keywords.slice(pageSize * (currentPage - 1), pageSize * currentPage).map((keyword: any, index: number) => (
-          <Keyword keyword={keyword} key={index} />
+          <Keyword keyword={keyword} interests={interests} toggleInterest={toggleInterest} key={index} />
         ))
       }
       <div className='flex'>

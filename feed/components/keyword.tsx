@@ -1,14 +1,11 @@
 'use client'
 
-import { useEffect, useCallback, useState } from 'react';
-
 import Link from 'next/link'
 import Image from 'next/image'
 
-import { getInterests, addInterest, removeInterest } from '@/helpers/localstorage';
 import Tooltip from '@/components/tooltip';
 
-export default function Keyword({ keyword }: { keyword: any }) {
+export default function Keyword({ keyword, interests, toggleInterest }: { keyword: any, interests: string[], toggleInterest: any }) {
   const latestAnalyzed = (keyword.analyzed) ? keyword.analyzed[0] : null;
 
   let icon, label, url;
@@ -28,22 +25,6 @@ export default function Keyword({ keyword }: { keyword: any }) {
     icon = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/1200px-Google_%22G%22_Logo.svg.png";
     label = "Google";
   }
-
-  const [interests, setInterests] = useState<string[]>([])
-
-  const toggleInterest = useCallback((interest: string) => {
-    if (interests.includes(interest)) {
-      removeInterest(interest)
-      setInterests((current: string[]) => current.filter((item) => item !== interest))
-    } else {
-      addInterest(interest)
-      setInterests((current: string[]) => [...current, interest])
-    }
-  }, [interests, setInterests])
-
-  useEffect(() => {
-    setInterests(getInterests())
-  }, [])
 
   return (
     <li className='pb-2 mb-3 last:pb-0 last:mb-0 flex items-center group/item border-b-2 border-transparent border-dashed hover:border-gray-100 dark:hover:border-gray-800 dark:hover:border-opacity-80'>

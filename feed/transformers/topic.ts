@@ -83,3 +83,31 @@ export function filterTopic(data: any) {
 
   return true
 }
+
+export function filterData(sources: any, social: any, sort: string = '') {
+  switch (sort) {
+    case 'latest':
+      sources = sources.filter((source: any) => !source.social || source.social.length === 0)
+      break;
+    case 'popular':
+      sources = sources.filter((source: any) => source.social?.length > 0)
+      break;
+    default:
+      break;
+  }
+
+  return {
+    sources: sources.sort((a: any, b: any) => {
+      return new Date(b.articles[0].added_at).getTime() - new Date(a.articles[0].added_at).getTime()
+    }),
+    social: social.sort((a: any, b: any) => {
+      return b.score - a.score
+    }),
+    combined: sources.concat(social).sort((a: any, b: any) => {
+      const aTime = a.added_at || a.articles[0].added_at
+      const bTime = b.added_at || b.articles[0].added_at
+
+      return new Date(bTime).getTime() - new Date(aTime).getTime()
+    })
+  }
+}

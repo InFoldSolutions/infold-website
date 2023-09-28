@@ -3,14 +3,16 @@
 import { useEffect, useMemo, useRef, useState, useCallback, KeyboardEventHandler, MouseEventHandler } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
 
-import { getWebsocket, closeWebsocket } from '@/websocket';
+import { getWebsocket } from '@/websocket';
 
 import { usePathname } from 'next/navigation'
 
 import Tooltip from '@/components/tooltip';
+import TypeWriter from '@/components/typewriter';
 
 import config from '@/config';
-import TypeWriter from './typewriter';
+
+import { isBrowser } from '@/helpers/utils';
 
 export default function ChatBot() {
   const textareaRef = useRef(null)
@@ -18,7 +20,6 @@ export default function ChatBot() {
   const pathname = usePathname()
   const topicName = pathname.split('/').pop()
 
-  const isBrowser = typeof window !== "undefined";
   const socketURL = `${config.ws.chat}/${config.ws.path}/${topicName}`;
 
   const webSocket = useMemo(() => {

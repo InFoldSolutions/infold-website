@@ -13,14 +13,15 @@ import Loading from '@/components/loading'
 import Spinner from '@/components/spinner'
 import Interests from '@/components/interests'
 import Keywords from '@/components/keywords'
+import Premium from '@/components/premium'
 
 import { getFeed, getSearchFeed, getInterestsFeed } from '@/helpers/api'
 import { saveInterests, getInterests } from '@/helpers/localstorage'
+import { isBrowser } from '@/helpers/utils'
 
 import { closeWebsocket } from '@/websocket'
 
 import config from '@/config'
-import Premium from './premium'
 
 export default function Wrapper({ initialFeedData, topKeywords, totalResults }: { initialFeedData: any, topKeywords: [], totalResults: number }) {
   const pathname = usePathname()
@@ -31,14 +32,13 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
   const [isLoading, setIsLoading] = useState(false)
   const [isLoadMore, setIsLoadMore] = useState(false)
   const [endOfFeed, setEndOfFeed] = useState(false)
-  const [selectedInterests, setSelectedInterests] = useState([])
+  const [selectedInterests, setSelectedInterests] = useState((isBrowser) ? getInterests() : [])
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [showToTop, setShowToTop] = useState(false)
-  const [isLoaded, setIsLoaded] = useState(false)
 
   const isSelectScreen = useMemo(() => { // do we display interests screen ?
     const keywords = searchParams.get('keywords')
-    return selectedInterests.length === 0 && (!pathname || pathname === '/') && !keywords
+    return feedData.length === 0 && selectedInterests.length === 0 && (!pathname || pathname === '/') && !keywords
   }, [feedData, selectedInterests, pathname, searchParams])
 
   const backToTop = useCallback(() => {
@@ -78,14 +78,6 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
       document.removeEventListener('scroll', onScrollHandler);
     }
   }, [onScrollHandler]);
-
-  // on initial load get interests from localstorage
-  useEffect(() => {
-    setIsLoaded(true)
-
-    // @ts-ignore
-    setSelectedInterests(getInterests())
-  }, [])
 
   // selected interests changed
   useEffect(() => {
@@ -166,11 +158,11 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
 
       <div className='flex items-start flex-row'>
         <div className={`flex md:mr-auto ${isSelectScreen || feedData.length === 0 ? 'm-auto flex-row' : 'flex-col'} min-h-[70vh] w-full max-w-full pb-1 max-w-[900px] lg:w-[900px] overflow-x-hidden`}>
-          {!isLoaded && isLoading && !isSelectScreen && feedData.length === 0 &&
+          {isLoading && !isSelectScreen && feedData.length === 0 &&
             <Loading />
           }
 
-          {isSelectScreen && isLoaded &&
+          {isSelectScreen &&
             <Interests interests={config.interests} saveInterests={saveInterests} setSelectedInterests={setSelectedInterests} />
           }
 

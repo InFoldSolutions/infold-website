@@ -44,3 +44,5 @@ export function getRandomInt(min: number, max: number) {
 export function isValidEmail(email: string) {
   return /\S+@\S+\.\S+/.test(email);
 }
+
+export const isBrowser = typeof window !== "undefined";
