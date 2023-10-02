@@ -11,18 +11,32 @@ import { isBrowser } from '@/helpers/utils'
 
 import { filterData } from '@/transformers/topic'
 
+import { refreshTopicMeta } from '@/helpers/api'
+
 export default function TopicWrapper({ data, modal = false }: { data: any, modal?: boolean }) {
 
   const [latestArticles] = useState<any>(filterData(data.sources, data.social, 'latest'))
   const [popularArticles] = useState<any>(filterData(data.sources, data.social, 'popular'))
   const [initialCount] = useState(popularArticles.sources.length > 0 ? popularArticles.sources.length : 5)
   const [isDesktop] = useState((isBrowser) ? window.innerWidth > 820 : false)
+  const [isRefreshing, setIsRefreshing] = useState(false)
+
+  const refreshTopic = async () => {
+    setIsRefreshing(true)
+    await refreshTopicMeta(data.slug)
+    setIsRefreshing(false)
+  }
 
   return (
     <article className='pb-2'>
-      <h3 className={`${modal ? 'mr-4' : ''} mb-4 text-3xl font-bold`}>
+      <h3 className={`${modal ? 'mr-4' : ''} mb-4 text-3xl font-bold group`}>
         <span>{data.title}</span><br />
-        <small className='text-sm'>Topic summarized from {data.sources.length} sources.</small>
+        <span className='text-sm'>
+          Topic summarized from {data.sources.length} sources.
+          <span className='hidden group-hover:inline-flex cursor-pointer'>
+            <i className={`fad fa-sync ml-2 ${isRefreshing ? 'animate-spin' : ''}`} onClick={() => refreshTopic()} />
+          </span>
+        </span>
       </h3>
 
       <Outline outlines={data.outline} />

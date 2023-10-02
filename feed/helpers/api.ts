@@ -139,6 +139,41 @@ export async function getTopic(slug: string) {
   }
 }
 
+export async function refreshTopicMeta(slug: string) {
+  console.log('refreshTopicMeta', slug)
+
+  try {
+    const url = `${config.api.url}/topics/${slug}`
+    const res = await fetch(url, {
+      next: { revalidate: 1 },
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'api_key': config.api_key || '',
+      },
+      body: JSON.stringify({
+        'topic': null,
+        'requeue_social': true,
+        'requeue_media': true
+      }),
+    })
+
+    if (!res.ok)
+      throw new Error('Response not ok');
+
+    const data = await res.json()
+    console.log('refreshTopicMeta', data)
+
+    if (!data.topic)
+      throw new Error('Topic not found');
+
+    return transformTopic(data.topic)
+  } catch (error) {
+    console.error('Failed to fetch topic data', error)
+    return {};
+  }
+}
+
 export async function getTopKeywords(bucket: string = 'day') {
   try {
     const url = `${config.api.url}/keywords/top?bucket=${bucket}&limit=30`;
