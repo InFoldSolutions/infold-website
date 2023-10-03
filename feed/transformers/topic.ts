@@ -1,6 +1,8 @@
 import { getRandomInt } from '@/helpers/utils';
 import { filterKeyword } from '@/transformers/keyword';
 
+import config from '@/config';
+
 export function transformTopic(data: any) {
   data.title = data.title.replace(/\"/g, '')
   data.social = (data.social?.length > 0) ? data.social.map((social: any) => {
@@ -79,12 +81,10 @@ export function transformTopic(data: any) {
     })
   }
 
-  if (data.slug === 'mercedes-benz-s-drive-pilot-system-hands-off-highway-driving-with-in-car-monitoring' && !data.suggested) {
-    data.suggested = [
-      'What is a level 3 autonomous driving system?',
-      'Which companies received permit to test level 3 autonomous driving in California?',
-      'What autonomous level allows for the driver not to be present?'
-    ]
+  // @ts-ignore
+  if (config.mockSuggested[data.slug]) {
+    // @ts-ignore
+    data.suggested = config.mockSuggested[data.slug]
   } 
 
   return {

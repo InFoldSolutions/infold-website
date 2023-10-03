@@ -86,6 +86,19 @@ const config = {
     },
   ],
 
+  'mockSuggested': {
+    'exploring-the-life-and-legacy-of-j-robert-oppenheimer-through-christopher-nolan-s-latest-film': [
+      'Who was J. Robert Oppenheimer and was he involved in the Manhattan Project ?',
+      'What is Christopher Nolan latest film ?',
+      'How is the movie Oppenheimer doing at the box office ?',
+    ],
+    'mercedes-benz-s-drive-pilot-system-hands-off-highway-driving-with-in-car-monitoring': [
+      'What is a level 3 autonomous driving system ?',
+      'Which companies received permit to test level 3 autonomous driving in California ?',
+      'What autonomous level allows for the driver not to be present ?'
+    ]
+  },
+
   'sentiment': {
     'positive': {
       'bg': 'bg-green-600',
