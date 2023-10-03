@@ -47,7 +47,7 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
 
       <Outline outlines={data.outline} />
 
-      <ChatBot />
+      <ChatBot suggested={data.suggested} />
 
       {data.media && data.media.length > 0 &&
         <YTMedia data={data.media} />
@@ -57,7 +57,7 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
 
       {popularArticles.sources.length > 0 && latestArticles.sources.length > 0 &&
         <div className='lg:flex'>
-          <div className='lg:basis-1/2 lg:mr-4 shrink-0 lg:max-w-[50%]'>
+          <div className='lg:basis-1/2 lg:mr-4 shrink-1 lg:max-w-[50%]'>
             <div className={`p-2 px-3 mt-4 items-center justify-center bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 rounded hidden lg:flex`}>
               <i className='fad fa-comments mr-2' /> Popular
 
@@ -70,7 +70,7 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
             <ArticleList sources={popularArticles.sources} initialCount={(isDesktop) ? initialCount : popularArticles.sources.length} />
           </div>
 
-          <div className='lg:basis-1/2 lg:ml-4 shrink-0 lg:max-w-[50%]'>
+          <div className='lg:basis-1/2 lg:ml-4 shrink-1 lg:max-w-[50%]'>
             <div className={`p-2 px-3 mt-4 items-center justify-center bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 rounded hidden lg:flex`}>
               <i className='fad fa-history mr-2' />Latest
 

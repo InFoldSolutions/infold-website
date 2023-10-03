@@ -14,7 +14,7 @@ import config from '@/config';
 
 import { isBrowser } from '@/helpers/utils';
 
-export default function ChatBot() {
+export default function ChatBot({ suggested }: { suggested: any }) {
   const textareaRef = useRef(null)
 
   const pathname = usePathname()
@@ -35,7 +35,7 @@ export default function ChatBot() {
     // @ts-ignore
     const textLength = textareaRef?.current?.value.length
 
-    if (textLength > 0) 
+    if (textLength > 0)
       setActiveBtn(true)
     else
       setActiveBtn(false)
@@ -73,6 +73,15 @@ export default function ChatBot() {
       setActiveBtn(false)
     }
   }, [webSocket, textareaRef, setChatMessages])
+
+  const onPromptSumbit = useCallback((suggested: string) => {
+    // @ts-ignore
+    textareaRef.current.value = suggested
+    setActiveBtn(true)
+
+    // @ts-ignore
+    onBtnSubmit()
+  }, [textareaRef, setActiveBtn])
 
   useEffect((): any => {
     if (!webSocket) return
@@ -135,6 +144,23 @@ export default function ChatBot() {
           </div>
         </Tooltip>
       </div>
+
+      {suggested && suggested.length > 0 &&
+        <div className='mt-4 px-1 w-full'>
+          <ul>
+            {suggested.map((suggested: any, index: number) => (
+              <li className='mb-2 border-b-2 border-dashed border-gray-200 dark:border-gray-800 dark:border-opacity-60 cursor-pointer group flex items-center'
+                onClick={() => onPromptSumbit(suggested)}
+                key={index}>
+                <span className='text-base p-1 flex'>{suggested}</span>
+                <span className='ml-auto text-sm hidden group-hover:flex items-center'>
+                  <i className='fad fa-terminal ml-2' />
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      }
     </div>
   )
 }

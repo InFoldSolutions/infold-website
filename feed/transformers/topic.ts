@@ -71,11 +71,21 @@ export function transformTopic(data: any) {
     })
   }
 
-  /*if (data.media?.length > 0) {
-    data.media = data.media.sort((a: any, b: any) => {
+  if (data.media?.length > 0) {
+    data.media = data.media.filter((media: any) => {
+      return media.channel.name !== 'Amweekly'
+    }).sort((a: any, b: any) => {
       return new Date(b.published_at).getTime() - new Date(a.published_at).getTime()
     })
-  }*/
+  }
+
+  if (data.slug === 'mercedes-benz-s-drive-pilot-system-hands-off-highway-driving-with-in-car-monitoring' && !data.suggested) {
+    data.suggested = [
+      'What is a level 3 autonomous driving system?',
+      'Which companies received permit to test level 3 autonomous driving in California?',
+      'What autonomous level allows for the driver not to be present?'
+    ]
+  } 
 
   return {
     ...data,

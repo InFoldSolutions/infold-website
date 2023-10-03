@@ -7,6 +7,8 @@ import TimeAgo from 'react-timeago'
 
 import Arrow from '@/components/arrow'
 
+import { kFormatter } from '@/helpers/utils'
+
 export default function YTMedia({ data }: { data: any }) {
 
   let [isDesktop, setIsDesktop] = useState(false)
@@ -103,12 +105,18 @@ export default function YTMedia({ data }: { data: any }) {
                     </span>
                     <span className='flex flex-col'>
                       <span className='leading-4 text-sm font-medium truncate-2-lines'>{item.title}</span>
-                      <span className='text-gray-600 dark:text-gray-300 text-xs mt-1'>
-                        <span>{item.channel.name}</span>
-                        <span className='ml-1.5 mr-1.5'>•</span>
-                        <TimeAgo
-                          date={new Date(item.published_at).getTime()}
-                        />
+                      <span className='text-gray-600 dark:text-gray-300 text-xs'>
+                        <span className='flex mt-1.5 mb-0.5'>{item.channel.name}</span>
+                        <span>
+                          <span>
+                            <i className='fad fa-eye mr-1' />
+                            {kFormatter(item.statistics.viewCount)}
+                          </span>
+                          <span className='ml-1.5 mr-1.5'>•</span>
+                          <TimeAgo
+                            date={new Date(item.published_at).getTime()}
+                          />
+                        </span>
                       </span>
                     </span>
                   </div>
