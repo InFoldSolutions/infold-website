@@ -77,7 +77,7 @@ export function transformTopic(data: any) {
     data.media = data.media.filter((media: any) => {
       return media.channel.name !== 'Amweekly'
     }).sort((a: any, b: any) => {
-      return new Date(b.published_at).getTime() - new Date(a.published_at).getTime()
+      return b.statistics.viewCount - a.statistics.viewCount
     })
   }
 
