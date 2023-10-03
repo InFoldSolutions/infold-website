@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 
 import ArticleList from '@/components/article_list'
 import Outline from '@/components/outline'
@@ -12,6 +12,7 @@ import { isBrowser } from '@/helpers/utils'
 import { filterData } from '@/transformers/topic'
 
 import { refreshTopicMeta } from '@/helpers/api'
+import { AuthContext } from '@/context/auth'
 
 export default function TopicWrapper({ data, modal = false }: { data: any, modal?: boolean }) {
 
@@ -20,6 +21,8 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
   const [initialCount] = useState(popularArticles.sources.length > 0 ? popularArticles.sources.length : 5)
   const [isDesktop] = useState((isBrowser) ? window.innerWidth > 820 : false)
   const [isRefreshing, setIsRefreshing] = useState(false)
+
+  const { user } = useContext(AuthContext)
 
   const refreshTopic = async () => {
     setIsRefreshing(true)
@@ -33,9 +36,12 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
         <span>{data.title}</span><br />
         <span className='text-sm'>
           Topic summarized from {data.sources.length} sources.
-          <span className='hidden group-hover:inline-flex cursor-pointer'>
-            <i className={`fad fa-sync ml-2 ${isRefreshing ? 'animate-spin' : ''}`} onClick={() => refreshTopic()} />
-          </span>
+
+          {user &&
+            <span className='hidden group-hover:inline-flex cursor-pointer'>
+              <i className={`fad fa-sync ml-2 ${isRefreshing ? 'animate-spin' : ''}`} onClick={() => refreshTopic()} />
+            </span>
+          }
         </span>
       </h3>
 
@@ -51,7 +57,7 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
 
       {popularArticles.sources.length > 0 && latestArticles.sources.length > 0 &&
         <div className='lg:flex'>
-          <div className='lg:basis-1/2 lg:mr-4'>
+          <div className='lg:basis-1/2 lg:mr-4 shrink-0 lg:max-w-[50%]'>
             <div className={`p-2 px-3 mt-4 items-center justify-center bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 rounded hidden lg:flex`}>
               <i className='fad fa-comments mr-2' /> Popular
 
@@ -64,7 +70,7 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
             <ArticleList sources={popularArticles.sources} initialCount={(isDesktop) ? initialCount : popularArticles.sources.length} />
           </div>
 
-          <div className='lg:basis-1/2 lg:ml-4'>
+          <div className='lg:basis-1/2 lg:ml-4 shrink-0 lg:max-w-[50%]'>
             <div className={`p-2 px-3 mt-4 items-center justify-center bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 rounded hidden lg:flex`}>
               <i className='fad fa-history mr-2' />Latest
 
@@ -82,6 +88,12 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
       {popularArticles.sources.length === 0 && latestArticles.sources.length > 0 &&
         <div>
           <ArticleList sources={latestArticles.sources} initialCount={initialCount * 2} />
+        </div>
+      }
+
+      {popularArticles.sources.length === 0 && latestArticles.sources.length === 0 &&
+        <div className='mt-4'>
+          <p className='text-center'>No news coverage found.</p>
         </div>
       }
 

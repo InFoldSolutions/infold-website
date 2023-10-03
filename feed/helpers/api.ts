@@ -149,7 +149,7 @@ export async function refreshTopicMeta(slug: string) {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        'api_key': config.api_key || '',
+        'api-key': config.api_key || '',
       },
       body: JSON.stringify({
         'topic': null,
@@ -162,7 +162,6 @@ export async function refreshTopicMeta(slug: string) {
       throw new Error('Response not ok');
 
     const data = await res.json()
-    console.log('refreshTopicMeta', data)
 
     if (!data.topic)
       throw new Error('Topic not found');

@@ -71,6 +71,12 @@ export function transformTopic(data: any) {
     })
   }
 
+  /*if (data.media?.length > 0) {
+    data.media = data.media.sort((a: any, b: any) => {
+      return new Date(b.published_at).getTime() - new Date(a.published_at).getTime()
+    })
+  }*/
+
   return {
     ...data,
     keywords: uniqueKeywords,
