@@ -104,9 +104,9 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
 
   // pathname changed
   useEffect(() => {
-    if (pathname.startsWith('/topics/')) { // going to topic
+    if (pathname.startsWith('/story/')) { // going to a story
       document.body.style.overflowY = 'hidden' // disable scrolling when modal is open
-    } else if (document.body.style.overflowY === 'hidden') { // comming from topic
+    } else if (document.body.style.overflowY === 'hidden') { // comming from a story
       document.body.style.overflowY = 'scroll' // enable scrolling when modal is closed
       closeWebsocket()
     }
@@ -114,19 +114,19 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
 
   // load more
   useEffect(() => {
+    
     if (offset > 1 && !endOfFeed) {
       setIsLoadMore(true)
 
       const fetchMoreData = async () => {
         let res: any;
 
-        const keywords = searchParams.get('keywords')
         const pathnameParts = pathname.split('/')
         const endpoint = pathnameParts[1]
         const bucket = pathnameParts[2] || config.api.defaultBucket
 
-        if (keywords)
-          res = await getSearchFeed(keywords.split(','), offset)
+        if (endpoint === 'keyword')
+          res = await getSearchFeed(bucket.split(','), offset)
         else if (endpoint)
           res = await getFeed(endpoint, config.api.defaultLimit, bucket, offset)
         else if (selectedInterests.length > 0)
@@ -143,8 +143,10 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
       fetchMoreData()
         .catch(console.error)
         .finally(() => setIsLoadMore(false))
-    }
-  }, [offset])
+    } else if (endOfFeed) 
+      setIsLoadMore(false)
+
+  }, [offset, endOfFeed])
 
   return (
     <Container>

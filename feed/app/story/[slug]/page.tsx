@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 
-import TopicWrapper from '@/components/topic'
+import StoryWrapper from '@/components/story'
 import Container from '@/components/container'
 import TagsChart from '@/components/tags_chart'
 import Keywords from '@/components/keywords'
@@ -28,7 +28,7 @@ export default async function Topic({ params }: { params: { slug: string } }) {
       <div className='flex items-start mt-6'>
         <div className='md:mr-auto w-full max-w-full lg:w-[860px]'>
           {!data && <div className='w-auto text-center p-2 px-3'>Loading topic ..</div>}
-          {data && <TopicWrapper data={data} />}
+          {data && <StoryWrapper data={data} />}
         </div>
 
         <div className='sticky top-4 h-auto hidden lg:flex flex-col'>

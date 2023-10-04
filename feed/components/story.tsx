@@ -9,12 +9,12 @@ import YTMedia from '@/components/ytmedia'
 
 import { isBrowser } from '@/helpers/utils'
 
-import { filterData } from '@/transformers/topic'
+import { filterData } from '@/transformers/story'
 
 import { refreshTopicMeta } from '@/helpers/api'
 import { AuthContext } from '@/context/auth'
 
-export default function TopicWrapper({ data, modal = false }: { data: any, modal?: boolean }) {
+export default function StoryWrapper({ data, modal = false }: { data: any, modal?: boolean }) {
 
   const [latestArticles] = useState<any>(filterData(data.sources, data.social, 'latest'))
   const [popularArticles] = useState<any>(filterData(data.sources, data.social, 'popular'))
@@ -35,7 +35,7 @@ export default function TopicWrapper({ data, modal = false }: { data: any, modal
       <h3 className={`${modal ? 'mr-4' : ''} mb-4 text-3xl font-bold group`}>
         <span>{data.title}</span><br />
         <span className='text-sm'>
-          Topic summarized from {data.sources.length} sources.
+          {`Summarized from ${data.sources.length} sources${data.articles > data.sources.length ? ` and ${data.articles} articles.` : '.'}`}
 
           {user &&
             <span className='hidden group-hover:inline-flex cursor-pointer'>

@@ -96,6 +96,11 @@ const config = {
       'What is a level 3 autonomous driving system ?',
       'Which companies received permit to test level 3 autonomous driving in California ?',
       'What autonomous level allows for the driver not to be present ?'
+    ],
+    'unity-s-controversial-installation-fee-policy-sparks-outrage-among-developers': [
+      'What is Unity ?',
+      'What is the Unity installation fee ?',
+      'What is the Unity Plus subscription ?',
     ]
   },
 

@@ -4,7 +4,7 @@
 import { useState, useEffect } from 'react'
 
 import Modal from '@/components/modal'
-import TopicWrapper from '@/components/topic'
+import StoryWrapper from '@/components/story'
 import TagsChart from '@/components/tags_chart'
 import Spinner from '@/components/spinner'
 import Keywords from '@/components/keywords'
@@ -12,23 +12,23 @@ import Premium from '@/components/premium'
 
 import { getTopic } from '@/helpers/api'
 
-export default function TopicModal({ params }: { params: { slug: string } }) {
+export default function StoryModal({ params }: { params: { slug: string } }) {
 
   let [isLoading, setIsLoading] = useState(true);
   let [data, setData] = useState<any>(null);
 
 
   useEffect(() => {
-    const fetchTopicData = async () => {
-      const topic = await getTopic(params.slug);
+    const fetchStoryData = async () => {
+      const story = await getTopic(params.slug);
 
-      if (topic)
-        setData(topic);
+      if (story)
+        setData(story);
 
       setIsLoading(false);
     }
 
-    fetchTopicData()
+    fetchStoryData()
       .catch(console.error)
   }, [params.slug]);
 
@@ -37,7 +37,7 @@ export default function TopicModal({ params }: { params: { slug: string } }) {
       {isLoading &&
         <div className='flex relative top-[50vh] -mt-6 h-12 items-center justify-center font-mono w-auto px-6 bg-gray-300 dark:bg-black border-2 border-black border-dashed dark:border-gray-400 dark:text-gray-400'>
           <Spinner />
-          Loading topic ..
+          Loading story ..
         </div>
       }
 
@@ -47,7 +47,7 @@ export default function TopicModal({ params }: { params: { slug: string } }) {
             <div className='p-4 md:p-8 md:px-12 max-w-[1355px] lg:w-[1355px] lg:px-20 flex items-start'>
 
               <div className='md:mr-auto w-full lg:w-[860px]'>
-                <TopicWrapper data={data} modal={true} />
+                <StoryWrapper data={data} modal={true} />
               </div>
 
               <div className='sticky top-[32px] h-auto hidden lg:flex flex-col'>

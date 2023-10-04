@@ -1,5 +1,5 @@
 import config from '@/config';
-import { transformTopic, filterTopic } from '@/transformers/topic';
+import { transformStory, filterStory } from '@/transformers/story';
 
 export type Item = {
   slug: string
@@ -46,7 +46,7 @@ export async function getFeed(endpoint = 'top', limit: number = 0, bucket: any =
 
     return {
       meta: data.meta,
-      data: data.topics.filter(filterTopic).map(transformTopic)
+      data: data.topics.filter(filterStory).map(transformStory)
     }
   } catch (error) {
     console.error('Failed to fetch feed data', error)
@@ -76,7 +76,7 @@ export async function getSearchFeed(keywords: string[], page: number = 1) {
 
     return {
       meta: data.meta,
-      data: data.topics.filter(filterTopic).map(transformTopic)
+      data: data.topics.filter(filterStory).map(transformStory)
     }
   } catch (error) {
     console.error('Failed to fetch search feed data', error)
@@ -111,7 +111,7 @@ export async function getInterestsFeed(interests: string[], page: number = 1) {
 
     return {
       meta: data.meta,
-      data: data.topics.filter(filterTopic).map(transformTopic)
+      data: data.topics.filter(filterStory).map(transformStory)
     }
   } catch (error) {
     console.error('Failed to fetch search feed data', error)
@@ -132,7 +132,7 @@ export async function getTopic(slug: string) {
     if (!data.topic)
       throw new Error('Topic not found');
 
-    return transformTopic(data.topic)
+    return transformStory(data.topic)
   } catch (error) {
     console.error('Failed to fetch topic data', error)
     return {};
@@ -166,7 +166,7 @@ export async function refreshTopicMeta(slug: string) {
     if (!data.topic)
       throw new Error('Topic not found');
 
-    return transformTopic(data.topic)
+    return transformStory(data.topic)
   } catch (error) {
     console.error('Failed to fetch topic data', error)
     return {};

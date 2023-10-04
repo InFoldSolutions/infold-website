@@ -1,21 +1,14 @@
 import Wrapper from '@/components/wrapper'
 
-import { getFeed, getSearchFeed, getTopKeywords } from '@/helpers/api'
+export default async function Home() {
 
-export default async function Home({ params, searchParams }: { params: any, searchParams: any }) {
-  const keywords = searchParams ? searchParams.keywords : ''
+  // TO-DO
+  // Server side personal feed
 
-  let res: any = null
-
-  if (keywords)
-    res = await getSearchFeed(keywords.split(','))
-  /*else if (endpoint)
-    res = await getFeed(endpoint, config.api.defaultLimit, bucket)*/
-
-  const topKeywords = await getTopKeywords('week')
-  const totalResults = res?.meta?.total_results || 0
+  const topKeywords: any = []
+  const totalResults: number = 0
 
   return (
-    <Wrapper initialFeedData={res?.data} topKeywords={topKeywords} totalResults={totalResults} />
+    <Wrapper initialFeedData={null} topKeywords={topKeywords} totalResults={totalResults} />
   )
 }

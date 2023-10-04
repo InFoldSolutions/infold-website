@@ -17,15 +17,17 @@ const topOptions = [
 ]
 
 export default function Filters({ isMenuOpen, setIsMenuOpen, totalResults }: { isMenuOpen: boolean, setIsMenuOpen: any, totalResults: number, showToTop: boolean }) {
+  let keywords: any = '';
+
   const router = useRouter()
   const searchParams: any = useSearchParams()
   const pathname: string = usePathname()
-
-  const keywords = searchParams.get('keywords') || ''
-
   const pathnameParts = pathname.split('/')
   const endpoint = pathnameParts[1]
   const bucket = pathnameParts[2] || config.api.defaultBucket
+
+  if (endpoint === 'keyword')
+    keywords = decodeURIComponent(bucket)
 
   const searchInputRef = useRef(null)
 
@@ -38,12 +40,11 @@ export default function Filters({ isMenuOpen, setIsMenuOpen, totalResults }: { i
       target = e.target.parentNode;
 
     const keywordText = target.innerText.replace('×', '').trim()
-    const keywords = searchParams.get('keywords') || ''
     const keywordsArray = keywords.split(',')
     const queryString = keywordsArray.filter((keyword: string) => keyword !== keywordText).join(',')
 
     if (queryString)
-      router.push(`/?keywords=${queryString}`)
+      router.push(`/keyword/${queryString}`)
     else
       router.push('/')
   }, [searchParams, router])
@@ -54,7 +55,7 @@ export default function Filters({ isMenuOpen, setIsMenuOpen, totalResults }: { i
       const keywordText = searchInputRef?.current?.value.trim()
 
       if (keywordText && keywordText.length > 3)
-        router.push(`/?keywords=${keywordText}`)
+        router.push(`/keyword/${keywordText}`)
       else
         router.push('/')
     }

@@ -3,7 +3,7 @@ import { filterKeyword } from '@/transformers/keyword';
 
 import config from '@/config';
 
-export function transformTopic(data: any) {
+export function transformStory(data: any) {
   data.title = data.title.replace(/\"/g, '')
   data.social = (data.social?.length > 0) ? data.social.map((social: any) => {
     switch (social.source.name) {
@@ -93,7 +93,7 @@ export function transformTopic(data: any) {
   }
 }
 
-export function filterTopic(data: any) {
+export function filterStory(data: any) {
   if (data.title.includes('CBS News Mornings'))
     return false
 

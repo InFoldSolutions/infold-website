@@ -41,7 +41,7 @@ export default function Keyword({ keyword, interests, toggleInterest }: { keywor
         </Link>
       </div>
 
-      <Link href={`/?keywords=${keyword.keyword}`} prefetch={false} className='group/link' target='_blank'>
+      <Link href={`/keyword/${keyword.keyword}`} prefetch={false} className='group/link' target='_blank'>
         <span>
           <span className='font-bold block leading-4 group-hover/link:underline'>{keyword.keyword}</span>
           <span className='flex text-xs'>
