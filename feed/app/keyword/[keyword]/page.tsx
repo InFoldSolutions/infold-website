@@ -7,7 +7,7 @@ export async function generateMetadata(
   { params }: { params: { keyword: string } }
 ): Promise<Metadata> {
   return {
-    title: `${params.keyword} - News, Stories, Videos`,
+    title: `${params.keyword} - News, Stories, Videos | InFold`,
     description: `Get latest news, stories, and articles about ${params.keyword} all in one place.`
   }
 }
