@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { useSearchParams, useRouter, usePathname } from 'next/navigation'
 
 import config from '@/config'
-import { capitalize } from '@/helpers/utils'
+import { capitalize, slugifyKeyword, unSlugifyKeyword } from '@/helpers/utils'
 
 const topOptions = [
   { label: 'Hour', value: 'hour' },
@@ -27,7 +27,7 @@ export default function Filters({ isMenuOpen, setIsMenuOpen, totalResults }: { i
   const bucket = pathnameParts[2] || config.api.defaultBucket
 
   if (endpoint === 'keyword')
-    keywords = decodeURIComponent(bucket)
+    keywords = unSlugifyKeyword(bucket)
 
   const searchInputRef = useRef(null)
 
@@ -44,7 +44,7 @@ export default function Filters({ isMenuOpen, setIsMenuOpen, totalResults }: { i
     const queryString = keywordsArray.filter((keyword: string) => keyword !== keywordText).join(',')
 
     if (queryString)
-      router.push(`/keyword/${queryString}`)
+      router.push(`/keyword/${slugifyKeyword(queryString)}`)
     else
       router.push('/')
   }, [searchParams, router])
@@ -55,7 +55,7 @@ export default function Filters({ isMenuOpen, setIsMenuOpen, totalResults }: { i
       const keywordText = searchInputRef?.current?.value.trim()
 
       if (keywordText && keywordText.length > 3)
-        router.push(`/keyword/${keywordText}`)
+        router.push(`/keyword/${slugifyKeyword(keywordText)}`)
       else
         router.push('/')
     }

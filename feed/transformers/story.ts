@@ -52,12 +52,6 @@ export function transformStory(data: any) {
     })
   }
 
-  /*data.politicsAgg = {
-    left: 23,
-    right: 77,
-    center: 42
-  }*/
-
   let keywords: any = [], uniqueKeywords: any = []
 
   if (data.keywords?.data) {
@@ -79,6 +73,12 @@ export function transformStory(data: any) {
     }).sort((a: any, b: any) => {
       return b.statistics.viewCount - a.statistics.viewCount
     })
+  }
+
+  // @ts-ignore
+  if (config.mockAffiliate[data.slug]) {
+    // @ts-ignore
+    data.affiliates = config.mockAffiliate[data.slug]
   }
 
   // @ts-ignore

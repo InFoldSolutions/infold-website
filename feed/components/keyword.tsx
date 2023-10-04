@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 import Tooltip from '@/components/tooltip';
+import { slugifyKeyword } from '@/helpers/utils';
 
 export default function Keyword({ keyword, interests, toggleInterest }: { keyword: any, interests: string[], toggleInterest: any }) {
   const latestAnalyzed = (keyword.analyzed) ? keyword.analyzed[0] : null;
@@ -41,7 +42,7 @@ export default function Keyword({ keyword, interests, toggleInterest }: { keywor
         </Link>
       </div>
 
-      <Link href={`/keyword/${keyword.keyword}`} prefetch={false} className='group/link' target='_blank'>
+      <Link href={`/keyword/${slugifyKeyword(keyword.keyword)}`} prefetch={false} className='group/link' target='_blank'>
         <span>
           <span className='font-bold block leading-4 group-hover/link:underline'>{keyword.keyword}</span>
           <span className='flex text-xs'>

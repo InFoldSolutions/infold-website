@@ -13,6 +13,7 @@ import { filterData } from '@/transformers/story'
 
 import { refreshTopicMeta } from '@/helpers/api'
 import { AuthContext } from '@/context/auth'
+import Books from './books'
 
 export default function StoryWrapper({ data, modal = false }: { data: any, modal?: boolean }) {
 
@@ -49,7 +50,11 @@ export default function StoryWrapper({ data, modal = false }: { data: any, modal
 
       <ChatBot suggested={data.suggested} />
 
-      {data.media && data.media.length > 0 &&
+      {data.affiliates?.length > 0 &&
+        <Books data={data.affiliates} />
+      }
+
+      {data.media?.length > 0 &&
         <YTMedia data={data.media} />
       }
 

@@ -87,7 +87,7 @@ const config = {
   ],
 
   'mockSuggested': {
-    'exploring-the-life-and-legacy-of-j-robert-oppenheimer-through-christopher-nolan-s-latest-film': [
+    'exploring-the-mind-of-j-robert-oppenheimer-a-deep-dive-into-the-father-of-the-atomic-bomb': [
       'Who was J. Robert Oppenheimer and was he involved in the Manhattan Project ?',
       'What is Christopher Nolan latest film ?',
       'How is the movie Oppenheimer doing at the box office ?',
@@ -102,6 +102,66 @@ const config = {
       'What is the Unity installation fee ?',
       'What is the Unity Plus subscription ?',
     ]
+  },
+
+  'mockAffiliate': {
+    'exploring-the-mind-of-j-robert-oppenheimer-a-deep-dive-into-the-father-of-the-atomic-bomb': [{
+      url: 'https://amzn.to/46Fn113',
+      title: 'American Prometheus: The Triumph and Tragedy of J. Robert Oppenheimer',
+      img: 'https://m.media-amazon.com/images/I/81kdC93pWrL._SY466_.jpg',
+      author: 'Kai Bird, Martin J. Sherwin',
+      rating: 4.6,
+      ratingsCount: 7014,
+      type: 'book'
+    }, {
+      url: 'https://www.amazon.com/Countdown-1945-Extraordinary-Atomic-Changed/dp/B07ZWCSWPK/ref=sr_1_2?crid=1TFJCDKY9E82N&keywords=atomic+bomb&qid=1696456867&s=audible&sprefix=atomic+bomb%2Caudible%2C159&sr=1-2',
+      title: 'Countdown 1945: The Extraordinary Story of the Atomic Bomb and the 116 Days That Changed the World',
+      img: 'https://m.media-amazon.com/images/I/51ZEI-NjeRL.jpg',
+      rating: 4.7,
+      ratingsCount: 8718,
+      author: 'Chris Wallace, Mitch Weiss',
+      type: 'book'
+    }, {
+      url: 'https://www.amazon.com/Making-Atomic-Bomb-Richard-Rhodes/dp/1451677618/ref=d_sims_dp_d_dex_ai_speed_loc_sccl_2_2/132-9214889-2545118?pd_rd_w=YX76u&content-id=amzn1.sym.29adec37-ce27-44ef-b467-ea0aa144e49d&pf_rd_p=29adec37-ce27-44ef-b467-ea0aa144e49d&pf_rd_r=6HE5QV2DJFC5560X8CAB&pd_rd_wg=HcBpY&pd_rd_r=d46b2a73-1187-48ba-a9b9-7f2531439a60&pd_rd_i=1451677618&psc=1',
+      title: 'The Making of the Atomic Bomb',
+      img: 'https://m.media-amazon.com/images/I/61KLAA1jwQL._SY466_.jpg',
+      rating: 4.6,
+      ratingsCount: 3456,
+      author: 'Richard Rhodes ',
+      type: 'book'
+    }, {
+      url: 'https://amzn.to/46e7ntv',
+      title: 'Oppenheimer: Beyond the Blast: A Deep Dive into the Life and Legacy of J. Robert Oppenheimer - A 2023 Biography and Documentary Book (Pioneering Minds: The J. Robert Oppenheimer Legacy Series 1)',
+      img: 'https://m.media-amazon.com/images/I/712BZ56me-L._SY466_.jpg',
+      author: 'Julian R. Stonebridge',
+      rating: 3.8,
+      ratingsCount: 30,
+      type: 'book'
+    }, {
+      url: 'https://www.amazon.com/Brief-History-Robert-Oppenheimer-Mechanics-ebook/dp/B0CD5214B3/ref=sr_1_9?crid=N5ME5ULHW0R5&keywords=the+manhattan+project&qid=1696456539&s=books&sprefix=the+manhatan+projec%2Cstripbooks-intl-ship%2C186&sr=1-9',
+      title: 'A Brief History of Robert Oppenheimer - From Quantum Mechanics to the Atomic Bomb: A Journey Through the Manhattan Project and Beyond',
+      img: 'https://m.media-amazon.com/images/I/81WoKR6La0L._SY466_.jpg',
+      rating: 4.3,
+      ratingsCount: 169,
+      author: 'Albert Neutron',
+      type: 'book'
+    }, {
+      url: 'https://amzn.to/3F3m1YJ',
+      title: 'The Manhattan Project: The Making of the Atomic Bomb',
+      img: 'https://m.media-amazon.com/images/I/518YhP5FpGL.jpg',
+      rating: 4.2,
+      ratingsCount: 559,
+      author: 'Al Cimino',
+      type: 'book'
+    }, {
+      url: 'https://amzn.to/3F3m1YJ',
+      title: 'Now It Can Be Told: The Story Of The Manhattan Project',
+      img: 'https://m.media-amazon.com/images/I/61T0Cg1flDL._SY466_.jpg',
+      rating: 4.4,
+      ratingsCount: 417,
+      author: 'Leslie R. Groves',
+      type: 'book'
+    }]
   },
 
   'sentiment': {
