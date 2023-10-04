@@ -6,9 +6,12 @@ import { getSearchFeed, getTopKeywords } from '@/helpers/api'
 export async function generateMetadata(
   { params }: { params: { keyword: string } }
 ): Promise<Metadata> {
+
+  const keyword = decodeURIComponent(params.keyword)
+
   return {
-    title: `${params.keyword} - News, Stories, Videos | InFold`,
-    description: `Get latest news, stories, and articles about ${params.keyword} all in one place.`
+    title: `${keyword} - News, Stories, Videos | InFold`,
+    description: `Get latest news, stories, and articles about ${keyword} all in one place.`
   }
 }
 

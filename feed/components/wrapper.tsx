@@ -4,7 +4,7 @@
 import { useState, useEffect, UIEvent, useMemo, useCallback } from 'react'
 
 import { Suspense } from 'react'
-import { useSearchParams, usePathname } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 
 import Container from '@/components/container'
 import Filters from '@/components/filters'
@@ -25,7 +25,6 @@ import config from '@/config'
 
 export default function Wrapper({ initialFeedData, topKeywords, totalResults }: { initialFeedData: any, topKeywords: [], totalResults: number }) {
   const pathname = usePathname()
-  const searchParams = useSearchParams()
 
   const [feedData, setFeedData] = useState(initialFeedData || [])
   const [offset, setOffset] = useState<number>(1)
@@ -37,9 +36,8 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
   const [showToTop, setShowToTop] = useState(false)
 
   const isSelectScreen = useMemo(() => { // do we display interests screen ?
-    const keywords = searchParams.get('keywords')
-    return feedData.length === 0 && selectedInterests.length === 0 && (!pathname || pathname === '/') && !keywords
-  }, [feedData, selectedInterests, pathname, searchParams])
+    return feedData.length === 0 && selectedInterests.length === 0 && (!pathname || pathname === '/')
+  }, [feedData, selectedInterests, pathname])
 
   const backToTop = useCallback(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -110,7 +108,7 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
       document.body.style.overflowY = 'scroll' // enable scrolling when modal is closed
       closeWebsocket()
     }
-  }, [pathname, searchParams])
+  }, [pathname])
 
   // load more
   useEffect(() => {
