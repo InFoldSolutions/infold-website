@@ -1,6 +1,16 @@
+import { Metadata } from 'next';
 import Wrapper from '@/components/wrapper'
 
 import { getSearchFeed, getTopKeywords } from '@/helpers/api'
+
+export async function generateMetadata(
+  { params }: { params: { keyword: string } }
+): Promise<Metadata> {
+  return {
+    title: `${params.keyword} - News, Stories, Videos`,
+    description: `Get latest news, stories, and articles about ${params.keyword} all in one place.`
+  }
+}
 
 export default async function Keyword({ params }: { params: { keyword: string } }) {
   let res: any = null
