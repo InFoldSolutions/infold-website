@@ -36,7 +36,7 @@ export default function RelatedArticle({ item, last }: IRelatedArticle) {
         {firstArticle.summary}
       </div>
 
-      {item.social.length > 0 &&
+      {item.social?.length > 0 &&
         <SocialComments data={item} />
       }
     </li >
