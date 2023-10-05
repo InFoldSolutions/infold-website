@@ -102,7 +102,7 @@ const config = {
       'What is the Unity installation fee ?',
       'What is the Unity Plus subscription ?',
     ],
-    'apple-s-latest-innovation-the-iphone-15-pro-max-a-game-changer': [
+    'apple-s-newest-iphones-a-game-changer': [
       'Tell me about the key features of the iPhone 15 Max.',
       'What improvements have been made in the iPhone 15 Max compared to its predecessor ?',
       'Compare the iPhone 15 Max to its competitors in terms of features and performance.'
@@ -110,7 +110,7 @@ const config = {
   },
 
   'mockAffiliate': {
-    'apple-s-latest-innovation-the-iphone-15-pro-max-a-game-changer': [{
+    'apple-s-newest-iphones-a-game-changer': [{
       url: 'https://www.amazon.com/UltraGlass-Protector-Coverage-Military-Shatterproof/dp/B0CB5VVSGX/ref=sr_1_51?crid=1XNKUGG6LB0R7&keywords=iPhone%2B15%2BPro%2BMax&qid=1696508678&sprefix=iphone%2B15%2Bpro%2Bmax%2Caps%2C161&sr=8-51&th=1',
       title: 'UltraGlass UNBREAK TOP 9H+ Glass for iPhone 15 Pro Max Screen Protector [Full Coverage & Military Grade Shatterproof] Screen Protector 15 Pro Max Tempered Glass [Longest Durable] 2 Packs',
       img: 'https://m.media-amazon.com/images/I/71mSDF6S8SL._AC_SX679_.jpg',
