@@ -1,6 +1,7 @@
 import config from '@/config';
 import { transformStory, filterStory } from '@/transformers/story';
 
+// Topic, story item
 export type Item = {
   slug: string
   title: string
@@ -8,6 +9,8 @@ export type Item = {
   keywords: any
   added_at: number
   articles: number,
+  short_description: string
+  short_title: string
   social: any,
   sentimentAgg: any
 }

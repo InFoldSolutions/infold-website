@@ -26,13 +26,7 @@ export default function Feed({ data }: { data: any, onScrollHandler?: any }) {
               <small className='text-sm'>Summarized from {item.articles} articles.</small>
             </h3>
             <div className='text-left'>
-              <ul className='list-inside list-disc'>
-                {item.outline.slice(0, 1).map((outline: string, index: number) => (
-                  <li className='mb-4 last:mb-0' key={index}>
-                    {outline}
-                  </li>
-                ))}
-              </ul>
+              {item.short_description}
             </div>
 
             <div className='mt-6 flex items-center'>

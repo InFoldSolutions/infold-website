@@ -21,7 +21,7 @@ export default function Carousel({ title, children, length, overflow }: { title:
 
     if (!element) return console.warn('Carousel: nextClickHandler: element not found')
 
-    const x = (element.clientWidth / 3 + 5) + element.scrollLeft;
+    const x = (element.clientWidth / overflow + 5) + element.scrollLeft;
 
     element.scroll({
       left: x,
@@ -36,7 +36,7 @@ export default function Carousel({ title, children, length, overflow }: { title:
 
     if (!element) return console.warn('Carousel: prevClickHandler: element not found')
 
-    const x = (element.clientWidth / 3 + 5) - element.scrollLeft;
+    const x = (element.clientWidth / overflow + 5) - element.scrollLeft;
 
     element.scroll({
       left: -x,

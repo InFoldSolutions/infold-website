@@ -15,8 +15,8 @@ export async function generateMetadata(
   const data = await getTopic(params.slug);
 
   return {
-    title: `${data.title} | InFold`,
-    description: data.outline.slice(0, 2).join(' ')
+    title: `${data.short_title} | InFold`,
+    description: data.short_description
   }
 }
 

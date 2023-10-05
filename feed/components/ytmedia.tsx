@@ -36,8 +36,8 @@ export default function YTMedia({ data }: { data: any }) {
                     <span className='flex mt-1.5 mb-0.5'>{item.channel.name}</span>
                     <span>
                       <span>
-                        <i className='fad fa-eye mr-1' />
                         {kFormatter(item.statistics.viewCount)}
+                        <span className='ml-1'>views</span>
                       </span>
                       <span className='ml-1.5 mr-1.5'>•</span>
                       <TimeAgo

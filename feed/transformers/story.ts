@@ -59,7 +59,7 @@ export function transformStory(data: any) {
     uniqueKeywords = [...new Map(keywords.map((item: any) => [item['keyword'], item])).values()]
     uniqueKeywords.sort((a: any) => {
       if (data.title.toLowerCase().includes(a.keyword.toLowerCase()) || data.outline.join('. ').toLowerCase().includes(a.keyword.toLowerCase()))
-        return -1 
+        return -1
       else if (a.type === 'person')
         return 0
       else
@@ -68,11 +68,16 @@ export function transformStory(data: any) {
   }
 
   if (data.media?.length > 0) {
-    data.media = data.media.filter((media: any) => {
-      return media.channel.name !== 'Amweekly'
-    }).sort((a: any, b: any) => {
-      return b.statistics.viewCount - a.statistics.viewCount
-    })
+    data.media = data.media
+      .filter((media: any) => {
+        return media.channel.name !== 'Amweekly'
+      })
+      .sort((a: any, b: any) => {
+        return b.statistics.viewCount - a.statistics.viewCount
+      })
+      .filter((media: any, index: number, self: any) => {
+        return self.findIndex((v: any) => v.title === media.title) === index;
+      })
   }
 
   // @ts-ignore
@@ -82,10 +87,11 @@ export function transformStory(data: any) {
   }
 
   // @ts-ignore
-  if (config.mockSuggested[data.slug]) {
+  if ((!data.questions || data.questions.length === 0) && config.mockSuggested[data.slug]) {
     // @ts-ignore
     data.suggested = config.mockSuggested[data.slug]
-  } 
+  } else if (data.questions) 
+    data.suggested = data.questions
 
   return {
     ...data,
