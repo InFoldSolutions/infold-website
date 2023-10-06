@@ -6,11 +6,13 @@ import SocialComments from './comments';
 interface IRelatedArticle {
   item: any,
   last?: boolean,
+  popular?: boolean,
   children?: string,
 }
 
-export default function RelatedArticle({ item, last }: IRelatedArticle) {
+export default function RelatedArticle({ item, last, popular }: IRelatedArticle) {
   const firstArticle: any = item.articles[0]
+  const articleList = (popular) ? item.articles.filter((article: any) => article.social?.length > 0) : item.articles
 
   return (
     <li className={`${last ? 'border-b-0' : 'border-b-2'} py-4 list-none rounded-md border-gray-200 dark:border-gray-800 dark:border-opacity-80 border-dashed last:border-b-0 last:mb-0 group`}
@@ -31,17 +33,17 @@ export default function RelatedArticle({ item, last }: IRelatedArticle) {
       </div>
 
       <ul className='flex w-auto flex-col'>
-        {item.articles.map((article: any, index: number) => 
+        {articleList.map((article: any, index: number) => 
           <li key={index} className='mt-3 group/article'>
-            <h3 className="mb-2 text-xl font-bold flex-inline items-center">
-              {article.title} <span className={`text-blue-500 underline cursor-pointer text-base opacity-10 group-hover/article:opacity-100`} onClick={() => window.open(firstArticle.url, '_blank')}>more..</span>
+            <h3 className="mb-2 text-xl font-bold flex-inline items-center hover:underline cursor-pointer" onClick={() => window.open(firstArticle.url, '_blank')}>
+              {article.title}
             </h3>
 
             <div className="text-sm truncate-2-lines">
               {article.summary}
             </div>
 
-            {article.social?.length > 0 &&
+            {popular &&
               <SocialComments data={article} />
             }
           </li>

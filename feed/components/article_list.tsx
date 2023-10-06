@@ -3,7 +3,7 @@ import { useState, useCallback, MouseEventHandler } from 'react'
 import Spinner from '@/components/spinner'
 import RelatedArticle from '@/components/article'
 
-export default function ArticleList({ sources, initialCount = 4 }: { sources: any, initialCount?: number }) {
+export default function ArticleList({ sources, initialCount = 4, popular }: { sources: any, initialCount?: number, popular?: boolean }) {
   const [expandArticles, setExpandArticles] = useState(false)
   const toggleMoreArticles: MouseEventHandler = useCallback(
     (e) => {
@@ -26,12 +26,12 @@ export default function ArticleList({ sources, initialCount = 4 }: { sources: an
               </li>
             )
 
-          return <RelatedArticle item={item} key={index} last={index === initialCount - 1} />
+          return <RelatedArticle item={item} key={index} last={index === initialCount - 1} popular={popular} />
         })}
       </ul>
       <ul className={`${!expandArticles ? 'hidden' : ''} border-t-2 border-gray-200 dark:border-gray-800 dark:border-opacity-80 border-dashed`}>
         {sources.slice(initialCount).map((item: any, index: number) => {
-          return <RelatedArticle item={item} key={index} />
+          return <RelatedArticle item={item} key={index} popular={popular} />
         })}
       </ul>
     </div>

@@ -88,7 +88,7 @@ export default function StoryWrapper({ data, modal = false }: { data: any, modal
               </span>
             </div>
 
-            <ArticleList sources={popularArticles.sources} initialCount={(isDesktop) ? initialCount : popularArticles.sources.length} />
+            <ArticleList sources={popularArticles.sources} initialCount={(isDesktop) ? initialCount : popularArticles.sources.length} popular={true} />
           </div>
 
           <div className='lg:basis-1/2 lg:ml-4 shrink-1 lg:max-w-[50%]'>
