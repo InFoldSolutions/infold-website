@@ -3,7 +3,7 @@ import { useState, useCallback, MouseEventHandler } from 'react'
 import Spinner from '@/components/spinner'
 import RelatedArticle from '@/components/article'
 
-export default function ArticleList({ sources, initialCount = 4, popular }: { sources: any, initialCount?: number, popular?: boolean }) {
+export default function ArticleList({ sources, initialCount = 2, popular }: { sources: any, initialCount?: number, popular?: boolean }) {
   const [expandArticles, setExpandArticles] = useState(false)
   const toggleMoreArticles: MouseEventHandler = useCallback(
     (e) => {

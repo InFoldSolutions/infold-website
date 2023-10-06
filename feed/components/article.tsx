@@ -1,3 +1,5 @@
+import { MouseEventHandler, useCallback, useEffect, useState } from 'react'
+
 import Image from 'next/image'
 import TimeAgo from 'react-timeago'
 
@@ -13,6 +15,20 @@ interface IRelatedArticle {
 export default function RelatedArticle({ item, last, popular }: IRelatedArticle) {
   const firstArticle: any = item.articles[0]
   const articleList = (popular) ? item.articles.filter((article: any) => article.social?.length > 0) : item.articles
+
+  const [initialCount, setInitialCount] = useState((popular) ? articleList.length : 2)
+  const [expandArticles, setExpandArticles] = useState(false)
+  const toggleMoreArticles: MouseEventHandler = useCallback(
+    (e) => {
+      setExpandArticles(true)
+    },
+    [setExpandArticles]
+  )
+
+  useEffect(() => {
+    if (expandArticles) 
+      setInitialCount(articleList.length)
+  }, [expandArticles])
 
   return (
     <li className={`${last ? 'border-b-0' : 'border-b-2'} py-4 list-none rounded-md border-gray-200 dark:border-gray-800 dark:border-opacity-80 border-dashed last:border-b-0 last:mb-0 group`}
@@ -33,22 +49,34 @@ export default function RelatedArticle({ item, last, popular }: IRelatedArticle)
       </div>
 
       <ul className='flex w-auto flex-col'>
-        {articleList.map((article: any, index: number) => 
-          <li key={index} className='mt-3 group/article'>
-            <h3 className="mb-2 text-xl font-bold flex-inline items-center hover:underline cursor-pointer" onClick={() => window.open(firstArticle.url, '_blank')}>
-              {article.title}
-            </h3>
+        {articleList.slice(0, initialCount + 1).map((article: any, index: number) => {
+          if (index === initialCount && articleList.length > initialCount) {
+            return (
+              <li className={`${expandArticles ? 'hidden' : ''} w-[98%] mx-auto rounded-md flex items-center justify-center cursor-pointer hover:underline mt-5`}
+                onClick={toggleMoreArticles}
+                key={index}>
+                <span className='py-1'>more articles..</span>
+              </li>
+            )
+          } else {
+            return (
+              <li key={index} className='mt-3 group/article' >
+                <h3 className="mb-2 text-xl font-bold flex-inline items-center hover:underline cursor-pointer" onClick={() => window.open(firstArticle.url, '_blank')}>
+                  {article.title}
+                </h3>
 
-            <div className="text-sm truncate-2-lines">
-              {article.summary}
-            </div>
+                <div className="text-sm truncate-2-lines">
+                  {article.summary}
+                </div>
 
-            {popular &&
-              <SocialComments data={article} />
-            }
-          </li>
-        )}
+                {popular &&
+                  <SocialComments data={article} />
+                }
+              </li>
+            )
+          }
+        })}
       </ul>
-    </li >
+    </li>
   )
 }

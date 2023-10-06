@@ -313,6 +313,47 @@ const config = {
       rating: 4.5,
       ratingsCount: 102,
       type: 'book'
+    }],
+    'scientists-discover-slow-spinning-stars-in-the-center-of-the-milky-way': [{
+      url: 'https://www.amazon.com/Galaxy-Ground-Within-Novel-Wayfarers-ebook/dp/B088RDCLQ4/ref=sr_1_8?crid=268TYC9BB2HHV&keywords=Spinning+Stars+Milky+Way+book&qid=1696600998&sprefix=spinning+stars+milky+way+book%2Caps%2C210&sr=8-8',
+      title: 'The Galaxy, and the Ground Within: A Novel (Wayfarers Book 4)',
+      img: 'https://m.media-amazon.com/images/I/81iJ3xZbebL._SY466_.jpg',
+      author: 'Becky Chambers',
+      rating: 4.6,
+      ratingsCount: 6599,
+      type: 'book'
+    },{
+      url: 'https://www.amazon.com/National-Geographic-Backyard-Guide-Night/dp/1426220154/ref=sr_1_3_sspa?crid=U25SXDSG1VCN&keywords=Milky+Way+book&qid=1696601235&sprefix=milky+way+book%2Caps%2C236&sr=8-3-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1',
+      title: 'National Geographic Backyard Guide to the Night Sky, 2nd Edition',
+      img: 'https://m.media-amazon.com/images/I/81HDRnhESpL._SY466_.jpg',
+      author: 'Andrew Fazekas',
+      rating: 4.7,
+      ratingsCount: 1461,
+      type: 'book'
+    },{
+      url: 'https://www.amazon.com/Visual-Galaxy-Ultimate-Guide-Beyond/dp/142622060X/ref=sr_1_6?crid=U25SXDSG1VCN&keywords=Milky+Way+book&qid=1696601235&sprefix=milky+way+book%2Caps%2C236&sr=8-6',
+      title: 'Visual Galaxy: The Ultimate Guide to the Milky Way and Beyond',
+      img: 'https://m.media-amazon.com/images/I/914j-nSmqOL._SY466_.jpg',
+      author: 'National Geographic',
+      rating: 4.7,
+      ratingsCount: 154,
+      type: 'book'
+    },{
+      url: 'https://www.amazon.com/Believing-Seeing-Physicist-Shattered-Necessity-ebook/dp/B08XR1WGCW/ref=sr_1_11_sspa?crid=U25SXDSG1VCN&keywords=Milky+Way+book&qid=1696601235&sprefix=milky+way+book%2Caps%2C236&sr=8-11-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9tdGY&psc=1',
+      title: 'Believing Is Seeing: A Physicist Explains How Science Shattered His Atheism and Revealed the Necessity of Faith',
+      img: 'https://m.media-amazon.com/images/I/81MSIk7jWES._SY466_.jpg',
+      author: 'Michael Guillen',
+      rating: 4.6,
+      ratingsCount: 863,
+      type: 'book'
+    },{
+      url: 'https://www.amazon.com/Milky-Way-Autobiography-Our-Galaxy-ebook/dp/B09N3FS9DP/ref=sr_1_1?crid=U25SXDSG1VCN&keywords=Milky+Way+book&qid=1696601673&sprefix=milky+way+book%2Caps%2C236&sr=8-1',
+      title: 'The Milky Way: An Autobiography of Our Galaxy',
+      img: 'https://m.media-amazon.com/images/I/8121PSx1W3L._SY466_.jpg',
+      author: 'Moiya McTier',
+      rating: 4.2,
+      ratingsCount: 167,
+      type: 'book'
     }]
   },
 
