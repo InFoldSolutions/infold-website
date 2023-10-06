@@ -18,7 +18,7 @@ export default function Feed({ data }: { data: any, onScrollHandler?: any }) {
             onClick={() => router.push(`/story/${item.slug}`)}
             key={index}>
             <TimeAgo
-              date={new Date(item.added_at).getTime()}
+              date={new Date(item.updated_at).getTime()}
               className='text-gray-600 dark:text-gray-300 flex text-base pb-2'
             />
             <h3 className='mb-4 text-3xl font-bold leading-snug text-left'>

@@ -2,6 +2,8 @@
 
 import { useContext, useState } from 'react'
 
+import TimeAgo from 'react-timeago'
+
 import ArticleList from '@/components/article_list'
 import Outline from '@/components/outline'
 import ChatBot from '@/components/chatbot'
@@ -46,16 +48,23 @@ export default function StoryWrapper({ data, modal = false }: { data: any, modal
             }
           </span>
           <span className='text-sm ml-auto flex-row flex items-center'>
-            <span className="items-center mr-3">
-              <b>{data.meta.articles}</b>
-              <i className='fad fa-newspaper ml-2'></i>
-              <span className='hidden md:inline-block ml-2 text-xs'>Articles</span>
+            <span className='items-center md:mr-3'>
+              <i className='fad fa-clock mr-2'></i>
+              <TimeAgo
+                date={new Date(data.updated_at).getTime()}
+                className='text-sm'
+              />
+            </span>
+            <span className="hidden md:inline-block items-center mr-3">
+              <i className='fad fa-newspaper mr-2'></i>
+              {data.meta.articles}
+              <span className='ml-2 text-xs'>Articles</span>
             </span>
             {data.meta.social > 0 &&
-              <span className="items-center">
-                <b>{data.meta.social}</b>
-                <i className='fad fa-comments ml-2'></i>
-                <span className='hidden md:inline-block ml-2 text-xs'>Comments</span>
+              <span className="hidden md:inline-block items-center">
+                <i className='fad fa-comments mr-2'></i>
+                {data.meta.social}
+                <span className='ml-2 text-xs'>Comments</span>
               </span>
             }
           </span>

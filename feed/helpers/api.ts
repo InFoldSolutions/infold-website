@@ -8,6 +8,7 @@ export type Item = {
   outline: string[]
   keywords: any
   added_at: number
+  updated_at: number
   articles: number,
   short_description: string
   short_title: string

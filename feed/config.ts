@@ -278,7 +278,7 @@ const config = {
       rating: 4.6,
       ratingsCount: 930,
       type: 'book'
-    },{
+    }, {
       url: 'https://www.amazon.com/Audible-Outlive-Science-Art-Longevity/dp/B0B64WL9PK/ref=sr_1_5?crid=ZOA3MY3E6302&keywords=aging+books&qid=1696598517&sprefix=aginng+book%2Caps%2C167&sr=8-5',
       title: 'Outlive: The Science and Art of Longevity',
       img: 'https://m.media-amazon.com/images/I/41qWDt1FuBL.jpg',
@@ -319,7 +319,40 @@ const config = {
       ratingsCount: 102,
       type: 'book'
     }],
-    'scientists-discover-slow-spinning-stars-in-the-center-of-the-milky-way': [{
+    '2024-audi-s5-sportback-sleek-looks-and-powerful-performance': [{
+      url: 'https://www.amazon.com/AUTO-P-Suitable-2017-up-Interior-Modification/dp/B07VCFYMS8/ref=sr_1_4?crid=37YT4SH55DGG8&keywords=audi+s5+sportback+accessories&qid=1696619673&sprefix=Audi+S5+Sportback%2Caps%2C166&sr=8-4',
+      title: 'AUTO-P Suitable for Audi 2017-up A4 A5 S5 RS5 Q7, 2018-up Q5 Shift knob Cover Shell Interior Modification (ABS Carbon Fiber Plaid) (A)',
+      img: 'https://m.media-amazon.com/images/I/61xdcYQmt0L._AC_SX522_.jpg',
+      brand: 'AUTO-P',
+      rating: 4.4,
+      ratingsCount: 115,
+      type: 'product'
+    }, {
+      url: 'https://www.amazon.com/CarQiWireless-Wireless-2018-2022-Organizer-Accessories/dp/B09LM1R7YT/ref=sr_1_5?crid=37YT4SH55DGG8&keywords=audi+s5+sportback+accessories&qid=1696619673&sprefix=Audi+S5+Sportback%2Caps%2C166&sr=8-5',
+      title: 'CarQiWireless Wireless Charger for Audi A4 (B9) A5 S4 S5 2018-2023, Wireless Charging Pad Center Console Organizer for Audi A4 A5 Accessories A4 Allroad A4 Quattro, 2023 2022 2021 2020 2019 2018',
+      img: 'https://m.media-amazon.com/images/I/71D-YcDctvL._AC_SX466_.jpg',
+      brand: 'CarQiWireless',
+      rating: 3.0,
+      ratingsCount: 9,
+      type: 'product'
+    }, {
+      url: 'https://www.amazon.com/MIGUOER-S-line-Universal-Accessories-Motorcycles/dp/B0C533DNNK/ref=sr_1_42?crid=37YT4SH55DGG8&keywords=audi%2Bs5%2Bsportback%2Baccessories&qid=1696619673&sprefix=Audi%2BS5%2BSportback%2Caps%2C166&sr=8-42&th=1',
+      title: 'MIGUOER Tire Valve Stem Caps for Audi S-line RS Series Stem Cap Universal Car Air Cover Car Accessories for Cars, SUV, Truck, Motorcycles 4pcs Black',
+      img: 'https://m.media-amazon.com/images/I/71zQXA0KG4L._AC_SX466_.jpg',
+      brand: 'MIGUOER',
+      rating: 4.5,
+      ratingsCount: 132,
+      type: 'product'
+    }, {
+      url: 'https://www.amazon.com/TTCR-II-Compatible-Drill-Anti-Slip-Aluminum-Alloy-Brake-Automatic/dp/B08X4M1133/ref=sr_1_158?crid=37YT4SH55DGG8&keywords=audi+s5+sportback+accessories&qid=1696619820&sprefix=Audi+S5+Sportback%2Caps%2C166&sr=8-158',
+      title: 'TTCR-II Compatible with Audi Pedals, Brake and Gas Pedal Covers for A3 A4 A5 A6 A7 A8 Q3 Q5 Q7 Q8 SQ5 SQ7 SQ8 TT TTRS Pedals, No Drill Anti-Slip Alloy Pedal Pad (Auto, 2 pcs)',
+      img: 'https://m.media-amazon.com/images/I/71ZB+jg-nkL._AC_SX466_.jpg',
+      brand: 'TTCR-II',
+      rating: 3.7,
+      ratingsCount: 82,
+      type: 'product'
+    }],
+    'scientists-discover-slowly-spinning-group-of-stars-in-the-center-of-the-milky-way-galaxy': [{
       url: 'https://www.amazon.com/Cosmic-Queries-StarTalks-Guide-Where/dp/1426221770/ref=sr_1_2_sspa?crid=3VTVUH7GUTOUT&keywords=astronomy+books&qid=1696603018&sprefix=astronomy+book%2Caps%2C206&sr=8-2-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1',
       title: 'Cosmic Queries: StarTalk\'s Guide to Who We Are, How We Got Here, and Where We\'re Going',
       img: 'https://m.media-amazon.com/images/I/91uhfngBB1L._SY466_.jpg',
@@ -327,7 +360,7 @@ const config = {
       rating: 4.8,
       ratingsCount: 3092,
       type: 'book'
-    },{
+    }, {
       url: 'https://www.amazon.com/Space-Atlas-Second-Mapping-Universe/dp/1426219695/ref=sr_1_9?crid=3VTVUH7GUTOUT&keywords=astronomy+books&qid=1696603168&sprefix=astronomy+book%2Caps%2C206&sr=8-9',
       title: 'Space Atlas, Second Edition: Mapping the Universe and Beyond',
       img: 'https://m.media-amazon.com/images/I/91w9WCjBeGL._SY466_.jpg',
@@ -335,7 +368,7 @@ const config = {
       rating: 4.8,
       ratingsCount: 1047,
       type: 'book'
-    },{
+    }, {
       url: 'https://www.amazon.com/Star-Finder-Step-Step-Guide/dp/1465464751/ref=sr_1_26?crid=3VTVUH7GUTOUT&keywords=astronomy+books&qid=1696603168&sprefix=astronomy+book%2Caps%2C206&sr=8-26',
       title: 'Star Finder!: A Step-by-Step Guide to the Night Sky',
       img: 'https://m.media-amazon.com/images/I/71YLVkjyufL._SY466_.jpg',
@@ -343,7 +376,7 @@ const config = {
       rating: 4.7,
       ratingsCount: 1001,
       type: 'book'
-    },{
+    }, {
       url: 'https://www.amazon.com/Astrophysics-People-Hurry-audio-cd/dp/B06XB2PX7G/ref=sr_1_6?crid=3VTVUH7GUTOUT&keywords=astronomy+books&qid=1696603168&sprefix=astronomy+book%2Caps%2C206&sr=8-6',
       title: 'Astrophysics for People in a Hurry',
       img: 'https://m.media-amazon.com/images/I/61j+AB3GUoL.jpg',
@@ -351,7 +384,7 @@ const config = {
       rating: 4.6,
       ratingsCount: 35440,
       type: 'book'
-    },{
+    }, {
       url: 'https://www.amazon.com/National-Geographic-Backyard-Guide-Night/dp/1426220154/ref=sr_1_3_sspa?crid=U25SXDSG1VCN&keywords=Milky+Way+book&qid=1696601235&sprefix=milky+way+book%2Caps%2C236&sr=8-3-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1',
       title: 'National Geographic Backyard Guide to the Night Sky, 2nd Edition',
       img: 'https://m.media-amazon.com/images/I/81HDRnhESpL._SY466_.jpg',
@@ -359,7 +392,7 @@ const config = {
       rating: 4.7,
       ratingsCount: 1461,
       type: 'book'
-    },{
+    }, {
       url: 'https://www.amazon.com/Visual-Galaxy-Ultimate-Guide-Beyond/dp/142622060X/ref=sr_1_6?crid=U25SXDSG1VCN&keywords=Milky+Way+book&qid=1696601235&sprefix=milky+way+book%2Caps%2C236&sr=8-6',
       title: 'Visual Galaxy: The Ultimate Guide to the Milky Way and Beyond',
       img: 'https://m.media-amazon.com/images/I/914j-nSmqOL._SY466_.jpg',
@@ -367,7 +400,7 @@ const config = {
       rating: 4.7,
       ratingsCount: 154,
       type: 'book'
-    },{
+    }, {
       url: 'https://www.amazon.com/Believing-Seeing-Physicist-Shattered-Necessity-ebook/dp/B08XR1WGCW/ref=sr_1_11_sspa?crid=U25SXDSG1VCN&keywords=Milky+Way+book&qid=1696601235&sprefix=milky+way+book%2Caps%2C236&sr=8-11-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9tdGY&psc=1',
       title: 'Believing Is Seeing: A Physicist Explains How Science Shattered His Atheism and Revealed the Necessity of Faith',
       img: 'https://m.media-amazon.com/images/I/81MSIk7jWES._SY466_.jpg',
@@ -375,7 +408,7 @@ const config = {
       rating: 4.6,
       ratingsCount: 863,
       type: 'book'
-    },{
+    }, {
       url: 'https://www.amazon.com/Milky-Way-Autobiography-Our-Galaxy-ebook/dp/B09N3FS9DP/ref=sr_1_1?crid=U25SXDSG1VCN&keywords=Milky+Way+book&qid=1696601673&sprefix=milky+way+book%2Caps%2C236&sr=8-1',
       title: 'The Milky Way: An Autobiography of Our Galaxy',
       img: 'https://m.media-amazon.com/images/I/8121PSx1W3L._SY466_.jpg',
