@@ -58,13 +58,13 @@ export default function StoryWrapper({ data, modal = false }: { data: any, modal
             <span className="hidden md:inline-block items-center mr-3">
               <i className='fad fa-newspaper mr-2'></i>
               {data.meta.articles}
-              <span className='ml-2 text-xs'>Articles</span>
+              <span className='ml-2'>Articles</span>
             </span>
             {data.meta.social > 0 &&
               <span className="hidden md:inline-block items-center">
                 <i className='fad fa-comments mr-2'></i>
                 {data.meta.social}
-                <span className='ml-2 text-xs'>Comments</span>
+                <span className='ml-2'>Comments</span>
               </span>
             }
           </span>
