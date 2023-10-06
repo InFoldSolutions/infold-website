@@ -5,26 +5,19 @@ import config from '@/config';
 
 export function transformStory(data: any) {
   data.title = data.title.replace(/\"/g, '')
-  data.social = (data.social?.length > 0) ? data.social.map((social: any) => {
-    switch (social.source.name) {
-      case 'reddit.com':
-        social.logo = '/assets/images/reddit.svg'
-        social.author = `u/${social.author}`
-        break
-    }
-
-    if (social.sentiment === 'slightly_positive')
-      social.sentiment = 'positive'
-
-    if (social.sentiment === 'slightly_negative')
-      social.sentimentt = 'negative'
-
-    return social
-  }).sort((a: any, b: any) => b.score - a.score) : []
 
   if (data.sources?.length > 0) {
-    data.sentimentAgg = data.sources.reduce((aggregator: any, item: any) => {
+
+    data.sentimentAgg = {
+      positive: 0,
+      negative: 0,
+      neutral: 0
+    }
+
+    data.sources.forEach((item: any) => {
       if (item.articles?.length > 0) {
+
+        // This is mock data
         if (!item.articles[0].sentiment)
           item.articles[0].sentiment = ['negative', 'positive', 'neutral'][getRandomInt(0, 3)]
 
@@ -41,14 +34,16 @@ export function transformStory(data: any) {
         }
 
         if (articleSentiment)
-          aggregator[articleSentiment]++
-      }
+          data.sentimentAgg[articleSentiment]++
 
-      return aggregator
-    }, {
-      positive: 0,
-      negative: 0,
-      neutral: 0
+        // Sort articles by date
+        item.articles.sort((a: any, b: any) => {
+          return new Date(b.added_at).getTime() - new Date(a.added_at).getTime()
+        })
+
+        // Filter out articles with social
+        item.popularArticles = item.articles.filter((article: any) =>  article.social && article.social.length > 0)
+      }
     })
   }
 
@@ -90,7 +85,7 @@ export function transformStory(data: any) {
   if ((!data.questions || data.questions.length === 0) && config.mockSuggested[data.slug]) {
     // @ts-ignore
     data.suggested = config.mockSuggested[data.slug]
-  } else if (data.questions) 
+  } else if (data.questions)
     data.suggested = data.questions
 
   return {
@@ -106,13 +101,13 @@ export function filterStory(data: any) {
   return true
 }
 
-export function filterData(sources: any, social: any, sort: string = '') {
+export function filterData(sources: any, sort: string = '') {
   switch (sort) {
     case 'latest':
-      sources = sources.filter((source: any) => !source.social || source.social.length === 0)
+      sources = sources.filter((source: any) => !source.popularArticles || source.popularArticles.length === 0)
       break;
     case 'popular':
-      sources = sources.filter((source: any) => source.social?.length > 0)
+      sources = sources.filter((source: any) => source.popularArticles?.length > 0)
       break;
     default:
       break;
@@ -121,15 +116,6 @@ export function filterData(sources: any, social: any, sort: string = '') {
   return {
     sources: sources.sort((a: any, b: any) => {
       return new Date(b.articles[0].added_at).getTime() - new Date(a.articles[0].added_at).getTime()
-    }),
-    social: social.sort((a: any, b: any) => {
-      return b.score - a.score
-    }),
-    combined: sources.concat(social).sort((a: any, b: any) => {
-      const aTime = a.added_at || a.articles[0].added_at
-      const bTime = b.added_at || b.articles[0].added_at
-
-      return new Date(bTime).getTime() - new Date(aTime).getTime()
     })
   }
 }

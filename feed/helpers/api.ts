@@ -13,6 +13,7 @@ export type Item = {
   short_title: string
   social: any,
   sentimentAgg: any
+  meta: any
 }
 
 export function getApiUrl(endpoint = 'top', limit: number = 0, bucket: any = null, page: number = 1) {
@@ -143,8 +144,6 @@ export async function getTopic(slug: string) {
 }
 
 export async function refreshTopicMeta(slug: string) {
-  console.log('refreshTopicMeta', slug)
-
   try {
     const url = `${config.api.url}/topics/${slug}`
     const res = await fetch(url, {

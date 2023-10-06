@@ -215,6 +215,55 @@ const config = {
       ratingsCount: 417,
       author: 'Leslie R. Groves',
       type: 'book'
+    }],
+    'escalating-tensions-between-india-and-canada-over-alleged-involvement-in-sikh-activist-s-murder': [{
+      url: 'https://www.amazon.com/Passage-India-M-Forster/dp/0156711427/ref=sr_1_10?crid=2XOLMRP20E8WG&keywords=books+canada+india&qid=1696579483&s=books&sprefix=books+canada+indi%2Cstripbooks-intl-ship%2C165&sr=1-10',
+      title: 'A Passage To India',
+      img: 'https://m.media-amazon.com/images/I/71O4LefzraL._SY466_.jpg',
+      author: 'E.M. Forster',
+      rating: 4.0,
+      ratingsCount: 3860,
+      type: 'book'
+    },{
+      url: 'https://www.amazon.com/Canada-Richard-Ford/dp/0061692034/ref=sr_1_17?crid=2XOLMRP20E8WG&keywords=books+canada+india&qid=1696579595&s=books&sprefix=books+canada+indi%2Cstripbooks-intl-ship%2C165&sr=1-17',
+      title: 'Canada',
+      img: 'https://m.media-amazon.com/images/I/71pOQaRRU9L._SY466_.jpg',
+      author: 'Richard Ford',
+      rating: 3.8,
+      ratingsCount: 3251,
+      type: 'book'
+    },{
+      url: 'https://www.amazon.com/Company-Rise-Fall-Hudsons-Empire/dp/0385694091/ref=sr_1_24?crid=2XOLMRP20E8WG&keywords=books+canada+india&qid=1696579595&s=books&sprefix=books+canada+indi%2Cstripbooks-intl-ship%2C165&sr=1-24',
+      title: 'The Company: The Rise and Fall of the Hudson\'s Bay Empire',
+      img: 'https://m.media-amazon.com/images/I/81jomUVeItL._SY466_.jpg',
+      author: 'Richard Ford',
+      rating: 4.4,
+      ratingsCount: 833,
+      type: 'book'
+    },{
+      url: 'https://www.amazon.com/India-History-John-Keay-ebook/dp/B004UN6P0M/ref=sr_1_4?crid=SL4TYL4ZR88Q&keywords=books+india&qid=1696587572&s=books&sprefix=books+india%2Cstripbooks-intl-ship%2C163&sr=1-4',
+      title: 'India: A History',
+      img: 'https://m.media-amazon.com/images/I/91SzXVV2ekL._SY466_.jpg',
+      author: 'John Keay',
+      rating: 4.3,
+      ratingsCount: 1068,
+      type: 'book'
+    },{
+      url: 'https://www.amazon.com/India-Short-History-Andrew-Robinson/dp/0500295166/ref=sr_1_33?crid=2XOLMRP20E8WG&keywords=books+canada+india&qid=1696587552&s=books&sprefix=books+canada+indi%2Cstripbooks-intl-ship%2C165&sr=1-33',
+      title: 'India: A Short History',
+      img: 'https://m.media-amazon.com/images/I/81L-kU-S0KL._SY466_.jpg',
+      author: 'Andrew Robinson',
+      rating: 3.9,
+      ratingsCount: 53,
+      type: 'book'
+    },{
+      url: 'https://www.amazon.com/Constitution-Canada-Founding-Fathers/dp/1774262665/ref=sr_1_14?crid=2XOLMRP20E8WG&keywords=books+canada+india&qid=1696579483&s=books&sprefix=books+canada+indi%2Cstripbooks-intl-ship%2C165&sr=1-14',
+      title: 'The Constitution of Canada',
+      img: 'https://m.media-amazon.com/images/I/71VXqEjOYJL._SY466_.jpg',
+      author: 'Founding Fathers',
+      rating: 4.6,
+      ratingsCount: 387,
+      type: 'book'
     }]
   },
 

@@ -32,7 +32,7 @@ export default function Affiliate({ data }: { data: any }) {
                     alt={item.title}
                     className={`w-auto h-auto ${padding} bg-white`} />
                 </div>
-                <span className='absolute top-0 bottom-0 left- right-0 w-full bg-black opacity-0 group-hover:opacity-50 flex items-center justify-center z-40 transition-all text-5xl text-white'>
+                <span className='absolute top-0 bottom-0 left- right-0 w-full bg-black opacity-0 group-hover:opacity-60 flex items-center justify-center z-40 transition-all text-5xl text-white'>
                   <i className={`fad ${icon} z-50`} />
                 </span>
               </div>

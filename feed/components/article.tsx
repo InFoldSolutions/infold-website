@@ -21,6 +21,7 @@ export default function RelatedArticle({ item, last }: IRelatedArticle) {
         </span>
         <span className='font-bold mr-1'>{item.source.name}</span>
         <span className="text-gray-600 dark:text-gray-300 text-xs ml-auto">
+          <span className='mr-2'>Latest</span>
           <TimeAgo
             date={new Date(firstArticle.added_at).getTime()}
             title={firstArticle.title}
@@ -28,17 +29,24 @@ export default function RelatedArticle({ item, last }: IRelatedArticle) {
           <i className='fad fa-clock ml-2' />
         </span>
       </div>
-      <h3 className="mb-2 text-xl font-bold flex-inline items-center">
-        {firstArticle.title} <span className={`text-blue-500 hover:underline cursor-pointer text-base opacity-50 group-hover:opacity-100`} onClick={() => window.open(firstArticle.url, '_blank')}>more..</span>
-      </h3>
 
-      <div className="text-sm truncate-2-lines">
-        {firstArticle.summary}
-      </div>
+      <ul className='flex w-auto'>
+        {item.articles.map((article: any, index: number) => 
+          <li key={index}>
+            <h3 className="mb-2 text-xl font-bold flex-inline items-center">
+              {article.title} <span className={`text-blue-500 hover:underline cursor-pointer text-base opacity-50 group-hover:opacity-100`} onClick={() => window.open(firstArticle.url, '_blank')}>more..</span>
+            </h3>
 
-      {item.social.length > 0 &&
-        <SocialComments data={item} />
-      }
+            <div className="text-sm truncate-2-lines">
+              {article.summary}
+            </div>
+
+            {article.social?.length > 0 &&
+              <SocialComments data={article} />
+            }
+          </li>
+        )}
+      </ul>
     </li >
   )
 }
