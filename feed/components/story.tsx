@@ -34,9 +34,9 @@ export default function StoryWrapper({ data, modal = false }: { data: any, modal
   return (
     <article className='pb-2'>
       <h3 className={`${modal ? 'mr-4' : ''} mb-5 text-3xl font-bold group`}>
-        <span className='flex'>{data.title}</span>
+        <span className='flex ml-1'>{data.title}</span>
         <span className='flex items-center mt-3'>
-          <span className='text-sm'>
+          <span className='text-sm ml-2'>
             {`Summarized from ${data.meta.sources} sources.`}
 
             {user &&
@@ -51,7 +51,7 @@ export default function StoryWrapper({ data, modal = false }: { data: any, modal
               <i className='fad fa-newspaper ml-2'></i>
               <span className='hidden md:inline-block ml-2 text-xs'>Articles</span>
             </span>
-            {data.meta.social &&
+            {data.meta.social > 0 &&
               <span className="items-center">
                 <b>{data.meta.social}</b>
                 <i className='fad fa-comments ml-2'></i>

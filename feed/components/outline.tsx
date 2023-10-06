@@ -4,7 +4,7 @@ export default function Outline({ outlines }: { outlines: string[] }) {
   const [expanded, setExpanded] = useState<boolean>(false)
 
   return (
-    <div className='text-left'>
+    <div className='text-left ml-2'>
       <ul className='list-inside list-disc'>
         {outlines.slice(0, 3).map((outline: string, index: number) => (
           <li className='mb-4 last:mb-0' key={index}>

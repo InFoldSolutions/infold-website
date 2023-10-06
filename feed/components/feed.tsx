@@ -23,49 +23,10 @@ export default function Feed({ data }: { data: any, onScrollHandler?: any }) {
             />
             <h3 className='mb-4 text-3xl font-bold leading-snug text-left'>
               {item.title}<br />
-              <small className='text-sm'>Summarized from {item.articles} articles.</small>
+              <small className='text-sm'>Summarized from {item.meta.articles} articles.</small>
             </h3>
             <div className='text-left'>
               {item.short_description}
-            </div>
-
-            <div className='mt-6 flex items-center'>
-              <ul className='flex w-auto'>
-                <li className='flex items-center mr-2 cursor-pointer border-2 dark:border-gray-800 hover:bg-gray-200 dark:hover:bg-gray-800 p-1 px-2 select-none'>
-                  <span className="flex items-center">
-                    <b>{item.meta.articles}</b>
-                    <i className='fad fa-newspaper ml-2'></i>
-                    <span className='hidden md:inline-block ml-2 text-sm'>Articles</span>
-                  </span>
-                </li>
-                <li className='flex items-center mr-2 cursor-pointer border-2 dark:border-gray-800 hover:bg-gray-200 dark:hover:bg-gray-800 p-1 px-2 select-none'>
-                  <span className="flex items-center">
-                    <b>{item.meta.social}</b>
-                    <i className='fad fa-comments ml-2'></i>
-                    <span className='hidden md:inline-block ml-2 text-sm'>Social feedback</span>
-                  </span>
-                </li>
-              </ul>
-              <ul className='flex w-auto ml-auto'>
-                <li className='flex items-center mr-2 cursor-pointer border-2 dark:border-gray-800 hover:bg-gray-200 dark:hover:bg-gray-800 p-1 px-2 select-none'>
-                  <span className="flex items-center">
-                    <b className='text-green-600'>{item.articles}</b>
-                    <i className='far text-green-600 fa-smile ml-2'></i>
-                  </span>
-                </li>
-                <li className='flex items-center mr-2 cursor-pointer border-2 dark:border-gray-800 hover:bg-gray-200 dark:hover:bg-gray-800 p-1 px-2 select-none'>
-                  <span className="flex items-center">
-                    <b className='text-red-600'>23</b>
-                    <i className='far fa-frown text-red-600 ml-2'></i>
-                  </span>
-                </li>
-                <li className='flex items-center cursor-pointer border-2 dark:border-gray-800 hover:bg-gray-200 dark:hover:bg-gray-800 p-1 px-2 select-none'>
-                  <span className="flex items-center">
-                    <b className='text-slate-500'>10</b>
-                    <i className='far fa-meh text-slate-500 ml-2'></i>
-                  </span>
-                </li>
-              </ul>
             </div>
           </li>
         ))}
