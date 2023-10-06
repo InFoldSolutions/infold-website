@@ -106,6 +106,11 @@ const config = {
       'Tell me about the key features of the iPhone 15 Max.',
       'What improvements have been made in the iPhone 15 Max compared to its predecessor ?',
       'Compare the iPhone 15 Max to its competitors in terms of features and performance.'
+    ],
+    'scientists-discover-slow-spinning-stars-in-the-center-of-the-milky-way': [
+      'Why did researchers conclude that the group of stars is spinning slowly ?',
+      'In what ways does the discovery challenge previous assumptions about of the Milky Way ?',
+      'Can we conclude that other galaxies may have formed in a similar manner ?'
     ]
   },
 
@@ -315,12 +320,36 @@ const config = {
       type: 'book'
     }],
     'scientists-discover-slow-spinning-stars-in-the-center-of-the-milky-way': [{
-      url: 'https://www.amazon.com/Galaxy-Ground-Within-Novel-Wayfarers-ebook/dp/B088RDCLQ4/ref=sr_1_8?crid=268TYC9BB2HHV&keywords=Spinning+Stars+Milky+Way+book&qid=1696600998&sprefix=spinning+stars+milky+way+book%2Caps%2C210&sr=8-8',
-      title: 'The Galaxy, and the Ground Within: A Novel (Wayfarers Book 4)',
-      img: 'https://m.media-amazon.com/images/I/81iJ3xZbebL._SY466_.jpg',
-      author: 'Becky Chambers',
+      url: 'https://www.amazon.com/Cosmic-Queries-StarTalks-Guide-Where/dp/1426221770/ref=sr_1_2_sspa?crid=3VTVUH7GUTOUT&keywords=astronomy+books&qid=1696603018&sprefix=astronomy+book%2Caps%2C206&sr=8-2-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1',
+      title: 'Cosmic Queries: StarTalk\'s Guide to Who We Are, How We Got Here, and Where We\'re Going',
+      img: 'https://m.media-amazon.com/images/I/91uhfngBB1L._SY466_.jpg',
+      author: 'Neil Degrasse Tyson',
+      rating: 4.8,
+      ratingsCount: 3092,
+      type: 'book'
+    },{
+      url: 'https://www.amazon.com/Space-Atlas-Second-Mapping-Universe/dp/1426219695/ref=sr_1_9?crid=3VTVUH7GUTOUT&keywords=astronomy+books&qid=1696603168&sprefix=astronomy+book%2Caps%2C206&sr=8-9',
+      title: 'Space Atlas, Second Edition: Mapping the Universe and Beyond',
+      img: 'https://m.media-amazon.com/images/I/91w9WCjBeGL._SY466_.jpg',
+      author: 'James Trefil',
+      rating: 4.8,
+      ratingsCount: 1047,
+      type: 'book'
+    },{
+      url: 'https://www.amazon.com/Star-Finder-Step-Step-Guide/dp/1465464751/ref=sr_1_26?crid=3VTVUH7GUTOUT&keywords=astronomy+books&qid=1696603168&sprefix=astronomy+book%2Caps%2C206&sr=8-26',
+      title: 'Star Finder!: A Step-by-Step Guide to the Night Sky',
+      img: 'https://m.media-amazon.com/images/I/71YLVkjyufL._SY466_.jpg',
+      author: 'DK',
+      rating: 4.7,
+      ratingsCount: 1001,
+      type: 'book'
+    },{
+      url: 'https://www.amazon.com/Astrophysics-People-Hurry-audio-cd/dp/B06XB2PX7G/ref=sr_1_6?crid=3VTVUH7GUTOUT&keywords=astronomy+books&qid=1696603168&sprefix=astronomy+book%2Caps%2C206&sr=8-6',
+      title: 'Astrophysics for People in a Hurry',
+      img: 'https://m.media-amazon.com/images/I/61j+AB3GUoL.jpg',
+      author: 'Neil deGrasse Tyson',
       rating: 4.6,
-      ratingsCount: 6599,
+      ratingsCount: 35440,
       type: 'book'
     },{
       url: 'https://www.amazon.com/National-Geographic-Backyard-Guide-Night/dp/1426220154/ref=sr_1_3_sspa?crid=U25SXDSG1VCN&keywords=Milky+Way+book&qid=1696601235&sprefix=milky+way+book%2Caps%2C236&sr=8-3-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1',
