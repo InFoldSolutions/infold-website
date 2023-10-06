@@ -1,7 +1,10 @@
 {
-  "name": "feed",
-  "version": "0.1.0",
+  "name": "InFold",
+  "version": "0.9.0",
   "private": true,
+  "author": {
+    "name": "Jernej"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -20,7 +23,7 @@
     "eslint-config-next": "13.5.2",
     "firebase": "^10.4.0",
     "next": "13.5.2",
-    "postcss": "8.4.30",
+    "postcss": "8.4.31",
     "react": "18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "18.2.0",

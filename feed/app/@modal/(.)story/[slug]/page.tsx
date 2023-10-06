@@ -17,7 +17,6 @@ export default function StoryModal({ params }: { params: { slug: string } }) {
   let [isLoading, setIsLoading] = useState(true);
   let [data, setData] = useState<any>(null);
 
-
   useEffect(() => {
     const fetchStoryData = async () => {
       const story = await getTopic(params.slug);

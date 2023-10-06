@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { permanentRedirect } from 'next/navigation'
 
 import StoryWrapper from '@/components/story'
 import Container from '@/components/container'
@@ -22,6 +23,9 @@ export async function generateMetadata(
 
 export default async function Topic({ params }: { params: { slug: string } }) {
   const data = await getTopic(params.slug);
+
+  if (data.slug !== params.slug)
+    permanentRedirect(`/story/${data.slug}`)
 
   return (
     <Container>
