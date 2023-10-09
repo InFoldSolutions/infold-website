@@ -30,28 +30,10 @@ export default function ChatBot({ suggested }: { suggested: any }) {
 
   const [chatMessages, setChatMessages] = useState<any>([])
   const [activeBtn, setActiveBtn] = useState(false)
-
-  const onKeyDown: KeyboardEventHandler = useCallback((e) => {
-    // @ts-ignore
-    const textLength = textareaRef?.current?.value.length
-
-    if (textLength > 0)
-      setActiveBtn(true)
-    else
-      setActiveBtn(false)
-
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault()
-
-      if (textLength > 0) {
-        // @ts-ignore
-        onBtnSubmit()
-      }
-    }
-  }, [])
+  const [waitingForMsg, setWaitingForMsg] = useState(false)
 
   const onBtnSubmit = useCallback(() => {
-    if (!webSocket) return
+    if (!webSocket || waitingForMsg) return
 
     // @ts-ignore
     const text = textareaRef?.current?.value
@@ -71,17 +53,39 @@ export default function ChatBot({ suggested }: { suggested: any }) {
       // @ts-ignore
       textareaRef.current.value = ''
       setActiveBtn(false)
+      setWaitingForMsg(true)
     }
-  }, [webSocket, textareaRef, setChatMessages])
+  }, [webSocket, textareaRef, waitingForMsg])
+
+  const onKeyDown: KeyboardEventHandler = useCallback((e) => {
+    // @ts-ignore
+    const textLength = textareaRef?.current?.value.length
+
+    if (textLength > 0)
+      setActiveBtn(true)
+    else
+      setActiveBtn(false)
+
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault()
+
+      if (textLength > 0) {
+        // @ts-ignore
+        onBtnSubmit()
+      }
+    }
+  }, [onBtnSubmit])
 
   const onPromptSumbit = useCallback((suggested: string) => {
+    if (!webSocket || waitingForMsg) return
+
     // @ts-ignore
     textareaRef.current.value = suggested
     setActiveBtn(true)
 
     // @ts-ignore
     onBtnSubmit()
-  }, [textareaRef, setActiveBtn])
+  }, [textareaRef, onBtnSubmit, webSocket, waitingForMsg])
 
   useEffect((): any => {
     if (!webSocket) return
@@ -91,8 +95,10 @@ export default function ChatBot({ suggested }: { suggested: any }) {
         messages[messages.length - 1].message = event.data
         return [...messages]
       })
+
+      setWaitingForMsg(false)
     };
-  }, [])
+  }, [webSocket])
 
   return (
     <div className="flex flex-col w-full items-center mt-2">
@@ -148,7 +154,7 @@ export default function ChatBot({ suggested }: { suggested: any }) {
       {suggested && suggested.length > 0 &&
         <div className='mt-4 px-1 w-full'>
           <ul>
-            {suggested.slice(0,3).map((suggested: any, index: number) => (
+            {suggested.slice(0, 3).map((suggested: any, index: number) => (
               <li className='mb-2 border-b-2 border-dashed border-gray-200 dark:border-gray-800 dark:border-opacity-60 cursor-pointer group flex items-center last:mb-0'
                 onClick={() => onPromptSumbit(suggested)}
                 title={suggested}
