@@ -155,12 +155,12 @@ export default function ChatBot({ suggested }: { suggested: any }) {
         <div className='mt-4 px-1 w-full'>
           <ul>
             {suggested.slice(0, 3).map((suggested: any, index: number) => (
-              <li className='mb-2 border-b-2 border-dashed border-gray-200 dark:border-gray-800 dark:border-opacity-60 cursor-pointer group flex items-center last:mb-0'
+              <li className='mb-2 border-b-2 border-dashed border-gray-200 dark:border-gray-800 dark:border-opacity-60 cursor-pointer group flex items-center last:mb-0 relative'
                 onClick={() => onPromptSumbit(suggested)}
                 title={suggested}
                 key={index}>
-                <span className='text-base p-1 flex truncate-2-lines'>{suggested}</span>
-                <span className='ml-auto text-sm hidden group-hover:flex items-center'>
+                <span className='text-base p-1 flex truncate-2-lines pr-8'>{suggested}</span>
+                <span className='text-sm hidden group-hover:flex items-center absolute right-0'>
                   <i className='fad fa-terminal ml-2' />
                 </span>
               </li>

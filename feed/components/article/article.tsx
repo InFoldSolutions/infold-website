@@ -3,7 +3,7 @@ import { MouseEventHandler, useCallback, useEffect, useState } from 'react'
 import Image from 'next/image'
 import TimeAgo from 'react-timeago'
 
-import SocialComments from './comments';
+import SocialComments from '@/components/article/comments';
 
 interface IRelatedArticle {
   item: any,

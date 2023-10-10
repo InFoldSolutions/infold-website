@@ -18,36 +18,36 @@ export type Item = {
 }
 
 export function getApiUrl(endpoint = 'top', limit: number = 0, bucket: any = null, page: number = 1) {
-  let url = `${config.api.url}/topics/${endpoint}`;
-  let separator = '?';
+  let url = `${config.api.url}/topics/${endpoint}`
+  let separator = '?'
 
   if (bucket) {
     url += `${separator}bucket=${bucket}`
-    separator = '&';
+    separator = '&'
   }
   if (limit) {
     url += `${separator}limit=${limit}`
-    separator = '&';
+    separator = '&'
   }
   if (page > 1) {
     url += `${separator}page=${page}`
   }
 
-  return url;
+  return url
 }
 
 export async function getFeed(endpoint = 'top', limit: number = 0, bucket: any = null, page: number = 1) {
   try {
-    const url = getApiUrl(endpoint, limit, bucket, page);
+    const url = getApiUrl(endpoint, limit, bucket, page)
     const res = await fetch(url, { next: { revalidate: 1 } })
 
     if (!res.ok)
-      throw new Error('Response not ok');
+      throw new Error('Response not ok')
 
     const data = await res.json()
 
     if (!data.topics)
-      throw new Error('Topics not found');
+      throw new Error('Topics not found')
 
     return {
       meta: data.meta,
@@ -55,13 +55,13 @@ export async function getFeed(endpoint = 'top', limit: number = 0, bucket: any =
     }
   } catch (error) {
     console.error('Failed to fetch feed data', error)
-    return [];
+    return []
   }
 }
 
 export async function getSearchFeed(keywords: string[], page: number = 1) {
   try {
-    const url = getApiUrl('search', config.api.defaultLimit, null, page);
+    const url = getApiUrl('search', config.api.defaultLimit, null, page)
     const res = await fetch(url, {
       method: 'POST',
       headers: {
@@ -72,12 +72,12 @@ export async function getSearchFeed(keywords: string[], page: number = 1) {
     })
 
     if (!res.ok)
-      throw new Error('Response not ok');
+      throw new Error('Response not ok')
 
     const data = await res.json()
 
     if (!data.topics)
-      throw new Error('Topics not found');
+      throw new Error('Topics not found')
 
     return {
       meta: data.meta,
@@ -85,7 +85,7 @@ export async function getSearchFeed(keywords: string[], page: number = 1) {
     }
   } catch (error) {
     console.error('Failed to fetch search feed data', error)
-    return [];
+    return []
   }
 }
 
@@ -107,12 +107,12 @@ export async function getInterestsFeed(interests: string[], page: number = 1) {
     })
 
     if (!res.ok)
-      throw new Error('Response not ok');
+      throw new Error('Response not ok')
 
     const data = await res.json()
 
     if (!data.topics)
-      throw new Error('Topics not found');
+      throw new Error('Topics not found')
 
     return {
       meta: data.meta,
@@ -120,7 +120,7 @@ export async function getInterestsFeed(interests: string[], page: number = 1) {
     }
   } catch (error) {
     console.error('Failed to fetch search feed data', error)
-    return [];
+    return []
   }
 }
 
@@ -130,17 +130,37 @@ export async function getTopic(slug: string) {
     const res = await fetch(url, { next: { revalidate: 60 } })
 
     if (!res.ok)
-      throw new Error('Response not ok');
+      throw new Error('Response not ok')
 
     const data = await res.json()
 
     if (!data.topic)
-      throw new Error('Topic not found');
+      throw new Error('Topic not found')
 
     return transformStory(data.topic)
   } catch (error) {
     console.error('Failed to fetch topic data', error)
-    return {};
+    return {}
+  }
+}
+
+export async function getTopicAffiliate(slug: string) {
+  try {
+    const url = `${config.api.url}/topics/${slug}/affiliate`
+    const res = await fetch(url, { next: { revalidate: 60 } })
+
+    if (!res.ok)
+      throw new Error('Response not ok')
+
+    const data = await res.json()
+
+    if (data.products?.length === 0)
+      throw new Error('Affiliate not found')
+
+    return data.products.reverse()
+  } catch (error) {
+    console.error('Failed to fetch affiliate data', error)
+    return {}
   }
 }
 
@@ -162,17 +182,17 @@ export async function refreshTopicMeta(slug: string) {
     })
 
     if (!res.ok)
-      throw new Error('Response not ok');
+      throw new Error('Response not ok')
 
     const data = await res.json()
 
     if (!data.topic)
-      throw new Error('Topic not found');
+      throw new Error('Topic not found')
 
     return transformStory(data.topic)
   } catch (error) {
     console.error('Failed to fetch topic data', error)
-    return {};
+    return {}
   }
 }
 
@@ -182,16 +202,16 @@ export async function getTopKeywords(bucket: string = 'day') {
     const res = await fetch(url, { next: { revalidate: 60 } })
 
     if (!res.ok)
-      throw new Error('Response not ok');
+      throw new Error('Response not ok')
 
     const data = await res.json()
 
     if (!data.keywords || !data.meta.success)
-      throw new Error('Keywords not found');
+      throw new Error('Keywords not found')
 
     return data.keywords
   } catch (error) {
     console.error('Failed to fetch top keywords', error)
-    return [];
+    return []
   }
 }

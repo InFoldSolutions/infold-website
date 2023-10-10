@@ -2,8 +2,6 @@ import { MouseEventHandler, useCallback, useState } from 'react'
 
 import Image from 'next/image'
 
-import TimeAgo from 'react-timeago'
-
 import config from '@/config';
 
 const sentiment: any = config.sentiment

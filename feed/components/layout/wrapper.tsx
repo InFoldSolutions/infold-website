@@ -1,9 +1,8 @@
 
 'use client'
 
-import { useState, useEffect, UIEvent, useMemo, useCallback } from 'react'
+import { useState, useEffect, UIEvent, useMemo, useCallback, Suspense } from 'react'
 
-import { Suspense } from 'react'
 import { usePathname } from 'next/navigation'
 
 import Container from '@/components/layout/container'

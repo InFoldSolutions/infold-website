@@ -11,13 +11,13 @@ import YTMedia from '@/components/carousel/ytmedia'
 import Affiliate from '@/components/carousel/affiliate'
 
 import { isBrowser } from '@/helpers/utils'
+import { refreshTopicMeta } from '@/helpers/api'
 
 import { filterData } from '@/transformers/story'
 
-import { refreshTopicMeta } from '@/helpers/api'
 import { AuthContext } from '@/context/auth'
 
-export default function StoryWrapper({ data, modal = false }: { data: any, modal?: boolean }) {
+export default function StoryWrapper({ data, affiliate, modal = false }: { data: any, affiliate: any, modal?: boolean }) {
 
   const [latestArticles] = useState<any>(filterData(data.sources, 'latest'))
   const [popularArticles] = useState<any>(filterData(data.sources, 'popular'))
@@ -75,8 +75,8 @@ export default function StoryWrapper({ data, modal = false }: { data: any, modal
 
       <ChatBot suggested={data.suggested} />
 
-      {data.affiliates?.length > 0 &&
-        <Affiliate data={data.affiliates} />
+      {affiliate?.length > 0 &&
+        <Affiliate data={affiliate} />
       }
 
       {data.media?.length > 0 &&
