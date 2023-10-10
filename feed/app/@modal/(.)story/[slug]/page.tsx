@@ -3,12 +3,12 @@
 
 import { useState, useEffect } from 'react'
 
-import Modal from '@/components/modal'
-import StoryWrapper from '@/components/story'
-import TagsChart from '@/components/tags_chart'
-import Spinner from '@/components/spinner'
-import Keywords from '@/components/keywords'
-import Premium from '@/components/premium'
+import Modal from '@/components/layout/modal'
+import StoryWrapper from '@/components/story/story'
+import TagsChart from '@/components/sidebar/tags_chart'
+import Spinner from '@/components/helpers/spinner'
+import Keywords from '@/components/sidebar/keywords'
+import Premium from '@/components/sidebar/premium'
 
 import { getTopic } from '@/helpers/api'
 

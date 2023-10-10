@@ -10,7 +10,7 @@ import { signInWithLink, signInWithGoogle, signInWithTwitter } from '@/firebase/
 
 import { isValidEmail } from '@/helpers/utils'
 
-import Tooltip from '@/components/tooltip'
+import Tooltip from '@/components/helpers/tooltip'
 
 export default function Premium({ isSelectScreen }: { isSelectScreen: boolean }) {
 

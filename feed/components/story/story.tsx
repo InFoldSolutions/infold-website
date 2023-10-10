@@ -4,11 +4,11 @@ import { useContext, useState } from 'react'
 
 import TimeAgo from 'react-timeago'
 
-import ArticleList from '@/components/article_list'
-import Outline from '@/components/outline'
-import ChatBot from '@/components/chatbot'
-import YTMedia from '@/components/ytmedia'
-import Affiliate from '@/components/affiliate'
+import ArticleList from '@/components/article/article_list'
+import Outline from '@/components/story/outline'
+import ChatBot from '@/components/story/chatbot'
+import YTMedia from '@/components/carousel/ytmedia'
+import Affiliate from '@/components/carousel/affiliate'
 
 import { isBrowser } from '@/helpers/utils'
 

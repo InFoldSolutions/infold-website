@@ -5,6 +5,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 
 import { AuthContextProvider } from '@/context/auth'
+import GoogleAnalytics from '@/components/helpers/ganalytics'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -22,6 +23,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      {process.env.NEXT_PUBLIC_GA_TRACKING_ID &&
+        <GoogleAnalytics GA_TRACKING_ID={process.env.NEXT_PUBLIC_GA_TRACKING_ID} />
+      }
+
       <body className={`${inter.className} bg-gray-300 dark:bg-black overflow-y-scroll overflow-x-hidden w-full`}>
         <AuthContextProvider>
           {modal}

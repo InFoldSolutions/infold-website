@@ -1,11 +1,11 @@
 import { Metadata } from 'next';
 import { permanentRedirect } from 'next/navigation'
 
-import StoryWrapper from '@/components/story'
-import Container from '@/components/container'
-import TagsChart from '@/components/tags_chart'
-import Keywords from '@/components/keywords'
-import Premium from '@/components/premium'
+import StoryWrapper from '@/components/story/story'
+import Container from '@/components/layout/container'
+import TagsChart from '@/components/sidebar/tags_chart'
+import Keywords from '@/components/sidebar/keywords'
+import Premium from '@/components/sidebar/premium'
 
 import { getTopic } from '@/helpers/api'
 

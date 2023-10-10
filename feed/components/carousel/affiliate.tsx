@@ -4,7 +4,7 @@ import Image from 'next/image'
 
 import { kFormatter } from '@/helpers/utils'
 
-import Carousel from '@/components/carousel'
+import Carousel from '@/components/carousel/carousel'
 
 export default function Affiliate({ data }: { data: any }) {
 

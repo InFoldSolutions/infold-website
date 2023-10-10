@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import Wrapper from '@/components/wrapper'
+import Wrapper from '@/components/layout/wrapper'
 
 import { getSearchFeed, getTopKeywords } from '@/helpers/api'
 import { unSlugifyKeyword } from '@/helpers/utils';

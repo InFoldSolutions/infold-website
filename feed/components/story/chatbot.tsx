@@ -7,8 +7,8 @@ import { getWebsocket } from '@/websocket';
 
 import { usePathname } from 'next/navigation'
 
-import Tooltip from '@/components/tooltip';
-import TypeWriter from '@/components/typewriter';
+import Tooltip from '@/components/helpers/tooltip';
+import TypeWriter from '@/components/helpers/typewriter';
 
 import config from '@/config';
 
