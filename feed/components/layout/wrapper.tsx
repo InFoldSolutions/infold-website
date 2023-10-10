@@ -112,7 +112,6 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
 
   // load more
   useEffect(() => {
-    
     if (offset > 1 && !endOfFeed) {
       setIsLoadMore(true)
 
@@ -125,6 +124,8 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
 
         if (endpoint === 'keyword')
           res = await getSearchFeed(bucket.split(','), offset)
+        else if (endpoint === 'rising')
+          res = await getFeed('top', config.api.defaultLimit, config.api.defaultBucket, offset)
         else if (endpoint)
           res = await getFeed(endpoint, config.api.defaultLimit, bucket, offset)
         else if (selectedInterests.length > 0)
@@ -141,7 +142,7 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
       fetchMoreData()
         .catch(console.error)
         .finally(() => setIsLoadMore(false))
-    } else if (endOfFeed) 
+    } else if (endOfFeed)
       setIsLoadMore(false)
 
   }, [offset, endOfFeed])

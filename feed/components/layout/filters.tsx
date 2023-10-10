@@ -9,7 +9,7 @@ import config from '@/config'
 import { capitalize, slugifyKeyword, unSlugifyKeyword } from '@/helpers/utils'
 
 const topOptions = [
-  { label: 'Hour', value: 'hour' },
+  //{ label: 'Hour', value: 'hour' },
   { label: 'Today', value: 'day' },
   { label: 'This Week', value: 'week' },
   { label: 'This Month', value: 'month' },

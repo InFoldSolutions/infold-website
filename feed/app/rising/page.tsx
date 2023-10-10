@@ -13,13 +13,13 @@ export async function generateMetadata(
 
   return {
     title: `Top Rising Stories | InFold`,
-    description: `Get latest news, stories, and articles about ${keyword} all in one place.`
+    description: `Get latest news, stories, and articles all in one place.`
   }
 }
 
 export default async function Rising() {
-  const res: any = await getFeed('rising', config.api.defaultLimit)
-  const topKeywords = await getTopKeywords('week')
+  const res: any = await getFeed('top', config.api.defaultLimit, config.api.defaultBucket)
+  const topKeywords = await getTopKeywords(config.api.defaultBucket)
   const totalResults = res?.meta?.total_results || 0
 
   return (
