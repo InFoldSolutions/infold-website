@@ -176,20 +176,17 @@ export async function refreshTopicMeta(slug: string) {
       },
       body: JSON.stringify({
         'topic': null,
-        'requeue_social': true,
-        'requeue_media': true
+        //'requeue_social': true,
+        'requeue_media': true,
+        "requeue_llm": true,
+        "requeue_meta": true,
       }),
     })
 
     if (!res.ok)
       throw new Error('Response not ok')
 
-    const data = await res.json()
-
-    if (!data.topic)
-      throw new Error('Topic not found')
-
-    return transformStory(data.topic)
+    return true
   } catch (error) {
     console.error('Failed to fetch topic data', error)
     return {}

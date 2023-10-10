@@ -64,7 +64,7 @@ export default function Filters({ isMenuOpen, setIsMenuOpen, totalResults }: { i
   if (keywords) {
     return (
       <div className='flex py-4 px-5 pr-3 dark:bg-gray-800 dark:bg-opacity-60 rounded items-center'>
-        <span className='mr-3 flex items-center'>
+        <span className='mr-3 items-center hidden md:flex'>
           <i className='fad fa-search mr-3'></i>
           Search:
         </span>
