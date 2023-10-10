@@ -159,7 +159,7 @@ export default function ChatBot({ suggested }: { suggested: any }) {
                 onClick={() => onPromptSumbit(suggested)}
                 title={suggested}
                 key={index}>
-                <span className='text-base p-1 flex max-w-full overflow-x-scroll no-scrollbar truncate'>{suggested}</span>
+                <span className='text-base p-1 flex truncate-2-lines'>{suggested}</span>
                 <span className='ml-auto text-sm hidden group-hover:flex items-center'>
                   <i className='fad fa-terminal ml-2' />
                 </span>
