@@ -2,7 +2,7 @@
 
 import { UIEvent, useEffect, useRef, useState } from 'react'
 
-import Arrow from '@/components/arrow'
+import Arrow from '@/components/carousel/arrow'
 
 export default function Carousel({ title, children, length, overflow }: { title: string, children: any, length: number, overflow: number }) {
 

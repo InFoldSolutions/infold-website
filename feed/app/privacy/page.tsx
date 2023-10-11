@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 
-import Footer from '@/components/footer';
+import Footer from '@/components/layout/footer';
 
 export async function generateMetadata(): Promise<Metadata> {
   return {

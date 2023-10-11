@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
-import Keyword from '@/components/keyword';
+import Keyword from '@/components/sidebar/keyword';
 
 import { getInterests, addInterest, removeInterest } from '@/helpers/localstorage';
 

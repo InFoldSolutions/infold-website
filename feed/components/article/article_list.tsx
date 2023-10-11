@@ -1,7 +1,7 @@
 import { useState, useCallback, MouseEventHandler } from 'react'
 
-import Spinner from '@/components/spinner'
-import RelatedArticle from '@/components/article'
+import Spinner from '@/components/helpers/spinner'
+import RelatedArticle from '@/components/article/article'
 
 export default function ArticleList({ sources, initialCount = 2, popular }: { sources: any, initialCount?: number, popular?: boolean }) {
   const [expandArticles, setExpandArticles] = useState(false)

@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 
-import Tooltip from '@/components/tooltip';
+import Tooltip from '@/components/helpers/tooltip';
 import { slugifyKeyword } from '@/helpers/utils';
 
 export default function Keyword({ keyword, interests, toggleInterest }: { keyword: any, interests: string[], toggleInterest: any }) {

@@ -1,13 +1,13 @@
 import { Metadata } from 'next';
 import { permanentRedirect } from 'next/navigation'
 
-import StoryWrapper from '@/components/story'
-import Container from '@/components/container'
-import TagsChart from '@/components/tags_chart'
-import Keywords from '@/components/keywords'
-import Premium from '@/components/premium'
+import StoryWrapper from '@/components/story/story'
+import Container from '@/components/layout/container'
+import TagsChart from '@/components/sidebar/tags_chart'
+import Keywords from '@/components/sidebar/keywords'
+import Premium from '@/components/sidebar/premium'
 
-import { getTopic } from '@/helpers/api'
+import { getTopic, getTopicAffiliate } from '@/helpers/api'
 
 export async function generateMetadata(
   { params }: { params: any }
@@ -22,17 +22,19 @@ export async function generateMetadata(
 }
 
 export default async function Topic({ params }: { params: { slug: string } }) {
-  const data = await getTopic(params.slug);
+  const data = await getTopic(params.slug)
 
   if (data.slug !== params.slug)
     permanentRedirect(`/story/${data.slug}`)
+
+  const affiliate = await getTopicAffiliate(params.slug)
 
   return (
     <Container>
       <div className='flex items-start mt-6'>
         <div className='md:mr-auto w-full max-w-full lg:w-[860px]'>
           {!data && <div className='w-auto text-center p-2 px-3'>Loading topic ..</div>}
-          {data && <StoryWrapper data={data} />}
+          {data && <StoryWrapper data={data} affiliate={affiliate} />}
         </div>
 
         <div className='sticky top-4 h-auto hidden lg:flex flex-col'>

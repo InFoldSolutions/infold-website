@@ -4,7 +4,8 @@ import Image from 'next/image'
 import TimeAgo from 'react-timeago'
 
 import { kFormatter } from '@/helpers/utils'
-import Carousel from './carousel'
+
+import Carousel from '@/components/carousel/carousel'
 
 export default function YTMedia({ data }: { data: any }) {
   return (

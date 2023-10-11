@@ -4,20 +4,20 @@ import { useContext, useState } from 'react'
 
 import TimeAgo from 'react-timeago'
 
-import ArticleList from '@/components/article_list'
-import Outline from '@/components/outline'
-import ChatBot from '@/components/chatbot'
-import YTMedia from '@/components/ytmedia'
-import Affiliate from '@/components/affiliate'
+import ArticleList from '@/components/article/article_list'
+import Outline from '@/components/story/outline'
+import ChatBot from '@/components/story/chatbot'
+import YTMedia from '@/components/carousel/ytmedia'
+import Affiliate from '@/components/carousel/affiliate'
 
 import { isBrowser } from '@/helpers/utils'
+import { refreshTopicMeta } from '@/helpers/api'
 
 import { filterData } from '@/transformers/story'
 
-import { refreshTopicMeta } from '@/helpers/api'
 import { AuthContext } from '@/context/auth'
 
-export default function StoryWrapper({ data, modal = false }: { data: any, modal?: boolean }) {
+export default function StoryWrapper({ data, affiliate, modal = false }: { data: any, affiliate: any, modal?: boolean }) {
 
   const [latestArticles] = useState<any>(filterData(data.sources, 'latest'))
   const [popularArticles] = useState<any>(filterData(data.sources, 'popular'))
@@ -75,8 +75,8 @@ export default function StoryWrapper({ data, modal = false }: { data: any, modal
 
       <ChatBot suggested={data.suggested} />
 
-      {data.affiliates?.length > 0 &&
-        <Affiliate data={data.affiliates} />
+      {affiliate?.length > 0 &&
+        <Affiliate data={affiliate} />
       }
 
       {data.media?.length > 0 &&
