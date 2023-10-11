@@ -42,15 +42,18 @@ export default function Affiliate({ data }: { data: any }) {
                   <span className='leading-4 text-sm font-medium truncate-2-lines'>{item.name}</span>
                   <span className='text-gray-600 dark:text-gray-300 text-xs'>
                     <span className='flex mt-1.5 mb-0.5'>{item.meta.author || item.meta.brand}</span>
-                    <span>
+
+                    {item.ratings.score > 0 &&
                       <span>
-                        {item.ratings.score} <i className='fad fa-star text-yellow-500' />
+                        <span>
+                          {item.ratings.score} <i className='fad fa-star text-yellow-500' />
+                        </span>
+                        <span className='ml-1.5 mr-1.5'>•</span>
+                        <span>
+                          {kFormatter(item.ratings.count)}
+                        </span>
                       </span>
-                      <span className='ml-1.5 mr-1.5'>•</span>
-                      <span>
-                        {kFormatter(item.ratings.count)}
-                      </span>
-                    </span>
+                    }
                   </span>
                 </span>
               </div>
