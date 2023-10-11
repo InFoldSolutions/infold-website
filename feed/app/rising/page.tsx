@@ -1,9 +1,5 @@
 import { Metadata } from 'next';
-import Wrapper from '@/components/layout/wrapper'
-
-import config from '@/config'
-
-import { getFeed, getTopKeywords } from '@/helpers/api'
+import { permanentRedirect } from 'next/navigation'
 
 export async function generateMetadata(
   { params }: { params: { keyword: string } }
@@ -18,11 +14,5 @@ export async function generateMetadata(
 }
 
 export default async function Rising() {
-  const res: any = await getFeed('top', config.api.defaultLimit, config.api.defaultBucket)
-  const topKeywords = await getTopKeywords(config.api.defaultBucket)
-  const totalResults = res?.meta?.total_results || 0
-
-  return (
-    <Wrapper initialFeedData={res?.data} topKeywords={topKeywords} totalResults={totalResults} />
-  )
+  permanentRedirect(`/feed`)
 }

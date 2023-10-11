@@ -123,8 +123,8 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
 
         if (endpoint === 'keyword')
           res = await getSearchFeed(bucket.split(','), offset)
-        else if (endpoint === 'rising')
-          res = await getFeed('top', config.api.defaultLimit, config.api.defaultBucket, offset)
+        else if (endpoint === 'feed')
+          res = await getFeed('top', config.api.defaultLimit, 'month', offset)
         else if (endpoint)
           res = await getFeed(endpoint, config.api.defaultLimit, bucket, offset)
         else if (selectedInterests.length > 0)

@@ -480,7 +480,7 @@ const config = {
   'api': {
     'url': 'https://api.infold.ai',
     'defaultLimit': 10,
-    'defaultBucket': 'hour',
+    'defaultBucket': 'month',
     'defaultSort': 'top'
   },
 
