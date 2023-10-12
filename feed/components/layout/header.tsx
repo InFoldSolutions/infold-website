@@ -28,17 +28,20 @@ export default function Header() {
         <div className='text-sm mx-auto w-auto flex justify-center hidden md:flex'>navigate the noise</div>
         <div className="w-auto items-center justify-end flex text-sm">
           <ul className="ml-auto w-auto flex">
-            <li className="mr-2">
-              <a href="https://infold.medium.com/a-lot-of-knowledge-is-a-dangerous-thing-6a4d2560cc83" target="_blank"
-                className="h-full text-center flex hover:underline">
-                How it works
+            <li className='hidden md:flex mr-2'>
+              <a href={browserLink} target="_blank"
+                title='Download our Browser Extension'
+                className="h-full text-center items-center flex hover:underline">
+                <i className='fad fa-sliders-h mr-2' />
+                Extension
               </a>
             </li>
             <li className='hidden md:flex'>|</li>
-            <li className='hidden md:flex ml-2'>
-              <a href={browserLink} target="_blank"
+            <li className="ml-2">
+              <a href="https://infold.medium.com/a-lot-of-knowledge-is-a-dangerous-thing-6a4d2560cc83" target="_blank"
+                title='Read an article on Medium'
                 className="h-full text-center flex hover:underline">
-                Extension
+                How it works
               </a>
             </li>
           </ul>
