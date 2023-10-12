@@ -1,19 +1,29 @@
 import ReconnectingWebSocket from 'reconnecting-websocket';
 
-let websocket: ReconnectingWebSocket | null = null;
+let socketMap: Map<string, ReconnectingWebSocket> = new Map();
 
 export function getWebsocket(url: string) {
-  if (websocket)
-    closeWebsocket()
+  if (socketMap.get(url))
+    return socketMap.get(url);
 
-  websocket = new ReconnectingWebSocket(url);
+  socketMap.set(url, new ReconnectingWebSocket(url));
 
-  return websocket;
+  return socketMap.get(url);
 }
 
-export function closeWebsocket() {
-  if (websocket) {
-    websocket.close();
-    websocket = null;
+export function closeWebsocket(url: string) {
+  const socketForUrl: ReconnectingWebSocket | undefined = socketMap.get(url);
+
+  if (socketForUrl) {
+    socketForUrl.close();
+    socketMap.delete(url);
   }
+}
+
+export function closeAllWebSockets() {
+  socketMap.forEach((socket: ReconnectingWebSocket) => {
+    socket.close();
+  });
+
+  socketMap.clear();
 }

@@ -18,7 +18,7 @@ import { getFeed, getSearchFeed, getInterestsFeed } from '@/helpers/api'
 import { saveInterests, getInterests } from '@/helpers/localstorage'
 import { isBrowser } from '@/helpers/utils'
 
-import { closeWebsocket } from '@/websocket'
+import { closeAllWebSockets } from '@/websocket'
 
 import config from '@/config'
 
@@ -105,7 +105,7 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
       document.body.style.overflowY = 'hidden' // disable scrolling when modal is open
     } else if (document.body.style.overflowY === 'hidden') { // comming from a story
       document.body.style.overflowY = 'scroll' // enable scrolling when modal is closed
-      closeWebsocket()
+      closeAllWebSockets()
     }
   }, [pathname])
 

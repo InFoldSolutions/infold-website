@@ -1,7 +1,30 @@
-import { useState } from 'react'
+import { trackEvent } from '@/helpers/analytics'
+import { useCallback, useState } from 'react'
 
 export default function Outline({ outlines }: { outlines: string[] }) {
   const [expanded, setExpanded] = useState<boolean>(false)
+
+  const moreClick = useCallback(() => {
+    trackEvent({
+      action: "outline",
+      params: {
+        name: 'more'
+      }
+    })
+
+    setExpanded(true)
+  }, [setExpanded])
+  
+  const lessClick = useCallback(() => {
+    trackEvent({
+      action: "outline",
+      params: {
+        name: 'less'
+      }
+    })
+
+    setExpanded(false)
+  }, [setExpanded])
 
   return (
     <div className='text-left ml-2'>
@@ -10,7 +33,7 @@ export default function Outline({ outlines }: { outlines: string[] }) {
           <li className='mb-4 last:mb-0' key={index}>
             {outline}
             {(index == 2 && !expanded) &&
-              <span className={`text-blue-500 hover:underline ml-2 cursor-pointer`} onClick={() => setExpanded(true)}>more..</span>
+              <span className={`text-blue-500 hover:underline ml-2 cursor-pointer`} onClick={() => moreClick()}>more..</span>
             }
           </li>
         ))}
@@ -22,7 +45,7 @@ export default function Outline({ outlines }: { outlines: string[] }) {
             <li className='mb-4 last:mb-0' key={index}>
               {outline}
               {(index + 4 == outlines.length && expanded) &&
-                <span className={`text-blue-500 hover:underline ml-2 cursor-pointer`} onClick={() => setExpanded(false)}>less..</span>
+                <span className={`text-blue-500 hover:underline ml-2 cursor-pointer`} onClick={() => lessClick()}>less..</span>
               }
             </li>
           ))}

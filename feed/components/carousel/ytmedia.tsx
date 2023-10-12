@@ -1,20 +1,36 @@
 'use client'
 
+import { useCallback } from 'react'
+
 import Image from 'next/image'
 import TimeAgo from 'react-timeago'
 
 import { kFormatter } from '@/helpers/utils'
+import { trackEvent } from '@/helpers/analytics'
 
 import Carousel from '@/components/carousel/carousel'
 
 export default function YTMedia({ data }: { data: any }) {
+
+  const videoClick = useCallback((item: any) => {
+    trackEvent({
+      action: "video",
+      params: {
+        name: item.title,
+        url: item.url,
+      }
+    })
+
+    window.open(item.url, '_blank')
+  }, [])
+
   return (
     <Carousel title='Related Video' length={data.length} overflow={3}>
       <ul className='flex flex-nowrap relative'>
         {data.map((item: any, index: number) => {
           return (
             <li className={`group rounded mr-4 min-w-[275px] group select-none cursor-pointer relative items-center relative`}
-              onClick={() => window.open(item.url, '_blank')}
+              onClick={() => videoClick(item)}
               title={`Youtube: ${item.title}`}
               key={index} >
               <div className='h-[150px] rounded-md relative overflow-hidden'>

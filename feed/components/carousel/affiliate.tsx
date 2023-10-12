@@ -5,6 +5,8 @@ import Image from 'next/image'
 import { kFormatter } from '@/helpers/utils'
 
 import Carousel from '@/components/carousel/carousel'
+import { useCallback } from 'react'
+import { trackEvent } from '@/helpers/analytics'
 
 export default function Affiliate({ data }: { data: any }) {
 
@@ -15,6 +17,18 @@ export default function Affiliate({ data }: { data: any }) {
   const padding = type === 'book' ? 'p-0' : 'p-2'
   const minWidth = type === 'book' ? 'min-w-[150px]' : 'min-w-[194px]'
 
+  const affiliateClick = useCallback((item: any) => {
+    trackEvent({
+      action: "affiliate",
+      params: {
+        name: item.name,
+        url: item.url,
+      }
+    })
+
+    window.open(item.url, '_blank')
+  }, [trackEvent])
+
   return (
     <Carousel title={title} length={data.length} overflow={overflow}>
       <span className='hidden min-w-[121px] min-w-[194px] z-0'></span>
@@ -22,7 +36,7 @@ export default function Affiliate({ data }: { data: any }) {
         {data.map((item: any, index: number) => {
           return (
             <li className={`w-full group rounded-md mr-4 group select-none cursor-pointer relative items-center relative`}
-              onClick={() => window.open(item.url, '_blank')}
+              onClick={() => affiliateClick(item)}
               title={`Amazon: ${item.name}`}
               key={index} >
               <div className={`w-full mx-1 relative rounded-md overflow-hidden`}>

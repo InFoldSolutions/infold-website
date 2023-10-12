@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState, useCallback, KeyboardEventHandler, MouseEventHandler } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
 
-import { getWebsocket } from '@/websocket';
+import { closeWebsocket, getWebsocket } from '@/websocket';
 
 import { usePathname } from 'next/navigation'
 
@@ -12,7 +12,7 @@ import TypeWriter from '@/components/helpers/typewriter';
 
 import config from '@/config';
 
-import { isBrowser } from '@/helpers/utils';
+import ReconnectingWebSocket from 'reconnecting-websocket';
 
 export default function ChatBot({ suggested }: { suggested: any }) {
   const textareaRef = useRef(null)
@@ -22,18 +22,29 @@ export default function ChatBot({ suggested }: { suggested: any }) {
 
   const socketURL = `${config.ws.chat}/${config.ws.path}/${topicName}`;
 
-  const webSocket = useMemo(() => {
-    if (!isBrowser) return null
-
-    return getWebsocket(socketURL)
-  }, []);
-
   const [chatMessages, setChatMessages] = useState<any>([])
   const [activeBtn, setActiveBtn] = useState(false)
   const [waitingForMsg, setWaitingForMsg] = useState(false)
 
+  let webSocket: ReconnectingWebSocket | undefined = useMemo(() => undefined, [])
+
   const onBtnSubmit = useCallback(() => {
-    if (!webSocket || waitingForMsg) return
+    if (waitingForMsg) return
+
+    if (!webSocket) { // only setup websocket once and on msg send, seems hacky, needs refactor
+      webSocket = getWebsocket(socketURL)
+
+      if (!webSocket) return
+
+      webSocket.onmessage = (event: any) => {
+        setChatMessages((messages: any) => {
+          messages[messages.length - 1].message = event.data
+          return [...messages]
+        })
+
+        setWaitingForMsg(false)
+      };
+    }
 
     // @ts-ignore
     const text = textareaRef?.current?.value
@@ -77,8 +88,6 @@ export default function ChatBot({ suggested }: { suggested: any }) {
   }, [onBtnSubmit])
 
   const onPromptSumbit = useCallback((suggested: string) => {
-    if (!webSocket || waitingForMsg) return
-
     // @ts-ignore
     textareaRef.current.value = suggested
     setActiveBtn(true)
@@ -87,18 +96,12 @@ export default function ChatBot({ suggested }: { suggested: any }) {
     onBtnSubmit()
   }, [textareaRef, onBtnSubmit, webSocket, waitingForMsg])
 
-  useEffect((): any => {
-    if (!webSocket) return
-
-    webSocket.onmessage = (event: any) => {
-      setChatMessages((messages: any) => {
-        messages[messages.length - 1].message = event.data
-        return [...messages]
-      })
-
-      setWaitingForMsg(false)
-    };
-  }, [webSocket])
+  useEffect(() => {
+    return () => {
+      if (webSocket)
+        closeWebsocket(socketURL)
+    }
+  }, [])
 
   return (
     <div className="flex flex-col w-full items-center mt-2">

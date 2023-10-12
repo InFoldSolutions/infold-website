@@ -11,6 +11,7 @@ import { signInWithLink, signInWithGoogle, signInWithTwitter } from '@/firebase/
 import { isValidEmail } from '@/helpers/utils'
 
 import Tooltip from '@/components/helpers/tooltip'
+import { trackEvent } from '@/helpers/analytics'
 
 export default function Premium({ isSelectScreen }: { isSelectScreen: boolean }) {
 
@@ -34,6 +35,17 @@ export default function Premium({ isSelectScreen }: { isSelectScreen: boolean })
       alert('Please enter a valid email address')
   }, [])
 
+  const tryNowClick = useCallback(() => {
+    trackEvent({
+      action: "premium",
+      params: {
+        name: 'trynow'
+      }
+    })
+
+    setLogin(true)
+  }, [setLogin])
+
   return (
     <div className={`h-auto w-[280px] px-4 py-5 bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 hidden lg:flex flex-col rounded ${isSelectScreen ? 'lg:hidden' : ''} `}>
       <div className='flex items-center justify-center'>
@@ -49,7 +61,7 @@ export default function Premium({ isSelectScreen }: { isSelectScreen: boolean })
             The best InFold experience.
           </div>
 
-          <button className='rounded-md bg-black text-white dark:bg-white dark:text-black p-2 w-full text-center mt-3' onClick={() => setLogin(true)}>Try Now</button>
+          <button className='rounded-md bg-black text-white dark:bg-white dark:text-black p-2 w-full text-center mt-3' onClick={() => tryNowClick()}>Try Now</button>
         </div>
       }
 
