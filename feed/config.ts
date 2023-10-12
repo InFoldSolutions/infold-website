@@ -88,9 +88,9 @@ const config = {
 
   'mockSuggested': {
     'exploring-the-mind-of-j-robert-oppenheimer-a-deep-dive-into-the-father-of-the-atomic-bomb': [
-      'Who was J. Robert Oppenheimer and was he involved in the Manhattan Project ?',
-      'What is Christopher Nolan latest film ?',
-      'How is the movie Oppenheimer doing at the box office ?',
+      'Who was J. Robert Oppenheimer, and was he involved in the Manhattan Project?',
+      'What is Christopher Nolan\'s latest film?',
+      'How is the movie Oppenheimer doing at the box office?',
     ],
     'mercedes-benz-s-drive-pilot-system-hands-off-highway-driving-with-in-car-monitoring': [
       'What is a level 3 autonomous driving system ?',
@@ -113,6 +113,8 @@ const config = {
       'Can we conclude that other galaxies may have formed in a similar manner ?'
     ]
   },
+
+  
 
   'mockAffiliate': {
     'unlocking-the-power-of-the-iphone-15-pro-max': [{
