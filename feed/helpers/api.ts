@@ -144,6 +144,10 @@ export async function getTopic(slug: string) {
   }
 }
 
+export function getTopicThumbUrl(slug: string) {
+  return `${config.api.url}/topics/${slug}/${config.story.thumb.name}`
+}
+
 export async function getTopicAffiliate(slug: string) {
   try {
     const url = `${config.api.url}/topics/${slug}/affiliate`

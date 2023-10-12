@@ -7,7 +7,8 @@ import TagsChart from '@/components/sidebar/tags_chart'
 import Keywords from '@/components/sidebar/keywords'
 import Premium from '@/components/sidebar/premium'
 
-import { getTopic, getTopicAffiliate } from '@/helpers/api'
+import { getTopic, getTopicAffiliate, getTopicThumbUrl } from '@/helpers/api'
+import config from '@/config';
 
 export async function generateMetadata(
   { params }: { params: any }
@@ -17,7 +18,19 @@ export async function generateMetadata(
 
   return {
     title: `${data.short_title} | InFold`,
-    description: data.short_description
+    description: data.short_description,
+    openGraph: {
+      title: `${data.short_title} | InFold`,
+      description: data.short_description,
+      images: [
+        {
+          url: getTopicThumbUrl(params.slug),
+          width: config.story.thumb.width,
+          height: config.story.thumb.height,
+          alt: data.short_title,
+        },
+      ],
+    }
   }
 }
 

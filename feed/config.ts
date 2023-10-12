@@ -493,6 +493,14 @@ const config = {
     'signInLinkRedirectUrl': 'https://infold.com',
   },
 
+  story: {
+    thumb: {
+      name: 'thumbnail.png',
+      width: 1200,
+      height: 630,
+    },
+  },
+
   "api_key": process.env.NEXT_API_KEY,
 
   // temp keyword blacklist
