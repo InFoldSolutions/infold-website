@@ -14,7 +14,7 @@ import Interests from '@/components/layout/interests'
 import Keywords from '@/components/sidebar/keywords'
 import Premium from '@/components/sidebar/premium'
 
-import { getFeed, getSearchFeed, getInterestsFeed, getKeywordFeed } from '@/helpers/api'
+import { getFeed, getInterestsFeed, getKeywordFeed } from '@/helpers/api'
 import { saveInterests, getInterests } from '@/helpers/localstorage'
 import { isBrowser } from '@/helpers/utils'
 
@@ -166,15 +166,17 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
             <Interests interests={config.interests} saveInterests={saveInterests} setSelectedInterests={setSelectedInterests} />
           }
 
-          <Suspense fallback={<Loading />}>
-            <Feed data={feedData} />
-          </Suspense>
+          {!isSelectScreen &&
+            <Suspense fallback={<Loading />}>
+              <Feed data={feedData} />
+            </Suspense>
+          }
 
           {!isSelectScreen && feedData.length === 0 && !isLoading &&
             <div className='my-auto pl-2 text-center text-2xl w-full'>No topics found</div>
           }
 
-          {isLoadMore &&
+          {!isSelectScreen && isLoadMore &&
             <div className='w-full justify-center mt-4 pt-2 flex items-center'><Spinner />Loading more ...</div>
           }
         </div>
