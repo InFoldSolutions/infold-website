@@ -35,8 +35,8 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
   const [showToTop, setShowToTop] = useState(false)
 
   const isSelectScreen = useMemo(() => { // do we display interests screen ?
-    return feedData.length === 0 && selectedInterests.length === 0 && (!pathname || pathname === '/')
-  }, [feedData, selectedInterests, pathname])
+    return !pathname || pathname === '/'
+  }, [pathname])
 
   const backToTop = useCallback(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
