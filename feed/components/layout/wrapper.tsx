@@ -77,7 +77,7 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
   }, [onScrollHandler]);
 
   // selected interests changed
-  useEffect(() => {
+  /*useEffect(() => {
     if ((pathname && pathname !== '/'))
       return
 
@@ -97,7 +97,7 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
 
     fetchInterestFeedData()
       .catch(console.error)
-  }, [selectedInterests])
+  }, [selectedInterests])*/
 
   // pathname changed
   useEffect(() => {
