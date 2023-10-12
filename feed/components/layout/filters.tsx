@@ -81,7 +81,7 @@ export default function Filters({ isMenuOpen, setIsMenuOpen, totalResults }: { i
         <span className={`${!totalResults ? 'hidden' : ''} ml-auto mr-2 flex items-center`}>
           <i className='fad fa-books mr-2'></i>
           {totalResults} 
-          <span className='hidden md:flex'>results</span>
+          <span className='hidden md:flex ml-2'>results</span>
         </span>
       </div>
     )

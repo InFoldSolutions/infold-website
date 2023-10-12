@@ -59,6 +59,29 @@ export async function getFeed(endpoint = 'top', limit: number = 0, bucket: any =
   }
 }
 
+export async function getKeywordFeed(keyword: string, page: number = 1) {
+  try {
+    const url = `${config.api.url}/topics/search/${keyword}?page=${page}`
+    const res = await fetch(url, { next: { revalidate: 1 } })
+
+    if (!res.ok)
+      throw new Error('Response not ok')
+
+    const data = await res.json()
+
+    if (!data.topics)
+      throw new Error('Topics not found')
+
+    return {
+      meta: data.meta,
+      data: data.topics.filter(filterStory).map(transformStory)
+    }
+  } catch (error) {
+    console.error('Failed to fetch keyword feed data', error)
+    return []
+  }
+}
+
 export async function getSearchFeed(keywords: string[], page: number = 1) {
   try {
     const url = getApiUrl('search', config.api.defaultLimit, null, page)

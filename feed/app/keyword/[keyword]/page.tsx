@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import Wrapper from '@/components/layout/wrapper'
 
-import { getSearchFeed, getTopKeywords } from '@/helpers/api'
+import { getKeywordFeed, getTopKeywords } from '@/helpers/api'
 import { unSlugifyKeyword } from '@/helpers/utils';
 
 export async function generateMetadata(
@@ -21,8 +21,8 @@ export default async function Keyword({ params }: { params: { keyword: string } 
   
   const keyword = unSlugifyKeyword(params.keyword)
 
-  if (params.keyword)
-    res = await getSearchFeed(keyword.split(','))
+  if (keyword)
+    res = await getKeywordFeed(keyword)
 
   const topKeywords = await getTopKeywords('month')
   const totalResults = res?.meta?.total_results || 0
