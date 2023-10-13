@@ -21,6 +21,12 @@ export default function Footer() {
               <Link href='/privacy' className='ml-2 hover:underline' prefetch={false}>Privacy</Link>
             </div>
           }
+          {pathname !== '/contact' &&
+            <div className='text-sm -mt-[1px] ml-2'>
+              <span >|</span>
+              <Link href='/contact' className='ml-2 hover:underline' prefetch={false}>Contact</Link>
+            </div>
+          }
         </div>
         <div className="w-auto items-center justify-end flex">
           <nav className='text-sm'>

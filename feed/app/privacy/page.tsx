@@ -57,8 +57,6 @@ export default async function Privacy() {
             You can always contact us with questions or feedback about our privacy policy, or anything else, at
             <a href='mailto:contact@infold.ai' className='text-underline ml-2' title='E-mail us'>contact@infold.ai</a>.
           </p>
-
-          <Footer />
         </div>
       </div>
     </main>
