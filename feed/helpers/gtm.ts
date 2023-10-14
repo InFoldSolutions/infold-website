@@ -20,3 +20,17 @@ export const pageview = (url: string) => {
     })
   }
 }
+
+export function trackEvent({ action, params }: { action: string, params: any }) {
+  if (typeof window.dataLayer !== "undefined") {
+    window.dataLayer.push({
+      event: action,
+      params
+    })
+  } else {
+    console.log({
+      event: action,
+      params
+    })
+  }
+}
