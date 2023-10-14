@@ -1,4 +1,4 @@
-import { trackEvent } from '@/helpers/analytics'
+import { trackEvent } from '@/helpers/gtm'
 import { useCallback, useState } from 'react'
 
 export default function Outline({ outlines }: { outlines: string[] }) {

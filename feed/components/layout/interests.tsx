@@ -3,7 +3,7 @@
 import { useCallback, useState } from 'react';
 
 import Link from 'next/link';
-import { trackEvent } from '@/helpers/analytics';
+import { trackEvent } from '@/helpers/gtm';
 
 export default function Interests({ interests, saveInterests, setSelectedInterests }: { interests: string[], saveInterests: any, setSelectedInterests: any }) {
 

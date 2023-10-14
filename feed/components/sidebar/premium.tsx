@@ -11,7 +11,7 @@ import { signInWithLink, signInWithGoogle, signInWithTwitter } from '@/firebase/
 import { isValidEmail } from '@/helpers/utils'
 
 import Tooltip from '@/components/helpers/tooltip'
-import { trackEvent } from '@/helpers/analytics'
+import { trackEvent } from '@/helpers/gtm'
 
 export default function Premium({ isSelectScreen }: { isSelectScreen: boolean }) {
 

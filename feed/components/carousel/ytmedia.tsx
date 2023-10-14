@@ -6,7 +6,7 @@ import Image from 'next/image'
 import TimeAgo from 'react-timeago'
 
 import { kFormatter } from '@/helpers/utils'
-import { trackEvent } from '@/helpers/analytics'
+import { trackEvent } from '@/helpers/gtm'
 
 import Carousel from '@/components/carousel/carousel'
 

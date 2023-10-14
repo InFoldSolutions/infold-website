@@ -6,7 +6,7 @@ import { kFormatter } from '@/helpers/utils'
 
 import Carousel from '@/components/carousel/carousel'
 import { useCallback } from 'react'
-import { trackEvent } from '@/helpers/analytics'
+import { trackEvent } from '@/helpers/gtm'
 
 export default function Affiliate({ data }: { data: any }) {
 
