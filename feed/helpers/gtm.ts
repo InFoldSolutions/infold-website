@@ -25,12 +25,12 @@ export function trackEvent({ action, params }: { action: string, params: any }) 
   if (typeof window.dataLayer !== "undefined") {
     window.dataLayer.push({
       event: action,
-      params
+      ...params
     })
   } else {
     console.log({
       event: action,
-      params
+      ...params
     })
   }
 }
