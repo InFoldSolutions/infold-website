@@ -2,11 +2,14 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
+import { usePathname } from 'next/navigation'
 
 import Tooltip from '@/components/helpers/tooltip';
 import { slugifyKeyword } from '@/helpers/utils';
 
 export default function Keyword({ keyword, interests, toggleInterest }: { keyword: any, interests: string[], toggleInterest: any }) {
+  const pathname = usePathname()
+  const target = (pathname === '/feed' || pathname.includes('/keyword/')) ? '_self': '_blank';
   const latestAnalyzed = (keyword.analyzed) ? keyword.analyzed[0] : null;
 
   let icon, label, url;
@@ -42,7 +45,7 @@ export default function Keyword({ keyword, interests, toggleInterest }: { keywor
         </Link>
       </div>
 
-      <Link href={`/keyword/${slugifyKeyword(keyword.keyword)}`} prefetch={false} className='group/link' target='_blank'>
+      <Link href={`/keyword/${slugifyKeyword(keyword.keyword)}`} prefetch={false} className='group/link' target={target}>
         <span>
           <span className='font-bold block leading-4 group-hover/link:underline'>{keyword.keyword}</span>
           <span className='flex text-xs'>
