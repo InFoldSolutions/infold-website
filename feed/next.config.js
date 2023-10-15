@@ -10,6 +10,18 @@ const nextConfig = {
       },
     ]
   },
+  async rewrites() {
+    return [
+      {
+        source: '/sitemap_index.xml.gz',
+        destination: 'https://api.infold.ai/sitemap_index.xml.gz'
+      },
+      {
+        source: '/robots.txt',
+        destination: 'https://api.infold.ai/robots.txt'
+      }
+    ]
+  },
   images: {
     remotePatterns: [
       {
