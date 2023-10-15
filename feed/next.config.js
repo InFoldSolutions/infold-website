@@ -17,6 +17,14 @@ const nextConfig = {
         destination: 'https://api.infold.ai/sitemap_index.xml.gz'
       },
       {
+        source: '/story/sitemap.xml.gz',
+        destination: 'https://api.infold.ai/topics/sitemap.xml.gz'
+      },
+      {
+        source: '/keyword/sitemap.xml.gz',
+        destination: 'https://api.infold.ai/keywords/sitemap.xml.gz'
+      },
+      {
         source: '/sitemap_index.xml',
         destination: 'https://api.infold.ai/sitemap_index.xml'
       },
