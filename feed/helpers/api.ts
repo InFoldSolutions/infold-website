@@ -1,5 +1,7 @@
 import config from '@/config';
+
 import { transformStory, filterStory } from '@/transformers/story';
+import { filterKeyword } from '@/transformers/keyword';
 
 // Topic, story item
 export type Item = {
@@ -220,9 +222,9 @@ export async function refreshTopicMeta(slug: string) {
   }
 }
 
-export async function getTopKeywords(bucket: string = 'day') {
+export async function getTopKeywords(bucket: string = 'month') {
   try {
-    const url = `${config.api.url}/keywords/top?bucket=${bucket}&limit=30`;
+    const url = `${config.api.url}/keywords/top?bucket=${bucket}&types=person&limit=40`;
     const res = await fetch(url, { next: { revalidate: 60 } })
 
     if (!res.ok)
@@ -233,7 +235,7 @@ export async function getTopKeywords(bucket: string = 'day') {
     if (!data.keywords || !data.meta.success)
       throw new Error('Keywords not found')
 
-    return data.keywords
+    return data.keywords.filter(filterKeyword)
   } catch (error) {
     console.error('Failed to fetch top keywords', error)
     return []

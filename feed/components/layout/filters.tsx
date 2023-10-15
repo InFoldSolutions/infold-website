@@ -46,7 +46,7 @@ export default function Filters({ isMenuOpen, setIsMenuOpen, totalResults }: { i
     if (queryString)
       router.push(`/keyword/${slugifyKeyword(queryString)}`)
     else
-      router.push('/')
+      router.push('/feed')
   }, [searchParams, router])
 
   const onKeyDown = useCallback((e: any) => {

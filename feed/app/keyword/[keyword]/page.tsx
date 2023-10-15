@@ -11,7 +11,7 @@ export async function generateMetadata(
   const keyword = unSlugifyKeyword(params.keyword)
 
   return {
-    title: `${keyword} - News, Stories, Videos | InFold`,
+    title: `${keyword} Latest News, Stories, Videos | InFold`,
     description: `Get latest news, stories, and articles about ${keyword} all in one place.`
   }
 }
