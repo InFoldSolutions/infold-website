@@ -1,6 +1,6 @@
 'use client'
 
-import { useContext, useState } from 'react'
+import { Suspense, useContext, useState } from 'react'
 
 import TimeAgo from 'react-timeago'
 
@@ -35,41 +35,43 @@ export default function StoryWrapper({ data, affiliate, modal = false }: { data:
 
   return (
     <article className='pb-2'>
-      <h3 className={`${modal ? 'mr-4' : ''} mb-5 text-3xl font-bold group`}>
-        <span className='flex ml-1'>{data.title}</span>
-        <span className='flex items-center mt-3'>
-          <span className='text-sm ml-2'>
-            {`Summarized from ${data.meta.sources} sources.`}
+      <h1 className={`${modal ? 'mr-4' : ''} mb-2 text-3xl font-bold group`}>
+        {data.title}
+      </h1>
 
-            {user &&
-              <span className='hidden group-hover:inline-flex cursor-pointer'>
-                <i className={`fad fa-sync ml-2 ${isRefreshing ? 'animate-spin' : ''}`} onClick={() => refreshTopic()} />
-              </span>
-            }
-          </span>
-          <span className='text-sm ml-auto flex-row flex items-center'>
-            <span className='items-center md:mr-3'>
-              <i className='fad fa-clock mr-2'></i>
+      <div className='flex items-center mb-4 text-sm font-bold'>
+        <span className='ml-1'>
+          {`Summarized from ${data.meta.sources} sources.`}
+
+          {user &&
+            <span className='hidden group-hover:inline-flex cursor-pointer'>
+              <i className={`fad fa-sync ml-2 ${isRefreshing ? 'animate-spin' : ''}`} onClick={() => refreshTopic()} />
+            </span>
+          }
+        </span>
+        <span className='ml-auto flex-row flex items-center'>
+          <span className='items-center md:mr-3'>
+            <i className='fad fa-clock mr-2'></i>
+            <Suspense fallback={null}>
               <TimeAgo
                 date={new Date(data.updated_at).getTime()}
-                className='text-sm'
               />
-            </span>
-            <span className="hidden md:inline-block items-center mr-3">
-              <i className='fad fa-newspaper mr-2'></i>
-              {data.meta.articles}
-              <span className='ml-2'>Articles</span>
-            </span>
-            {data.meta.social > 0 &&
-              <span className="hidden md:inline-block items-center">
-                <i className='fad fa-comments mr-2'></i>
-                {data.meta.social}
-                <span className='ml-2'>Comments</span>
-              </span>
-            }
+            </Suspense>
           </span>
+          <span className="hidden md:inline-block items-center mr-3">
+            <i className='fad fa-newspaper mr-2'></i>
+            {data.meta.articles}
+            <span className='ml-2'>Articles</span>
+          </span>
+          {data.meta.social > 0 &&
+            <span className="hidden md:inline-block items-center">
+              <i className='fad fa-comments mr-2'></i>
+              {data.meta.social}
+              <span className='ml-2'>Comments</span>
+            </span>
+          }
         </span>
-      </h3>
+      </div>
 
       <Outline outlines={data.outline} />
 
