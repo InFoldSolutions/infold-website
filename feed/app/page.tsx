@@ -1,9 +1,12 @@
 import Wrapper from '@/components/layout/wrapper'
+import { permanentRedirect } from 'next/navigation'
 
-export default async function Home() {
+import { slugifyKeyword } from '@/helpers/utils'
 
-  // TO-DO
-  // Server side personal feed
+export default async function Home({ searchParams }: { searchParams: any }) {
+
+  if (searchParams.keywords)
+    permanentRedirect(`/keyword/${slugifyKeyword(decodeURIComponent(searchParams.keywords))}`)
 
   const topKeywords: any = []
   const totalResults: number = 0
