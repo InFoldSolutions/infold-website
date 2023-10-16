@@ -1,6 +1,8 @@
-import { MouseEventHandler, useCallback, useEffect, useState } from 'react'
+import { MouseEventHandler, Suspense, useCallback, useEffect, useState } from 'react'
 
 import Image from 'next/image'
+import Link from 'next/link'
+
 import TimeAgo from 'react-timeago'
 
 import SocialComments from '@/components/article/comments';
@@ -26,7 +28,7 @@ export default function RelatedArticle({ item, last, popular }: IRelatedArticle)
   )
 
   useEffect(() => {
-    if (expandArticles) 
+    if (expandArticles)
       setInitialCount(articleList.length)
   }, [expandArticles])
 
@@ -40,10 +42,12 @@ export default function RelatedArticle({ item, last, popular }: IRelatedArticle)
         <span className='font-bold mr-1'>{item.source.name}</span>
         <span className="text-gray-600 dark:text-gray-300 text-xs ml-auto">
           <span className='mr-2'>Latest</span>
-          <TimeAgo
-            date={new Date(firstArticle.added_at).getTime()}
-            title={firstArticle.title}
-          />
+          <Suspense fallback={null}>
+            <TimeAgo
+              date={new Date(firstArticle.added_at).getTime()}
+              title={firstArticle.title}
+            />
+          </Suspense>
           <i className='fad fa-clock ml-2' />
         </span>
       </div>
@@ -61,9 +65,9 @@ export default function RelatedArticle({ item, last, popular }: IRelatedArticle)
           } else {
             return (
               <li key={index} className='mt-3 group/article' >
-                <h3 className="text-xl font-bold flex-inline items-center hover:underline cursor-pointer" onClick={() => window.open(firstArticle.url, '_blank')}>
+                <Link className='text-xl font-bold flex-inline items-center hover:underline cursor-pointer' href={firstArticle.url} target='_blank' title={article.title}>
                   {article.title}
-                </h3>
+                </Link>
 
                 {popular &&
                   <SocialComments data={article} />

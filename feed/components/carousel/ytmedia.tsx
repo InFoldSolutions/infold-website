@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback } from 'react'
+import { Suspense, useCallback } from 'react'
 
 import Image from 'next/image'
 import TimeAgo from 'react-timeago'
@@ -57,9 +57,11 @@ export default function YTMedia({ data }: { data: any }) {
                         <span className='ml-1'>views</span>
                       </span>
                       <span className='ml-1.5 mr-1.5'>•</span>
-                      <TimeAgo
-                        date={new Date(item.published_at).getTime()}
-                      />
+                      <Suspense fallback={null}>
+                        <TimeAgo
+                          date={new Date(item.published_at).getTime()}
+                        />
+                      </Suspense>
                     </span>
                   </span>
                 </span>
