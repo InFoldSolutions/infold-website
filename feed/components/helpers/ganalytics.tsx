@@ -1,9 +1,11 @@
 "use client"
 
-import { GTM_ID, pageview } from "@/helpers/gtm"
+import { useEffect } from "react"
+
 import { usePathname, useSearchParams } from "next/navigation"
 import Script from "next/script"
-import { useEffect } from "react"
+
+import { GTM_ID, trackEvent } from "@/helpers/gtm"
 
 export default function Analytics() {
   const pathname = usePathname()
@@ -11,7 +13,12 @@ export default function Analytics() {
 
   useEffect(() => {
     if (pathname) {
-      pageview(pathname)
+      trackEvent({
+        action: 'pageview',
+        params: {
+          page: pathname
+        }
+      })
     }
   }, [pathname, searchParams])
 

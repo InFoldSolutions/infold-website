@@ -13,6 +13,7 @@ import TypeWriter from '@/components/helpers/typewriter';
 import config from '@/config';
 
 import ReconnectingWebSocket from 'reconnecting-websocket';
+import { trackEvent } from '@/helpers/gtm';
 
 export default function ChatBot({ suggested }: { suggested: any }) {
   const textareaRef = useRef(null)
@@ -51,6 +52,15 @@ export default function ChatBot({ suggested }: { suggested: any }) {
     const textLength = text.length
 
     if (textLength > 0) {
+      trackEvent({
+        action: 'chat',
+        params: {
+          topic: topicName,
+          message: text,
+          suggested: suggested.includes(text)
+        }
+      })
+
       setChatMessages((messages: any) => [...messages, {
         user: 'me',
         message: text
@@ -87,9 +97,9 @@ export default function ChatBot({ suggested }: { suggested: any }) {
     }
   }, [onBtnSubmit])
 
-  const onPromptSumbit = useCallback((suggested: string) => {
+  const onPromptSumbit = useCallback((prompSuggested: string) => {
     // @ts-ignore
-    textareaRef.current.value = suggested
+    textareaRef.current.value = prompSuggested
     setActiveBtn(true)
 
     // @ts-ignore
