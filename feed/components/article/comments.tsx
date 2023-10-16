@@ -18,7 +18,7 @@ export default function SocialComments({ data }: { data: any }) {
   )
 
   return (
-    <div>
+    <div className='mt-2'>
       <ul className='flex flex-col'>
         {sortedComments.length > 0 && sortedComments.slice(0, 2).map((socialItem: any, index: number) => {
           if (index === 1 && sortedComments.length > 1)
@@ -63,6 +63,7 @@ function Comment({ socialItem }: { socialItem: any }) {
             {socialItem.score}
           </span>
         </div>
+        
         <div className='truncate-4-lines w-auto flex flex-wrap max-w-none lg:max-w-[385px]'>
           {socialItem.body}
         </div>

@@ -61,13 +61,9 @@ export default function RelatedArticle({ item, last, popular }: IRelatedArticle)
           } else {
             return (
               <li key={index} className='mt-3 group/article' >
-                <h3 className="mb-2 text-xl font-bold flex-inline items-center hover:underline cursor-pointer" onClick={() => window.open(firstArticle.url, '_blank')}>
+                <h3 className="text-xl font-bold flex-inline items-center hover:underline cursor-pointer" onClick={() => window.open(firstArticle.url, '_blank')}>
                   {article.title}
                 </h3>
-
-                <div className="text-sm truncate-2-lines">
-                  {article.summary}
-                </div>
 
                 {popular &&
                   <SocialComments data={article} />
