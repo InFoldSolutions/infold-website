@@ -188,7 +188,7 @@ export async function getTopicAffiliate(slug: string) {
 
     return data.products.reverse()
   } catch (error) {
-    console.error('Failed to fetch affiliate data', error)
+    console.warn('Failed to fetch affiliate data', error)
     return {}
   }
 }

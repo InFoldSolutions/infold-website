@@ -36,6 +36,6 @@ export async function generateMetadata(
   }
 }
 
-export default async function Top({ params }: { params: { bucket: string } }) {
+export default async function Top() {
   permanentRedirect(`/feed`)
 }
