@@ -29,7 +29,7 @@ export default function YTMedia({ data }: { data: any }) {
       <ul className='flex flex-nowrap relative'>
         {data.map((item: any, index: number) => {
           return (
-            <li className={`group rounded mr-4 min-w-[275px] group select-none cursor-pointer relative items-center relative`}
+            <li className={`group rounded mr-4 min-w-[275px] max-w-[275px] group select-none cursor-pointer relative items-center relative`}
               onClick={() => videoClick(item)}
               title={`Youtube: ${item.title}`}
               key={index} >
