@@ -58,7 +58,7 @@ export default function Filters({ totalResults }: { isMenuOpen: boolean, setIsMe
     if (queryString)
       router.push(`/keyword/${slugifyKeyword(queryString)}`)
     else
-      router.push('/feed')
+      router.push('/')
   }, [searchParams, router])
 
   const onKeyDown = useCallback((e: any) => {
@@ -156,6 +156,8 @@ export default function Filters({ totalResults }: { isMenuOpen: boolean, setIsMe
 
 /*
 
-  
+  torek 7:30 - laboratorij
+  četrtek 8:00 - referenčna ambulanta
+
 
   */

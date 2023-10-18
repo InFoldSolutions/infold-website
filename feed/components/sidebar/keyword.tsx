@@ -9,7 +9,7 @@ import { slugifyKeyword } from '@/helpers/utils';
 
 export default function Keyword({ keyword, interests, toggleInterest }: { keyword: any, interests: string[], toggleInterest: any }) {
   const pathname = usePathname()
-  const target = (pathname === '/feed' || pathname.includes('/keyword/')) ? '_self': '_blank';
+  const target = (pathname === '/' || pathname.includes('/keyword/') || pathname.includes('/section/')) ? '_self': '_blank';
   const latestAnalyzed = (keyword.analyzed) ? keyword.analyzed[0] : null;
 
   let icon, label, url;
