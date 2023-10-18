@@ -25,23 +25,38 @@ export default function Header() {
             <span className='text-2xl'>InFold</span>
           </Link>
         </div>
-        <div className='text-sm mx-auto w-auto flex justify-center hidden md:flex'>navigate the noise</div>
         <div className="w-auto items-center justify-end flex text-sm">
           <ul className="ml-auto w-auto flex">
             <li className='hidden md:flex mr-2'>
+              <Link href='/about' target="_self"
+                title='About InFold'
+                className="h-full text-center items-center flex group items-center">
+                <i className='fad fa-question mr-2' />
+                <span className='group-hover:underline'>
+                  About
+                </span>
+              </Link>
+            </li>
+            <li className='hidden md:flex mr-2'>|</li>
+            <li className='hidden md:flex mr-2'>
               <a href={browserLink} target="_blank"
                 title='Download our Browser Extension'
-                className="h-full text-center items-center flex hover:underline">
+                className="h-full text-center items-center flex group items-center">
                 <i className='fad fa-sliders-h mr-2' />
-                Extension
+                <span className='group-hover:underline'>
+                  Extension
+                </span>
               </a>
             </li>
-            <li className='hidden md:flex'>|</li>
-            <li className="ml-2">
+            <li className='hidden md:flex mr-2'>|</li>
+            <li>
               <a href="https://infold.medium.com/a-lot-of-knowledge-is-a-dangerous-thing-6a4d2560cc83" target="_blank"
                 title='Read an article on Medium'
-                className="h-full text-center flex hover:underline">
-                How it works
+                className="h-full text-center flex group items-center">
+                <i className='fad fa-book mr-2 text-base' />
+                <span className='group-hover:underline'>
+                  How it works
+                </span>
               </a>
             </li>
           </ul>

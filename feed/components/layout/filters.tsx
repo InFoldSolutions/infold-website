@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useCallback } from 'react'
+import { useRef, useState, useCallback } from 'react'
 
 import Link from 'next/link'
 import { useSearchParams, useRouter, usePathname } from 'next/navigation'
@@ -16,7 +16,16 @@ const topOptions = [
   //{ label: 'This Year', value: 'year' },
 ]
 
-export default function Filters({ isMenuOpen, setIsMenuOpen, totalResults }: { isMenuOpen: boolean, setIsMenuOpen: any, totalResults: number, showToTop: boolean }) {
+const categoryOptions = [
+  { label: 'Politics', value: 'Politics', icon: 'fa-landmark' },
+  { label: 'Science', value: 'Technology', icon: 'fa-flask' },
+  { label: 'Sports', value: 'Sports', icon: 'fa-football-ball' },
+  { label: 'Finance', value: 'Finance', icon: 'fa-user-chart' },
+  { label: 'Culture', value: 'Culture', icon: 'fa-film' },
+  { label: 'Health', value: 'Health', icon: 'fa-heartbeat' },
+]
+
+export default function Filters({ totalResults }: { isMenuOpen: boolean, setIsMenuOpen: any, totalResults: number, showToTop: boolean }) {
   let keywords: any = '';
 
   const router = useRouter()
@@ -25,6 +34,9 @@ export default function Filters({ isMenuOpen, setIsMenuOpen, totalResults }: { i
   const pathnameParts = pathname.split('/')
   const endpoint = pathnameParts[1]
   const bucket = pathnameParts[2] || config.api.defaultBucket
+  const bucketIcon = categoryOptions.find(item => item.value === bucket)?.icon
+
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   if (endpoint === 'keyword')
     keywords = unSlugifyKeyword(bucket)
@@ -80,27 +92,56 @@ export default function Filters({ isMenuOpen, setIsMenuOpen, totalResults }: { i
         ))}
         <span className={`${!totalResults ? 'hidden' : ''} ml-auto mr-2 flex items-center`}>
           <i className='fad fa-books mr-2'></i>
-          {totalResults} 
+          {totalResults}
           <span className='hidden md:flex ml-2'>results</span>
         </span>
       </div>
     )
   } else {
     return (
-      <div className='relative flex py-3 px-5 pr-3 dark:bg-gray-800 dark:bg-opacity-60 rounded items-center'>
+      <div className='relative flex py-3 px-5 pr-3 dark:bg-gray-800 dark:bg-opacity-60 rounded items-center text-lg'>
         <div className='flex items-center'>
           <Link className='group flex items-center' href={`/`} prefetch={false}>
-            <i className={`fad fa-home-alt ${!endpoint ? 'mr-3' : 'lg:mr-3'}`}></i>
-            <span className={`${!endpoint ? 'underline flex' : 'hidden lg:flex'} group-hover:underline`}>Home</span>
+            <i className={`fad fa-fire-alt ${!endpoint ? 'mr-3' : 'lg:mr-3'} text-[20px]`}></i>
+            <span className={`${!endpoint ? 'underline flex' : 'hidden lg:flex'} group-hover:underline`}>Top</span>
           </Link>
           <span className='ml-3 mr-3'>|</span>
         </div>
-        <div className='flex items-center'>
-          <Link className='group flex items-center' href={`/feed`} prefetch={false}>
-            <i className={`fad fa-head-side-brain ${endpoint === 'feed' ? 'mr-3' : 'lg:mr-3'}`}></i>
-            <span className={`${endpoint === 'feed' ? 'underline flex' : 'hidden lg:flex'} group-hover:underline`}>Feed</span>
-          </Link>
+
+        <div className="relative inline-block text-left">
+          <div className='flex items-center'>
+            <button className="group flex w-full justify-center gap-x-1.5 rounded items-center"
+              onClick={() => { setIsMenuOpen((current: boolean) => !current) }}>
+              {endpoint === 'section' &&
+                <span className='flex items-center'>
+                  <i className={`fad ${bucketIcon} mr-3 ${bucketIcon !== 'fa-user-chart' ? 'text-[17px]' : ''} ${(bucketIcon === 'fa-landmark' || bucketIcon === 'fa-football-ball') ? 'mt-[2px]' : 'mt-[1px]'}`} />
+                  <span className='underline'>{capitalize(bucket)}</span>
+                </span>
+              }
+              {!endpoint &&
+                <span className='group-hover:underline'>more</span>
+              }
+              <svg className={`${(isMenuOpen) ? 'rotate-180' : ''} h-5 w-5 text-gray-400`} viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" />
+              </svg>
+            </button>
+          </div>
+
+          <div className={`${!isMenuOpen ? 'hidden' : ''} absolute left-[50%] -ml-[90px] r-auto z-10 mt-4 md:mt-5 w-40 rounded bg-gray-200 dark:bg-black`}>
+            <div className='dark:bg-gray-800 dark:bg-opacity-60 py-1 rounded'>
+              {categoryOptions.map((option: any, index: number) => (
+                <Link className={`group w-full py-1.5 flex items-center justify-left pl-6`}
+                  href={`/section/${option.value}`}
+                  prefetch={false}
+                  key={index}>
+                  <i className={`fad ${option.icon} ${option.icon === 'fa-user-chart' ? '-ml-[5px]' : ''} ${endpoint === 'section' && bucket === option.value ? 'mr-3' : 'lg:mr-3'} text-[17px]`}></i>
+                  <span className={`${endpoint === 'section' && bucket === option.value ? 'underline' : ''} group-hover:underline`}>{option.label}</span>
+                </Link>
+              ))}
+            </div>
+          </div>
         </div>
+
         <div className={`ml-auto bg-gray-100 dark:bg-black flex items-center rounded`}>
           <input ref={searchInputRef} type='text' placeholder='Search' className='bg-transparent focus:outline-none p-1 px-3 max-w-[95px] md:max-w-[231px]' onKeyDown={onKeyDown} />
           <i className='fad fa-search mr-3' />
@@ -115,32 +156,6 @@ export default function Filters({ isMenuOpen, setIsMenuOpen, totalResults }: { i
 
 /*
 
-  <div className="relative inline-block text-left">
-    <div className='flex items-center'>
-      <button className="group flex w-full justify-center gap-x-1.5 rounded items-center"
-        onClick={() => { setIsMenuOpen((current: boolean) => !current) }}>
-        <i className='fad fa-fire mr-1'></i>
-        <span className={`${endpoint === 'top' ? 'underline flex' : 'hidden lg:flex'} group-hover:underline`}>Top</span>
-        <svg className={`${(isMenuOpen) ? 'rotate-180' : ''} h-5 w-5 text-gray-400`} viewBox="0 0 20 20" fill="currentColor">
-          <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" />
-        </svg>
-        <span className={`underline`}>{endpoint === 'top' && capitalize(bucket)}</span>
-      </button>
-    </div>
-
-    <div className={`${!isMenuOpen ? 'hidden' : ''} absolute left-[50%] -ml-[80px] r-auto z-10 mt-4 md:mt-5 w-40 rounded bg-gray-200 dark:bg-black`}>
-      <div className='dark:bg-gray-800 dark:bg-opacity-60 py-1 rounded'>
-        {topOptions.map((option: any, index: number) => (
-          <span className='group cursor-pointer flex justify-center border-b-2 border-dashed border-gray-100 dark:border-black last:border-transparent' key={index}>
-            <Link className={`${(endpoint === 'top' && bucket === option.value) ? 'underline' : ''} group-hover:underline block w-full text-center py-0.5`}
-              href={`/top/${option.value}`}
-              prefetch={false}>
-              {option.label}
-            </Link>
-          </span>
-        ))}
-      </div>
-    </div>
-  </div>
+  
 
   */

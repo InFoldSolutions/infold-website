@@ -34,18 +34,11 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [showToTop, setShowToTop] = useState(false)
 
-  const isSelectScreen = useMemo(() => { // do we display interests screen ?
-    return !pathname || pathname === '/'
-  }, [pathname])
-
   const backToTop = useCallback(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }, [])
 
   const onScrollHandler = useCallback((e: UIEvent) => {
-    if (isSelectScreen)
-      return
-
     const scrollHeight = document.body.scrollHeight
     const innerHeight = window.innerHeight
     const scrollTop = window.scrollY
@@ -63,7 +56,7 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
       setIsLoadMore(true)
       setOffset((old: number) => old + 1)
     }
-  }, [isSelectScreen, isLoadMore, showToTop, setShowToTop, setOffset, setIsLoadMore])
+  }, [isLoadMore, showToTop, setShowToTop, setOffset, setIsLoadMore])
 
   // for scrollHandler
   useEffect(() => {
@@ -75,29 +68,6 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
       document.removeEventListener('scroll', onScrollHandler);
     }
   }, [onScrollHandler]);
-
-  // selected interests changed
-  /*useEffect(() => {
-    if ((pathname && pathname !== '/'))
-      return
-
-    if (selectedInterests.length === 0 || feedData?.length > 0)
-      return
-
-    setIsLoading(true)
-
-    const fetchInterestFeedData = async () => {
-      let res: any = await getInterestsFeed(selectedInterests)
-
-      if (res.data && res.meta?.total_results > 0) {
-        setFeedData(res.data);
-        setIsLoading(false);
-      }
-    }
-
-    fetchInterestFeedData()
-      .catch(console.error)
-  }, [selectedInterests])*/
 
   // pathname changed
   useEffect(() => {
@@ -157,32 +127,26 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
       </div>
 
       <div className='flex items-start flex-row'>
-        <div className={`flex md:mr-auto ${isSelectScreen || feedData.length === 0 ? 'm-auto flex-row' : 'flex-col'} min-h-[70vh] w-full max-w-full pb-1 max-w-[900px] lg:w-[900px] overflow-x-hidden`}>
-          {isLoading && !isSelectScreen && feedData.length === 0 &&
+        <div className={`flex md:mr-auto ${feedData.length === 0 ? 'm-auto flex-row' : 'flex-col'} min-h-[70vh] w-full max-w-full pb-1 max-w-[900px] lg:w-[900px] overflow-x-hidden`}>
+          {isLoading && feedData.length === 0 &&
             <Loading />
           }
 
-          {isSelectScreen &&
-            <Interests interests={config.interests} saveInterests={saveInterests} setSelectedInterests={setSelectedInterests} />
-          }
+          <Suspense fallback={<Loading />}>
+            <Feed data={feedData} />
+          </Suspense>
 
-          {!isSelectScreen &&
-            <Suspense fallback={<Loading />}>
-              <Feed data={feedData} />
-            </Suspense>
-          }
-
-          {!isSelectScreen && feedData.length === 0 && !isLoading &&
+          {feedData.length === 0 && !isLoading &&
             <div className='my-auto pl-2 text-center text-2xl w-full'>No topics found</div>
           }
 
-          {!isSelectScreen && isLoadMore &&
+          {isLoadMore &&
             <div className='w-full justify-center mt-4 pt-2 flex items-center'><Spinner />Loading more ...</div>
           }
         </div>
 
         <div className='sticky top-20'>
-          <div className={`h-auto w-[280px] mb-4 p-4 bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 hidden lg:flex flex-col rounded ${isSelectScreen ? 'lg:hidden' : ''} `}>
+          <div className={`h-auto w-[280px] mb-4 p-4 bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 hidden lg:flex flex-col rounded`}>
             <h3 className='mb-5 text-2xl font-bold flex items-center'>
               <i className='fad fa-rocket-launch mr-3 text-xl'></i>
               Trending
@@ -192,7 +156,7 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
             </div>
           </div>
 
-          <Premium isSelectScreen={isSelectScreen} />
+          <Premium isSelectScreen={false} />
         </div>
       </div>
 
