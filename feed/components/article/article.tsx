@@ -65,7 +65,7 @@ export default function RelatedArticle({ item, last, popular }: IRelatedArticle)
           } else {
             return (
               <li key={index} className='mt-3 group/article' >
-                <Link className='text-xl font-bold flex-inline items-center hover:underline cursor-pointer' href={firstArticle.url} target='_blank' title={article.title}>
+                <Link className='text-xl font-bold flex-inline items-center hover:underline cursor-pointer truncate-3-lines' href={firstArticle.url} target='_blank' title={article.title}>
                   {article.title}
                 </Link>
 

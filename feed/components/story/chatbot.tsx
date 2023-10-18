@@ -145,7 +145,7 @@ export default function ChatBot({ suggested }: { suggested: any }) {
             onKeyDown={onKeyDown}
             minRows={1}
             rows={1}
-            placeholder="Ask a question"
+            placeholder="Type a question or select one below"
             className="w-full resize-none bg-transparent focus-visible:outline-none dark:bg-transparent" />
           <button className="p-1 rounded-md disabled:text-gray-400 disabled:opacity-40 ml-2 -mr-1">
             <span onClick={onBtnSubmit} className={`${activeBtn ? 'text-black dark:text-white' : 'text-gray-400 dark:text-gray-800'}`}>
