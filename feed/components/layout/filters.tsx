@@ -134,7 +134,7 @@ export default function Filters({ totalResults }: { isMenuOpen: boolean, setIsMe
                   href={`/section/${option.value}`}
                   prefetch={false}
                   key={index}>
-                  <i className={`fad ${option.icon} ${option.icon === 'fa-user-chart' ? '-ml-[5px]' : ''} ${endpoint === 'section' && bucket === option.value ? 'mr-3' : 'lg:mr-3'} text-[17px]`}></i>
+                  <i className={`fad ${option.icon} ${option.icon === 'fa-user-chart' ? '-ml-[5px]' : ''} mr-3' text-[17px]`}></i>
                   <span className={`${endpoint === 'section' && bucket === option.value ? 'underline' : ''} group-hover:underline`}>{option.label}</span>
                 </Link>
               ))}
@@ -142,9 +142,9 @@ export default function Filters({ totalResults }: { isMenuOpen: boolean, setIsMe
           </div>
         </div>
 
-        <div className={`ml-auto bg-gray-100 dark:bg-black flex items-center rounded`}>
-          <input ref={searchInputRef} type='text' placeholder='Search' className='bg-transparent focus:outline-none p-1 px-3 max-w-[95px] md:max-w-[231px]' onKeyDown={onKeyDown} />
-          <i className='fad fa-search mr-3' />
+        <div className={`ml-auto bg-gray-100 dark:bg-black flex items-center justify-center rounded min-h-[35px] min-w-[40px]`}>
+          <input ref={searchInputRef} type='text' placeholder='Search' className='bg-transparent focus:outline-none p-1 px-3 hidden md:flex md:max-w-[231px]' onKeyDown={onKeyDown} />
+          <i className='fad fa-search md:mr-3' />
         </div>
       </div>
     )
