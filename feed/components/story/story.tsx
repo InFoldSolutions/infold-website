@@ -77,12 +77,12 @@ export default function StoryWrapper({ data, affiliate, modal = false }: { data:
 
       <ChatBot suggested={data.suggested} />
 
-      {affiliate?.length > 0 &&
-        <Affiliate data={affiliate} />
-      }
-
       {data.media?.length > 0 &&
         <YTMedia data={data.media} />
+      }
+      
+      {affiliate?.length > 0 &&
+        <Affiliate data={affiliate} />
       }
 
       <h3 className='mt-4 text-2xl font-bold'>News Coverage</h3>
