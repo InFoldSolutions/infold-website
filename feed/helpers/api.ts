@@ -84,7 +84,7 @@ export async function getKeywordFeed(keyword: string, page: number = 1) {
   }
 }
 
-export async function getSearchFeed(keywords: string[], page: number = 1) {
+export async function getSearchFeed(query: string, page: number = 1) {
   try {
     const url = getApiUrl('search', config.api.defaultLimit, null, page)
     const res = await fetch(url, {
@@ -92,7 +92,7 @@ export async function getSearchFeed(keywords: string[], page: number = 1) {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ keywords }),
+      body: JSON.stringify({ keywords: [query] }),
       next: { revalidate: 1 }
     })
 

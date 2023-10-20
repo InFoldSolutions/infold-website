@@ -38,7 +38,7 @@ export default function Filters({ totalResults }: { isMenuOpen: boolean, setIsMe
 
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-  if (endpoint === 'keyword')
+  if (endpoint === 'search' || endpoint === 'keyword')
     keywords = unSlugifyKeyword(bucket)
 
   const searchInputRef = useRef(null)
@@ -56,7 +56,7 @@ export default function Filters({ totalResults }: { isMenuOpen: boolean, setIsMe
     const queryString = keywordsArray.filter((keyword: string) => keyword !== keywordText).join(',')
 
     if (queryString)
-      router.push(`/keyword/${slugifyKeyword(queryString)}`)
+      router.push(`/search/${slugifyKeyword(queryString)}`)
     else
       router.push('/')
   }, [searchParams, router])
@@ -67,7 +67,7 @@ export default function Filters({ totalResults }: { isMenuOpen: boolean, setIsMe
       const keywordText = searchInputRef?.current?.value.trim()
 
       if (keywordText && keywordText.length > 3)
-        router.push(`/keyword/${slugifyKeyword(keywordText)}`)
+        router.push(`/search/${slugifyKeyword(keywordText)}`)
       else
         router.push('/')
     }
