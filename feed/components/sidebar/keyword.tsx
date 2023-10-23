@@ -31,7 +31,7 @@ export default function Keyword({ keyword, interests, toggleInterest }: { keywor
   }
 
   return (
-    <li className='pb-2 mb-2 last:pb-0 last:mb-0 flex items-center group/item border-b-2'>
+    <li className='pb-2 mb-2 last:pb-0 last:mb-0 flex items-center group/item'>
       <div className='mr-2'>
         <Link
           href={url}
