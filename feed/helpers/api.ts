@@ -22,7 +22,6 @@ export type Item = {
 export async function getTopFeed(bucket: string = config.api.defaultBucket, page: number = 1) {
   try {
     const url = `${config.api.url}/topics/top?bucket=${bucket}&page=${page}`
-    console.log('getTopFeed', url)
     const res = await fetch(url, { next: { revalidate: 1 } })
 
     if (!res.ok)

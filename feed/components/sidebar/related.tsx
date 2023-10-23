@@ -4,9 +4,14 @@ import { useEffect, useMemo, useState } from 'react';
 
 import RelatedItem from '@/components/sidebar/related_item';
 
-export default function Related({ related }: { related: any }) {
+import { getTopicRelated } from '@/helpers/api';
+import Loading from '../helpers/loading';
 
+export default function Related({ slug }: { slug: string }) {
+
+  const [related, setRelated] = useState<any>(null)
   const [showMore, setShowMore] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize] = useState(3);
 
@@ -19,8 +24,30 @@ export default function Related({ related }: { related: any }) {
       setShowMore(false);
   }, [related, currentPage, pageSize, moreKeywords]);
 
+  useEffect(() => {
+    const fetchRelated = async () => {
+      const relatedData = await getTopicRelated(slug)
+
+      if (relatedData?.length > 0)
+        setRelated(relatedData)
+    }
+
+    setIsLoading(true)
+
+    fetchRelated()
+      .catch(console.error)
+  }, [slug]);
+
+  useEffect(() => {
+    setIsLoading(false)
+  }, [related])
+
+  if (!related || isLoading)
+    return (<div className='w-auto text-small text-center py-6 mt-1 mb-3'>Loading data ..</div>);
+
   return (
     <ul className='flex flex-col'>
+
       {currentPage === 1 && (related && related.length > 0) && related.slice(0, pageSize).map((story: any, index: number) => (
         <RelatedItem story={story} key={index} />
       ))}

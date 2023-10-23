@@ -8,17 +8,17 @@ export function transformStory(data: any) {
 
   if (data.sources?.length > 0) {
 
-    /*data.sentimentAgg = {
+    data.sentimentAgg = {
       positive: 0,
       negative: 0,
       neutral: 0
-    }*/
+    }
 
     data.sources.forEach((item: any) => {
       if (item.articles?.length > 0) {
 
         // This is mock data
-        /*if (!item.articles[0].sentiment)
+        if (!item.articles[0].sentiment)
           item.articles[0].sentiment = ['negative', 'positive', 'neutral'][getRandomInt(0, 3)]
 
         let articleSentiment = item.articles[0].sentiment
@@ -34,7 +34,7 @@ export function transformStory(data: any) {
         }
 
         if (articleSentiment)
-          data.sentimentAgg[articleSentiment]++*/
+          data.sentimentAgg[articleSentiment]++
 
         // Sort articles by date
         item.articles.sort((a: any, b: any) => {

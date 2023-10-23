@@ -8,7 +8,6 @@ import StoryWrapper from '@/components/story/story'
 import TagsChart from '@/components/sidebar/tags_chart'
 import Spinner from '@/components/helpers/spinner'
 import Keywords from '@/components/sidebar/keywords'
-import Premium from '@/components/sidebar/premium'
 import Related from '@/components/sidebar/related'
 
 import { getTopic, getTopicAffiliate, getTopicRelated } from '@/helpers/api'
@@ -18,7 +17,6 @@ export default function StoryModal({ params }: { params: { slug: string } }) {
   let [isLoading, setIsLoading] = useState(true)
   let [data, setData] = useState<any>(null)
   let [affiliate, setAffiliate] = useState<any>(null)
-  let [related, setRelated] = useState<any>(null)
 
   useEffect(() => {
     const fetchStoryData = async () => {
@@ -29,10 +27,7 @@ export default function StoryModal({ params }: { params: { slug: string } }) {
 
       setIsLoading(false);
 
-      const relatedData = await getTopicRelated(params.slug)
 
-      if (relatedData?.length > 0)
-        setRelated(relatedData)
 
       const affiliateData = await getTopicAffiliate(params.slug)
 
@@ -63,13 +58,6 @@ export default function StoryModal({ params }: { params: { slug: string } }) {
               </div>
 
               <div className='sticky top-[32px] h-auto hidden lg:flex flex-col'>
-                {related &&
-                  <div className='h-auto w-[280px] p-5 bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 hidden lg:flex flex-col mb-4 rounded'>
-                    <h3 className='text-2xl font-bold mb-4'>Related</h3>
-                    <Related related={related} />
-                  </div>
-                }
-
                 {data.sentimentAgg &&
                   <div className='h-auto w-[280px] p-5 bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 hidden lg:flex flex-col mb-4 rounded'>
                     <h3 className='text-2xl font-bold mb-2'>Sentiment</h3>
@@ -77,12 +65,10 @@ export default function StoryModal({ params }: { params: { slug: string } }) {
                   </div>
                 }
 
-                {data.politicsAgg &&
-                  <div className='h-auto w-[280px] p-5 bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 hidden lg:flex flex-col mb-4 rounded'>
-                    <h3 className='text-2xl font-bold mb-2'>Politics</h3>
-                    <TagsChart aggregation={data.politicsAgg} />
-                  </div>
-                }
+                <div className='h-auto w-[280px] p-5 bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 hidden lg:flex flex-col mb-4 rounded'>
+                  <h3 className='text-2xl font-bold mb-4'>Related</h3>
+                  <Related slug={data.slug} />
+                </div>
 
                 <div className='h-auto w-[280px] p-5 bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 hidden lg:flex flex-col mb-4 rounded'>
                   <h3 className='text-2xl font-bold mb-5'>Keywords</h3>
