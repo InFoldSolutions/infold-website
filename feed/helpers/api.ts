@@ -19,28 +19,10 @@ export type Item = {
   meta: any
 }
 
-export function getApiUrl(endpoint = 'top', limit: number = 0, bucket: any = null, page: number = 1) {
-  let url = `${config.api.url}/topics/${endpoint}`
-  let separator = '?'
-
-  if (bucket) {
-    url += `${separator}bucket=${bucket}`
-    separator = '&'
-  }
-  if (limit) {
-    url += `${separator}limit=${limit}`
-    separator = '&'
-  }
-  if (page > 1) {
-    url += `${separator}page=${page}`
-  }
-
-  return url
-}
-
-export async function getFeed(endpoint = 'top', limit: number = 0, bucket: any = null, page: number = 1) {
+export async function getTopFeed(bucket: string = config.api.defaultBucket, page: number = 1) {
   try {
-    const url = getApiUrl(endpoint, limit, bucket, page)
+    const url = `${config.api.url}/topics/top?bucket=${bucket}&page=${page}`
+    console.log('getTopFeed', url)
     const res = await fetch(url, { next: { revalidate: 1 } })
 
     if (!res.ok)
@@ -56,7 +38,30 @@ export async function getFeed(endpoint = 'top', limit: number = 0, bucket: any =
       data: data.topics.filter(filterStory).map(transformStory)
     }
   } catch (error) {
-    console.error('Failed to fetch feed data', error)
+    console.error('Failed to fetch keyword feed data', error)
+    return []
+  }
+}
+
+export async function getSectionFeed(bucket: string = config.api.defaultBucket, category: string, page: number = 1) {
+  try {
+    const url = `${config.api.url}/topics/top?bucket=${bucket}&category=${category}&page=${page}`
+    const res = await fetch(url, { next: { revalidate: 1 } })
+
+    if (!res.ok)
+      throw new Error('Response not ok')
+
+    const data = await res.json()
+
+    if (!data.topics)
+      throw new Error('Topics not found')
+
+    return {
+      meta: data.meta,
+      data: data.topics.filter(filterStory).map(transformStory)
+    }
+  } catch (error) {
+    console.error('Failed to fetch keyword feed data', error)
     return []
   }
 }
@@ -193,6 +198,26 @@ export async function getTopicAffiliate(slug: string) {
   }
 }
 
+export async function getTopicRelated(slug: string) {
+  try {
+    const url = `${config.api.url}/topics/${slug}/related`
+    const res = await fetch(url, { next: { revalidate: 60 } })
+
+    if (!res.ok)
+      throw new Error('Response not ok')
+
+    const data = await res.json()
+
+    if (data.topics?.length === 0)
+      throw new Error('Related not found')
+
+    return data.topics.reverse()
+  } catch (error) {
+    console.warn('Failed to fetch related data', error)
+    return {}
+  }
+}
+
 export async function refreshTopicMeta(slug: string) {
   try {
     const url = `${config.api.url}/topics/${slug}`
@@ -222,7 +247,7 @@ export async function refreshTopicMeta(slug: string) {
   }
 }
 
-export async function getTopKeywords(bucket: string = 'month') {
+export async function getTopKeywords(bucket: string = config.api.defaultBucket) {
   try {
     const url = `${config.api.url}/keywords/top?bucket=${bucket}&types=person&limit=40`;
     const res = await fetch(url, { next: { revalidate: 60 } })
@@ -238,6 +263,48 @@ export async function getTopKeywords(bucket: string = 'month') {
     return data.keywords.filter(filterKeyword)
   } catch (error) {
     console.error('Failed to fetch top keywords', error)
+    return []
+  }
+}
+
+export function getApiUrl(endpoint = 'top', limit: number = 0, bucket: any = null, page: number = 1) {
+  let url = `${config.api.url}/topics/${endpoint}`
+  let separator = '?'
+
+  if (bucket) {
+    url += `${separator}bucket=${bucket}`
+    separator = '&'
+  }
+  if (limit) {
+    url += `${separator}limit=${limit}`
+    separator = '&'
+  }
+  if (page > 1) {
+    url += `${separator}page=${page}`
+  }
+
+  return url
+}
+
+export async function getFeed(endpoint = 'top', limit: number = 0, bucket: any = null, page: number = 1) {
+  try {
+    const url = getApiUrl(endpoint, limit, bucket, page)
+    const res = await fetch(url, { next: { revalidate: 1 } })
+
+    if (!res.ok)
+      throw new Error('Response not ok')
+
+    const data = await res.json()
+
+    if (!data.topics)
+      throw new Error('Topics not found')
+
+    return {
+      meta: data.meta,
+      data: data.topics.filter(filterStory).map(transformStory)
+    }
+  } catch (error) {
+    console.error('Failed to fetch feed data', error)
     return []
   }
 }

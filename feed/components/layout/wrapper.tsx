@@ -14,7 +14,7 @@ import Interests from '@/components/layout/interests'
 import Keywords from '@/components/sidebar/keywords'
 import Premium from '@/components/sidebar/premium'
 
-import { getFeed, getInterestsFeed, getKeywordFeed } from '@/helpers/api'
+import { getFeed, getInterestsFeed, getKeywordFeed, getSearchFeed, getSectionFeed, getTopFeed } from '@/helpers/api'
 import { saveInterests, getInterests } from '@/helpers/localstorage'
 import { isBrowser } from '@/helpers/utils'
 
@@ -89,16 +89,18 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
 
         const pathnameParts = pathname.split('/')
         const endpoint = pathnameParts[1]
-        const bucket = pathnameParts[2] || config.api.defaultBucket
+        const param = pathnameParts[2]
 
         if (endpoint === 'keyword')
-          res = await getKeywordFeed(bucket, offset)
-        else if (endpoint === 'feed')
-          res = await getFeed('top', config.api.defaultLimit, 'month', offset)
-        else if (endpoint)
-          res = await getFeed(endpoint, config.api.defaultLimit, bucket, offset)
+          res = await getKeywordFeed(param, offset)
+        else if (endpoint === 'search')
+          res = await getSearchFeed(param, offset)
+        else if (endpoint === 'section')
+          res = await getSectionFeed(config.api.defaultBucket, param, offset)
         else if (selectedInterests.length > 0)
           res = await getInterestsFeed(selectedInterests, offset)
+        else
+          res = await getTopFeed(config.api.defaultBucket, offset)
 
         if (res?.data?.length > 0)
           setFeedData((prevData: any) => [...prevData, ...res.data])
@@ -114,7 +116,7 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
     } else if (endOfFeed)
       setIsLoadMore(false)
 
-  }, [offset, endOfFeed])
+  }, [offset, endOfFeed, setIsLoadMore])
 
   return (
     <Container>

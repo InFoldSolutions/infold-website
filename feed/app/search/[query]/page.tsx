@@ -24,7 +24,7 @@ export default async function Search({ params }: { params: { query: string } }) 
   if (query)
     res = await getSearchFeed(query)
 
-  const topKeywords = await getTopKeywords('month')
+  const topKeywords = await getTopKeywords()
   const totalResults = res?.meta?.total_results || 0
 
   return (

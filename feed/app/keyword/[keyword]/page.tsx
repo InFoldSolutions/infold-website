@@ -24,7 +24,7 @@ export default async function Keyword({ params }: { params: { keyword: string } 
   if (keyword)
     res = await getKeywordFeed(keyword)
 
-  const topKeywords = await getTopKeywords('month')
+  const topKeywords = await getTopKeywords()
   const totalResults = res?.meta?.total_results || 0
 
   return (

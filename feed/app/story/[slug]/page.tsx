@@ -7,8 +7,9 @@ import TagsChart from '@/components/sidebar/tags_chart'
 import Keywords from '@/components/sidebar/keywords'
 import Premium from '@/components/sidebar/premium'
 
-import { getTopic, getTopicAffiliate, getTopicThumbUrl } from '@/helpers/api'
+import { getTopic, getTopicAffiliate, getTopicRelated, getTopicThumbUrl } from '@/helpers/api'
 import config from '@/config';
+import Related from '@/components/sidebar/related';
 
 export async function generateMetadata(
   { params }: { params: any }
@@ -43,6 +44,7 @@ export default async function Topic({ params }: { params: { slug: string } }) {
     return permanentRedirect(`/story/${data.slug}`)
 
   const affiliate = await getTopicAffiliate(params.slug)
+  const related = await getTopicRelated(params.slug)
 
   return (
     <Container>
@@ -53,6 +55,13 @@ export default async function Topic({ params }: { params: { slug: string } }) {
         </div>
 
         <div className='sticky top-4 h-auto hidden lg:flex flex-col'>
+          {related &&
+            <div className='h-auto w-[280px] p-5 bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 hidden lg:flex flex-col mb-4 rounded'>
+              <h3 className='text-2xl font-bold mb-4'>Related</h3>
+              <Related related={related} />
+            </div>
+          }
+          
           {data.sentimentAgg &&
             <div className='h-auto w-[280px] p-5 bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 hidden lg:flex flex-col mb-4 rounded'>
               <h3 className='text-2xl font-bold mb-2'>Sentiment</h3>
@@ -71,8 +80,6 @@ export default async function Topic({ params }: { params: { slug: string } }) {
             <h3 className='text-2xl font-bold mb-5'>Keywords</h3>
             <Keywords keywords={data.keywords} />
           </div>
-
-          <Premium isSelectScreen={false} />
         </div>
       </div>
     </Container>

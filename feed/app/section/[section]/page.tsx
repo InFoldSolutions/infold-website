@@ -1,8 +1,9 @@
 import { Metadata } from 'next';
 import Wrapper from '@/components/layout/wrapper'
 
-import { getKeywordFeed, getTopKeywords } from '@/helpers/api'
+import { getSectionFeed, getTopFeed, getTopKeywords } from '@/helpers/api'
 import { unSlugifyKeyword } from '@/helpers/utils';
+import config from '@/config';
 
 export async function generateMetadata(
   { params }: { params: { section: string } }
@@ -19,12 +20,12 @@ export async function generateMetadata(
 export default async function Section({ params }: { params: { section: string } }) {
   let res: any = null
   
-  const keyword = unSlugifyKeyword(params.section)
+  const section = unSlugifyKeyword(params.section)
 
-  if (keyword)
-    res = await getKeywordFeed(keyword)
+  if (section)
+    res = await getSectionFeed(config.api.defaultBucket, section)
 
-  const topKeywords = await getTopKeywords('month')
+  const topKeywords = await getTopKeywords()
   const totalResults = res?.meta?.total_results || 0
 
   return (
