@@ -21,8 +21,8 @@ const categoryOptions = [
   { label: 'Science', value: 'Technology', icon: 'fa-flask' },
   { label: 'Sports', value: 'Sports', icon: 'fa-football-ball' },
   { label: 'Finance', value: 'Finance', icon: 'fa-user-chart' },
-  { label: 'Culture', value: 'Culture', icon: 'fa-film' },
-  { label: 'Health', value: 'Health', icon: 'fa-heartbeat' },
+  { label: 'Creative', value: 'Creative', icon: 'fa-alien-monster' },
+  //{ label: 'Health', value: 'Health', icon: 'fa-heartbeat' },
 ]
 
 export default function Filters({ totalResults }: { isMenuOpen: boolean, setIsMenuOpen: any, totalResults: number, showToTop: boolean }) {
@@ -134,7 +134,7 @@ export default function Filters({ totalResults }: { isMenuOpen: boolean, setIsMe
                   href={`/section/${option.value}`}
                   prefetch={false}
                   key={index}>
-                  <i className={`fad ${option.icon} ${option.icon === 'fa-user-chart' ? '-ml-[5px]' : ''} mr-3 text-[17px]`}></i>
+                  <i className={`fad ${option.icon} ${(option.icon === 'fa-user-chart' || option.icon === 'fa-alien-monster') ? '-ml-[5px]' : ''} mr-3 text-[17px]`}></i>
                   <span className={`${endpoint === 'section' && bucket === option.value ? 'underline' : ''} group-hover:underline`}>{option.label}</span>
                 </Link>
               ))}
