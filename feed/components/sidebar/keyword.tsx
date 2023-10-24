@@ -4,15 +4,16 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 
-import Tooltip from '@/components/helpers/tooltip';
 import { slugifyKeyword } from '@/helpers/utils';
 
-export default function Keyword({ keyword, interests, toggleInterest }: { keyword: any, interests: string[], toggleInterest: any }) {
+export default function Keyword({ keyword }: { keyword: any, interests: string[], toggleInterest: any }) {
   const pathname = usePathname()
   const target = (pathname === '/' || pathname.includes('/keyword/') || pathname.includes('/search/') || pathname.includes('/section/')) ? '_self': '_blank';
-  const latestAnalyzed = (keyword.analyzed) ? keyword.analyzed[0] : null;
 
-  let icon, label, url;
+  let latestAnalyzed = null, icon, label, url;
+
+  if (keyword.analyzed) 
+    latestAnalyzed = keyword.analyzed.find((item: any) => item.url);
 
   if (latestAnalyzed && latestAnalyzed.url) {
     url = latestAnalyzed.url;
@@ -45,7 +46,7 @@ export default function Keyword({ keyword, interests, toggleInterest }: { keywor
         </Link>
       </div>
 
-      <Link href={`/keyword/${slugifyKeyword(keyword.keyword)}`} prefetch={false} className='group/link' target={target}>
+      <Link href={`/keyword/${slugifyKeyword(keyword.keyword)}`} prefetch={false} className='group/link w-full' target={target}>
         <span>
           <span className='font-bold block leading-4 group-hover/link:underline'>{keyword.keyword}</span>
           <span className='flex text-xs'>
@@ -53,15 +54,6 @@ export default function Keyword({ keyword, interests, toggleInterest }: { keywor
           </span>
         </span>
       </Link>
-
-      <div className={`${interests.includes(keyword.keyword) ? 'opacity-50' : 'opacity-30'} ml-auto cursor-pointer transition group-hover/item:opacity-100 flex items-center group/follow`}
-        onClick={() => toggleInterest(keyword.keyword)}>
-        <Tooltip message={`${interests.includes(keyword.keyword) ? 'Unfollow' : 'Follow'}`} bottom={1} left={10} padding={1}>
-          <span className={`border-2 group-hover/follow:opacity-100 group-hover/follow:border-blue-500 group-hover/follow:text-blue-500 rounded-md ${interests.includes(keyword.keyword) ? 'opacity-100 text-blue-500 border-blue-500' : 'opacity-50 border-transparent'}`}>
-            <i className={`fad ${interests.includes(keyword.keyword) ? 'fa-bookmark' : 'fa-bookmark'}  p-1`} />
-          </span>
-        </Tooltip>
-      </div>
     </li>
   )
 }

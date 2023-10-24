@@ -1,13 +1,15 @@
 'use client'
 
 import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 
 import Image from 'next/image'
 import Link from 'next/link'
 
 export default function Header() {
 
-  let [browserLink, setBrowserLink] = useState("https://chrome.google.com/webstore/detail/infoldai/dfmmanoiegndhgdjendeidcakajifnlb?hl=en") // default
+  const [browserLink, setBrowserLink] = useState("https://chrome.google.com/webstore/detail/infoldai/dfmmanoiegndhgdjendeidcakajifnlb?hl=en") // default
+  const pathname = usePathname()
 
   useEffect(() => {
     const isFirefox = navigator?.userAgent.match(/firefox|fxios/i);
@@ -30,9 +32,9 @@ export default function Header() {
             <li className='hidden md:flex mr-2'>
               <Link href='/about' target="_self"
                 title='About InFold'
-                className="h-full text-center items-center flex group items-center">
+                className={`h-full text-center items-center flex group items-center`}>
                 <i className='fad fa-question mr-2' />
-                <span className='group-hover:underline'>
+                <span className={`group-hover:underline ${pathname === '/about' ? 'underline' : ''}`}>
                   About
                 </span>
               </Link>
