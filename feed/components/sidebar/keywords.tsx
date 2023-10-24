@@ -8,11 +8,11 @@ import { getInterests, addInterest, removeInterest } from '@/helpers/localstorag
 
 import { isBrowser } from '@/helpers/utils';
 
-export default function Keywords({ keywords }: { keywords: any }) {
+export default function Keywords({ keywords, defaultSize = 4 }: { keywords: any, defaultSize?: number }) {
 
   const [showMore, setShowMore] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize] = useState(6);
+  const [pageSize] = useState(defaultSize);
   const [interests, setInterests] = useState<string[]>((isBrowser) ? getInterests() : [])
 
   const moreKeywords = useMemo(() => keywords && keywords.length > pageSize * currentPage, [keywords, currentPage, pageSize]);

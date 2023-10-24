@@ -153,7 +153,7 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
               Trending
             </h3>
             <div className='pl-1'>
-              <Keywords keywords={topKeywords} />
+              <Keywords keywords={topKeywords} defaultSize={6} />
             </div>
           </div>
 

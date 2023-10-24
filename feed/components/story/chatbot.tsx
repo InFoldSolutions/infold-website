@@ -145,7 +145,7 @@ export default function ChatBot({ suggested }: { suggested: any }) {
             onKeyDown={onKeyDown}
             minRows={1}
             rows={1}
-            placeholder="Type a question or select one below"
+            placeholder="Type a question or select one below ↓"
             className="w-full resize-none bg-transparent focus-visible:outline-none dark:bg-transparent" />
           <button className="p-1 rounded-md disabled:text-gray-400 disabled:opacity-40 ml-2 -mr-1">
             <span onClick={onBtnSubmit} className={`${activeBtn ? 'text-black dark:text-white' : 'text-gray-400 dark:text-gray-800'}`}>
@@ -157,7 +157,7 @@ export default function ChatBot({ suggested }: { suggested: any }) {
             </span>
           </button>
         </div>
-        <Tooltip message={"Foldy is powered by Llama 2 and customized for each topic to provide you with the most relevant information possible"} top={20} right={6} minWidth={220} padding={2}>
+        <Tooltip message={"Foldy is powered by Llama 2 and customized for each story to provide you with the most relevant information possible"} top={20} right={6} minWidth={220} padding={2}>
           <div className='ml-2 rounded-md border-2 border-gray-200 dark:border-gray-800 dark:border-opacity-60 p-4 hidden md:flex items-center cursor-pointer select-none' onClick={onBtnSubmit}>
             <i className='fad fa-robot mr-3 -mt-1 text-xl' /> Ask Foldy
           </div>

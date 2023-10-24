@@ -4,15 +4,18 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 
-import { slugifyKeyword } from '@/helpers/utils';
+import { slugifyKeyword, unSlugifyKeyword } from '@/helpers/utils';
 
 export default function Keyword({ keyword }: { keyword: any, interests: string[], toggleInterest: any }) {
   const pathname = usePathname()
-  const target = (pathname === '/' || pathname.includes('/keyword/') || pathname.includes('/search/') || pathname.includes('/section/')) ? '_self': '_blank';
+  const pathnameParts = pathname.split('/')
+  const endpoint = pathnameParts[1]
+  const paramKeyword = pathnameParts[2] ? unSlugifyKeyword(pathnameParts[2]) : null
+  const target = (pathname === '/' || endpoint === 'keyword' || endpoint === 'search' || endpoint === 'section') ? '_self' : '_blank';
 
   let latestAnalyzed = null, icon, label, url;
 
-  if (keyword.analyzed) 
+  if (keyword.analyzed)
     latestAnalyzed = keyword.analyzed.find((item: any) => item.url);
 
   if (latestAnalyzed && latestAnalyzed.url) {
@@ -48,7 +51,7 @@ export default function Keyword({ keyword }: { keyword: any, interests: string[]
 
       <Link href={`/keyword/${slugifyKeyword(keyword.keyword)}`} prefetch={false} className='group/link w-full' target={target}>
         <span>
-          <span className='font-bold block leading-4 group-hover/link:underline'>{keyword.keyword}</span>
+          <span className={`font-bold block leading-4 group-hover/link:underline ${paramKeyword && paramKeyword === keyword.keyword ? 'underline' : ''}`}>{keyword.keyword}</span>
           <span className='flex text-xs'>
             {keyword.topics || 4} Topics
           </span>
