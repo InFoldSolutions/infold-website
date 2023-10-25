@@ -42,7 +42,6 @@ export default function StoryWrapper({ data, affiliate, modal = false }: { data:
       <div className='flex items-center mb-4 text-sm font-bold'>
         <span className='ml-1'>
           {`Summarized from ${data.meta.sources} sources.`}
-
           {user &&
             <span className='hidden group-hover:inline-flex cursor-pointer'>
               <i className={`fad fa-sync ml-2 ${isRefreshing ? 'animate-spin' : ''}`} onClick={() => refreshTopic()} />

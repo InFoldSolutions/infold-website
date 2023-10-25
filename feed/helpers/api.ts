@@ -16,7 +16,8 @@ export type Item = {
   short_title: string
   social: any,
   sentimentAgg: any
-  meta: any
+  meta: any,
+  media: any,
 }
 
 export async function getTopFeed(bucket: string = config.api.defaultBucket, page: number = 1) {
