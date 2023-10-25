@@ -11,7 +11,7 @@ import { Suspense } from 'react'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'InFold - Get The Full Story',
+  title: 'InFold - Discover The Full Story',
   description: 'News is broken and driven by different agendas. We\'re here to help you get context, delve deeper, and learn more.',
 }
 

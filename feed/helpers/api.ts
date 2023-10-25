@@ -1,7 +1,11 @@
+import { permanentRedirect } from 'next/navigation'
+
 import config from '@/config';
 
 import { transformStory, filterStory } from '@/transformers/story';
 import { filterKeyword } from '@/transformers/keyword';
+
+import { searchParamsToQueryParams } from '@/helpers/utils';
 
 // Topic, story item
 export type Item = {
@@ -265,6 +269,14 @@ export async function getTopKeywords(bucket: string = config.api.defaultBucket) 
     console.error('Failed to fetch top keywords', error)
     return []
   }
+}
+
+export function handleRedirect(slug: string, searchParams: any) {
+  let url = `/story/${slug}`
+
+  if (Object.keys(searchParams).length > 0) url += `?${searchParamsToQueryParams(searchParams)}`
+
+  return permanentRedirect(url)
 }
 
 export function getApiUrl(endpoint = 'top', limit: number = 0, bucket: any = null, page: number = 1) {

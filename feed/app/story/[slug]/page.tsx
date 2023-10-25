@@ -1,5 +1,7 @@
+import config from '@/config';
+
 import { Metadata } from 'next';
-import { permanentRedirect, notFound } from 'next/navigation'
+import { notFound } from 'next/navigation'
 
 import StoryWrapper from '@/components/story/story'
 import Container from '@/components/layout/container'
@@ -7,10 +9,7 @@ import TagsChart from '@/components/sidebar/tags_chart'
 import Keywords from '@/components/sidebar/keywords'
 import Related from '@/components/sidebar/related'
 
-import { getTopic, getTopicAffiliate, getTopicThumbUrl } from '@/helpers/api'
-import { searchParamsToQueryParams } from '@/helpers/utils'
-
-import config from '@/config';
+import { getTopic, getTopicAffiliate, getTopicThumbUrl, handleRedirect } from '@/helpers/api'
 
 export async function generateMetadata(
   { params }: { params: any }
@@ -41,14 +40,8 @@ export default async function Topic({ params, searchParams }: { params: { slug: 
 
   if (!data || !data.slug)
     return notFound()
-  if (data.slug !== params.slug) { // handle redirect
-    let url = `/story/${data.slug}`
-
-    if (Object.keys(searchParams).length > 0) url += `?${searchParamsToQueryParams(searchParams)}`
-
-    return permanentRedirect(url)
-  }
-
+  if (data.slug !== params.slug)
+    return handleRedirect(data.slug, searchParams)
 
   const affiliate = await getTopicAffiliate(params.slug)
 

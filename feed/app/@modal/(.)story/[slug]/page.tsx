@@ -10,7 +10,7 @@ import Spinner from '@/components/helpers/spinner'
 import Keywords from '@/components/sidebar/keywords'
 import Related from '@/components/sidebar/related'
 
-import { getTopic, getTopicAffiliate, getTopicRelated } from '@/helpers/api'
+import { getTopic, getTopicAffiliate } from '@/helpers/api'
 
 export default function StoryModal({ params }: { params: { slug: string } }) {
 

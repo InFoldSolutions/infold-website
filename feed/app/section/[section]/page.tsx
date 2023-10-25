@@ -1,8 +1,10 @@
 import { Metadata } from 'next';
+
 import Wrapper from '@/components/layout/wrapper'
 
-import { getSectionFeed, getTopFeed, getTopKeywords } from '@/helpers/api'
+import { getSectionFeed, getTopKeywords } from '@/helpers/api'
 import { unSlugifyKeyword } from '@/helpers/utils';
+
 import config from '@/config';
 
 export async function generateMetadata(
