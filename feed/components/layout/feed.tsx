@@ -23,17 +23,17 @@ export default function Feed({ data }: { data: any, onScrollHandler?: any }) {
                 date={new Date(item.updated_at).getTime()}
                 className='text-gray-600 dark:text-gray-300 flex text-base'
               />
-              <span className="ml-2 mr-2">·</span>
-              <span className='text-gray-600 dark:text-gray-300 flex text-base'>Summarized from {item.meta.articles} articles.</span>
             </div>
             <div className='flex items-center my-2'>
-              {item.media?.length > 0 &&
+              {(item.media?.length > 0) &&
                 <Thumbs media={item.media} />
               }
               <h3 className='text-3xl font-bold leading-snug text-left'>
                 {item.title}
               </h3>
             </div>
+
+            <div className='flex text-sm mt-4 mb-2 font-bold'>Summarized from {item.meta.articles} articles.</div>
 
             <div className='text-left'>
               {item.outline.slice(0, 1).map((outline: any, index: number) => (

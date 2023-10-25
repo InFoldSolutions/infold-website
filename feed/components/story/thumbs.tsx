@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 export default function Thumbs({ media }: { media: any }) {
   return (
-    <div className='flex mr-4'>
+    <div className='mr-4 hidden md:flex'>
       <ul className='flex relative max-h-[90px] max-w-[160px]'>
         {media.slice(0, 1).map((item: any, index: number) => (
           <li className={`overflow-hidden max-w-[160px]`} key={index}>
