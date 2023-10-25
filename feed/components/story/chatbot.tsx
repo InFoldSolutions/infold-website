@@ -167,7 +167,7 @@ export default function ChatBot({ suggested }: { suggested: any }) {
       {suggested && suggested.length > 0 &&
         <div className='mt-4 px-1 w-full'>
           <ul>
-            {suggested.slice(0, 3).map((suggested: any, index: number) => (
+            {suggested.slice(0, 4).map((suggested: any, index: number) => (
               <li className='mb-2 border-b-2 border-dashed border-gray-200 dark:border-gray-800 dark:border-opacity-60 cursor-pointer group flex items-center last:mb-0 relative'
                 onClick={() => onPromptSumbit(suggested)}
                 title={suggested}
