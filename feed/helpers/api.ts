@@ -211,7 +211,7 @@ export async function getTopicRelated(slug: string) {
     if (data.topics?.length === 0)
       throw new Error('Related not found')
 
-    return data.topics.reverse()
+    return data.topics.filter(filterStory).map(transformStory)
   } catch (error) {
     console.warn('Failed to fetch related data', error)
     return {}
