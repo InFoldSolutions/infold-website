@@ -9,7 +9,7 @@ export default function About() {
         <h2 className='text-3xl md:text-4xl font-bold mb-6 flex justify-center text-center items-center'>
           Get The Full Story
         </h2>
-        <h4 className='mb-4 text-center'>
+        <h4 className='mb-4 text-lg leading-relaxed sm:text-xl sm:leading-relaxed text-center'>
           {`News is broken and driven by different agendas. We're here to help you get context, delve deeper, and learn more.`}
         </h4>
         <Link href={'https://infold.medium.com/a-lot-of-knowledge-is-a-dangerous-thing-6a4d2560cc83'}
@@ -32,7 +32,7 @@ export default function About() {
               <h2 className='mb-4 font-bold text-3xl md:text-4xl'>
                 Variety of sources
               </h2>
-              <p className='text-lg leading-relaxed text-body-color sm:text-xl sm:leading-relaxed'>
+              <p className='text-lg leading-relaxed sm:text-xl sm:leading-relaxed'>
                 Compare views from an ever expanding list of online sources and publishers.
               </p>
             </div>
