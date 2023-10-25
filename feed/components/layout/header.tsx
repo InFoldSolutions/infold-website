@@ -29,7 +29,7 @@ export default function Header() {
         </div>
         <div className="w-auto items-center justify-end flex text-sm">
           <ul className="ml-auto w-auto flex">
-            <li className='hidden md:flex mr-2'>
+            <li className='flex mr-2'>
               <Link href='/about' target="_self"
                 title='About InFold'
                 className={`h-full text-center items-center flex group items-center`}>
@@ -41,25 +41,25 @@ export default function Header() {
             </li>
             <li className='hidden md:flex mr-2'>|</li>
             <li className='hidden md:flex mr-2'>
-              <a href={browserLink} target="_blank"
+              <Link href={browserLink} target="_blank"
                 title='Download our Browser Extension'
                 className="h-full text-center items-center flex group items-center">
                 <i className='fad fa-sliders-h mr-2' />
                 <span className='group-hover:underline'>
                   Extension
                 </span>
-              </a>
+              </Link>
             </li>
             <li className='hidden md:flex mr-2'>|</li>
-            <li>
-              <a href="https://infold.medium.com/a-lot-of-knowledge-is-a-dangerous-thing-6a4d2560cc83" target="_blank"
-                title='Read an article on Medium'
+            <li className='hidden md:flex mr-2'>
+              <Link href="https://infold.medium.com/a-lot-of-knowledge-is-a-dangerous-thing-6a4d2560cc83" target="_blank"
+                title='Read more on our Medium'
                 className="h-full text-center flex group items-center">
-                <i className='fad fa-book mr-2 text-base' />
+                <i className='fab fa-medium mr-2 text-base' />
                 <span className='group-hover:underline'>
-                  How it works
+                  Medium
                 </span>
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
