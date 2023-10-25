@@ -58,4 +58,10 @@ export function unSlugifyKeyword(keyword: string) {
   return keyword.replace(/-/g, ' ')
 }
 
+export function searchParamsToQueryParams(searchParams: any) {
+  return Object.keys(searchParams).map((key) => {
+    return `${key}=${searchParams[key]}`
+  }).join('&')
+}
+
 export const isBrowser = typeof window !== "undefined"

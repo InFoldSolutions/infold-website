@@ -5,11 +5,12 @@ import StoryWrapper from '@/components/story/story'
 import Container from '@/components/layout/container'
 import TagsChart from '@/components/sidebar/tags_chart'
 import Keywords from '@/components/sidebar/keywords'
-import Premium from '@/components/sidebar/premium'
+import Related from '@/components/sidebar/related'
 
-import { getTopic, getTopicAffiliate, getTopicRelated, getTopicThumbUrl } from '@/helpers/api'
+import { getTopic, getTopicAffiliate, getTopicThumbUrl } from '@/helpers/api'
+import { searchParamsToQueryParams } from '@/helpers/utils'
+
 import config from '@/config';
-import Related from '@/components/sidebar/related';
 
 export async function generateMetadata(
   { params }: { params: any }
@@ -35,16 +36,21 @@ export async function generateMetadata(
   }
 }
 
-export default async function Topic({ params }: { params: { slug: string } }) {
+export default async function Topic({ params, searchParams }: { params: { slug: string }, searchParams: any }) {
   const data = await getTopic(params.slug)
 
   if (!data || !data.slug)
     return notFound()
-  if (data.slug !== params.slug)
-    return permanentRedirect(`/story/${data.slug}`)
+  if (data.slug !== params.slug) { // handle redirect
+    let url = `/story/${data.slug}`
+
+    if (Object.keys(searchParams).length > 0) url += `?${searchParamsToQueryParams(searchParams)}`
+
+    return permanentRedirect(url)
+  }
+
 
   const affiliate = await getTopicAffiliate(params.slug)
-  const related = await getTopicRelated(params.slug)
 
   return (
     <Container>
