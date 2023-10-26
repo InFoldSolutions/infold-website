@@ -28,7 +28,7 @@ export default function Interests({ interests, saveInterests, setSelectedInteres
   return (
     <div className='flex items-center flex-col my-auto py-2 md:py-8'>
       <h3 className='text-2xl md:text-3xl font-bold mb-6 flex justify-center text-center items-center'>
-        Get The Full Story
+        Discover The Full Story
       </h3>
       <h4 className='mb-4 text-center max-w-[80%]'>
         {`News is broken and driven by different agendas. We're here to help you get context, delve deeper, and learn more.`}

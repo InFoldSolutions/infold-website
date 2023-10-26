@@ -13,7 +13,7 @@ export async function generateMetadata(
 
   return {
     title: `Top Rising Stories | InFold`,
-    description: `Get latest news, stories, and articles all in one place.`
+    description: 'News is broken and driven by different agendas. We\'re here to help you get context, delve deeper, and learn more.'
   }
 }
 
