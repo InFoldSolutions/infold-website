@@ -41,7 +41,7 @@ export default function Affiliate({ data }: { data: any }) {
               key={index} >
               <div className={`w-full mx-1 relative rounded-md overflow-hidden`}>
                 <div className={`w-full h-[220px] ${minWidth} relative rounded-md`}>
-                  <Image src={item.thumbnails[0].url}
+                  <Image unoptimized src={item.thumbnails[0].url}
                     fill={true}
                     style={{ objectFit: 'cover' }}
                     alt={item.name}

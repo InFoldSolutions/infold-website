@@ -44,7 +44,7 @@ export default function Keyword({ keyword }: { keyword: any, interests: string[]
           prefetch={false}
           className='group/image'>
           <span className='group-hover/image:border-gray-400 border-2 bg-gray-100 dark:border-gray-600 dark:bg-gray-200 opacity:60 group-hover/image:dark:border-gray-200 p-1 flex items-center justify-center w-8 rounded-md'>
-            <Image src={icon} alt={label} width={22} height={22} className={`${label === 'Google' ? 'w-5' : ''} h-auto`} />
+            <Image unoptimized src={icon} alt={label} width={22} height={22} className={`${label === 'Google' ? 'w-5' : ''} h-auto`} />
           </span>
         </Link>
       </div>

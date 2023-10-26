@@ -83,7 +83,7 @@ export default function Premium({ isSelectScreen }: { isSelectScreen: boolean })
             </Tooltip>
             <Tooltip message={`Google`} top={12} right={1} padding={1}>
               <span className='shrink-0 h-10 w-10 p-2 bg-gray-100 dark:bg-black ml-1 flex items-center justify-center cursor-pointer rounded hover:outline outline-2 outline-neutral-950' onClick={() => signInWithGoogle()}>
-                <Image src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/2048px-Google_%22G%22_Logo.svg.png" alt="Google" width={80} height={80} className='w-full h-auto' />
+                <Image unoptimized src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/2048px-Google_%22G%22_Logo.svg.png" alt="Google" width={80} height={80} className='w-full h-auto' />
               </span>
             </Tooltip>
             <Tooltip message={`X.com`} top={12} right={1} padding={1}>

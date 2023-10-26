@@ -34,7 +34,7 @@ export default function YTMedia({ data }: { data: any }) {
               title={`Youtube: ${item.title}`}
               key={index} >
               <div className='h-[150px] rounded-md relative overflow-hidden'>
-                <Image src={item.thumbnails.high.url}
+                <Image unoptimized src={item.thumbnails.high.url}
                   width='480'
                   height='320'
                   alt={item.title}

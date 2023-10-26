@@ -35,7 +35,7 @@ export default function Column({ data, sentiment, expanded }: { data: any, senti
               onClick={() => window.open(url, '_blank')}
               title={item.summary || item.articles[0].title}
               key={index}>
-              <Image src={item.logo || item.source.logo} alt="Logo" width={80} height={80} className='mr-3 h-11 w-11' />
+              <Image unoptimized src={item.logo || item.source.logo} alt="Logo" width={80} height={80} className='mr-3 h-11 w-11' />
               <span className='flex flex-col'>
                 <span className='flex'>
                   <span className='max-w-[130px] truncate inline-flex'>{item.handle || item.source.name}</span>

@@ -7,7 +7,7 @@ export default function About() {
     <article className='max-w-[90%] flex mx-auto mt-[7%] h-full flex-col pb-4 md:pb-8'>
       <div className='w-full lg:max-w-[80%] mx-auto flex flex-col'>
         <h2 className='text-3xl md:text-4xl font-bold mb-6 flex justify-center text-center items-center'>
-          Get The Full Story
+          Discover the full story
         </h2>
         <h4 className='mb-4 text-lg leading-relaxed sm:text-xl sm:leading-relaxed text-center'>
           {`News is broken and driven by different agendas. We're here to help you get context, delve deeper, and learn more.`}
