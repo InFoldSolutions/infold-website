@@ -21,7 +21,7 @@ import { closeAllWebSockets } from '@/websocket'
 
 import config from '@/config'
 
-export default function Wrapper({ initialFeedData, topKeywords, totalResults }: { initialFeedData: any, topKeywords: [], totalResults: number }) {
+export default function Wrapper({ initialFeedData, totalResults }: { initialFeedData: any, topKeywords: [], totalResults: number }) {
   const pathname = usePathname()
 
   const [feedData, setFeedData] = useState(initialFeedData || [])
@@ -153,7 +153,7 @@ export default function Wrapper({ initialFeedData, topKeywords, totalResults }: 
               Trending
             </h3>
             <div className='pl-1'>
-              <Keywords keywords={topKeywords} defaultSize={6} />
+              <Keywords defaultSize={6} />
             </div>
           </div>
 

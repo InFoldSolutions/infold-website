@@ -5,7 +5,6 @@ import { useEffect, useMemo, useState } from 'react';
 import RelatedItem from '@/components/sidebar/related_item';
 
 import { getTopicRelated } from '@/helpers/api';
-import Loading from '../helpers/loading';
 
 export default function Related({ slug }: { slug: string }) {
 
@@ -42,8 +41,10 @@ export default function Related({ slug }: { slug: string }) {
     setIsLoading(false)
   }, [related])
 
-  if (!related || isLoading)
+  if (isLoading)
     return (<div className='w-auto text-small text-center py-6 mt-1 mb-3'>Loading data ..</div>);
+  else if (!related)
+    return (<div className='w-auto text-small text-center py-6 mt-1 mb-3'>No data ..</div>);
 
   return (
     <ul className='flex flex-col'>

@@ -70,7 +70,7 @@ export default function StoryModal({ params }: { params: { slug: string } }) {
 
                 <div className='h-auto w-[280px] p-5 bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 hidden lg:flex flex-col mb-4 rounded'>
                   <h3 className='text-2xl font-bold mb-5'>Keywords</h3>
-                  <Keywords keywords={data.keywords} defaultSize={5} />
+                  <Keywords keywordData={data.keywords} defaultSize={5} />
                 </div>
               </div>
             </div>

@@ -5,17 +5,42 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import Keyword from '@/components/sidebar/keyword';
 
 import { getInterests, addInterest, removeInterest } from '@/helpers/localstorage';
-
 import { isBrowser } from '@/helpers/utils';
+import { getTopKeywords } from '@/helpers/api';
 
-export default function Keywords({ keywords, defaultSize = 4 }: { keywords: any, defaultSize?: number }) {
+export default function Keywords({ keywordData, defaultSize = 4 }: { keywordData?: any, defaultSize?: number }) {
 
+  const [isLoading, setIsLoading] = useState(true);
+  const [keywords, setKeywords] = useState<any>(null)
   const [showMore, setShowMore] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize] = useState(defaultSize);
   const [interests, setInterests] = useState<string[]>((isBrowser) ? getInterests() : [])
 
   const moreKeywords = useMemo(() => keywords && keywords.length > pageSize * currentPage, [keywords, currentPage, pageSize]);
+
+  useEffect(() => {
+    if (keywordData) {
+      setKeywords(keywordData)
+      return
+    }
+
+    const fetchKeywords = async () => {
+      const keywordDataRes = await getTopKeywords()
+
+      if (keywordDataRes?.length > 0)
+        setKeywords(keywordDataRes)
+    }
+
+    setIsLoading(true)
+
+    fetchKeywords()
+      .catch(console.error)
+  }, []);
+
+  useEffect(() => {
+    setIsLoading(false)
+  }, [keywords])
 
   useEffect(() => {
     if (currentPage > 1 && moreKeywords)
@@ -33,6 +58,11 @@ export default function Keywords({ keywords, defaultSize = 4 }: { keywords: any,
       setInterests((current: string[]) => [...current, interest])
     }
   }, [interests, setInterests])
+
+  if (isLoading)
+    return (<div className='w-auto text-small text-center py-6 mt-1 mb-3'>Loading data ..</div>);
+  else if (!keywords)
+    return (<div className='w-auto text-small text-center py-6 mt-1 mb-3'>No data ..</div>);
 
   return (
     <ul>
