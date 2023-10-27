@@ -30,9 +30,9 @@ export default function Keywords({ keywordData, defaultSize = 4 }: { keywordData
 
       if (keywordDataRes?.length > 0)
         setKeywords(keywordDataRes)
-    }
 
-    setIsLoading(true)
+      setIsLoading(true)
+    }
 
     fetchKeywords()
       .catch(console.error)

@@ -10,7 +10,7 @@ export default function Related({ slug }: { slug: string }) {
 
   const [related, setRelated] = useState<any>(null)
   const [showMore, setShowMore] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize] = useState(3);
 
@@ -29,6 +29,8 @@ export default function Related({ slug }: { slug: string }) {
 
       if (relatedData?.length > 0)
         setRelated(relatedData)
+
+      setIsLoading(false)
     }
 
     setIsLoading(true)
@@ -36,10 +38,6 @@ export default function Related({ slug }: { slug: string }) {
     fetchRelated()
       .catch(console.error)
   }, [slug]);
-
-  useEffect(() => {
-    setIsLoading(false)
-  }, [related])
 
   if (isLoading)
     return (<div className='w-auto text-small text-center py-6 mt-1 mb-3'>Loading data ..</div>);
