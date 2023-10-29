@@ -1,14 +1,17 @@
 import ReconnectingWebSocket from 'reconnecting-websocket';
 
-let socketMap: Map<string, ReconnectingWebSocket> = new Map();
+const socketMap: Map<string, ReconnectingWebSocket> = new Map();
 
 export function getWebsocket(url: string) {
-  if (socketMap.get(url))
-    return socketMap.get(url);
+  const existingSocket = socketMap.get(url);
 
-  socketMap.set(url, new ReconnectingWebSocket(url));
+  if (existingSocket) return existingSocket;
 
-  return socketMap.get(url);
+  const newWebSocket = new ReconnectingWebSocket(url);
+
+  socketMap.set(url, newWebSocket);
+
+  return newWebSocket;
 }
 
 export function closeWebsocket(url: string) {

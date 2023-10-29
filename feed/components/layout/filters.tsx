@@ -18,7 +18,7 @@ const topOptions = [
 
 const categoryOptions = [
   { label: 'Politics', value: 'Politics', icon: 'fa-landmark' },
-  { label: 'Science', value: 'Technology', icon: 'fa-flask' },
+  { label: 'Technology', value: 'Technology', icon: 'fa-computer-classic' },
   { label: 'Sports', value: 'Sports', icon: 'fa-football-ball' },
   { label: 'Finance', value: 'Finance', icon: 'fa-user-chart' },
   { label: 'Creative', value: 'Creative', icon: 'fa-alien-monster' },
@@ -127,7 +127,7 @@ export default function Filters({ totalResults }: { isMenuOpen: boolean, setIsMe
             </button>
           </div>
 
-          <div className={`${!isMenuOpen ? 'hidden' : ''} absolute left-[50%] -ml-[90px] r-auto z-10 mt-4 md:mt-5 w-40 rounded bg-gray-200 dark:bg-black`}>
+          <div className={`${!isMenuOpen ? 'hidden' : ''} absolute left-[50%] -ml-[95px] r-auto z-10 mt-4 md:mt-5 w-44 rounded bg-gray-200 dark:bg-black`}>
             <div className='dark:bg-gray-800 dark:bg-opacity-60 py-1 rounded'>
               {categoryOptions.map((option: any, index: number) => (
                 <Link className={`group w-full py-1.5 flex items-center justify-left pl-6`}

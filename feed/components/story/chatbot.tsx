@@ -29,22 +29,21 @@ export default function ChatBot({ suggested }: { suggested: any }) {
 
   let webSocket: ReconnectingWebSocket | undefined = useMemo(() => undefined, [])
 
+  const onMsgReceived = useCallback((event: any) => {    
+    setChatMessages((messages: any) => {
+      messages[messages.length - 1].message = event.data
+      return [...messages]
+    })
+
+    setWaitingForMsg(false)
+  }, [setChatMessages, setWaitingForMsg])
+
   const onBtnSubmit = useCallback(() => {
     if (waitingForMsg) return
 
-    if (!webSocket) { // only setup websocket once and on msg send, seems hacky, needs refactor
+    if (!webSocket) {
       webSocket = getWebsocket(socketURL)
-
-      if (!webSocket) return
-
-      webSocket.onmessage = (event: any) => {
-        setChatMessages((messages: any) => {
-          messages[messages.length - 1].message = event.data
-          return [...messages]
-        })
-
-        setWaitingForMsg(false)
-      };
+      webSocket.onmessage = onMsgReceived
     }
 
     // @ts-ignore
@@ -76,7 +75,7 @@ export default function ChatBot({ suggested }: { suggested: any }) {
       setActiveBtn(false)
       setWaitingForMsg(true)
     }
-  }, [webSocket, textareaRef, waitingForMsg])
+  }, [textareaRef, waitingForMsg, webSocket])
 
   const onKeyDown: KeyboardEventHandler = useCallback((e) => {
     // @ts-ignore
@@ -104,7 +103,7 @@ export default function ChatBot({ suggested }: { suggested: any }) {
 
     // @ts-ignore
     onBtnSubmit()
-  }, [textareaRef, onBtnSubmit, webSocket, waitingForMsg])
+  }, [textareaRef, onBtnSubmit, waitingForMsg])
 
   useEffect(() => {
     return () => {
