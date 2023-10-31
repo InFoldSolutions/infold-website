@@ -36,11 +36,10 @@ export default function Affiliate({ slug }: { slug: string }) {
   useEffect(() => {
     const fetchStoryData = async () => {
       const affiliateData = await getTopicAffiliate(slug)
+      setIsLoading(false);
 
       if (affiliateData?.length > 0)
         setData(affiliateData)
-
-      setIsLoading(false);
     }
 
     fetchStoryData()
@@ -48,15 +47,19 @@ export default function Affiliate({ slug }: { slug: string }) {
   }, [])
 
   useEffect(() => {
-    if (data) {
+    if (data && data[0]?.category)
       setType(data[0].category)
+  }, [data])
+
+  useEffect(() => {
+    if (type) {
       setTitle(type === 'book' ? 'Library' : 'Accessories')
       setOverflow(type === 'book' ? 5 : 4)
       setIcon(type === 'book' ? 'fa-books' : 'fa-shopping-cart')
       setPadding(type === 'book' ? 'p-0' : 'p-2')
       setMinWidth(type === 'book' ? 'min-w-[150px]' : 'min-w-[194px]')
     }
-  }, [data])
+  }, [type])
 
   if (isLoading)
     return (<div className='w-auto text-small text-center pt-6 mt-6 mb-3'>Loading data ..</div>);
