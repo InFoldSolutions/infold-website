@@ -254,7 +254,7 @@ export async function refreshTopicMeta(slug: string) {
 export async function getTopKeywords(bucket: string = 'day') {
   try {
     const url = `${config.api.url}/keywords/top?bucket=${bucket}&types=person&limit=40`;
-    const res = await fetch(url, { next: { revalidate: 300 } })
+    const res = await fetch(url, { next: { revalidate: 1 } })
 
     if (!res.ok)
       throw new Error('Response not ok')

@@ -27,10 +27,9 @@ export default async function Section({ params }: { params: { section: string } 
   if (section)
     res = await getSectionFeed(config.api.defaultBucket, section)
 
-  const topKeywords = await getTopKeywords()
   const totalResults = res?.meta?.total_results || 0
 
   return (
-    <Wrapper initialFeedData={res?.data} topKeywords={topKeywords} totalResults={totalResults} />
+    <Wrapper initialFeedData={res?.data} totalResults={totalResults} />
   )
 }

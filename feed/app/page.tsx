@@ -23,10 +23,9 @@ export default async function Home({ searchParams }: { searchParams: any }) {
     permanentRedirect(`/keyword/${slugifyKeyword(decodeURIComponent(searchParams.keywords))}`)
 
   const res: any = await getTopFeed()
-  const topKeywords = await getTopKeywords()
   const totalResults = res?.meta?.total_results || 0
 
   return (
-    <Wrapper initialFeedData={res?.data} topKeywords={topKeywords} totalResults={totalResults} />
+    <Wrapper initialFeedData={res?.data} totalResults={totalResults} />
   )
 }

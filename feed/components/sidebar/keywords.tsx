@@ -61,7 +61,7 @@ export default function Keywords({ keywordData, defaultSize = 4 }: { keywordData
 
   if (isLoading)
     return (<div className='w-auto text-small text-center py-6 mt-1 mb-3'>Loading data ..</div>);
-  else if (!keywords)
+  else if (!keywords && !isLoading)
     return (<div className='w-auto text-small text-center py-6 mt-1 mb-3'>No data ..</div>);
 
   return (

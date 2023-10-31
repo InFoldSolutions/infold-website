@@ -24,10 +24,9 @@ export default async function Keyword({ params }: { params: { keyword: string } 
   if (keyword)
     res = await getKeywordFeed(keyword)
 
-  const topKeywords = await getTopKeywords()
   const totalResults = res?.meta?.total_results || 0
 
   return (
-    <Wrapper initialFeedData={res?.data} topKeywords={topKeywords} totalResults={totalResults} />
+    <Wrapper initialFeedData={res?.data} totalResults={totalResults} />
   )
 }

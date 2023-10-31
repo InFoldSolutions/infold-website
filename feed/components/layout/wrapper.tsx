@@ -21,7 +21,7 @@ import { closeAllWebSockets } from '@/websocket'
 
 import config from '@/config'
 
-export default function Wrapper({ initialFeedData, totalResults }: { initialFeedData: any, topKeywords: [], totalResults: number }) {
+export default function Wrapper({ initialFeedData, totalResults }: { initialFeedData: any, totalResults: number }) {
   const pathname = usePathname()
 
   const [feedData, setFeedData] = useState(initialFeedData || [])

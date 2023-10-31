@@ -10,13 +10,12 @@ import Spinner from '@/components/helpers/spinner'
 import Keywords from '@/components/sidebar/keywords'
 import Related from '@/components/sidebar/related'
 
-import { getTopic, getTopicAffiliate } from '@/helpers/api'
+import { getTopic } from '@/helpers/api'
 
 export default function StoryModal({ params }: { params: { slug: string } }) {
 
   let [isLoading, setIsLoading] = useState(true)
   let [data, setData] = useState<any>(null)
-  let [affiliate, setAffiliate] = useState<any>(null)
 
   useEffect(() => {
     const fetchStoryData = async () => {
@@ -26,11 +25,6 @@ export default function StoryModal({ params }: { params: { slug: string } }) {
         setData(story);
 
       setIsLoading(false);
-
-      const affiliateData = await getTopicAffiliate(params.slug)
-
-      if (affiliateData?.length > 0)
-        setAffiliate(affiliateData)
     }
 
     fetchStoryData()
@@ -52,7 +46,7 @@ export default function StoryModal({ params }: { params: { slug: string } }) {
             <div className='p-4 md:p-8 md:px-12 max-w-[1355px] lg:w-[1355px] lg:px-20 flex items-start'>
 
               <div className='md:mr-auto w-full lg:w-[860px]'>
-                <StoryWrapper data={data} modal={true} affiliate={affiliate} />
+                <StoryWrapper data={data} modal={true} />
               </div>
 
               <div className='sticky top-[32px] h-auto hidden lg:flex flex-col'>

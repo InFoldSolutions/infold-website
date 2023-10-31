@@ -1,21 +1,25 @@
 'use client'
 
+import { useCallback, useEffect, useState } from 'react'
+
 import Image from 'next/image'
 
-import { kFormatter } from '@/helpers/utils'
-
 import Carousel from '@/components/carousel/carousel'
-import { useCallback } from 'react'
+
+import { kFormatter } from '@/helpers/utils'
 import { trackEvent } from '@/helpers/gtm'
+import { getTopicAffiliate } from '@/helpers/api'
 
-export default function Affiliate({ data }: { data: any }) {
+export default function Affiliate({ slug }: { slug: string }) {
 
-  const type = data[0].category
-  const title = type === 'book' ? 'Library' : 'Accessories'
-  const overflow = type === 'book' ? 5 : 4
-  const icon = type === 'book' ? 'fa-books' : 'fa-shopping-cart'
-  const padding = type === 'book' ? 'p-0' : 'p-2'
-  const minWidth = type === 'book' ? 'min-w-[150px]' : 'min-w-[194px]'
+  const [data, setData] = useState<any>(null)
+  const [type, setType] = useState<any>(null)
+  const [title, setTitle] = useState<any>(null)
+  const [overflow, setOverflow] = useState<any>(null)
+  const [icon, setIcon] = useState<any>(null)
+  const [minWidth, setMinWidth] = useState<any>(null)
+  const [padding, setPadding] = useState<any>([])
+  const [isLoading, setIsLoading] = useState(true)
 
   const affiliateClick = useCallback((item: any) => {
     trackEvent({
@@ -28,6 +32,36 @@ export default function Affiliate({ data }: { data: any }) {
 
     window.open(item.url, '_blank')
   }, [trackEvent])
+
+  useEffect(() => {
+    const fetchStoryData = async () => {
+      const affiliateData = await getTopicAffiliate(slug)
+
+      if (affiliateData?.length > 0)
+        setData(affiliateData)
+
+      setIsLoading(false);
+    }
+
+    fetchStoryData()
+      .catch(console.error)
+  }, [])
+
+  useEffect(() => {
+    if (data) {
+      setType(data[0].category)
+      setTitle(type === 'book' ? 'Library' : 'Accessories')
+      setOverflow(type === 'book' ? 5 : 4)
+      setIcon(type === 'book' ? 'fa-books' : 'fa-shopping-cart')
+      setPadding(type === 'book' ? 'p-0' : 'p-2')
+      setMinWidth(type === 'book' ? 'min-w-[150px]' : 'min-w-[194px]')
+    }
+  }, [data])
+
+  if (isLoading)
+    return (<div className='w-auto text-small text-center pt-6 mt-6 mb-3'>Loading data ..</div>);
+  else if (!data && !isLoading)
+    return null
 
   return (
     <Carousel title={title} length={data.length} overflow={overflow}>

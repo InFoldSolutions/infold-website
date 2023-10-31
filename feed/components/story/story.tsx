@@ -17,7 +17,7 @@ import { filterData } from '@/transformers/story'
 
 import { AuthContext } from '@/context/auth'
 
-export default function StoryWrapper({ data, affiliate, modal = false }: { data: any, affiliate: any, modal?: boolean }) {
+export default function StoryWrapper({ data, modal = false }: { data: any, modal?: boolean }) {
 
   const [latestArticles] = useState<any>(filterData(data.sources, 'latest'))
   const [popularArticles] = useState<any>(filterData(data.sources, 'popular'))
@@ -80,9 +80,7 @@ export default function StoryWrapper({ data, affiliate, modal = false }: { data:
         <YTMedia data={data.media} />
       }
       
-      {affiliate?.length > 0 &&
-        <Affiliate data={affiliate} />
-      }
+      <Affiliate slug={data.slug} />
 
       <h3 className='mt-4 text-2xl font-bold'>News Coverage</h3>
 
