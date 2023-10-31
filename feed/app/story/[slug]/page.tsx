@@ -9,7 +9,7 @@ import TagsChart from '@/components/sidebar/tags_chart'
 import Keywords from '@/components/sidebar/keywords'
 import Related from '@/components/sidebar/related'
 
-import { getTopic, getTopicAffiliate, getTopicThumbUrl, handleRedirect } from '@/helpers/api'
+import { getTopic, getTopicThumbUrl, handleRedirect } from '@/helpers/api'
 
 export async function generateMetadata(
   { params }: { params: any }
@@ -43,14 +43,12 @@ export default async function Topic({ params, searchParams }: { params: { slug: 
   if (data.slug !== params.slug)
     return handleRedirect(data.slug, searchParams)
 
-  const affiliate = await getTopicAffiliate(params.slug)
-
   return (
     <Container>
       <div className='flex items-start mt-4'>
         <div className='md:mr-auto w-full max-w-full lg:w-[860px]'>
           {!data && <div className='w-auto text-center p-2 px-3'>Loading topic ..</div>}
-          {data && <StoryWrapper data={data} affiliate={affiliate} />}
+          {data && <StoryWrapper data={data} />}
         </div>
 
         <div className='sticky top-4 h-auto hidden lg:flex flex-col'>
