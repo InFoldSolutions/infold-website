@@ -36,10 +36,12 @@ export default function Keywords({ keywordData, defaultSize = 4 }: { keywordData
 
     fetchKeywords()
       .catch(console.error)
+      .finally(() => setIsLoading(false))
   }, []);
 
   useEffect(() => {
-    setIsLoading(false)
+    if (keywords)
+      setIsLoading(false)
   }, [keywords])
 
   useEffect(() => {

@@ -37,7 +37,13 @@ export default function Related({ slug }: { slug: string }) {
 
     fetchRelated()
       .catch(console.error)
+      .finally(() => setIsLoading(false))
   }, [slug]);
+
+  useEffect(() => {
+    if (related)
+      setIsLoading(false)
+  }, [related])
 
   if (isLoading)
     return (<div className='w-auto text-small text-center py-6 mt-1 mb-3'>Loading data ..</div>);
