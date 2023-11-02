@@ -28,7 +28,7 @@ export default function Feed({ data }: { data: any, onScrollHandler?: any }) {
               {(item.media?.length > 0) &&
                 <Thumbs media={item.media} />
               }
-              <h3 className='text-3xl font-bold leading-snug text-left'>
+              <h3 className='text-3xl font-bold leading-snug text-left truncate-2-lines'>
                 {item.title}
               </h3>
             </div>
@@ -37,7 +37,7 @@ export default function Feed({ data }: { data: any, onScrollHandler?: any }) {
 
             <div className='text-left'>
               {item.outline.slice(0, 1).map((outline: any, index: number) => (
-                <p className='text-base text-gray-600 dark:text-gray-300' key={index}>
+                <p className='text-base text-gray-600 dark:text-gray-300 truncate-2-lines' key={index}>
                   {outline}
                 </p>
               ))}
