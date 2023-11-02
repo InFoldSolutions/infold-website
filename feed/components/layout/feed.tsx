@@ -28,7 +28,7 @@ export default function Feed({ data }: { data: any, onScrollHandler?: any }) {
               {(item.media?.length > 0) &&
                 <Thumbs media={item.media} />
               }
-              <h3 className='text-3xl font-bold leading-snug text-left truncate-2-lines'>
+              <h3 className='text-3xl font-bold leading-snug text-left md:truncate-2-lines'>
                 {item.title}
               </h3>
             </div>
