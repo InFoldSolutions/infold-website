@@ -46,7 +46,7 @@ export default function Related({ slug }: { slug: string }) {
   }, [related])
 
   if (isLoading)
-    return (<div className='w-auto text-small text-center py-6 mt-1 mb-3'>Loading data ..</div>);
+    return (<div className='w-auto text-small text-center py-6 mt-1 mb-3'>Loading ..</div>);
   else if (!related)
     return (<div className='w-auto text-small text-center py-6 mt-1 mb-3'>No data ..</div>);
 
