@@ -80,3 +80,14 @@ body {
 .animation-delay-3 {
   animation-delay: 0.3s;
 }
+
+/* Ipad Pro */
+
+@media (min-width: 1024px) {
+  .md\:truncate-2-lines {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
