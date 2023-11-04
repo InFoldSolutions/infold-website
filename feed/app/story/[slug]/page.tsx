@@ -47,8 +47,7 @@ export default async function Topic({ params, searchParams }: { params: { slug: 
     <Container>
       <div className='flex items-start mt-4'>
         <div className='md:mr-auto w-full max-w-full lg:w-[860px]'>
-          {!data && <div className='w-auto text-center p-2 px-3'>Loading topic ..</div>}
-          {data && <StoryWrapper data={data} />}
+          <StoryWrapper data={data} />
         </div>
 
         <div className='sticky top-4 h-auto hidden lg:flex flex-col'>
