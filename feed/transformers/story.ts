@@ -65,10 +65,10 @@ export function transformStory(data: any) {
   if (data.media?.length > 0) {
     data.media = data.media
       .filter((media: any) => {
-        return media.channel.name !== 'Amweekly'
+        return media.channel && !config.media.blacklistChannels.includes(media.channel.name.toLowerCase())
       })
       .sort((a: any, b: any) => {
-        return b.statistics.viewCount - a.statistics.viewCount
+        return new Date(b.published_at).getTime() - new Date(a.published_at).getTime()
       })
       .filter((media: any, index: number, self: any) => {
         return self.findIndex((v: any) => v.title === media.title) === index;

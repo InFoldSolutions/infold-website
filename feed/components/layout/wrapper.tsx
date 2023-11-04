@@ -149,7 +149,7 @@ export default function Wrapper({ initialFeedData, totalResults }: { initialFeed
         <div className='sticky top-20'>
           <div className={`h-auto w-[280px] mb-4 p-4 bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 hidden lg:flex flex-col rounded`}>
             <h3 className='mb-5 text-2xl font-bold flex items-center'>
-              <i className='fad fa-rocket-launch mr-3 text-xl'></i>
+              <i className='fad fa-user-friends mr-3 text-xl'></i>
               Trending
             </h3>
             <div className='pl-1'>

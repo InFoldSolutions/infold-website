@@ -116,6 +116,6 @@ export default function SentimentChart({ aggregation }: { aggregation: any }) {
   if (data)
     return (<Radar ref={chartRef} data={data} options={options} />);
   else
-    return (<div className='w-auto text-small text-center py-6 mt-1 mb-3'>Loading sentiment ..</div>);
+    return (<div className='w-auto text-small text-center py-6 mt-1 mb-3'>Loading ..</div>);
 }
 

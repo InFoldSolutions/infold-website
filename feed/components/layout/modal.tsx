@@ -1,12 +1,14 @@
 'use client'
 
-import { useCallback, useRef, useEffect, MouseEventHandler } from 'react'
+import { useState, useCallback, useRef, useEffect, MouseEventHandler } from 'react'
 import { useRouter } from 'next/navigation'
 
-export default function Modal({ children, isLoading }: { children: React.ReactNode, isLoading: boolean }) {
+export default function Modal({ children, showClose = true }: { children: React.ReactNode, showClose?: boolean }) {
   const overlay = useRef(null)
   const wrapper = useRef(null)
   const router = useRouter()
+
+  const [showCloseBtn] = useState(showClose)
 
   const onDismiss = useCallback(() => {
     router.back()
@@ -49,7 +51,7 @@ export default function Modal({ children, isLoading }: { children: React.ReactNo
         ref={wrapper}
         className='md:mx-auto w-auto max-w-full min-h-full h-fit flex justify-center'
       >
-        {!isLoading &&
+        {showCloseBtn &&
           <div className='fixed top-4 md:top-7 right-7 md:right-7 p-1 w-8 md:w-10 z-20 cursor-pointer bg-gray-100' onClick={onCloseClick}>
             <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>
               <g>
@@ -60,6 +62,7 @@ export default function Modal({ children, isLoading }: { children: React.ReactNo
             </svg>
           </div>
         }
+        
         {children}
       </div>
     </div>

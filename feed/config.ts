@@ -482,7 +482,7 @@ const config = {
   'api': {
     'url': 'https://api.infold.ai',
     'defaultLimit': 10,
-    'defaultBucket': 'week',
+    'defaultBucket': 'day',
     'defaultSort': 'top'
   },
 
@@ -501,6 +501,10 @@ const config = {
       width: 1200,
       height: 630,
     },
+  },
+
+  media: {
+    blacklistChannels: ['amweekly', 'ary media', 'india today', 'bloomberg television']
   },
 
   "api_key": process.env.NEXT_API_KEY,

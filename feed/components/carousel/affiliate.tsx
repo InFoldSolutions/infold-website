@@ -62,7 +62,7 @@ export default function Affiliate({ slug }: { slug: string }) {
   }, [type])
 
   if (isLoading)
-    return (<div className='w-auto text-small text-center pt-6 mt-6 mb-3'>Loading data ..</div>);
+    return null //(<div className='w-auto text-small text-center pt-6 mt-6 mb-3'>Loading ..</div>)
   else if (!data && !isLoading)
     return null
 

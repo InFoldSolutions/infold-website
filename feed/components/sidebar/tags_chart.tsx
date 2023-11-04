@@ -83,6 +83,6 @@ export default function TagsChart({ aggregation }: { aggregation: any }) {
   if (data)
     return (<Bar ref={chartRef} data={data} options={options} />);
   else
-    return (<div className='w-auto text-small text-center py-6 mt-1 mb-3'>Loading data ..</div>);
+    return (<div className='w-auto text-small text-center py-6 mt-1 mb-3'>Loading ..</div>);
 }
 
