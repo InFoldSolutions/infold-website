@@ -76,16 +76,7 @@ export function transformStory(data: any) {
   }
 
   // @ts-ignore
-  if (config.mockAffiliate[data.slug]) {
-    // @ts-ignore
-    data.affiliates = config.mockAffiliate[data.slug]
-  }
-
-  // @ts-ignore
-  if ((!data.questions || data.questions.length === 0) && config.mockSuggested[data.slug]) {
-    // @ts-ignore
-    data.suggested = config.mockSuggested[data.slug]
-  } else if (data.questions)
+  if (data.questions)
     data.suggested = data.questions
 
   return {

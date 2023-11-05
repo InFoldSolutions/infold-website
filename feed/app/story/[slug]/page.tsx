@@ -31,6 +31,9 @@ export async function generateMetadata(
           alt: data.short_title,
         },
       ],
+    },
+    alternates: {
+      canonical: `${config.www.root}/story/${params.slug}`,
     }
   }
 }
