@@ -2,7 +2,7 @@ import ReconnectingWebSocket from 'reconnecting-websocket';
 
 const socketMap: Map<string, ReconnectingWebSocket> = new Map();
 
-export function getWebsocket(url: string) {
+export function getWebsocket(url: string): ReconnectingWebSocket {
   const existingSocket = socketMap.get(url);
 
   if (existingSocket) return existingSocket;

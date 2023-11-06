@@ -68,7 +68,8 @@ export function transformStory(data: any) {
         return media.channel && !config.media.blacklistChannels.includes(media.channel.name.toLowerCase())
       })
       .sort((a: any, b: any) => {
-        return new Date(b.published_at).getTime() - new Date(a.published_at).getTime()
+        return b.statistics.viewCount - a.statistics.viewCount
+        //return new Date(b.published_at).getTime() - new Date(a.published_at).getTime()
       })
       .filter((media: any, index: number, self: any) => {
         return self.findIndex((v: any) => v.title === media.title) === index;
