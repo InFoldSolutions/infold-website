@@ -87,7 +87,7 @@ const config = {
   },
 
   'media': {
-    'blacklistChannels': ['amweekly', 'ary media', 'india today', 'bloomberg television', 'los angeles times']
+    'blacklistChannels': ['amweekly', 'ary media', 'india today', 'bloomberg television', 'los angeles times', 'universal pictures uk']
   },
 
   "api_key": process.env.NEXT_API_KEY,
