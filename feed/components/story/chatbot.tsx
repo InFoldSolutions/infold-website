@@ -1,7 +1,8 @@
 'use client'
 
-import { useEffect, useMemo, useRef, useState, useCallback, KeyboardEventHandler, MouseEventHandler } from 'react';
+import { useEffect, useMemo, useRef, useState, useCallback, KeyboardEventHandler } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
+import ReconnectingWebSocket from 'reconnecting-websocket';
 
 import { closeWebsocket, getWebsocket } from '@/websocket';
 
@@ -12,7 +13,6 @@ import TypeWriter from '@/components/helpers/typewriter';
 
 import config from '@/config';
 
-import ReconnectingWebSocket from 'reconnecting-websocket';
 import { trackEvent } from '@/helpers/gtm';
 
 export default function ChatBot({ suggested }: { suggested: any }) {
@@ -29,7 +29,7 @@ export default function ChatBot({ suggested }: { suggested: any }) {
 
   let webSocket: ReconnectingWebSocket | undefined = useMemo(() => undefined, [])
 
-  const onMsgReceived = useCallback((event: any) => {    
+  const onMsgReceived = useCallback((event: any) => {
     setChatMessages((messages: any) => {
       messages[messages.length - 1].message = event.data
       return [...messages]
