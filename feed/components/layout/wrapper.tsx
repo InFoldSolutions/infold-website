@@ -156,8 +156,6 @@ export default function Wrapper({ initialFeedData, totalResults }: { initialFeed
               <Keywords defaultSize={6} />
             </div>
           </div>
-
-          <Premium isSelectScreen={false} />
         </div>
       </div>
 
