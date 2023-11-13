@@ -1,27 +1,17 @@
 
 'use client'
 
-import { MouseEventHandler, MouseEvent, Suspense, useCallback } from 'react'
-
 import { useRouter } from 'next/navigation'
 
 import { Item } from '@/helpers/api'
 
 import Thumbs from '@/components/story/thumbs'
 import StoryMeta from '@/components/story/meta'
+import Category from '../story/category'
 
 
 export default function Feed({ data }: { data: any, onScrollHandler?: any }) {
   const router = useRouter()
-
-  const openSection: MouseEventHandler = useCallback((e: MouseEvent) => {
-    e.stopPropagation()
-
-    // @ts-ignore   
-    const section = e.target.textContent
-
-    router.push(`/section/${section}`)
-  }, [router])
 
   return (
     <div>
@@ -32,12 +22,7 @@ export default function Feed({ data }: { data: any, onScrollHandler?: any }) {
             key={index}>
 
             {item.category &&
-              <div className='text-gray-600 dark:text-gray-300'>
-                <span className='text-base group flex items-center' onClick={openSection}>
-                  <i className={`fad ${item.categoryIcon} mr-3 ${item.categoryIcon !== 'fa-user-chart' ? 'text-[17px]' : ''}`} />
-                  <span className='group-hover:underline'>{item.category}</span>
-                </span>
-              </div>
+              <Category data={item} />
             }
 
             <div className='flex items-center my-2'>

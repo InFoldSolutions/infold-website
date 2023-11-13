@@ -13,6 +13,7 @@ import { isBrowser } from '@/helpers/utils'
 import { filterData } from '@/transformers/story'
 
 import StoryMeta from './meta'
+import Category from './category'
 
 export default function StoryWrapper({ data, modal = false }: { data: any, modal?: boolean }) {
 
@@ -23,6 +24,10 @@ export default function StoryWrapper({ data, modal = false }: { data: any, modal
 
   return (
     <article className='pb-2'>
+      {data.category &&
+        <Category data={data} />
+      }
+      
       <h1 className={`${modal ? 'mr-4' : ''} mb-2 text-3xl font-bold group`}>
         {data.title}
       </h1>

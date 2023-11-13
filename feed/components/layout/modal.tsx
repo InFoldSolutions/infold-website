@@ -1,12 +1,13 @@
 'use client'
 
 import { useState, useCallback, useRef, useEffect, MouseEventHandler } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
 
 export default function Modal({ children, showClose = true }: { children: React.ReactNode, showClose?: boolean }) {
   const overlay = useRef(null)
   const wrapper = useRef(null)
   const router = useRouter()
+  const pathname = usePathname()
 
   const [showCloseBtn] = useState(showClose)
 
@@ -41,6 +42,9 @@ export default function Modal({ children, showClose = true }: { children: React.
     return () => document.removeEventListener('keydown', onKeyDown)
   }, [onKeyDown])
 
+  if (!pathname.startsWith('/story'))
+    return null
+
   return (
     <div
       ref={overlay}
@@ -62,7 +66,7 @@ export default function Modal({ children, showClose = true }: { children: React.
             </svg>
           </div>
         }
-        
+
         {children}
       </div>
     </div>

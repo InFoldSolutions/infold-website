@@ -11,7 +11,7 @@ export default function Keyword({ keyword }: { keyword: any, interests: string[]
   const pathnameParts = pathname.split('/')
   const endpoint = pathnameParts[1]
   const paramKeyword = pathnameParts[2] ? unSlugifyKeyword(pathnameParts[2]) : null
-  const target = (pathname === '/' || endpoint === 'keyword' || endpoint === 'search' || endpoint === 'section') ? '_self' : '_blank';
+  const target = '_self' //(pathname === '/' || endpoint === 'keyword' || endpoint === 'search' || endpoint === 'section') ? '_self' : '_blank';
 
   let latestAnalyzed = null, icon, label, url, padding;
 

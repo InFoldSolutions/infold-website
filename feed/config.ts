@@ -93,15 +93,15 @@ const config = {
     { label: 'This Month', value: 'month' },
     //{ label: 'This Year', value: 'year' },
   ],
-  
+
   categoryOptions: [
     { label: 'Politics', value: 'Politics', icon: 'fa-landmark' },
     { label: 'Science', value: 'Technology', icon: 'fa-flask' },
     { label: 'Sports', value: 'Sports', icon: 'fa-football-ball' },
     { label: 'Finance', value: 'Finance', icon: 'fa-user-chart' },
     { label: 'Health', value: 'Health', icon: 'fa-heart-rate' },
-    { label: 'Gaming', value: 'Gaming', icon: 'fa-computer-classic' },
     { label: 'Entertainment', value: 'Entertainment', icon: 'fa-film-alt' },
+    { label: 'Gaming', value: 'Gaming', icon: 'fa-computer-classic' },
     { label: 'Law', value: 'Law', icon: 'fa-balance-scale' },
     { label: 'Crime', value: 'Crime', icon: 'fa-balance-scale' },
     //{ label: 'Health', value: 'Health', icon: 'fa-heartbeat' },
