@@ -32,9 +32,11 @@ export default function Feed({ data }: { data: any, onScrollHandler?: any }) {
             key={index}>
 
             {item.category &&
-              <div className='flex items-center text-gray-600 dark:text-gray-300 flex text-base group' onClick={openSection}>
-                <i className={`fad ${item.categoryIcon} mr-3 ${item.categoryIcon !== 'fa-user-chart' ? 'text-[17px]' : ''}`} />
-                <span className='group-hover:underline'>{item.category}</span>
+              <div className='text-gray-600 dark:text-gray-300'>
+                <span className='text-base group flex items-center' onClick={openSection}>
+                  <i className={`fad ${item.categoryIcon} mr-3 ${item.categoryIcon !== 'fa-user-chart' ? 'text-[17px]' : ''}`} />
+                  <span className='group-hover:underline'>{item.category}</span>
+                </span>
               </div>
             }
 
