@@ -8,25 +8,8 @@ import { useSearchParams, useRouter, usePathname } from 'next/navigation'
 import config from '@/config'
 import { capitalize, slugifyKeyword, unSlugifyKeyword } from '@/helpers/utils'
 
-const topOptions = [
-  //{ label: 'Hour', value: 'hour' },
-  { label: 'Today', value: 'day' },
-  { label: 'This Week', value: 'week' },
-  { label: 'This Month', value: 'month' },
-  //{ label: 'This Year', value: 'year' },
-]
-
-const categoryOptions = [
-  { label: 'Politics', value: 'Politics', icon: 'fa-landmark' },
-  { label: 'Technology', value: 'Technology', icon: 'fa-computer-classic' },
-  { label: 'Sports', value: 'Sports', icon: 'fa-football-ball' },
-  { label: 'Finance', value: 'Finance', icon: 'fa-user-chart' },
-  { label: 'Creative', value: 'Creative', icon: 'fa-alien-monster' },
-  //{ label: 'Health', value: 'Health', icon: 'fa-heartbeat' },
-]
-
 export default function Filters({ totalResults }: { isMenuOpen: boolean, setIsMenuOpen: any, totalResults: number, showToTop: boolean }) {
-  let keywords: any = '';
+  let keywords: any = ''
 
   const router = useRouter()
   const searchParams: any = useSearchParams()
@@ -34,7 +17,7 @@ export default function Filters({ totalResults }: { isMenuOpen: boolean, setIsMe
   const pathnameParts = pathname.split('/')
   const endpoint = pathnameParts[1]
   const bucket = pathnameParts[2] || config.api.defaultBucket
-  const bucketIcon = categoryOptions.find(item => item.value === bucket)?.icon
+  const bucketIcon = config.categoryOptions.find(item => item.value === bucket)?.icon
 
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
@@ -44,12 +27,12 @@ export default function Filters({ totalResults }: { isMenuOpen: boolean, setIsMe
   const searchInputRef = useRef(null)
 
   const removeKeywordFilter = useCallback((e: any) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    let target = e.target;
+    let target = e.target
 
     if (!target.classList.contains('keyword'))
-      target = e.target.parentNode;
+      target = e.target.parentNode
 
     const keywordText = target.innerText.replace('×', '').trim()
     const keywordsArray = keywords.split(',')
@@ -129,7 +112,7 @@ export default function Filters({ totalResults }: { isMenuOpen: boolean, setIsMe
 
           <div className={`${!isMenuOpen ? 'hidden' : ''} absolute left-[50%] -ml-[95px] r-auto z-10 mt-4 md:mt-5 w-44 rounded bg-gray-200 dark:bg-black`}>
             <div className='dark:bg-gray-800 dark:bg-opacity-60 py-1 rounded'>
-              {categoryOptions.map((option: any, index: number) => (
+              {config.categoryOptions.map((option: any, index: number) => (
                 <Link className={`group w-full py-1.5 flex items-center justify-left pl-6`}
                   href={`/section/${option.value}`}
                   prefetch={false}

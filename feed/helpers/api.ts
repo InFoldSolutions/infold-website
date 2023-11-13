@@ -15,13 +15,15 @@ export type Item = {
   keywords: any
   added_at: number
   updated_at: number
-  articles: number,
+  articles: number
   short_description: string
   short_title: string
-  social: any,
+  social: any
   sentimentAgg: any
-  meta: any,
-  media: any,
+  meta: any
+  media: any
+  category: string
+  categoryIcon: string
 }
 
 export async function getTopFeed(bucket: string = config.api.defaultBucket, page: number = 1) {
@@ -251,7 +253,7 @@ export async function refreshTopicMeta(slug: string) {
   }
 }
 
-export async function getTopKeywords(bucket: string = 'week') {
+export async function getTopKeywords(bucket: string = config.api.defaultBucket) {
   try {
     const url = `${config.api.url}/keywords/top?bucket=${bucket}&types=person&limit=40`;
     const res = await fetch(url, { next: { revalidate: 600 } })

@@ -1,8 +1,6 @@
 'use client'
 
-import { Suspense, useContext, useState } from 'react'
-
-import TimeAgo from 'react-timeago'
+import { useState } from 'react'
 
 import ArticleList from '@/components/article/article_list'
 import Outline from '@/components/story/outline'
@@ -11,11 +9,10 @@ import YTMedia from '@/components/carousel/ytmedia'
 import Affiliate from '@/components/carousel/affiliate'
 
 import { isBrowser } from '@/helpers/utils'
-import { refreshTopicMeta } from '@/helpers/api'
 
 import { filterData } from '@/transformers/story'
 
-import { AuthContext } from '@/context/auth'
+import StoryMeta from './meta'
 
 export default function StoryWrapper({ data, modal = false }: { data: any, modal?: boolean }) {
 
@@ -23,15 +20,6 @@ export default function StoryWrapper({ data, modal = false }: { data: any, modal
   const [popularArticles] = useState<any>(filterData(data.sources, 'popular'))
   const [initialCount] = useState(popularArticles.sources.length > 0 ? popularArticles.sources.length : 5)
   const [isDesktop] = useState((isBrowser) ? window.innerWidth > 820 : false)
-  const [isRefreshing, setIsRefreshing] = useState(false)
-
-  const { user } = useContext(AuthContext)
-
-  const refreshTopic = async () => {
-    setIsRefreshing(true)
-    await refreshTopicMeta(data.slug)
-    setIsRefreshing(false)
-  }
 
   return (
     <article className='pb-2'>
@@ -39,38 +27,7 @@ export default function StoryWrapper({ data, modal = false }: { data: any, modal
         {data.title}
       </h1>
 
-      <div className='flex items-center mb-4 text-sm font-bold'>
-        <span className='ml-1'>
-          {`Summarized from ${data.meta.sources} sources.`}
-          {user &&
-            <span className='hidden group-hover:inline-flex cursor-pointer'>
-              <i className={`fad fa-sync ml-2 ${isRefreshing ? 'animate-spin' : ''}`} onClick={() => refreshTopic()} />
-            </span>
-          }
-        </span>
-        <span className='ml-auto flex-row flex items-center'>
-          <span className='items-center md:mr-3'>
-            <i className='fad fa-clock mr-2'></i>
-            <Suspense fallback={null}>
-              <TimeAgo
-                date={new Date(data.updated_at).getTime()}
-              />
-            </Suspense>
-          </span>
-          <span className="hidden md:inline-block items-center mr-3">
-            <i className='fad fa-newspaper mr-2'></i>
-            {data.meta.articles}
-            <span className='ml-2'>Articles</span>
-          </span>
-          {data.meta.social > 0 &&
-            <span className="hidden md:inline-block items-center">
-              <i className='fad fa-comments mr-2'></i>
-              {data.meta.social}
-              <span className='ml-2'>Comments</span>
-            </span>
-          }
-        </span>
-      </div>
+      <StoryMeta data={data} time={true} />
 
       <Outline outlines={data.outline} />
 

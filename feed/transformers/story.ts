@@ -80,6 +80,9 @@ export function transformStory(data: any) {
   if (data.questions)
     data.suggested = data.questions
 
+  if (data.category)
+    data.categoryIcon = config.categoryOptions.find(item => item.value === data.category)?.icon
+
   return {
     ...data,
     keywords: uniqueKeywords,

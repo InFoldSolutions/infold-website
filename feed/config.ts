@@ -61,7 +61,7 @@ const config = {
   'api': {
     'url': 'https://api.infold.ai',
     'defaultLimit': 10,
-    'defaultBucket': 'week',
+    'defaultBucket': 'day',
     'defaultSort': 'top'
   },
 
@@ -86,11 +86,28 @@ const config = {
     },
   },
 
+  topOptions: [
+    //{ label: 'Hour', value: 'hour' },
+    { label: 'Today', value: 'day' },
+    { label: 'This Week', value: 'week' },
+    { label: 'This Month', value: 'month' },
+    //{ label: 'This Year', value: 'year' },
+  ],
+  
+  categoryOptions: [
+    { label: 'Politics', value: 'Politics', icon: 'fa-landmark' },
+    { label: 'Technology', value: 'Technology', icon: 'fa-computer-classic' },
+    { label: 'Sports', value: 'Sports', icon: 'fa-football-ball' },
+    { label: 'Finance', value: 'Finance', icon: 'fa-user-chart' },
+    { label: 'Creative', value: 'Creative', icon: 'fa-alien-monster' },
+    //{ label: 'Health', value: 'Health', icon: 'fa-heartbeat' },
+  ],
+
   'media': {
     'blacklistChannels': ['amweekly', 'ary media', 'india today', 'bloomberg television', 'los angeles times', 'universal pictures uk', 'cleo abram']
   },
 
-  "api_key": process.env.NEXT_API_KEY,
+  api_key: process.env.NEXT_API_KEY,
 
   // temp keyword blacklist
   // lowercase
