@@ -25,9 +25,11 @@ export default function StoryWrapper({ data, modal = false }: { data: any, modal
   return (
     <article className='pb-2'>
       {data.category &&
-        <Category data={data} />
+        <div className='ml-1 mb-2'>
+          <Category data={data} />
+        </div>
       }
-      
+
       <h1 className={`${modal ? 'mr-4' : ''} mb-2 text-3xl font-bold group`}>
         {data.title}
       </h1>
