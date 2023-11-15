@@ -29,7 +29,7 @@ export type Item = {
 export async function getTopFeed(bucket: string = config.api.defaultBucket, page: number = 1) {
   try {
     const url = `${config.api.url}/topics/top?bucket=${bucket}&page=${page}`
-    const res = await fetch(url, { next: { revalidate: 1 } })
+    const res = await fetch(url)
 
     if (!res.ok)
       throw new Error('Response not ok')
@@ -52,7 +52,7 @@ export async function getTopFeed(bucket: string = config.api.defaultBucket, page
 export async function getSectionFeed(bucket: string = config.api.defaultBucket, category: string, page: number = 1) {
   try {
     const url = `${config.api.url}/topics/top?bucket=${bucket}&category=${category}&page=${page}`
-    const res = await fetch(url, { next: { revalidate: 1 } })
+    const res = await fetch(url)
 
     if (!res.ok)
       throw new Error('Response not ok')
@@ -75,7 +75,7 @@ export async function getSectionFeed(bucket: string = config.api.defaultBucket, 
 export async function getKeywordFeed(keyword: string, page: number = 1) {
   try {
     const url = `${config.api.url}/topics/search/${keyword}?page=${page}`
-    const res = await fetch(url, { next: { revalidate: 1 } })
+    const res = await fetch(url)
 
     if (!res.ok)
       throw new Error('Response not ok')
@@ -163,7 +163,7 @@ export async function getInterestsFeed(interests: string[], page: number = 1) {
 export async function getTopic(slug: string) {
   try {
     const url = `${config.api.url}/topics/${slug}?group_limit=1&keyword_limit=30`
-    const res = await fetch(url, { next: { revalidate: 60 } })
+    const res = await fetch(url)
 
     if (!res.ok)
       throw new Error('Response not ok')
@@ -187,7 +187,7 @@ export function getTopicThumbUrl(slug: string) {
 export async function getTopicAffiliate(slug: string) {
   try {
     const url = `${config.api.url}/topics/${slug}/affiliate`
-    const res = await fetch(url, { next: { revalidate: 60 } })
+    const res = await fetch(url)
 
     if (!res.ok)
       throw new Error('Response not ok')
@@ -207,7 +207,7 @@ export async function getTopicAffiliate(slug: string) {
 export async function getTopicRelated(slug: string) {
   try {
     const url = `${config.api.url}/topics/${slug}/related`
-    const res = await fetch(url, { next: { revalidate: 60 } })
+    const res = await fetch(url)
 
     if (!res.ok)
       throw new Error('Response not ok')
@@ -255,8 +255,8 @@ export async function refreshTopicMeta(slug: string) {
 
 export async function getTopKeywords(bucket: string = config.api.defaultBucket) {
   try {
-    const url = `${config.api.url}/keywords/top?bucket=${bucket}&types=person&limit=40`;
-    const res = await fetch(url, { next: { revalidate: 600 } })
+    const url = `${config.api.url}/keywords/top?bucket=${bucket}&types=person&limit=50`;
+    const res = await fetch(url)
 
     if (!res.ok)
       throw new Error('Response not ok')
@@ -303,7 +303,7 @@ export function getApiUrl(endpoint = 'top', limit: number = 0, bucket: any = nul
 export async function getFeed(endpoint = 'top', limit: number = 0, bucket: any = null, page: number = 1) {
   try {
     const url = getApiUrl(endpoint, limit, bucket, page)
-    const res = await fetch(url, { next: { revalidate: 1 } })
+    const res = await fetch(url)
 
     if (!res.ok)
       throw new Error('Response not ok')

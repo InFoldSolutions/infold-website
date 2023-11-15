@@ -61,7 +61,7 @@ const config = {
   'api': {
     'url': 'https://api.infold.ai',
     'defaultLimit': 10,
-    'defaultBucket': 'week',
+    'defaultBucket': 'day',
     'defaultSort': 'top'
   },
 
