@@ -3,7 +3,7 @@
 import { useState, useCallback, useRef, useEffect, MouseEventHandler } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
 
-export default function Modal({ children, showClose = true }: { children: React.ReactNode, showClose?: boolean }) {
+export default function Modal({ children, showClose = true, loadingState = false }: { children: React.ReactNode, showClose?: boolean, loadingState?: boolean }) {
   const overlay = useRef(null)
   const wrapper = useRef(null)
   const router = useRouter()
@@ -42,7 +42,7 @@ export default function Modal({ children, showClose = true }: { children: React.
     return () => document.removeEventListener('keydown', onKeyDown)
   }, [onKeyDown])
 
-  if (!pathname.startsWith('/story'))
+  if (!pathname.startsWith('/story') && !loadingState)
     return null
 
   return (
