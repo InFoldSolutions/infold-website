@@ -1,7 +1,6 @@
 import { Metadata } from 'next';
 import Wrapper from '@/components/layout/wrapper'
 
-import { getKeywordFeed, getTopKeywords } from '@/helpers/api'
 import { unSlugifyKeyword } from '@/helpers/utils';
 
 export async function generateMetadata(
@@ -17,16 +16,7 @@ export async function generateMetadata(
 }
 
 export default async function Keyword({ params }: { params: { keyword: string } }) {
-  let res: any = null
-  
-  const keyword = unSlugifyKeyword(params.keyword)
-
-  if (keyword)
-    res = await getKeywordFeed(keyword)
-
-  const totalResults = res?.meta?.total_results || 0
-
   return (
-    <Wrapper initialFeedData={res?.data} totalResults={totalResults} />
+    <Wrapper />
   )
 }

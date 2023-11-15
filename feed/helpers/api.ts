@@ -29,7 +29,7 @@ export type Item = {
 export async function getTopFeed(bucket: string = config.api.defaultBucket, page: number = 1) {
   try {
     const url = `${config.api.url}/topics/top?bucket=${bucket}&page=${page}`
-    const res = await fetch(url)
+    const res = await fetch(url, { next: { revalidate: 1 } })
 
     if (!res.ok)
       throw new Error('Response not ok')
@@ -52,7 +52,7 @@ export async function getTopFeed(bucket: string = config.api.defaultBucket, page
 export async function getSectionFeed(bucket: string = config.api.defaultBucket, category: string, page: number = 1) {
   try {
     const url = `${config.api.url}/topics/top?bucket=${bucket}&category=${category}&page=${page}`
-    const res = await fetch(url)
+    const res = await fetch(url, { next: { revalidate: 1 } })
 
     if (!res.ok)
       throw new Error('Response not ok')
@@ -75,7 +75,7 @@ export async function getSectionFeed(bucket: string = config.api.defaultBucket, 
 export async function getKeywordFeed(keyword: string, page: number = 1) {
   try {
     const url = `${config.api.url}/topics/search/${keyword}?page=${page}`
-    const res = await fetch(url)
+    const res = await fetch(url, { next: { revalidate: 1 } })
 
     if (!res.ok)
       throw new Error('Response not ok')
@@ -256,7 +256,7 @@ export async function refreshTopicMeta(slug: string) {
 export async function getTopKeywords(bucket: string = config.api.defaultBucket) {
   try {
     const url = `${config.api.url}/keywords/top?bucket=${bucket}&types=person&limit=50`;
-    const res = await fetch(url)
+    const res = await fetch(url, { next: { revalidate: 600 } })
 
     if (!res.ok)
       throw new Error('Response not ok')
@@ -303,7 +303,7 @@ export function getApiUrl(endpoint = 'top', limit: number = 0, bucket: any = nul
 export async function getFeed(endpoint = 'top', limit: number = 0, bucket: any = null, page: number = 1) {
   try {
     const url = getApiUrl(endpoint, limit, bucket, page)
-    const res = await fetch(url)
+    const res = await fetch(url, { next: { revalidate: 1 } })
 
     if (!res.ok)
       throw new Error('Response not ok')
@@ -321,4 +321,42 @@ export async function getFeed(endpoint = 'top', limit: number = 0, bucket: any =
     console.error('Failed to fetch feed data', error)
     return []
   }
+}
+
+export async function loadMoreDataForPathname(pathname: string, offset: number = 0): Promise<any> {
+  let res: any
+
+  const pathnameParts = pathname.split('/')
+  const endpoint = pathnameParts[1]
+  const param = pathnameParts[2]
+
+  if (endpoint === 'keyword')
+    res = await getKeywordFeed(param, offset)
+  else if (endpoint === 'search')
+    res = await getSearchFeed(param, offset)
+  else if (endpoint === 'section')
+    res = await getSectionFeed(config.api.defaultBucket, param, offset)
+  else
+    res = await getTopFeed(config.api.defaultBucket, offset)
+
+  return res
+}
+
+export async function loadDataForPathname(pathname: string): Promise<any> {
+  let res: any;
+
+  const pathnameParts = pathname.split('/')
+  const endpoint = pathnameParts[1]
+  const param = pathnameParts[2]
+
+  if (endpoint === 'keyword')
+    res = await getKeywordFeed(param)
+  else if (endpoint === 'search')
+    res = await getSearchFeed(param)
+  else if (endpoint === 'section')
+    res = await getSectionFeed(config.api.defaultBucket, param)
+  else
+    res = await getTopFeed()
+
+  return res
 }
