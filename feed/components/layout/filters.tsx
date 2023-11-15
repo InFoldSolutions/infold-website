@@ -110,14 +110,14 @@ export default function Filters({ totalResults }: { isMenuOpen: boolean, setIsMe
             </button>
           </div>
 
-          <div className={`${!isMenuOpen ? 'hidden' : ''} absolute left-[50%] -ml-[105px] r-auto z-10 mt-4 md:mt-5 w-48 rounded bg-gray-200 dark:bg-black`}>
+          <div className={`${!isMenuOpen ? 'hidden' : ''} absolute left-[50%] -ml-[100px] z-10 mt-4 md:mt-5 w-[200px] rounded bg-gray-200 dark:bg-black`}>
             <div className='dark:bg-gray-800 dark:bg-opacity-60 py-1 rounded max-h-[250px] overflow-y-auto overflow-x-hidden no-scrollbar'>
               {config.categoryOptions.map((option: any, index: number) => (
                 <Link className={`group w-full py-1.5 flex items-center justify-left pl-6`}
                   href={`/section/${option.value}`}
                   prefetch={false}
                   key={index}>
-                  <i className={`fad ${option.icon} ${(option.icon === 'fa-user-chart' || option.icon === 'fa-alien-monster' || option.icon === 'fa-film-alt' || option.icon === 'fa-heart-rate' || option.icon === 'fa-tv' || option.icon === 'fa-balance-scale') ? '-ml-[5px]' : ''} mr-3 text-[17px]`}></i>
+                  <i className={`fad ${option.icon} ${option.iconMargin} mr-3 text-[17px]`}></i>
                   <span className={`${endpoint === 'section' && bucket === option.value ? 'underline' : ''} group-hover:underline`}>{option.label}</span>
                 </Link>
               ))}
@@ -133,14 +133,3 @@ export default function Filters({ totalResults }: { isMenuOpen: boolean, setIsMe
     )
   }
 }
-
-//  <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
-
-
-/*
-
-  torek 7:30 - laboratorij
-  četrtek 8:00 - referenčna ambulanta
-
-
-  */

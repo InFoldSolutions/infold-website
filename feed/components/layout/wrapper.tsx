@@ -6,7 +6,6 @@ import { useState, useCallback, Suspense } from 'react'
 import Container from '@/components/layout/container'
 import Filters from '@/components/layout/filters'
 import Feed from '@/components/layout/feed'
-import Loading from '@/components/helpers/loading'
 import Keywords from '@/components/sidebar/keywords'
 
 export default function Wrapper() {

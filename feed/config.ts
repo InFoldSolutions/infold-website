@@ -95,15 +95,15 @@ const config = {
   ],
 
   categoryOptions: [
-    { label: 'Politics', value: 'Politics', icon: 'fa-landmark' },
-    { label: 'Science', value: 'Technology', icon: 'fa-flask' },
-    { label: 'Sports', value: 'Sports', icon: 'fa-football-ball' },
-    { label: 'Finance', value: 'Finance', icon: 'fa-user-chart' },
-    { label: 'Health', value: 'Health', icon: 'fa-heart-rate' },
-    { label: 'Entertainment', value: 'Entertainment', icon: 'fa-film-alt' },
-    { label: 'Gaming', value: 'Gaming', icon: 'fa-computer-classic' },
-    { label: 'Law', value: 'Law', icon: 'fa-balance-scale' },
-    { label: 'Crime', value: 'Crime', icon: 'fa-balance-scale' },
+    { label: 'Politics', value: 'Politics', icon: 'fa-landmark', iconMargin: '' },
+    { label: 'Technology', value: 'Technology', icon: 'fa-computer-classic', iconMargin: '' },  //'fa-flask'
+    { label: 'Sports', value: 'Sports', icon: 'fa-football-ball', iconMargin: '' },
+    { label: 'Finance', value: 'Finance', icon: 'fa-user-chart', iconMargin: '-ml-[5px]' },
+    { label: 'Health', value: 'Health', icon: 'fa-heart-rate', iconMargin: '-ml-[5px]' },
+    { label: 'Entertainment', value: 'Entertainment', icon: 'fa-film-alt', iconMargin: '' },
+    //{ label: 'Gaming', value: 'Gaming', icon: 'fa-computer-classic' },
+    { label: 'Law', value: 'Law', icon: 'fa-balance-scale', iconMargin: '' },
+    { label: 'Crime', value: 'Crime', icon: 'fa-balance-scale', iconMargin: '-ml-[5px]' },
     //{ label: 'Health', value: 'Health', icon: 'fa-heartbeat' },
   ],
 

@@ -70,7 +70,6 @@ export default function Feed({ setShowToTop, setTotalResults, showToTop }: { set
 
   // load data on load
   useEffect(() => {
-    // fetch data based on endpoint
     const fetchInitialData = async () => {
       const res = await loadDataForPathname(pathname)
 
