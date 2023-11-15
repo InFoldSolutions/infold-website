@@ -98,7 +98,7 @@ const config = {
     { label: 'Politics', value: 'Politics', icon: 'fa-landmark', iconMargin: '' },
     { label: 'Technology', value: 'Technology', icon: 'fa-computer-classic', iconMargin: '' },  //'fa-flask'
     { label: 'Sports', value: 'Sports', icon: 'fa-football-ball', iconMargin: '' },
-    { label: 'Finance', value: 'Finance', icon: 'fa-user-chart', iconMargin: '-ml-[5px]' },
+    { label: 'Finance', value: 'Finance', icon: 'fa-user-chart', iconMargin: '-ml-[7px]' },
     { label: 'Health', value: 'Health', icon: 'fa-heart-rate', iconMargin: '-ml-[5px]' },
     { label: 'Entertainment', value: 'Entertainment', icon: 'fa-film-alt', iconMargin: '' },
     //{ label: 'Gaming', value: 'Gaming', icon: 'fa-computer-classic' },

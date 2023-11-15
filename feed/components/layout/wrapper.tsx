@@ -19,7 +19,6 @@ export default function Wrapper() {
 
   return (
     <Container>
-
       <div className='bg-gray-300 dark:bg-black sticky top-0 z-40 mb-2 -mt-[5px] lg:mb-3 pt-2'>
         <div
           className='bg-gray-200 dark:bg-black rounded text-xl text-body-color'>

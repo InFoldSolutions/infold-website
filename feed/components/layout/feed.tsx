@@ -5,16 +5,15 @@ import { useState, useEffect, UIEvent, useCallback } from 'react'
 
 import { useRouter, usePathname } from 'next/navigation'
 
-import { Item } from '@/helpers/api'
+import { closeAllWebSockets } from '@/websocket'
 
 import Thumbs from '@/components/story/thumbs'
 import StoryMeta from '@/components/story/meta'
 import Category from '@/components/story/category'
+import Loading from '@/components/helpers/loading'
+import Skeleton from '@/components/layout/skeleton'
 
-import { loadDataForPathname, loadMoreDataForPathname } from '@/helpers/api'
-
-import { closeAllWebSockets } from '@/websocket'
-import Loading from '../helpers/loading'
+import { Item, loadDataForPathname, loadMoreDataForPathname } from '@/helpers/api'
 
 
 export default function Feed({ setShowToTop, setTotalResults, showToTop }: { setShowToTop: any, setTotalResults: any, showToTop: boolean }) {
@@ -41,7 +40,7 @@ export default function Feed({ setShowToTop, setTotalResults, showToTop }: { set
     if (scrollHeight <= innerHeight)
       return
 
-    if (isBottom && !isLoadMore) {
+    if (isBottom && !isLoadMore && !isLoading) {
       setIsLoadMore(true)
       setOffset((old: number) => old + 1)
     }
@@ -88,7 +87,7 @@ export default function Feed({ setShowToTop, setTotalResults, showToTop }: { set
 
   // load more
   useEffect(() => {
-    if (offset > 1 && !endOfFeed) {
+    if (offset > 1 && !endOfFeed && !isLoading) {
       setIsLoadMore(true)
 
       const fetchMoreData = async () => {
@@ -113,10 +112,10 @@ export default function Feed({ setShowToTop, setTotalResults, showToTop }: { set
   return (
     <div className={`flex md:mr-auto flex-col min-h-[70vh] w-full max-w-full pb-1 max-w-[900px] lg:w-[900px] overflow-x-hidden`}>
       {isLoading &&
-        <Loading />
+        <Skeleton />
       }
 
-      <ul className='mb-4'>
+      <ul className='mb-2'>
         {data.map((item: Item, index: number) => (
           <li className='relative md:pt-5 py-4 pb-2 md:px-6 px-2 no-highlight-tap border-gray-200 border-b-2 border-dashed dark:border-gray-800 dark:border-opacity-80 rounded last:border-b-0 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 dark:hover:bg-opacity-40 hover:bg-opacity-30'
             onClick={() => router.push(`/story/${item.slug}`)}
