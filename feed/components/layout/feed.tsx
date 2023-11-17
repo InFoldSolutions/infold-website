@@ -30,7 +30,7 @@ export default function Feed({ setShowToTop, setTotalResults, showToTop }: { set
     const scrollHeight = document.body.scrollHeight
     const innerHeight = window.innerHeight
     const scrollTop = window.scrollY
-    const isBottom = scrollTop + innerHeight + 50 >= scrollHeight
+    const isBottom = scrollTop + innerHeight >= scrollHeight
 
     if (scrollTop > 90 && !showToTop)
       setShowToTop(true)
@@ -113,6 +113,14 @@ export default function Feed({ setShowToTop, setTotalResults, showToTop }: { set
     <div className={`flex md:mr-auto flex-col min-h-[70vh] w-full max-w-full pb-1 max-w-[900px] lg:w-[900px] overflow-x-hidden`}>
       {isLoading &&
         <Skeleton />
+      }
+
+      {!isLoading && data.length === 0 &&
+        <div className='flex items-center justify-center w-full h-full min-h-[70vh]'>
+          <span className='text-center w-full'>
+            No stories found ..
+          </span>
+        </div>
       }
 
       <ul className='mb-2'>

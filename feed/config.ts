@@ -97,15 +97,17 @@ const config = {
   categoryOptions: [
     { label: 'Politics', value: 'Politics', icon: 'fa-landmark', iconMargin: '' },
     { label: 'Technology', value: 'Technology', icon: 'fa-computer-classic', iconMargin: '' },  //'fa-flask'
+    { label: 'Science', value: 'Science', icon: 'fa-flask', iconMargin: '' },  //''
     { label: 'Sports', value: 'Sports', icon: 'fa-football-ball', iconMargin: '' },
-    { label: 'Finance', value: 'Finance', icon: 'fa-user-chart', iconMargin: '-ml-[7px]' },
+    { label: 'Business', value: 'Business', icon: 'fa-user-chart', iconMargin: '-ml-[7px]' },
     { label: 'Health', value: 'Health', icon: 'fa-heart-rate', iconMargin: '-ml-[5px]' },
-    { label: 'Entertainment', value: 'Entertainment', icon: 'fa-film-alt', iconMargin: '' },
+    { label: 'Culture', value: 'Culture', icon: 'fa-film-alt', iconMargin: '' },
     //{ label: 'Gaming', value: 'Gaming', icon: 'fa-computer-classic' },
-    { label: 'Law', value: 'Law', icon: 'fa-balance-scale', iconMargin: '' },
-    { label: 'Crime', value: 'Crime', icon: 'fa-balance-scale', iconMargin: '-ml-[5px]' },
+    //{ label: 'Law & Crime', value: 'Law & Crime', icon: 'fa-balance-scale', iconMargin: '' },
     //{ label: 'Health', value: 'Health', icon: 'fa-heartbeat' },
   ],
+
+  // Input should be 'Politics', 'Culture', 'Sports', 'Technology', 'Law & Crime', 'Business', 'Science', 'Health' or 'Gaming'
 
   'media': {
     'blacklistChannels': ['amweekly', 'ary media', 'india today', 'bloomberg television', 'los angeles times', 'universal pictures uk', 'cleo abram']
