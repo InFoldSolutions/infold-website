@@ -14,6 +14,7 @@ import Loading from '@/components/helpers/loading'
 import Skeleton from '@/components/layout/skeleton'
 
 import { Item, loadDataForPathname, loadMoreDataForPathname } from '@/helpers/api'
+import Link from 'next/link'
 
 
 export default function Feed({ setShowToTop, setTotalResults, showToTop }: { setShowToTop: any, setTotalResults: any, showToTop: boolean }) {
@@ -128,29 +129,31 @@ export default function Feed({ setShowToTop, setTotalResults, showToTop }: { set
           <li className='relative md:pt-5 py-4 pb-2 md:px-6 px-2 no-highlight-tap border-gray-200 border-b-2 border-dashed dark:border-gray-800 dark:border-opacity-80 rounded last:border-b-0 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 dark:hover:bg-opacity-40 hover:bg-opacity-30'
             onClick={() => router.push(`/story/${item.slug}`)}
             key={index}>
+            <Link href={`/story/${item.slug}`}>
 
             {item.category &&
               <Category data={item} />
             }
 
-            <div className='flex items-center my-2'>
+            <span className='flex items-center my-2'>
               {(item.media?.length > 0) &&
                 <Thumbs media={item.media} />
               }
               <h3 className='text-3xl font-bold leading-snug text-left md:truncate-2-lines'>
                 {item.title}
               </h3>
-            </div>
+            </span>
 
-            <div className='text-left'>
+            <span className='text-left'>
               {item.outline.slice(0, 1).map((outline: any, index: number) => (
                 <p className='text-base text-gray-600 dark:text-gray-300 truncate-2-lines' key={index}>
                   {outline}
                 </p>
               ))}
-            </div>
+            </span>
 
             <StoryMeta data={item} time={true} />
+            </Link>
           </li>
         ))}
       </ul>

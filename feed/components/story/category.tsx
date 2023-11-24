@@ -15,11 +15,9 @@ export default function Category({ data }: { data: any }) {
   }, [router])
 
   return (
-    <div className='mb-1'>
-      <span className='text-base group flex items-center cursor-pointer' onClick={openSection}>
-        <i className={`fad ${data.categoryIcon} mr-3 ${data.categoryIcon !== 'fa-user-chart' ? 'text-[17px]' : ''}`} />
-        <span className='group-hover:underline'>{data.category}</span>
-      </span>
-    </div>
+    <span className='text-base group flex items-center cursor-pointer mb-1' onClick={openSection}>
+      <i className={`fad ${data.categoryIcon} mr-3 ${data.categoryIcon !== 'fa-user-chart' ? 'text-[17px]' : ''}`} />
+      <span className='group-hover:underline'>{data.category}</span>
+    </span>
   )
 }
