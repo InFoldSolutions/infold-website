@@ -127,7 +127,6 @@ export default function Feed({ setShowToTop, setTotalResults, showToTop }: { set
       <ul className='mb-2'>
         {data.map((item: Item, index: number) => (
           <li className='relative md:pt-5 py-4 pb-2 md:px-6 px-2 no-highlight-tap border-gray-200 border-b-2 border-dashed dark:border-gray-800 dark:border-opacity-80 rounded last:border-b-0 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 dark:hover:bg-opacity-40 hover:bg-opacity-30'
-            onClick={() => router.push(`/story/${item.slug}`)}
             key={index}>
             <Link href={`/story/${item.slug}`}>
 
