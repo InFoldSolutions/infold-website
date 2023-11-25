@@ -53,11 +53,11 @@ export default function Affiliate({ slug }: { slug: string }) {
 
   useEffect(() => {
     if (type) {
-      setTitle(type === 'book' ? 'Library' : 'Accessories')
-      setOverflow(type === 'book' ? 5 : 4)
-      setIcon(type === 'book' ? 'fa-books' : 'fa-shopping-cart')
-      setPadding(type === 'book' ? 'p-0' : 'p-2')
-      setMinWidth(type === 'book' ? 'min-w-[150px]' : 'min-w-[194px]')
+      setTitle(type === 'Books' ? 'Library' : 'Accessories')
+      setOverflow(type === 'Books' ? 5 : 4)
+      setIcon(type === 'Books' ? 'fa-books' : 'fa-shopping-cart')
+      setPadding(type === 'Books' ? 'p-0' : 'p-2')
+      setMinWidth(type === 'Books' ? 'min-w-[150px]' : 'min-w-[194px]')
     }
   }, [type])
 
