@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { useSearchParams, useRouter, usePathname } from 'next/navigation'
 
 import config from '@/config'
-import { capitalize, slugifyKeyword, unSlugifyKeyword } from '@/helpers/utils'
+import { capitalize, slugifyKeyword, unSlugifyKeyword, unSlugifySection } from '@/helpers/utils'
 
 export default function Filters({ totalResults }: { isMenuOpen: boolean, setIsMenuOpen: any, totalResults: number, showToTop: boolean }) {
   let keywords: any = ''
@@ -98,7 +98,7 @@ export default function Filters({ totalResults }: { isMenuOpen: boolean, setIsMe
               {endpoint === 'section' &&
                 <span className='flex items-center'>
                   <i className={`fad ${bucketIcon} mr-3 ${bucketIcon !== 'fa-user-chart' ? 'text-[17px]' : ''} ${(bucketIcon === 'fa-landmark' || bucketIcon === 'fa-football-ball') ? 'mt-[2px]' : 'mt-[1px]'}`} />
-                  <span className='underline'>{capitalize(bucket)}</span>
+                  <span className='underline'>{capitalize(unSlugifySection(bucket))}</span>
                 </span>
               }
               {!endpoint &&

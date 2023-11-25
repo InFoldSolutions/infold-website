@@ -58,6 +58,10 @@ export function unSlugifyKeyword(keyword: string) {
   return keyword.replace(/-/g, ' ')
 }
 
+export function unSlugifySection(keyword: string) {
+  return keyword.replace(/\+/g, ' ').replace(/-/g, ' ').replace(/%26/g, '&')
+}
+
 export function searchParamsToQueryParams(searchParams: any) {
   return Object.keys(searchParams).map((key) => {
     return `${key}=${searchParams[key]}`
