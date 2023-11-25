@@ -81,7 +81,7 @@ export function transformStory(data: any) {
     data.suggested = data.questions
 
   if (data.category)
-    data.categoryIcon = config.categoryOptions.find(item => item.value === data.category)?.icon
+    data.categoryIcon = config.categoryOptions.find(item => item.label === data.category)?.icon
 
   return {
     ...data,

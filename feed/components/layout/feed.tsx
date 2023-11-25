@@ -3,7 +3,7 @@
 
 import { useState, useEffect, UIEvent, useCallback } from 'react'
 
-import { useRouter, usePathname } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 
 import { closeAllWebSockets } from '@/websocket'
 
@@ -18,7 +18,6 @@ import Link from 'next/link'
 
 
 export default function Feed({ setShowToTop, setTotalResults, showToTop }: { setShowToTop: any, setTotalResults: any, showToTop: boolean }) {
-  const router = useRouter()
   const pathname = usePathname()
 
   const [data, setData] = useState<any>([])

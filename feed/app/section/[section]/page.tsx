@@ -2,13 +2,13 @@ import { Metadata } from 'next';
 
 import Wrapper from '@/components/layout/wrapper'
 
-import { unSlugifyKeyword } from '@/helpers/utils';
+import { unSlugifyKeyword, unSlugifySection } from '@/helpers/utils';
 
 export async function generateMetadata(
   { params }: { params: { section: string } }
 ): Promise<Metadata> {
 
-  const section = unSlugifyKeyword(params.section)
+  const section = unSlugifySection(params.section)
 
   return {
     title: `${section} Latest News, Stories, Videos | InFold`,

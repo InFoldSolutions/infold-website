@@ -55,11 +55,12 @@ export function slugifyKeyword(keyword: string) {
 }
 
 export function unSlugifyKeyword(keyword: string) {
-  return keyword.replace(/-/g, ' ')
+  return decodeURIComponent(keyword.replace(/-/g, ' '))
 }
 
-export function unSlugifySection(keyword: string) {
-  return keyword.replace(/\+/g, ' ').replace(/-/g, ' ').replace(/%26/g, '&')
+export function unSlugifySection(section: string) {
+  section = decodeURIComponent(section)
+  return section.replace(/\+/g, ' ').replace(/-/g, ' ').replace(/%26/g, '&')
 }
 
 export function searchParamsToQueryParams(searchParams: any) {
