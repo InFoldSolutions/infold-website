@@ -9,9 +9,8 @@ import { slugifyKeyword, unSlugifyKeyword } from '@/helpers/utils';
 export default function Keyword({ keyword }: { keyword: any, interests: string[], toggleInterest: any }) {
   const pathname = usePathname()
   const pathnameParts = pathname.split('/')
-  const endpoint = pathnameParts[1]
   const paramKeyword = pathnameParts[2] ? unSlugifyKeyword(pathnameParts[2]) : null
-  const target = '_self' //(pathname === '/' || endpoint === 'keyword' || endpoint === 'search' || endpoint === 'section') ? '_self' : '_blank';
+  const target = '_self'
 
   let latestAnalyzed = null, icon, label, url, padding;
 
@@ -32,7 +31,7 @@ export default function Keyword({ keyword }: { keyword: any, interests: string[]
     }
   } else {
     url = `https://www.google.com/search?q=${keyword.keyword}`;
-    icon = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/1200px-Google_%22G%22_Logo.svg.png";
+    icon = "https://image.similarpng.com/very-thumbnail/2020/06/Logo-google-icon-PNG.png";
     label = "Google";
     padding = 'p-0.5';
   }
