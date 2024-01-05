@@ -255,7 +255,7 @@ export async function refreshTopicMeta(slug: string) {
 
 export async function getTopKeywords(bucket: string = config.api.defaultBucket) {
   try {
-    const url = `${config.api.url}/keywords/top?bucket=${bucket}&types=person&limit=50`;
+    const url = `${config.api.url}/keywords/top?bucket=${bucket}&limit=50`;
     const res = await fetch(url, { next: { revalidate: 600 } })
 
     if (!res.ok)
