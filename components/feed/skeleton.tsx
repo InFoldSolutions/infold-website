@@ -1,5 +1,4 @@
-
-export default function Skeleton({ number = 9 }: { number?: number }) {
+export default function Skeleton({ number = 6 }: { number?: number }) {
   return (
     <div className="ml-1">
       {Array(number).fill(0).map((el, index) => (

@@ -4,7 +4,7 @@ import TimeAgo from 'react-timeago'
 
 export default function StoryMeta({ data, time = false }: { data: any, time?: boolean }) {
   return (
-    <div className='flex items-center text-gray-600 dark:text-gray-300 my-4 text-sm font-bold'>
+    <div className='flex items-center text-gray-600 dark:text-gray-300 mt-4 text-sm font-bold'>
       <span>
         {`Summarized from ${data.meta.articles} articles.`}
       </span>
