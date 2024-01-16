@@ -3,7 +3,9 @@ import { filterKeyword } from '@/transformers/keyword';
 
 import config from '@/config';
 
-export function transformStory(data: any) {
+import { Topic } from '@/types/topic';
+
+export function transformStory(data: any): Topic {
   data.title = data.title.replace(/\"/g, '')
 
   if (data.sources?.length > 0) {
@@ -89,14 +91,14 @@ export function transformStory(data: any) {
   }
 }
 
-export function filterStory(data: any) {
+export function filterStory(data: any): boolean {
   if (data.title.includes('CBS News Mornings'))
     return false
 
   return true
 }
 
-export function filterData(sources: any, sort: string = '') {
+export function filterStories(sources: any, sort: string = '') {
   switch (sort) {
     case 'latest':
       sources = sources.filter((source: any) => !source.popularArticles || source.popularArticles.length === 0)

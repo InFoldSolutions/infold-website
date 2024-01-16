@@ -86,6 +86,28 @@ const config = {
     },
   },
 
+  defaultFeeds: [{
+    keyword: 'Top Stories',
+    live: true,
+    icon: 'fa-fire-alt'
+  }, {
+    keyword: 'Donald Trump',
+    live: false,
+    icon: 'fa-landmark'
+  }/*, {
+    keyword: 'Joe Biden',
+    live: false,
+    icon: 'fa-landmark'
+  }*/, {
+    keyword: 'Ukraine',
+    live: false,
+    icon: 'fa-globe'
+  }, {
+    keyword: 'Middle East',
+    live: false,
+    icon: 'fa-globe'
+  }],
+
   topOptions: [
     //{ label: 'Hour', value: 'hour' },
     { label: 'Today', value: 'day' },

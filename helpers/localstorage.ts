@@ -4,7 +4,7 @@ export let interests: string[] = []
 if (typeof window !== "undefined")
   getInterests()
 
-export function getInterests() {
+export function getInterests(): string[] {
   if (interests?.length > 0)
     return interests
 
@@ -14,9 +14,9 @@ export function getInterests() {
   return interests
 }
 
-export function addInterest(interest: string) {
+export function addInterest(interest: string): string[] {
   if (interests.includes(interest))
-    return
+    return interests
 
   interests.push(interest)
 
@@ -25,9 +25,9 @@ export function addInterest(interest: string) {
   return interests
 }
 
-export function removeInterest(interest: string) {
+export function removeInterest(interest: string): string[] {
   if (!interests.includes(interest))
-    return
+    return interests
 
   interests = interests.filter((item: string) => item !== interest)
 

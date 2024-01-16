@@ -7,26 +7,18 @@ import { filterKeyword } from '@/transformers/keyword';
 
 import { searchParamsToQueryParams } from '@/helpers/utils';
 
-// Topic, story item
-export type Item = {
-  slug: string
-  title: string
-  outline: string[]
-  keywords: any
-  added_at: number
-  updated_at: number
-  articles: number
-  short_description: string
-  short_title: string
-  social: any
-  sentimentAgg: any
-  meta: any
-  media: any
-  category: string
-  categoryIcon: string
+import { APIResponse } from '@/types/response';
+import { Topic } from '@/types/topic';
+
+const ErrorAPIResponse = {
+  meta: {
+    success: false,
+    total_results: 0
+  },
+  data: []
 }
 
-export async function getTopFeed(bucket: string = config.api.defaultBucket, page: number = 1) {
+export async function getTopFeed(bucket: string = config.api.defaultBucket, page: number = 1): Promise<APIResponse> {
   try {
     const url = `${config.api.url}/topics/top?bucket=${bucket}&page=${page}`
     const res = await fetch(url, { next: { revalidate: 1 } })
@@ -45,11 +37,11 @@ export async function getTopFeed(bucket: string = config.api.defaultBucket, page
     }
   } catch (error) {
     console.error('Failed to fetch keyword feed data', error)
-    return []
+    return ErrorAPIResponse
   }
 }
 
-export async function getSectionFeed(bucket: string = config.api.defaultBucket, category: string, page: number = 1) {
+export async function getSectionFeed(bucket: string = config.api.defaultBucket, category: string, page: number = 1): Promise<APIResponse> {
   try {
     const url = `${config.api.url}/topics/top?bucket=${bucket}&category=${category}&page=${page}`
     const res = await fetch(url, { next: { revalidate: 1 } })
@@ -68,11 +60,11 @@ export async function getSectionFeed(bucket: string = config.api.defaultBucket, 
     }
   } catch (error) {
     console.error('Failed to fetch keyword feed data', error)
-    return []
+    return ErrorAPIResponse
   }
 }
 
-export async function getKeywordFeed(keyword: string, page: number = 1) {
+export async function getKeywordFeed(keyword: string, page: number = 1): Promise<APIResponse> {
   try {
     const url = `${config.api.url}/topics/search/${keyword}?page=${page}`
     const res = await fetch(url, { next: { revalidate: 1 } })
@@ -91,11 +83,11 @@ export async function getKeywordFeed(keyword: string, page: number = 1) {
     }
   } catch (error) {
     console.error('Failed to fetch keyword feed data', error)
-    return []
+    return ErrorAPIResponse
   }
 }
 
-export async function getSearchFeed(query: string, page: number = 1) {
+export async function getSearchFeed(query: string, page: number = 1): Promise<APIResponse> {
   try {
     const url = getApiUrl('search', config.api.defaultLimit, null, page)
     const res = await fetch(url, {
@@ -121,11 +113,11 @@ export async function getSearchFeed(query: string, page: number = 1) {
     }
   } catch (error) {
     console.error('Failed to fetch search feed data', error)
-    return []
+    return ErrorAPIResponse
   }
 }
 
-export async function getInterestsFeed(interests: string[], page: number = 1) {
+export async function getInterestsFeed(interests: string[], page: number = 1): Promise<APIResponse> {
   try {
     const url = `${config.api.url}/feed/personal?page=${page}`
     const res = await fetch(url, {
@@ -156,11 +148,11 @@ export async function getInterestsFeed(interests: string[], page: number = 1) {
     }
   } catch (error) {
     console.error('Failed to fetch search feed data', error)
-    return []
+    return ErrorAPIResponse
   }
 }
 
-export async function getTopic(slug: string) {
+export async function getTopic(slug: string): Promise<Topic | null> {
   try {
     const url = `${config.api.url}/topics/${slug}?group_limit=1&keyword_limit=30`
     const res = await fetch(url)
@@ -176,11 +168,11 @@ export async function getTopic(slug: string) {
     return transformStory(data.topic)
   } catch (error) {
     console.error('Failed to fetch topic data', error)
-    return {}
+    return null
   }
 }
 
-export function getTopicThumbUrl(slug: string) {
+export function getTopicThumbUrl(slug: string): string {
   return `${config.api.url}/topics/${slug}/${config.story.thumb.name}`
 }
 
@@ -204,7 +196,7 @@ export async function getTopicAffiliate(slug: string) {
   }
 }
 
-export async function getTopicRelated(slug: string) {
+export async function getTopicRelated(slug: string): Promise<Topic[]> {
   try {
     const url = `${config.api.url}/topics/${slug}/related`
     const res = await fetch(url)
@@ -220,11 +212,11 @@ export async function getTopicRelated(slug: string) {
     return data.topics.filter(filterStory).map(transformStory)
   } catch (error) {
     console.warn('Failed to fetch related data', error)
-    return {}
+    return []
   }
 }
 
-export async function refreshTopicMeta(slug: string) {
+export async function refreshTopicMeta(slug: string): Promise<boolean> {
   try {
     const url = `${config.api.url}/topics/${slug}`
     const res = await fetch(url, {
@@ -249,7 +241,7 @@ export async function refreshTopicMeta(slug: string) {
     return true
   } catch (error) {
     console.error('Failed to fetch topic data', error)
-    return {}
+    return false
   }
 }
 
@@ -281,7 +273,7 @@ export function handleRedirect(slug: string, searchParams: any) {
   return permanentRedirect(url)
 }
 
-export function getApiUrl(endpoint = 'top', limit: number = 0, bucket: any = null, page: number = 1) {
+export function getApiUrl(endpoint = 'top', limit: number = 0, bucket: any = null, page: number = 1): string {
   let url = `${config.api.url}/topics/${endpoint}`
   let separator = '?'
 
@@ -300,7 +292,7 @@ export function getApiUrl(endpoint = 'top', limit: number = 0, bucket: any = nul
   return url
 }
 
-export async function getFeed(endpoint = 'top', limit: number = 0, bucket: any = null, page: number = 1) {
+export async function getFeed(endpoint = 'top', limit: number = 0, bucket: any = null, page: number = 1): Promise<APIResponse> {
   try {
     const url = getApiUrl(endpoint, limit, bucket, page)
     const res = await fetch(url, { next: { revalidate: 1 } })
@@ -319,12 +311,12 @@ export async function getFeed(endpoint = 'top', limit: number = 0, bucket: any =
     }
   } catch (error) {
     console.error('Failed to fetch feed data', error)
-    return []
+    return ErrorAPIResponse
   }
 }
 
-export async function loadMoreDataForPathname(pathname: string, offset: number = 0): Promise<any> {
-  let res: any
+export async function loadMoreDataForPathname(pathname: string, offset: number = 0): Promise<APIResponse> {
+  let res: APIResponse
 
   const pathnameParts = pathname.split('/')
   const endpoint = pathnameParts[1]
@@ -342,8 +334,8 @@ export async function loadMoreDataForPathname(pathname: string, offset: number =
   return res
 }
 
-export async function loadDataForPathname(pathname: string): Promise<any> {
-  let res: any;
+export async function loadDataForPathname(pathname: string): Promise<APIResponse> {
+  let res: APIResponse
 
   const pathnameParts = pathname.split('/')
   const endpoint = pathnameParts[1]

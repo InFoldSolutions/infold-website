@@ -3,11 +3,10 @@
 
 import { useState, useCallback, Suspense } from 'react'
 
-import Image from 'next/image'
-
 import Container from '@/components/layout/container'
+import ActionsBar from '@/components/layout/actionsbar'
 import Feed from '@/components/feed/feed'
-import ActionsBar from './actionsbar'
+import config from '@/config'
 
 export default function Wrapper() {
   const [showToTop, setShowToTop] = useState(false)
@@ -21,10 +20,15 @@ export default function Wrapper() {
     <Container>
       <div className='flex items-start flex-row'>
         <ActionsBar />
-        
-        <div className='flex items-start flex-row'>
+
+        <div className='flex'>
           <Suspense>
-            <Feed setShowToTop={setShowToTop} showToTop={showToTop} setTotalResults={setTotalResults} />
+            {config.defaultFeeds.map((feed: any, index: number) => 
+              <Feed setShowToTop={setShowToTop} 
+                    showToTop={showToTop} 
+                    setTotalResults={setTotalResults} 
+                    meta={feed}
+                    key={index} />)}
           </Suspense>
         </div>
       </div>

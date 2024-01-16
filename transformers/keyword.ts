@@ -1,7 +1,7 @@
 
 import config from "@/config";
 
-export function filterKeyword(data: any, index: number, array: any) {
+export function filterKeyword(data: any, index: number, array: any): boolean {
   if (data.keyword.length < 3)
     return false;
 

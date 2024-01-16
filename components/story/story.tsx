@@ -10,15 +10,15 @@ import Affiliate from '@/components/carousel/affiliate'
 
 import { isBrowser } from '@/helpers/utils'
 
-import { filterData } from '@/transformers/story'
+import { filterStories } from '@/transformers/story'
 
 import StoryMeta from './meta'
 import Category from './category'
 
 export default function StoryWrapper({ data, modal = false }: { data: any, modal?: boolean }) {
 
-  const [latestArticles] = useState<any>(filterData(data.sources, 'latest'))
-  const [popularArticles] = useState<any>(filterData(data.sources, 'popular'))
+  const [latestArticles] = useState<any>(filterStories(data.sources, 'latest'))
+  const [popularArticles] = useState<any>(filterStories(data.sources, 'popular'))
   const [initialCount] = useState(popularArticles.sources.length > 0 ? popularArticles.sources.length : 5)
   const [isDesktop] = useState((isBrowser) ? window.innerWidth > 820 : false)
 

@@ -4,6 +4,7 @@
 import { useState, useEffect, useRef, UIEvent, useCallback } from 'react'
 
 import { usePathname } from 'next/navigation'
+import Link from 'next/link'
 
 import { closeAllWebSockets } from '@/websocket'
 
@@ -12,13 +13,15 @@ import StoryMeta from '@/components/story/meta'
 import Category from '@/components/story/category'
 import Loading from '@/components/helpers/loading'
 import Skeleton from '@/components/feed/skeleton'
+import FeedHeader from '@/components/feed/header'
 
-import { Item, loadDataForPathname, loadMoreDataForPathname } from '@/helpers/api'
-import Link from 'next/link'
-import FeedHeader from './header'
+import { getKeywordFeed } from '@/helpers/api'
 
+import type { FeedMeta } from '@/types/feedmeta'
+import type { APIResponse } from '@/types/response'
+import type { Topic } from '@/types/topic'
 
-export default function Feed({ setShowToTop, setTotalResults, showToTop }: { setShowToTop: any, setTotalResults: any, showToTop: boolean }) {
+export default function Feed({ setShowToTop, setTotalResults, showToTop, meta }: { setShowToTop: any, setTotalResults: any, showToTop: boolean, meta: FeedMeta }) {
   const pathname = usePathname()
 
   const [data, setData] = useState<any>([])
@@ -73,14 +76,14 @@ export default function Feed({ setShowToTop, setTotalResults, showToTop }: { set
   // load data on load
   useEffect(() => {
     const fetchInitialData = async () => {
-      const res = await loadDataForPathname(pathname)
+      const res: APIResponse = await getKeywordFeed(meta.keyword)
 
-      if (res?.data?.length > 0)
+      if (res.data.length > 0)
         setData(res.data)
       else
         setEndOfFeed(true)
 
-      setTotalResults(res?.meta?.total_results || 0)
+      setTotalResults(res.meta.total_results || 0)
     }
 
     fetchInitialData()
@@ -94,9 +97,9 @@ export default function Feed({ setShowToTop, setTotalResults, showToTop }: { set
       setIsLoadMore(true)
 
       const fetchMoreData = async () => {
-        const res = await loadMoreDataForPathname(pathname, offset)
+        const res: APIResponse = await getKeywordFeed(meta.keyword, offset)
 
-        if (res?.data?.length > 0)
+        if (res.data.length > 0)
           setData((prevData: any) => [...prevData, ...res.data])
         else
           setEndOfFeed(true)
@@ -113,8 +116,8 @@ export default function Feed({ setShowToTop, setTotalResults, showToTop }: { set
   }, [offset, endOfFeed, setIsLoadMore])
 
   return (
-    <div className='overflow-hidden min-h-[70vh] w-full max-w-full max-w-[500px] lg:w-[500px]'>
-      <FeedHeader />
+    <div className='overflow-hidden min-h-[70vh] w-full max-w-full max-w-[500px] lg:w-[500px] border-r-2 border-gray-800'>
+      <FeedHeader keyword={meta.keyword} live={meta.live} icon={meta.icon} />
 
       <div className={`max-h-[94.5vh] overflow-y-auto pb-1 ${(isLoading) ? 'overflow-y-hidden' : ''}`} ref={scrollParent}>
         <div className={`flex md:mr-auto flex-col`}>
@@ -131,7 +134,7 @@ export default function Feed({ setShowToTop, setTotalResults, showToTop }: { set
           }
 
           <ul className='mb-2'>
-            {data.map((item: Item, index: number) => (
+            {data.map((item: Topic, index: number) => (
               <li className='relative p-4 no-highlight-tap border-gray-200 border-b-2 border-dashed dark:border-gray-800 dark:border-opacity-80 last:border-b-0 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 dark:hover:bg-opacity-40 hover:bg-opacity-30'
                 key={index}>
                 <Link href={`/story/${item.slug}`} prefetch={false}>
