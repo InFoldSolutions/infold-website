@@ -32,6 +32,28 @@ export default function Feed({ meta }: { meta: FeedMeta }): ReactNode {
 
   const scrollParent = useRef<HTMLDivElement | null>(null)
 
+  const onScrollHandler = useCallback((e: Event) => {
+    const scrollElement = scrollParent?.current;
+    const scrollHeight = scrollElement?.scrollHeight || 0
+    const innerHeight = scrollElement?.clientHeight || 0
+    const scrollTop = scrollElement?.scrollTop || 0
+
+    // https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollHeight
+    const isBottom = Math.abs(scrollHeight - innerHeight - scrollTop) < 1
+
+    if (scrollHeight <= innerHeight)
+      return
+
+    if (isBottom && !isLoadMore && !isLoading) {
+      setIsLoadMore(true)
+
+      if (meta.type === 'subreddit')
+        setLastId(data[data.length - 1].id)
+      else
+        setOffset((old: number) => old + 1)
+    }
+  }, [scrollParent, isLoadMore, isLoading, meta, setOffset, setLastId, setIsLoadMore])
+
   // pathname changed
   useEffect(() => {
     closeAllWebSockets()
@@ -42,12 +64,10 @@ export default function Feed({ meta }: { meta: FeedMeta }): ReactNode {
     const fetchInitialData = async () => {
       const res: APIResponse = await loadFeed(meta, offset, lastId)
 
-      if (res.data.length > 0)
+      if (res.meta.success)
         setData(res.data)
       else
         setEndOfFeed(true)
-
-      //setTotalResults(res.meta.total_results || 0)
     }
 
     fetchInitialData()
@@ -57,18 +77,16 @@ export default function Feed({ meta }: { meta: FeedMeta }): ReactNode {
 
   // load more
   useEffect(() => {
-    if (offset > 1 && !endOfFeed && !isLoading) {
+    if ((offset > 1 || lastId !== '') && !endOfFeed && !isLoading) {
       setIsLoadMore(true)
 
       const fetchMoreData = async () => {
         const res: APIResponse = await loadFeed(meta, offset, lastId)
 
-        if (res.data.length > 0)
+        if (res.meta.success)
           setData((prevData: any) => [...prevData, ...res.data])
         else
           setEndOfFeed(true)
-
-        setIsLoadMore(false)
       }
 
       fetchMoreData()
@@ -77,30 +95,8 @@ export default function Feed({ meta }: { meta: FeedMeta }): ReactNode {
     } else if (endOfFeed)
       setIsLoadMore(false)
 
-  }, [offset, endOfFeed, setIsLoadMore])
+  }, [offset, lastId, endOfFeed, meta, setIsLoadMore])
 
-  const onScrollHandler = useCallback((e: Event) => {
-    console.log('onScrollHandler', e)
-
-    const scrollElement = scrollParent?.current;
-    const scrollHeight = scrollElement?.scrollHeight || 0
-    const innerHeight = scrollElement?.clientHeight || 0
-    const scrollTop = scrollElement?.scrollTop || 0
-
-    // Check if bottom
-    // https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollHeight
-    const isBottom = Math.abs(scrollHeight - innerHeight - scrollTop) < 1
-
-    if (scrollHeight <= innerHeight)
-      return
-
-    if (isBottom && !isLoadMore && !isLoading) {
-      setIsLoadMore(true)
-      setOffset((old: number) => old + 1)
-    }
-  }, [isLoadMore, setOffset, setIsLoadMore])
-
-  // for scrollHandler
   useEffect(() => {
     if (scrollParent.current)
       scrollParent.current.addEventListener('scroll', onScrollHandler)
@@ -109,18 +105,18 @@ export default function Feed({ meta }: { meta: FeedMeta }): ReactNode {
       if (scrollParent.current)
         scrollParent.current.removeEventListener('scroll', onScrollHandler)
     }
-  }, [onScrollHandler]);
-  
+  }, [scrollParent, onScrollHandler]);
 
-  function renderPost(type: string, data: Topic | RedditPost, index: number) {
+
+  function renderPost(postData: Topic | RedditPost, type: string, index: number) {
     switch (type) {
       case 'subreddit':
         return (
-          <RedditPreview post={data as RedditPost} key={index} />
+          <RedditPreview post={postData as RedditPost} key={index} />
         )
       default:
         return (
-          <TopicPost topic={data as Topic} key={index} />
+          <TopicPost topic={postData as Topic} key={index} />
         )
     }
   }
@@ -145,7 +141,7 @@ export default function Feed({ meta }: { meta: FeedMeta }): ReactNode {
 
           <ul className='mb-2'>
             {data.map((item: Topic | RedditPost, index: number) => (
-              renderPost(meta.type, item, index)
+              renderPost(item, meta.type, index)
             ))}
           </ul>
 
