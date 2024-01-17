@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
-import Wrapper from '@/components/layout/wrapper'
 
 import { unSlugifyKeyword } from '@/helpers/utils';
+import { permanentRedirect } from 'next/navigation';
 
 export async function generateMetadata(
   { params }: { params: { keyword: string } }
@@ -16,7 +16,5 @@ export async function generateMetadata(
 }
 
 export default async function Keyword({ params }: { params: { keyword: string } }) {
-  return (
-    <Wrapper />
-  )
+  permanentRedirect(`/`)
 }

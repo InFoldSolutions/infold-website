@@ -1,8 +1,7 @@
 import { Metadata } from 'next';
 
-import Wrapper from '@/components/layout/wrapper'
-
 import { unSlugifyKeyword, unSlugifySection } from '@/helpers/utils';
+import { permanentRedirect } from 'next/navigation';
 
 export async function generateMetadata(
   { params }: { params: { section: string } }
@@ -17,7 +16,5 @@ export async function generateMetadata(
 }
 
 export default async function Section({ params }: { params: { section: string } }) {
-  return (
-    <Wrapper />
-  )
+  permanentRedirect(`/`)
 }

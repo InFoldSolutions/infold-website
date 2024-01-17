@@ -7,7 +7,7 @@ import ActionsBar from '@/components/layout/actionsbar'
 import Feed from '@/components/feed/feed'
 import config from '@/config'
 
-export default function Wrapper() {
+export default function FeedWrapper() {
   return (
     <div className='flex items-start flex-row font-mono overflow-y-hidden overflow-x-hidden md:overflow-x-scroll max-h-[100vh]'>
       <ActionsBar />

@@ -1,10 +1,7 @@
 
-import { permanentRedirect } from 'next/navigation'
 import { Metadata } from 'next'
 
-import Wrapper from '@/components/layout/wrapper'
-
-import { slugifyKeyword } from '@/helpers/utils'
+import FeedWrapper from '@/components/feed/wrapper'
 
 export async function generateMetadata(
   { params }: { params: { section: string } }
@@ -16,12 +13,8 @@ export async function generateMetadata(
   }
 }
 
-export default async function Home({ searchParams }: { searchParams: any }) {
-
-  if (searchParams.keywords)
-    permanentRedirect(`/keyword/${slugifyKeyword(decodeURIComponent(searchParams.keywords))}`)
-
+export default async function Home() {
   return (
-    <Wrapper />
+    <FeedWrapper />
   )
 }

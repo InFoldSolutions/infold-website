@@ -37,5 +37,5 @@ export async function generateMetadata(
 }
 
 export default async function Top() {
-  permanentRedirect(`/feed`)
+  permanentRedirect(`/`)
 }
