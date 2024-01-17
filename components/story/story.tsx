@@ -73,8 +73,6 @@ export default function StoryWrapper({ data, modal = false }: { data: any, modal
         <YTMedia data={data.media} />
       }
 
-      <Affiliate slug={data.slug} />
-
       <h3 className='mt-4 text-2xl font-bold'>News Coverage</h3>
 
       {popularArticles.sources.length > 0 && latestArticles.sources.length > 0 &&
