@@ -32,7 +32,7 @@ export default function RootLayout({
         </Suspense>
       }
 
-      <body className={`${inter.className} bg-gray-300 dark:bg-black w-full`}>
+      <body className={`${inter.className} bg-white dark:bg-black w-full`}>
         <AuthContextProvider>
           {modal}
           {children}

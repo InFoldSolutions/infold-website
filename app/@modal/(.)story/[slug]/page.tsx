@@ -14,7 +14,7 @@ export default async function StoryModal({ params }: { params: { slug: string } 
 
   return (
     <Modal>
-      <main className='max-w-full font-mono bg-gray-300 dark:bg-black'>
+      <main className='max-w-full font-mono bg-white dark:bg-black'>
         {data &&
           <div className='p-4 md:p-8 md:px-12 max-w-[1355px] lg:w-[1355px] lg:px-20 flex items-start'>
 
@@ -24,18 +24,18 @@ export default async function StoryModal({ params }: { params: { slug: string } 
 
             <div className='sticky top-[32px] h-auto hidden lg:flex flex-col'>
               {data.sentimentAgg &&
-                <div className='h-auto w-[280px] p-5 bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 hidden lg:flex flex-col mb-4 rounded'>
+                <div className='h-auto w-[280px] p-5 bg-gray-100 dark:bg-gray-800 dark:bg-opacity-60 hidden lg:flex flex-col mb-4 rounded'>
                   <h3 className='text-2xl font-bold mb-2'>Sentiment</h3>
                   <TagsChart aggregation={data.sentimentAgg} />
                 </div>
               }
 
-              <div className='h-auto w-[280px] p-5 bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 hidden lg:flex flex-col mb-4 rounded'>
+              <div className='h-auto w-[280px] p-5 bg-gray-100 dark:bg-gray-800 dark:bg-opacity-60 hidden lg:flex flex-col mb-4 rounded'>
                 <h3 className='text-2xl font-bold mb-4'>Related</h3>
                 <Related slug={data.slug} />
               </div>
 
-              <div className='h-auto w-[280px] p-5 bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 hidden lg:flex flex-col mb-4 rounded'>
+              <div className='h-auto w-[280px] p-5 bg-gray-100 dark:bg-gray-800 dark:bg-opacity-60 hidden lg:flex flex-col mb-4 rounded'>
                 <h3 className='text-2xl font-bold mb-5'>Keywords</h3>
                 <Keywords keywordData={data.keywords} defaultSize={5} />
               </div>

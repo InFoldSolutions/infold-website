@@ -18,7 +18,7 @@ export default function Column({ data, sentiment, expanded }: { data: any, senti
 
   return (
     <div className='basis-1/2'>
-      <div className={`${sentimentData[sentiment].textColor} flex p-2 px-3 items-center justify-center bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 rounded`}>
+      <div className={`${sentimentData[sentiment].textColor} flex p-2 px-3 items-center justify-center bg-gray-100 dark:bg-gray-800 dark:bg-opacity-60 rounded`}>
         <i className={`far ${sentimentData[sentiment].icon} mr-2`} />
         {sentimentData[sentiment].name}
         <span className='ml-auto flex items-center'>
@@ -31,7 +31,7 @@ export default function Column({ data, sentiment, expanded }: { data: any, senti
           const url = item.url || item.articles[0].url
 
           return (
-            <li className='flex dark:hover:bg-gray-800 dark:hover:bg-opacity-40 hover:bg-gray-200 hover:bg-opacity-70 p-4 px-2 relative cursor-pointer border-b-2 border-gray-200 border-dashed dark:border-gray-800 dark:border-opacity-80 last:border-b-0'
+            <li className='flex dark:hover:bg-gray-800 dark:hover:bg-opacity-40 hover:bg-gray-100 hover:bg-opacity-70 p-4 px-2 relative cursor-pointer border-b-2 border-gray-200 border-dashed dark:border-gray-800 dark:border-opacity-80 last:border-b-0'
               onClick={() => window.open(url, '_blank')}
               title={item.summary || item.articles[0].title}
               key={index}>

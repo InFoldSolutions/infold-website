@@ -51,7 +51,7 @@ export default function StoryWrapper({ data, modal = false }: { data: any, modal
       {popularArticles.sources.length > 0 && latestArticles.sources.length > 0 &&
         <div className='lg:flex'>
           <div className='lg:basis-1/2 lg:mr-4 shrink-1 lg:max-w-[50%]'>
-            <div className={`p-2 px-3 mt-4 items-center justify-center bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 rounded hidden lg:flex`}>
+            <div className={`p-2 px-3 mt-4 items-center justify-center bg-gray-100 dark:bg-gray-800 dark:bg-opacity-60 rounded hidden lg:flex`}>
               <i className='fad fa-comments mr-2' /> Popular
 
               <span className='ml-auto flex items-center'>
@@ -64,7 +64,7 @@ export default function StoryWrapper({ data, modal = false }: { data: any, modal
           </div>
 
           <div className='lg:basis-1/2 lg:ml-4 shrink-1 lg:max-w-[50%]'>
-            <div className={`p-2 px-3 mt-4 items-center justify-center bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 rounded hidden lg:flex`}>
+            <div className={`p-2 px-3 mt-4 items-center justify-center bg-gray-100 dark:bg-gray-800 dark:bg-opacity-60 rounded hidden lg:flex`}>
               <i className='fad fa-history mr-2' />Latest
 
               <span className='ml-auto flex items-center'>

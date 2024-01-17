@@ -51,7 +51,7 @@ function Comment({ socialItem }: { socialItem: any }) {
   return (
     <li className={`group rounded mt-3 group select-none cursor-pointer items-center`}
       onClick={() => window.open(socialItem.url, '_blank')} >
-      <div className='relative bg-gray-200 bg-opacity-60 dark:bg-gray-800 dark:bg-opacity-40 hover:bg-opacity-80 hover:dark:bg-opacity-60 p-3 rounded-md text-sm'>
+      <div className='relative bg-gray-100 bg-opacity-60 dark:bg-gray-800 dark:bg-opacity-40 hover:bg-opacity-80 hover:dark:bg-opacity-60 p-3 rounded-md text-sm'>
         <div className='flex items-center mb-1'>
           <span className='mr-2'>
             <Image unoptimized src={'/assets/images/reddit.svg'} alt={socialItem.name || socialItem.source.name} width={35} height={35} className='h-[20px] w-auto max-w-none' />

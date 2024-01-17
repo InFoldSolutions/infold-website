@@ -115,16 +115,16 @@ export default function ChatBot({ suggested }: { suggested: any }) {
   return (
     <div className="flex flex-col w-full items-center mt-2">
       {chatMessages.map((chat: any, index: number) => (
-        <div className={`flex items-start p-4 mt-4 bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 rounded-md items-start justify-between w-auto ${chat.user === 'me' ? 'ml-auto' : 'mr-auto'}`} key={index}>
+        <div className={`flex items-start p-4 mt-4 bg-gray-100 dark:bg-gray-800 dark:bg-opacity-60 rounded-md items-start justify-between w-auto ${chat.user === 'me' ? 'ml-auto' : 'mr-auto'}`} key={index}>
           <span className={`${chat.user === 'me' ? `order-last ml-4` : `mr-4`} text-xl flex items-center text-gray-800 dark:text-gray-200`}>
             <i className={`fad ${chat.user === 'me' ? `fa-user-alt` : 'fa-robot'}`} />
           </span>
           <span className={`${chat.user === 'me' ? `ml-auto` : ''} text-sm flex justify-center items-center`}>
             {chat.message === '' &&
               <span className='flex space-x-2 justify-center items-center mt-2 pt-0.5'>
-                <span className="bg-black dark:bg-gray-200 p-1 w-2 h-2 rounded-full animate-bounce animation-delay-1"></span>
-                <span className="bg-black dark:bg-gray-200 p-1 w-2 h-2 rounded-full animate-bounce animation-delay-2"></span>
-                <span className="bg-black dark:bg-gray-200 p-1 w-2 h-2 rounded-full animate-bounce animation-delay-3"></span>
+                <span className="bg-black dark:bg-gray-100 p-1 w-2 h-2 rounded-full animate-bounce animation-delay-1"></span>
+                <span className="bg-black dark:bg-gray-100 p-1 w-2 h-2 rounded-full animate-bounce animation-delay-2"></span>
+                <span className="bg-black dark:bg-gray-100 p-1 w-2 h-2 rounded-full animate-bounce animation-delay-3"></span>
               </span>
             }
             {chat.user === 'me' && chat.message !== '' &&
@@ -138,7 +138,7 @@ export default function ChatBot({ suggested }: { suggested: any }) {
       ))}
 
       <div className='flex items-stretch w-full items-center mt-4'>
-        <div className="flex flex-grow p-4 bg-gray-200 dark:bg-gray-800 dark:bg-opacity-60 rounded-md items-center">
+        <div className="flex flex-grow p-4 bg-gray-100 dark:bg-gray-800 dark:bg-opacity-60 rounded-md items-center">
           <TextareaAutosize
             ref={textareaRef}
             onKeyDown={onKeyDown}
@@ -156,7 +156,7 @@ export default function ChatBot({ suggested }: { suggested: any }) {
             </span>
           </button>
         </div>
-        <Tooltip message={"Foldy is powered by Llama 2 and customized for each story to provide you with the most relevant information possible"} top={20} right={6} minWidth={220} padding={2}>
+        <Tooltip message={"Foldy is powered by PaLM 2 and customized for each story to provide you with the most relevant information possible"} top={20} right={6} minWidth={220} padding={2}>
           <div className='ml-2 rounded-md border-2 border-gray-200 dark:border-gray-800 dark:border-opacity-60 p-4 hidden md:flex items-center cursor-pointer select-none' onClick={onBtnSubmit}>
             <i className='fad fa-robot mr-3 -mt-1 text-xl' /> Ask Foldy
           </div>

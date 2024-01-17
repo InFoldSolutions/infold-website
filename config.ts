@@ -94,18 +94,18 @@ const config = {
     keyword: 'Donald Trump',
     live: false,
     icon: 'fa-landmark'
-  }/*, {
-    keyword: 'Joe Biden',
-    live: false,
-    icon: 'fa-landmark'
-  }*/, {
-    keyword: 'Ukraine',
-    live: false,
-    icon: 'fa-globe'
   }, {
     keyword: 'Middle East',
     live: false,
     icon: 'fa-globe'
+  }, {
+    keyword: 'Europe',
+    live: false,
+    icon: 'fa-globe'
+  }, {
+    keyword: 'NFL',
+    live: false,
+    icon: 'fa-football-ball'
   }],
 
   topOptions: [

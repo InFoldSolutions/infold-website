@@ -1,7 +1,7 @@
 
 'use client'
 
-import { useState, useEffect, useRef, UIEvent, useCallback } from 'react'
+import { useState, useEffect, useRef, UIEvent, useCallback, ReactNode } from 'react'
 
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
@@ -21,7 +21,7 @@ import type { FeedMeta } from '@/types/feedmeta'
 import type { APIResponse } from '@/types/response'
 import type { Topic } from '@/types/topic'
 
-export default function Feed({ setShowToTop, setTotalResults, showToTop, meta }: { setShowToTop: any, setTotalResults: any, showToTop: boolean, meta: FeedMeta }) {
+export default function Feed({ meta }: { meta: FeedMeta }): ReactNode {
   const pathname = usePathname()
 
   const [data, setData] = useState<any>([])
@@ -31,42 +31,6 @@ export default function Feed({ setShowToTop, setTotalResults, showToTop, meta }:
   const [endOfFeed, setEndOfFeed] = useState(false)
 
   const scrollParent = useRef<HTMLDivElement | null>(null)
-
-  const onScrollHandler = useCallback((e: UIEvent) => {
-
-    const scrollElement = scrollParent?.current;
-    const scrollHeight = scrollElement?.scrollHeight || 0
-    const innerHeight = scrollElement?.clientHeight || 0
-    const scrollTop = scrollElement?.scrollTop || 0
-
-    // Check if bottom
-    // https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollHeight
-    const isBottom = Math.abs(scrollHeight - innerHeight - scrollTop) < 1;
-
-    if (scrollTop > 90 && !showToTop)
-      setShowToTop(true)
-    else if (scrollTop <= 90 && showToTop)
-      setShowToTop(false)
-
-    if (scrollHeight <= innerHeight)
-      return
-
-    if (isBottom && !isLoadMore && !isLoading) {
-      setIsLoadMore(true)
-      setOffset((old: number) => old + 1)
-    }
-  }, [isLoadMore, showToTop, setShowToTop, setOffset, setIsLoadMore])
-
-  // for scrollHandler
-  useEffect(() => {
-    // @ts-ignore
-    scrollParent.current.addEventListener('scroll', onScrollHandler);
-
-    return () => {
-      // @ts-ignore
-      scrollParent.current.removeEventListener('scroll', onScrollHandler);
-    }
-  }, [onScrollHandler]);
 
   // pathname changed
   useEffect(() => {
@@ -83,7 +47,7 @@ export default function Feed({ setShowToTop, setTotalResults, showToTop, meta }:
       else
         setEndOfFeed(true)
 
-      setTotalResults(res.meta.total_results || 0)
+      //setTotalResults(res.meta.total_results || 0)
     }
 
     fetchInitialData()
@@ -115,18 +79,49 @@ export default function Feed({ setShowToTop, setTotalResults, showToTop, meta }:
 
   }, [offset, endOfFeed, setIsLoadMore])
 
+  const onScrollHandler = useCallback((e: Event) => {
+
+    const scrollElement = scrollParent?.current;
+    const scrollHeight = scrollElement?.scrollHeight || 0
+    const innerHeight = scrollElement?.clientHeight || 0
+    const scrollTop = scrollElement?.scrollTop || 0
+
+    // Check if bottom
+    // https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollHeight
+    const isBottom = Math.abs(scrollHeight - innerHeight - scrollTop) < 1
+
+    if (scrollHeight <= innerHeight)
+      return
+
+    if (isBottom && !isLoadMore && !isLoading) {
+      setIsLoadMore(true)
+      setOffset((old: number) => old + 1)
+    }
+  }, [isLoadMore, setOffset, setIsLoadMore])
+
+  // for scrollHandler
+  useEffect(() => {
+    if (scrollParent.current)
+      scrollParent.current.addEventListener('scroll', onScrollHandler)
+
+    return () => {
+      if (scrollParent.current)
+        scrollParent.current.removeEventListener('scroll', onScrollHandler)
+    }
+  }, [onScrollHandler]);
+
   return (
-    <div className='overflow-hidden min-h-[70vh] w-full max-w-full max-w-[500px] lg:w-[500px] border-r-2 border-gray-800'>
+    <div className='overflow-hidden min-h-[70vh] w-full max-w-full min-w-[360px] lg:w-[370px] border-r-2 border-gray-200 dark:border-gray-800'>
       <FeedHeader keyword={meta.keyword} live={meta.live} icon={meta.icon} />
 
-      <div className={`max-h-[94.5vh] overflow-y-auto pb-1 ${(isLoading) ? 'overflow-y-hidden' : ''}`} ref={scrollParent}>
+      <div className={`max-h-[94.5vh] pb-4 overflow-y-auto ${(isLoading) ? 'overflow-y-hidden' : ''}`} ref={scrollParent}>
         <div className={`flex md:mr-auto flex-col`}>
           {isLoading &&
             <Skeleton />
           }
 
           {!isLoading && data.length === 0 &&
-            <div className='flex items-center justify-center w-full h-full min-h-[70vh]'>
+            <div className='flex items-center justify-center w-full h-full min-h-[92vh]'>
               <span className='text-center w-full'>
                 No stories found ..
               </span>
@@ -135,30 +130,22 @@ export default function Feed({ setShowToTop, setTotalResults, showToTop, meta }:
 
           <ul className='mb-2'>
             {data.map((item: Topic, index: number) => (
-              <li className='relative p-4 no-highlight-tap border-gray-200 border-b-2 border-dashed dark:border-gray-800 dark:border-opacity-80 last:border-b-0 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 dark:hover:bg-opacity-40 hover:bg-opacity-30'
+              <li className='relative no-highlight-tap border-gray-200 border-b-2 border-dashed dark:border-gray-800 dark:border-opacity-80 last:border-b-0 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 dark:hover:bg-opacity-40 hover:bg-opacity-30'
                 key={index}>
-                <Link href={`/story/${item.slug}`} prefetch={false}>
+                <Link href={`/story/${item.slug}`} prefetch={false} className='p-4 flex flex-col'>
 
                   {item.category &&
                     <Category data={item} />
                   }
 
-                  <span className='flex items-center mb-2'>
+                  <div className='flex flex-col items-center mb-1'>
                     {(item.media?.length > 0) &&
                       <Thumbs media={item.media} />
                     }
-                    <h3 className='text-3xl font-bold leading-snug text-left md:truncate-2-lines'>
+                    <h3 className='text-2xl font-bold leading-snug text-left md:truncate-2-lines'>
                       {item.title}
                     </h3>
-                  </span>
-
-                  <span className='text-left'>
-                    {item.outline.slice(0, 1).map((outline: any, index: number) => (
-                      <p className='text-base text-gray-600 dark:text-gray-300 truncate-2-lines' key={index}>
-                        {outline}
-                      </p>
-                    ))}
-                  </span>
+                  </div>
 
                   <StoryMeta data={item} time={true} />
                 </Link>
