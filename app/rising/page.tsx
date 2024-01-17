@@ -9,5 +9,5 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Rising() {
-  permanentRedirect(`/feed`)
+  permanentRedirect(`/`)
 }

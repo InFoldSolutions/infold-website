@@ -12,7 +12,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function Rising() {
   return (
-    <Container>
+    <Container header={true}>
       <About />
     </Container>
   )
