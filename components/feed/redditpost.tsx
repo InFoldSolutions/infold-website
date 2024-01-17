@@ -32,7 +32,7 @@ export default function RedditPreview({ post }: { post: RedditPost }) {
 
         <div className='flex items-center text-gray-600 dark:text-gray-300 text-sm font-bold'>
           <span className='mb-1'>
-            {post.subreddit_name_prefixed}
+            {post.subreddit_name_prefixed} <i className='fad fa-external-link ml-0.5 text-xs'></i>
           </span>
         </div>
         <div className='flex flex-col items-center mb-1'>
