@@ -15,9 +15,9 @@ export default function Category({ data }: { data: any }) {
   }, [router])
 
   return (
-    <span className='text-base group flex items-center cursor-pointer mb-1' onClick={openSection}>
+    <span className='text-base group flex items-center mb-1'>
       <i className={`fad ${data.categoryIcon} mr-3 ${data.categoryIcon !== 'fa-user-chart' ? 'text-[17px]' : ''}`} />
-      <span className='group-hover:underline'>{data.category}</span>
+      <span>{data.category}</span>
     </span>
   )
 }
