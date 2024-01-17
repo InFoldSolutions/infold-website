@@ -2,7 +2,7 @@ import { FeedMeta } from '@/types/feedmeta'
 
 export default function FeedHeader({ meta }: { meta: FeedMeta }) {
   return (
-    <div className='relative flex py-3 px-4 bg-gray-100 dark:bg-gray-800 dark:bg-opacity-60 items-center z-40'>
+    <div className='relative flex py-3 px-4 bg-gray-100 dark:bg-gray-800 dark:bg-opacity-60 border-b-2 border-gray-200 dark:border-gray-800 items-center z-40'>
       <div
         className='text-xl text-body-color flex items-center'>
 
