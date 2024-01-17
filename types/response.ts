@@ -1,4 +1,5 @@
 import { Topic } from "@/types/topic"
+import { RedditPost } from "@/types/redditpost"
 
 export type APIResponseMeta = {
   success: boolean
@@ -7,5 +8,20 @@ export type APIResponseMeta = {
 
 export type APIResponse = {
   meta: APIResponseMeta,
-  data: Topic[]
+  data: RedditPost[] | Topic[]
+}
+
+export type APIResponseError = {
+  meta: APIResponseMeta,
+  data: []
+
+  error?: string
+}
+
+export const ErrorAPIResponse = {
+  meta: {
+    success: false,
+    total_results: 0
+  },
+  data: []
 }

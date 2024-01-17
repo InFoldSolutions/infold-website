@@ -2,13 +2,13 @@
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
-import Keyword from '@/components/sidebar/keyword';
+import Keyword from '@/components/story/sidebar/keyword';
 
 import { getInterests, addInterest, removeInterest } from '@/helpers/localstorage';
 import { isBrowser } from '@/helpers/utils';
-import { getTopKeywords } from '@/helpers/api';
+import { getTopKeywords } from '@/apis/infold';
 
-export default function Keywords({ keywordData, defaultSize = 4 }: { keywordData?: any, defaultSize?: number }) {
+export function Keywords({ keywordData, defaultSize = 4 }: { keywordData?: any, defaultSize?: number }) {
 
   const [isLoading, setIsLoading] = useState(true);
   const [keywords, setKeywords] = useState<any>(null)

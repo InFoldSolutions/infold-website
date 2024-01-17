@@ -2,9 +2,9 @@
 
 import Modal from '@/components/layout/modal'
 import StoryWrapper from '@/components/story/story'
-import TagsChart from '@/components/sidebar/tags_chart'
-import Keywords from '@/components/sidebar/keywords'
-import Related from '@/components/sidebar/related'
+import TagsChart from '@/components/story/sidebar/tags_chart'
+import Keywords from '@/components/story/sidebar/keywords'
+import Related from '@/components/story/sidebar/related'
 
 export default function StoryModalWrapper({ data }: { data: any }) {
   return (

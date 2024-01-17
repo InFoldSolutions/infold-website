@@ -8,7 +8,7 @@ import Carousel from '@/components/carousel/carousel'
 
 import { kFormatter } from '@/helpers/utils'
 import { trackEvent } from '@/helpers/gtm'
-import { getTopicAffiliate } from '@/helpers/api'
+import { getTopicAffiliate } from '@/apis/infold'
 
 export default function Affiliate({ slug }: { slug: string }) {
 

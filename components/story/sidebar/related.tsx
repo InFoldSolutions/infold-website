@@ -2,11 +2,11 @@
 
 import { useEffect, useMemo, useState } from 'react';
 
-import RelatedItem from '@/components/sidebar/related_item';
+import RelatedItem from '@/components/story/sidebar/related_item';
 
-import { getTopicRelated } from '@/helpers/api';
+import { getTopicRelated } from '@/apis/infold';
 
-export default function Related({ slug }: { slug: string }) {
+export function Related({ slug }: { slug: string }) {
 
   const [related, setRelated] = useState<any>(null)
   const [showMore, setShowMore] = useState(false);

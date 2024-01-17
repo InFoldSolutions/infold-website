@@ -2,11 +2,11 @@
 
 import Modal from '@/components/layout/modal'
 import StoryWrapper from '@/components/story/story'
-import TagsChart from '@/components/sidebar/tags_chart'
-import Keywords from '@/components/sidebar/keywords'
-import Related from '@/components/sidebar/related'
+import { TrendsChart } from '@/components/story/sidebar/trends'
+import { Keywords } from '@/components/story/sidebar/keywords'
+import { Related } from '@/components/story/sidebar/related'
 
-import { getTopic } from '@/helpers/api'
+import { getTopic } from '@/apis/infold'
 
 export default async function StoryModal({ params }: { params: { slug: string } }) {
 
@@ -25,8 +25,8 @@ export default async function StoryModal({ params }: { params: { slug: string } 
             <div className='sticky top-[32px] h-auto hidden lg:flex flex-col'>
               {data.sentimentAgg &&
                 <div className='h-auto w-[280px] p-5 bg-gray-100 dark:bg-gray-800 dark:bg-opacity-60 hidden lg:flex flex-col mb-4 rounded'>
-                  <h3 className='text-2xl font-bold mb-2'>Sentiment</h3>
-                  <TagsChart aggregation={data.sentimentAgg} />
+                  <h3 className='text-2xl font-bold mb-4'>Trends</h3>
+                  <TrendsChart />
                 </div>
               }
 

@@ -89,23 +89,39 @@ const config = {
   defaultFeeds: [{
     keyword: 'Top Stories',
     live: true,
-    icon: 'fa-fire-alt'
+    icon: 'fad fa-fire-alt',
+    iconColor: 'text-yellow-600',
+    type: 'featured'
   }, {
     keyword: 'Donald Trump',
     live: false,
-    icon: 'fa-landmark'
+    icon: 'fad fa-landmark',
+    iconColor: 'text-gray-400',
+    type: 'keyword'
   }, {
     keyword: 'Middle East',
     live: false,
-    icon: 'fa-globe'
+    icon: 'fad fa-globe',
+    iconColor: 'text-blue-400',
+    type: 'keyword'
+  }, {
+    keyword: 'r/all',
+    live: false,
+    icon: 'fab fa-reddit-alien',
+    iconColor: 'text-orange-500',
+    type: 'subreddit'
   }, {
     keyword: 'Europe',
     live: false,
-    icon: 'fa-globe'
+    icon: 'fad fa-globe',
+    iconColor: 'text-blue-400',
+    type: 'keyword'
   }, {
     keyword: 'NFL',
     live: false,
-    icon: 'fa-football-ball'
+    icon: 'fad fa-football-ball',
+    iconColor: 'text-green-400',
+    type: 'keyword'
   }],
 
   topOptions: [

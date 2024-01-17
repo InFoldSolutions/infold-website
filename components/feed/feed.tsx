@@ -1,31 +1,31 @@
 
 'use client'
 
-import { useState, useEffect, useRef, UIEvent, useCallback, ReactNode } from 'react'
+import { useState, useEffect, useRef, useCallback, ReactNode } from 'react'
 
 import { usePathname } from 'next/navigation'
-import Link from 'next/link'
 
 import { closeAllWebSockets } from '@/websocket'
 
-import Thumbs from '@/components/story/thumbs'
-import StoryMeta from '@/components/story/meta'
-import Category from '@/components/story/category'
 import Loading from '@/components/helpers/loading'
 import Skeleton from '@/components/feed/skeleton'
 import FeedHeader from '@/components/feed/header'
+import TopicPost from '@/components/feed/topic'
+import RedditPreview from '@/components/feed/redditpost'
 
-import { getKeywordFeed } from '@/helpers/api'
+import { loadFeed } from '@/apis/helpers'
 
 import type { FeedMeta } from '@/types/feedmeta'
 import type { APIResponse } from '@/types/response'
 import type { Topic } from '@/types/topic'
+import type { RedditPost } from '@/types/redditpost'
 
 export default function Feed({ meta }: { meta: FeedMeta }): ReactNode {
   const pathname = usePathname()
 
   const [data, setData] = useState<any>([])
   const [offset, setOffset] = useState<number>(1)
+  const [lastId, setLastId] = useState<string>('')
   const [isLoadMore, setIsLoadMore] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const [endOfFeed, setEndOfFeed] = useState(false)
@@ -40,7 +40,7 @@ export default function Feed({ meta }: { meta: FeedMeta }): ReactNode {
   // load data on load
   useEffect(() => {
     const fetchInitialData = async () => {
-      const res: APIResponse = await getKeywordFeed(meta.keyword)
+      const res: APIResponse = await loadFeed(meta, offset, lastId)
 
       if (res.data.length > 0)
         setData(res.data)
@@ -61,7 +61,7 @@ export default function Feed({ meta }: { meta: FeedMeta }): ReactNode {
       setIsLoadMore(true)
 
       const fetchMoreData = async () => {
-        const res: APIResponse = await getKeywordFeed(meta.keyword, offset)
+        const res: APIResponse = await loadFeed(meta, offset, lastId)
 
         if (res.data.length > 0)
           setData((prevData: any) => [...prevData, ...res.data])
@@ -80,6 +80,7 @@ export default function Feed({ meta }: { meta: FeedMeta }): ReactNode {
   }, [offset, endOfFeed, setIsLoadMore])
 
   const onScrollHandler = useCallback((e: Event) => {
+    console.log('onScrollHandler', e)
 
     const scrollElement = scrollParent?.current;
     const scrollHeight = scrollElement?.scrollHeight || 0
@@ -109,10 +110,24 @@ export default function Feed({ meta }: { meta: FeedMeta }): ReactNode {
         scrollParent.current.removeEventListener('scroll', onScrollHandler)
     }
   }, [onScrollHandler]);
+  
+
+  function renderPost(type: string, data: Topic | RedditPost, index: number) {
+    switch (type) {
+      case 'subreddit':
+        return (
+          <RedditPreview post={data as RedditPost} key={index} />
+        )
+      default:
+        return (
+          <TopicPost topic={data as Topic} key={index} />
+        )
+    }
+  }
 
   return (
     <div className='overflow-hidden min-h-[70vh] w-full max-w-full min-w-[360px] lg:w-[370px] border-r-2 border-gray-200 dark:border-gray-800'>
-      <FeedHeader keyword={meta.keyword} live={meta.live} icon={meta.icon} />
+      <FeedHeader meta={meta} />
 
       <div className={`max-h-[94.5vh] pb-4 overflow-y-auto ${(isLoading) ? 'overflow-y-hidden' : ''}`} ref={scrollParent}>
         <div className={`flex md:mr-auto flex-col`}>
@@ -129,27 +144,8 @@ export default function Feed({ meta }: { meta: FeedMeta }): ReactNode {
           }
 
           <ul className='mb-2'>
-            {data.map((item: Topic, index: number) => (
-              <li className='relative no-highlight-tap border-gray-200 border-b-2 border-dashed dark:border-gray-800 dark:border-opacity-80 last:border-b-0 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 dark:hover:bg-opacity-40 hover:bg-opacity-30'
-                key={index}>
-                <Link href={`/story/${item.slug}`} prefetch={false} className='p-4 flex flex-col'>
-
-                  {item.category &&
-                    <Category data={item} />
-                  }
-
-                  <div className='flex flex-col items-center mb-1'>
-                    {(item.media?.length > 0) &&
-                      <Thumbs media={item.media} />
-                    }
-                    <h3 className='text-2xl font-bold leading-snug text-left md:truncate-2-lines'>
-                      {item.title}
-                    </h3>
-                  </div>
-
-                  <StoryMeta data={item} time={true} />
-                </Link>
-              </li>
+            {data.map((item: Topic | RedditPost, index: number) => (
+              renderPost(meta.type, item, index)
             ))}
           </ul>
 

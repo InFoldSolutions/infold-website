@@ -45,7 +45,7 @@ export default function Keyword({ keyword }: { keyword: any, interests: string[]
           target='_blank'
           prefetch={false}
           className='group/image'>
-          <span className='group-hover/image:border-gray-400 border-2 bg-gray-100 dark:border-gray-600 dark:bg-gray-200 opacity:60 group-hover/image:dark:border-gray-200 p-px flex items-center justify-center h-8 w-8 rounded relative'>
+          <span className='group-hover/image:border-gray-400 border-2 bg-white dark:border-gray-600 dark:bg-gray-200 opacity:60 group-hover/image:dark:border-gray-200 p-px flex items-center justify-center h-8 w-8 rounded relative'>
             <Image unoptimized src={icon} alt={label} fill={true} className={`h-8 w-8 rounded ${padding}`} />
           </span>
         </Link>

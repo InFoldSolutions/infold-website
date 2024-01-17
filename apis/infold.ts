@@ -1,3 +1,9 @@
+
+//
+// InFold API docs
+// https://api.infold.ai/docs
+//
+
 import { permanentRedirect } from 'next/navigation'
 
 import config from '@/config';
@@ -7,16 +13,9 @@ import { filterKeyword } from '@/transformers/keyword';
 
 import { searchParamsToQueryParams } from '@/helpers/utils';
 
-import { APIResponse } from '@/types/response';
+import { APIResponse, ErrorAPIResponse } from '@/types/response';
 import { Topic } from '@/types/topic';
 
-const ErrorAPIResponse = {
-  meta: {
-    success: false,
-    total_results: 0
-  },
-  data: []
-}
 
 export async function getTopFeed(bucket: string = config.api.defaultBucket, page: number = 1): Promise<APIResponse> {
   try {
@@ -83,6 +82,29 @@ export async function getKeywordFeed(keyword: string, page: number = 1): Promise
     }
   } catch (error) {
     console.error('Failed to fetch keyword feed data', error)
+    return ErrorAPIResponse
+  }
+}
+
+export async function getFeaturedFeed(page: number = 1): Promise<APIResponse> {
+  try {
+    const url = `${config.api.url}/topics/featured?page=${page}`
+    const res = await fetch(url, { next: { revalidate: 1 } })
+
+    if (!res.ok)
+      throw new Error('Response not ok')
+
+    const data = await res.json()
+
+    if (!data.topics)
+      throw new Error('Topics not found')
+
+    return {
+      meta: data.meta,
+      data: data.topics.filter(filterStory).map(transformStory)
+    }
+  } catch (error) {
+    console.error('Failed to fetch featured feed data', error)
     return ErrorAPIResponse
   }
 }
