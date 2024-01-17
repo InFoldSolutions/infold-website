@@ -126,7 +126,7 @@ export default function Feed({ meta }: { meta: FeedMeta }): ReactNode {
   }
 
   return (
-    <div className='overflow-hidden min-h-[70vh] w-full max-w-full min-w-[360px] lg:w-[370px] border-r-2 border-gray-200 dark:border-gray-800'>
+    <div className='overflow-hidden min-h-[70vh] w-full max-w-full min-w-[89vw] md:min-w-[370px] border-r-2 border-gray-200 dark:border-gray-800'>
       <FeedHeader meta={meta} />
 
       <div className={`max-h-[94.5vh] pb-4 overflow-y-auto ${(isLoading) ? 'overflow-y-hidden' : ''}`} ref={scrollParent}>
