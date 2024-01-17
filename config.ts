@@ -99,13 +99,19 @@ const config = {
     iconColor: 'text-gray-400',
     type: 'keyword'
   }, {
+    keyword: 'r/all',
+    live: false,
+    icon: 'fab fa-reddit-alien',
+    iconColor: 'text-orange-500',
+    type: 'subreddit'
+  }, {
     keyword: 'Middle East',
     live: false,
     icon: 'fad fa-globe',
     iconColor: 'text-blue-400',
     type: 'keyword'
   }, {
-    keyword: 'r/all',
+    keyword: 'r/worldnews',
     live: false,
     icon: 'fab fa-reddit-alien',
     iconColor: 'text-orange-500',
@@ -117,10 +123,10 @@ const config = {
     iconColor: 'text-blue-400',
     type: 'keyword'
   }, {
-    keyword: 'NFL',
+    keyword: 'China',
     live: false,
-    icon: 'fad fa-football-ball',
-    iconColor: 'text-green-400',
+    icon: 'fad fa-globe',
+    iconColor: 'text-blue-400',
     type: 'keyword'
   }],
 

@@ -57,6 +57,6 @@ export const data = {
   ],
 };
 
-export function TrendsChart() {
+export default function TrendsChart() {
   return <Line options={options} data={data} />;
 }

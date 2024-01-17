@@ -8,7 +8,7 @@ import { getInterests, addInterest, removeInterest } from '@/helpers/localstorag
 import { isBrowser } from '@/helpers/utils';
 import { getTopKeywords } from '@/apis/infold';
 
-export function Keywords({ keywordData, defaultSize = 4 }: { keywordData?: any, defaultSize?: number }) {
+export default function Keywords({ keywordData, defaultSize = 4 }: { keywordData?: any, defaultSize?: number }) {
 
   const [isLoading, setIsLoading] = useState(true);
   const [keywords, setKeywords] = useState<any>(null)

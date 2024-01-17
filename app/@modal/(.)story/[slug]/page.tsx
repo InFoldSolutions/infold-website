@@ -2,9 +2,9 @@
 
 import Modal from '@/components/layout/modal'
 import StoryWrapper from '@/components/story/story'
-import { TrendsChart } from '@/components/story/sidebar/trends'
-import { Keywords } from '@/components/story/sidebar/keywords'
-import { Related } from '@/components/story/sidebar/related'
+import TrendsChart from '@/components/story/sidebar/trends'
+import Keywords from '@/components/story/sidebar/keywords'
+import Related from '@/components/story/sidebar/related'
 
 import { getTopic } from '@/apis/infold'
 

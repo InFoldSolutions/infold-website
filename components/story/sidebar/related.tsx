@@ -6,7 +6,7 @@ import RelatedItem from '@/components/story/sidebar/related_item';
 
 import { getTopicRelated } from '@/apis/infold';
 
-export function Related({ slug }: { slug: string }) {
+export default function Related({ slug }: { slug: string }) {
 
   const [related, setRelated] = useState<any>(null)
   const [showMore, setShowMore] = useState(false);

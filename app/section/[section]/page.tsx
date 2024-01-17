@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 
-import { unSlugifyKeyword, unSlugifySection } from '@/helpers/utils';
+import { unSlugifySection } from '@/helpers/utils';
 import { permanentRedirect } from 'next/navigation';
 
 export async function generateMetadata(
