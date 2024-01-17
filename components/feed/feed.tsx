@@ -64,7 +64,7 @@ export default function Feed({ meta }: { meta: FeedMeta }): ReactNode {
     const fetchInitialData = async () => {
       const res: APIResponse = await loadFeed(meta, offset, lastId)
 
-      if (res.meta.success)
+      if (res.meta.success && res.data.length > 0)
         setData(res.data)
       else
         setEndOfFeed(true)
@@ -83,7 +83,7 @@ export default function Feed({ meta }: { meta: FeedMeta }): ReactNode {
       const fetchMoreData = async () => {
         const res: APIResponse = await loadFeed(meta, offset, lastId)
 
-        if (res.meta.success)
+        if (res.meta.success && res.data.length > 0)
           setData((prevData: any) => [...prevData, ...res.data])
         else
           setEndOfFeed(true)
