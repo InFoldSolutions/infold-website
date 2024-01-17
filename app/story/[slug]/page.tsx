@@ -61,6 +61,7 @@ export default async function Topic({ params, searchParams }: { params: { slug: 
         <div className='sticky top-4 h-auto hidden lg:flex flex-col'>
           {data.sentimentAgg &&
             <div className='h-auto w-[280px] p-5 bg-gray-100 dark:bg-gray-800 dark:bg-opacity-60 hidden lg:flex flex-col mb-4 rounded'>
+              <h3 className='text-2xl font-bold mb-4'>Trends</h3>
               <TrendsChart />
             </div>
           }
