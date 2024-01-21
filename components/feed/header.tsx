@@ -102,7 +102,7 @@ export default function FeedHeader({ meta, removeFeed, setMeta }: { meta: FeedMe
 
       <div className="flex ml-auto items-center">
         {meta.live &&
-          <div className="mr-4 text-red-400 flex items-center">
+          <div className="mr-1 text-red-400 flex items-center">
             <span className="flex relative h-3 w-3 mr-2 rounded-full">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
@@ -111,7 +111,7 @@ export default function FeedHeader({ meta, removeFeed, setMeta }: { meta: FeedMe
           </div>
         }
 
-        <div>
+        <div className='text-center'>
           {!meta.edit && meta.type !== 'featured' &&
             <Tooltip message='Edit feed' top={10} right={2} padding={1} minWidth={85}>
               <i className='fad fa-sliders-h text-xl cursor-pointer opacity-40 hover:opacity-100' onClick={editFeed} />
