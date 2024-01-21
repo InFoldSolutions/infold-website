@@ -112,21 +112,21 @@ export default function FeedHeader({ meta, removeFeed, setMeta }: { meta: FeedMe
         }
 
         <div>
-          {!meta.edit &&
-            <Tooltip message='Edit feed' top={10} right={2} padding={1} minWidth={77}>
+          {!meta.edit && meta.type !== 'featured' &&
+            <Tooltip message='Edit feed' top={10} right={2} padding={1} minWidth={85}>
               <i className='fad fa-sliders-h text-xl cursor-pointer opacity-40 hover:opacity-100' onClick={editFeed} />
             </Tooltip>
           }
           {meta.edit &&
             <span className='flex flex-row items-center'>
-              <Tooltip message='Apply changes' top={10} right={3} padding={1} minWidth={103}>
+              <Tooltip message='Apply changes' top={10} right={3} padding={1} minWidth={110}>
                 <i className='fad fa-check-square text-2xl cursor-pointer text-green-500 opacity-40 hover:opacity-100 mr-2' onClick={applyChanges} />
               </Tooltip>
-              <Tooltip message='Cancel edit' top={10} right={3} padding={1} minWidth={90}>
+              <Tooltip message='Cancel edit' top={10} right={3} padding={1} minWidth={100}>
                 <i className='fad fa-window-close text-2xl cursor-pointer text-gray-500 dark:text-white opacity-40 hover:opacity-100' onClick={cancelEdit} />
               </Tooltip>
               <span className='px-2 text-gray-400 dark:text-white h-full flex opacity-50'>|</span>
-              <Tooltip message='Remove feed' top={10} right={3} padding={1} minWidth={90}>
+              <Tooltip message='Remove feed' top={10} right={3} padding={1} minWidth={100}>
                 <i className='fad fa-trash text-xl cursor-pointer text-blue-500 opacity-40 hover:opacity-100' onClick={removeCurrentFeed} />
               </Tooltip>
             </span>
