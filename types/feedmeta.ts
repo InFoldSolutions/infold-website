@@ -1,8 +1,10 @@
 // Feed column meta
 export type FeedMeta = {
-  keyword: string
   type: string
   icon: string
   iconColor: string
+  keyword: string
   live: boolean
+  id?: string
+  edit?: boolean
 }

@@ -1,28 +1,29 @@
-"use client"
+'use client'
 
-import { useState, useEffect, createContext } from 'react';
-import { onAuthStateChanged, getAuth, User } from 'firebase/auth';
-import app from '@/firebase/app';
+import { useState, useEffect, createContext } from 'react'
+import { onAuthStateChanged, getAuth, User } from 'firebase/auth'
 
-const auth = getAuth(app);
+import app from '@/context/firebase/app'
+
+const auth = getAuth(app)
 
 export const AuthContext = createContext<{ user: User | null }>({
   user: null
-});
+})
 
 export const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
 
-  const [user, setUser] = useState<null | User>(null);
+  const [user, setUser] = useState<null | User>(null)
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (userState) => {
       if (userState)
-        setUser(userState);
+        setUser(userState)
       else
-        setUser(null);
+        setUser(null)
     });
 
-    return () => unsubscribe();
+    return () => unsubscribe()
   }, []);
 
   return (

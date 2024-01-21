@@ -13,8 +13,6 @@ export default function RedditPreview({ post }: { post: RedditPost }) {
   const video = useRef<HTMLVideoElement>(null)
 
   const onVideoClick = useCallback((e: UIEvent) => {
-    console.log('video click', e)
-    
     e.stopPropagation();
     e.nativeEvent.stopImmediatePropagation();
 
@@ -31,7 +29,7 @@ export default function RedditPreview({ post }: { post: RedditPost }) {
       <Link href={`https://www.reddit.com${post.permalink}`} prefetch={false} className='p-4 flex flex-col' target='_blank'>
 
         <div className='flex items-center text-gray-600 dark:text-gray-300 text-sm font-bold'>
-          <span className='mb-1'>
+          <span>
             {post.subreddit_name_prefixed} <i className='fad fa-external-link ml-0.5 text-xs'></i>
           </span>
         </div>
@@ -54,9 +52,11 @@ export default function RedditPreview({ post }: { post: RedditPost }) {
           <span className='items-center md:mr-3'>
             <i className='fad fa-clock mr-2'></i>
             <Suspense fallback={null}>
-              <TimeAgo
-                date={post.created * 1000}
-              />
+              {post.created &&
+                <TimeAgo
+                  date={post.created * 1000}
+                />
+              }
             </Suspense>
           </span>
           <span className='ml-auto flex-row flex items-center'>

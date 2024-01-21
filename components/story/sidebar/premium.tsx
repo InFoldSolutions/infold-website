@@ -6,7 +6,7 @@ import Image from 'next/image'
 
 import { AuthContext } from '@/context/auth'
 
-import { signInWithLink, signInWithGoogle, signInWithTwitter } from '@/firebase/signIn'
+import { signInWithLink, signInWithGoogle, signInWithTwitter } from '@/context/firebase/signIn'
 
 import { isValidEmail } from '@/helpers/utils'
 

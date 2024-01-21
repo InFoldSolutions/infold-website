@@ -40,9 +40,11 @@ export default function TopicPost({ topic }: { topic: Topic }) {
             <span className='items-center md:mr-3'>
               <i className='fad fa-clock mr-2'></i>
               <Suspense fallback={null}>
-                <TimeAgo
-                  date={new Date(topic.updated_at).getTime()}
-                />
+                {topic.updated_at &&
+                  <TimeAgo
+                    date={new Date(topic.updated_at).getTime()}
+                  />
+                }
               </Suspense>
             </span>
             {topic.meta?.sources > 0 &&

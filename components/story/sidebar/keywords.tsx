@@ -1,11 +1,9 @@
 'use client'
 
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import Keyword from '@/components/story/sidebar/keyword';
 
-import { getInterests, addInterest, removeInterest } from '@/helpers/localstorage';
-import { isBrowser } from '@/helpers/utils';
 import { getTopKeywords } from '@/apis/infold';
 
 export default function Keywords({ keywordData, defaultSize = 4 }: { keywordData?: any, defaultSize?: number }) {
@@ -15,7 +13,6 @@ export default function Keywords({ keywordData, defaultSize = 4 }: { keywordData
   const [showMore, setShowMore] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize] = useState(defaultSize);
-  const [interests, setInterests] = useState<string[]>((isBrowser) ? getInterests() : [])
 
   const moreKeywords = useMemo(() => keywords && keywords.length > pageSize * currentPage, [keywords, currentPage, pageSize]);
 
@@ -51,15 +48,6 @@ export default function Keywords({ keywordData, defaultSize = 4 }: { keywordData
       setShowMore(false);
   }, [keywords, currentPage, pageSize, moreKeywords]);
 
-  const toggleInterest = useCallback((interest: string) => {
-    if (interests.includes(interest)) {
-      removeInterest(interest)
-      setInterests((current: string[]) => current.filter((item) => item !== interest))
-    } else {
-      addInterest(interest)
-      setInterests((current: string[]) => [...current, interest])
-    }
-  }, [interests, setInterests])
 
   if (isLoading)
     return (<div className='w-auto text-small text-center py-6 mt-1 mb-3'>Loading ..</div>);
@@ -69,11 +57,11 @@ export default function Keywords({ keywordData, defaultSize = 4 }: { keywordData
   return (
     <ul>
       {currentPage === 1 && (keywords && keywords.length > 0) && keywords.slice(0, pageSize).map((keyword: any, index: number) => (
-        <Keyword keyword={keyword} interests={interests} toggleInterest={toggleInterest} key={index} />
+        <Keyword keyword={keyword} key={index} />
       ))}
       {currentPage > 1 &&
         keywords.slice(pageSize * (currentPage - 1), pageSize * currentPage).map((keyword: any, index: number) => (
-          <Keyword keyword={keyword} interests={interests} toggleInterest={toggleInterest} key={index} />
+          <Keyword keyword={keyword} key={index} />
         ))
       }
       <div className='flex'>

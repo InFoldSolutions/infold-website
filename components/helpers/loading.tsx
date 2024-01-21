@@ -1,5 +1,5 @@
 
-import Spinner from "@/components/helpers/spinner"
+import Spinner from '@/components/helpers/spinner'
 
 export default function Loading() {
   return (

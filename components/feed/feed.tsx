@@ -1,36 +1,66 @@
-
 'use client'
 
-import { useState, useEffect, useRef, useCallback, ReactNode } from 'react'
+import { useState, useEffect, useRef, useCallback, ReactNode, useMemo, useReducer } from 'react'
 
 import { usePathname } from 'next/navigation'
 
 import { closeAllWebSockets } from '@/websocket'
 
+import { feedDataReducer, loadFeedData } from '@/reducers/feedData'
+
 import Loading from '@/components/helpers/loading'
 import Skeleton from '@/components/feed/skeleton'
 import FeedHeader from '@/components/feed/header'
-import TopicPost from '@/components/feed/topic'
-import RedditPreview from '@/components/feed/redditpost'
-
-import { loadFeed } from '@/apis/helpers'
+import RenderPost from '@/components/feed/renderPost'
 
 import type { FeedMeta } from '@/types/feedmeta'
 import type { APIResponse } from '@/types/response'
-import type { Topic } from '@/types/topic'
-import type { RedditPost } from '@/types/redditpost'
 
-export default function Feed({ meta }: { meta: FeedMeta }): ReactNode {
+export default function Feed({ meta, removeFeed, setMeta }: { meta: FeedMeta, removeFeed: any, setMeta: any }): ReactNode {
   const pathname = usePathname()
 
-  const [data, setData] = useState<any>([])
+  const [data, dispatchData] = useReducer(feedDataReducer, []);
   const [offset, setOffset] = useState<number>(1)
   const [lastId, setLastId] = useState<string>('')
-  const [isLoadMore, setIsLoadMore] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
+  const [isLoadingMore, setIsLoadingMore] = useState(false)
   const [endOfFeed, setEndOfFeed] = useState(false)
 
   const scrollParent = useRef<HTMLDivElement | null>(null)
+
+  const fetchInitialData = useMemo(() => async () => {
+    const res: APIResponse = await loadFeedData(meta, offset, lastId)
+
+    if (res.meta.success && res.data.length > 0)
+      dispatchData({
+        type: 'load',
+        data: res.data
+      })
+    else {
+      dispatchData({
+        type: 'clear',
+        data: []
+      })
+
+      setEndOfFeed(true)
+    }
+
+    setIsLoading(false)
+  }, [offset, lastId, meta])
+
+  const fetchMoreData = useMemo(() => async () => {
+    const res: APIResponse = await loadFeedData(meta, offset, lastId)
+
+    if (res.meta.success && res.data.length > 0) {
+      dispatchData({
+        type: 'more',
+        data: res.data
+      })
+    } else
+      setEndOfFeed(true)
+
+    setIsLoadingMore(false)
+  }, [offset, lastId, meta])
 
   const onScrollHandler = useCallback((e: Event) => {
     const scrollElement = scrollParent?.current;
@@ -41,61 +71,59 @@ export default function Feed({ meta }: { meta: FeedMeta }): ReactNode {
     // https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollHeight
     const isBottom = Math.abs(scrollHeight - innerHeight - scrollTop) < 1
 
-    if (scrollHeight <= innerHeight)
-      return
+    if (isBottom && !isLoadingMore && !endOfFeed) {
+      setIsLoadingMore(true)
 
-    if (isBottom && !isLoadMore && !isLoading) {
-      setIsLoadMore(true)
-
-      if (meta.type === 'subreddit')
+      if (meta.type === 'subreddit' && data.length > 0)
         setLastId(data[data.length - 1].id)
       else
         setOffset((old: number) => old + 1)
     }
-  }, [scrollParent, isLoadMore, isLoading, meta, setOffset, setLastId, setIsLoadMore])
+  }, [scrollParent, isLoadingMore, endOfFeed, meta, data])
 
   // pathname changed
   useEffect(() => {
     closeAllWebSockets()
   }, [pathname])
 
-  // load data on load
+  // meta changed
   useEffect(() => {
-    const fetchInitialData = async () => {
-      const res: APIResponse = await loadFeed(meta, offset, lastId)
+    if (meta.edit && !meta.keyword && data.length > 0) {
+      dispatchData({
+        type: 'clear',
+        data: []
+      })
+    } else if ((meta.keyword && data.length > 0) ||
+      (meta.keyword && !meta.edit && data.length === 0 && !isLoading) ||
+      (meta.keyword && meta.edit)) {
+      setOffset(1)
+      setLastId('')
 
-      if (res.meta.success && res.data.length > 0)
-        setData(res.data)
-      else
-        setEndOfFeed(true)
+      fetchInitialData()
+        .catch(console.error)
+    }
+  }, [meta])
+
+  // initial load
+  useEffect(() => {
+    if (!meta.keyword) {
+      setIsLoading(false)
+      setEndOfFeed(true)
+      return
     }
 
     fetchInitialData()
       .catch(console.error)
-      .finally(() => setIsLoading(false))
   }, [])
 
   // load more
   useEffect(() => {
     if ((offset > 1 || lastId !== '') && !endOfFeed && !isLoading) {
-      setIsLoadMore(true)
-
-      const fetchMoreData = async () => {
-        const res: APIResponse = await loadFeed(meta, offset, lastId)
-
-        if (res.meta.success && res.data.length > 0)
-          setData((prevData: any) => [...prevData, ...res.data])
-        else
-          setEndOfFeed(true)
-      }
-
       fetchMoreData()
         .catch(console.error)
-        .finally(() => setIsLoadMore(false))
     } else if (endOfFeed)
-      setIsLoadMore(false)
-
-  }, [offset, lastId, endOfFeed, meta, setIsLoadMore])
+      setIsLoadingMore(false)
+  }, [offset, lastId, endOfFeed, isLoading])
 
   useEffect(() => {
     if (scrollParent.current)
@@ -105,25 +133,11 @@ export default function Feed({ meta }: { meta: FeedMeta }): ReactNode {
       if (scrollParent.current)
         scrollParent.current.removeEventListener('scroll', onScrollHandler)
     }
-  }, [scrollParent, onScrollHandler]);
-
-
-  function renderPost(postData: Topic | RedditPost, type: string, index: number) {
-    switch (type) {
-      case 'subreddit':
-        return (
-          <RedditPreview post={postData as RedditPost} key={index} />
-        )
-      default:
-        return (
-          <TopicPost topic={postData as Topic} key={index} />
-        )
-    }
-  }
+  }, [scrollParent]);
 
   return (
     <div className='overflow-hidden min-h-[70vh] w-full max-w-full min-w-[89vw] md:min-w-[370px] border-r-2 border-gray-200 dark:border-gray-800'>
-      <FeedHeader meta={meta} />
+      <FeedHeader meta={meta} removeFeed={removeFeed} setMeta={setMeta} />
 
       <div className={`max-h-[94.5vh] pb-8 overflow-y-auto ${(isLoading) ? 'overflow-y-hidden' : ''}`} ref={scrollParent}>
         <div className={`flex md:mr-auto flex-col`}>
@@ -132,7 +146,7 @@ export default function Feed({ meta }: { meta: FeedMeta }): ReactNode {
           }
 
           {!isLoading && data.length === 0 &&
-            <div className='flex items-center justify-center w-full h-full min-h-[92vh]'>
+            <div className='flex items-center justify-center w-full h-full min-h-[90vh]'>
               <span className='text-center w-full'>
                 No stories found ..
               </span>
@@ -140,12 +154,12 @@ export default function Feed({ meta }: { meta: FeedMeta }): ReactNode {
           }
 
           <ul className='mb-2'>
-            {data.map((item: Topic | RedditPost, index: number) => (
-              renderPost(item, meta.type, index)
+            {data.map((item: any, index: number) => (
+              <RenderPost item={item} type={meta.type} key={index} />
             ))}
           </ul>
 
-          {isLoadMore &&
+          {isLoadingMore &&
             <Loading />
           }
         </div>

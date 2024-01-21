@@ -6,8 +6,6 @@
 
 import { permanentRedirect } from 'next/navigation'
 
-import config from '@/config';
-
 import { transformStory, filterStory } from '@/transformers/story';
 import { filterKeyword } from '@/transformers/keyword';
 
@@ -15,6 +13,8 @@ import { searchParamsToQueryParams } from '@/helpers/utils';
 
 import { APIResponse, ErrorAPIResponse } from '@/types/response';
 import { Topic } from '@/types/topic';
+
+import config from '@/config';
 
 
 export async function getTopFeed(bucket: string = config.api.defaultBucket, page: number = 1): Promise<APIResponse> {

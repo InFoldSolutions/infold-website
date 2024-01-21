@@ -97,7 +97,7 @@ const config = {
     live: false,
     icon: 'fad fa-landmark',
     iconColor: 'text-gray-400',
-    type: 'keyword'
+    type: 'topic'
   }, {
     keyword: 'r/all',
     live: false,
@@ -109,7 +109,7 @@ const config = {
     live: false,
     icon: 'fad fa-globe',
     iconColor: 'text-blue-400',
-    type: 'keyword'
+    type: 'topic'
   }, {
     keyword: 'r/worldnews',
     live: false,
@@ -121,13 +121,13 @@ const config = {
     live: false,
     icon: 'fad fa-globe',
     iconColor: 'text-blue-400',
-    type: 'keyword'
+    type: 'topic'
   }, {
     keyword: 'China',
     live: false,
     icon: 'fad fa-globe',
     iconColor: 'text-blue-400',
-    type: 'keyword'
+    type: 'topic'
   }],
 
   topOptions: [

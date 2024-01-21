@@ -1,5 +1,6 @@
 // Topic, story item
 export type Topic = {
+  id: string
   slug: string
   articles: number
   meta: any

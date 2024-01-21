@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation'
 
 import { slugifyKeyword, unSlugifyKeyword } from '@/helpers/utils';
 
-export default function Keyword({ keyword }: { keyword: any, interests: string[], toggleInterest: any }) {
+export default function Keyword({ keyword }: { keyword: any }) {
   const pathname = usePathname()
   const pathnameParts = pathname.split('/')
   const paramKeyword = pathnameParts[2] ? unSlugifyKeyword(pathnameParts[2]) : null

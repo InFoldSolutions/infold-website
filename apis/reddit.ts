@@ -5,28 +5,27 @@
 //
 
 import { RedditPost } from '@/types/redditpost'
-import { APIResponse } from '@/types/response'
+import { APIResponse, ErrorAPIResponse } from '@/types/response'
 
-export async function getSubredditJSON(subreddit: string, lastId: string): Promise<APIResponse> {
+export async function getSubredditJSON(subreddit: string, lastId?: string): Promise<APIResponse> {
   if (subreddit.includes('r/'))
     subreddit = subreddit.split('r/')[1]
+  if (subreddit.length < 3)
+    return ErrorAPIResponse
 
   let posts: RedditPost[] = []
   let pageSize: number = 25
+  let url = `https://www.reddit.com/r/${subreddit}.json?count=${pageSize}`
+
+  if (lastId)
+    url += `&after=${lastId}`
 
   try {
-    posts = await fetch(`https://www.reddit.com/r/${subreddit}.json?count=${pageSize}&after=${lastId}`)
+    posts = await fetch(url)
       .then(res => res.json())
       .then(json => json.data.children.map((c: any) => c.data)) // example response: https://www.reddit.com/r/all.json
   } catch (error) {
-    console.error('Failed to fetch subreddit data', error)
-    return {
-      meta: {
-        success: false,
-        total_results: 0
-      },
-      data: []
-    }
+    return ErrorAPIResponse
   }
 
   return {
