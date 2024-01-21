@@ -33,7 +33,7 @@ export default function RedditPreview({ post }: { post: RedditPost }) {
             {post.subreddit_name_prefixed} <i className='fad fa-external-link ml-0.5 text-xs'></i>
           </span>
         </div>
-        <div className='flex flex-col items-center mb-1'>
+        <div className='flex flex-col items-center mb-3'>
           {post.post_hint === 'image' &&
             <Image unoptimized src={post.url_overridden_by_dest} alt={post.title} width={320} height={160} className='min-w-[180px]' />
           }
@@ -43,7 +43,7 @@ export default function RedditPreview({ post }: { post: RedditPost }) {
             </video>
           }
 
-          <h3 className='text-xl text-left w-full mt-2'>
+          <h3 className='text-xl text-left w-full'>
             {post.title}
           </h3>
         </div>

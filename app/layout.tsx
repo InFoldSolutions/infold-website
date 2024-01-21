@@ -1,6 +1,3 @@
-import './globals.css'
-import './icons.min.css'
-
 import { Suspense } from 'react'
 
 import type { Metadata } from 'next'
@@ -9,6 +6,9 @@ import { Inter } from 'next/font/google'
 import { AuthContextProvider } from '@/context/auth'
 
 import Analytics from '@/components/helpers/ganalytics'
+
+import './globals.css'
+import './icons.min.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
