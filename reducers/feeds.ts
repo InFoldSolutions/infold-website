@@ -20,7 +20,16 @@ export function feedsReducer(feeds: FeedMeta[], action: FeedsReducerAction) {
       if (!action.data.id && action.data.keyword)
         action.data.id = slugifyKeyword(action.data.keyword)
 
-      const newFeeds = [action.data].concat(feeds) // attach to the front
+      if (!action.data.id) throw Error('No id provided')
+
+      let newFeeds: FeedMeta[] = []
+
+      const exists = feeds.find((item: any) => item.id === action.data?.id)
+
+      if (exists)
+        newFeeds = feeds.filter((item: any) => item.id !== action.data?.id)
+
+      newFeeds = [action.data].concat(feeds)
 
       setLocalStorage('feeds', newFeeds)
 

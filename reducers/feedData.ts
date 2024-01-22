@@ -3,7 +3,7 @@ import { getKeywordFeed, getFeaturedFeed } from '@/apis/infold'
 
 import { RedditPost } from '@/types/redditpost'
 import { Topic } from '@/types/topic'
-import { APIResponse } from '@/types/response';
+import { APIResponse, ErrorAPIResponse } from '@/types/response';
 import { FeedMeta } from '@/types/feedmeta';
 
 export type FeedDataReducerAction = {
@@ -30,6 +30,9 @@ export function feedDataReducer(feedData: any[], action: FeedDataReducerAction):
 
 export async function loadFeedData(meta: FeedMeta, offset: number, lastId: string): Promise<APIResponse> {
   let data: APIResponse
+
+  if (meta.keyword.length < 3)
+    return ErrorAPIResponse
 
   switch (meta.type) {
     case 'subreddit':

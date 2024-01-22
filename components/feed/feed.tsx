@@ -11,7 +11,7 @@ import { feedDataReducer, loadFeedData } from '@/reducers/feedData'
 import Loading from '@/components/helpers/loading'
 import Skeleton from '@/components/feed/skeleton'
 import FeedHeader from '@/components/feed/header'
-import RenderPost from '@/components/feed/renderPost'
+import RenderCard from '@/components/feed/cards/renderCard'
 
 import type { FeedMeta } from '@/types/feedmeta'
 import type { APIResponse } from '@/types/response'
@@ -28,7 +28,9 @@ export default function Feed({ meta, removeFeed, setMeta }: { meta: FeedMeta, re
 
   const scrollParent = useRef<HTMLDivElement | null>(null)
 
-  const fetchInitialData = useMemo(() => async () => {
+  const fetchInitialData = async () => {
+    setIsLoading(true)
+
     const res: APIResponse = await loadFeedData(meta, offset, lastId)
 
     if (res.meta.success && res.data.length > 0)
@@ -46,9 +48,10 @@ export default function Feed({ meta, removeFeed, setMeta }: { meta: FeedMeta, re
     }
 
     setIsLoading(false)
-  }, [offset, lastId, meta])
+  }
 
-  const fetchMoreData = useMemo(() => async () => {
+  const fetchMoreData = async () => {
+    setIsLoadingMore(true)
     const res: APIResponse = await loadFeedData(meta, offset, lastId)
 
     if (res.meta.success && res.data.length > 0) {
@@ -60,7 +63,7 @@ export default function Feed({ meta, removeFeed, setMeta }: { meta: FeedMeta, re
       setEndOfFeed(true)
 
     setIsLoadingMore(false)
-  }, [offset, lastId, meta])
+  }
 
   const onScrollHandler = useCallback((e: Event) => {
     const scrollElement = scrollParent?.current;
@@ -71,15 +74,13 @@ export default function Feed({ meta, removeFeed, setMeta }: { meta: FeedMeta, re
     // https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollHeight
     const isBottom = Math.abs(scrollHeight - innerHeight - scrollTop) < 1
 
-    if (isBottom && !isLoadingMore && !endOfFeed) {
-      setIsLoadingMore(true)
-
+    if (isBottom && !isLoadingMore && !isLoading && !endOfFeed) {
       if (meta.type === 'subreddit' && data.length > 0)
         setLastId(data[data.length - 1].id)
       else
         setOffset((old: number) => old + 1)
     }
-  }, [scrollParent, isLoadingMore, endOfFeed, meta, data])
+  }, [scrollParent, isLoadingMore, isLoading, endOfFeed, meta, data])
 
   // pathname changed
   useEffect(() => {
@@ -88,18 +89,15 @@ export default function Feed({ meta, removeFeed, setMeta }: { meta: FeedMeta, re
 
   // meta changed
   useEffect(() => {
-    console.log('meta changed', meta)
-
-    if (meta.edit && !meta.keyword && data.length > 0) {
+    if (!meta.keyword && data.length > 0) {
       dispatchData({
         type: 'clear',
         data: []
       })
-    } else if ((meta.keyword && data.length > 0) ||
-      (meta.keyword && !meta.edit && data.length === 0 && !isLoading) ||
-      (meta.keyword && meta.edit)) {
+    } else if ((meta.keyword && !isLoading)) {
       setOffset(1)
       setLastId('')
+      setEndOfFeed(false)
 
       fetchInitialData()
         .catch(console.error)
@@ -157,7 +155,7 @@ export default function Feed({ meta, removeFeed, setMeta }: { meta: FeedMeta, re
 
           <ul className='mb-2'>
             {data.map((item: any, index: number) => (
-              <RenderPost item={item} type={meta.type} key={index} />
+              <RenderCard item={item} type={meta.type} key={index} />
             ))}
           </ul>
 

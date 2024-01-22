@@ -24,7 +24,6 @@ export default function FeedWrapper(): ReactNode {
         id: 'newtopic',
         keyword: '',
         live: false,
-        edit: true,
         icon: 'fad fa-search',
         iconColor: 'text-green-500'
       }

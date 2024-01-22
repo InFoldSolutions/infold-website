@@ -1,72 +1,99 @@
-import { useCallback, useRef, ChangeEvent } from 'react'
+import { useCallback, useRef, useState, useEffect, ChangeEvent, KeyboardEvent } from 'react'
 
 import Tooltip from '@/components/helpers/tooltip'
 
 import { FeedMeta } from '@/types/feedmeta'
+import { useDebounce } from '@/helpers/useDebounce'
 
 export default function FeedHeader({ meta, removeFeed, setMeta }: { meta: FeedMeta, removeFeed: any, setMeta: any }) {
 
+  const [isEdit, setIsEdit] = useState<boolean>(meta.type === 'new')
+  const [keyword, setKeyword] = useState(meta.keyword || '')
+  const [type, setType] = useState(meta.type)
+  const [icon, setIcon] = useState(meta.icon)
+  const [iconColor, setIconColor] = useState(meta.iconColor)
+
   const inputRef = useRef<HTMLInputElement | null>(null)
+
   const removeCurrentFeed = useCallback(() => {
     removeFeed(meta.id)
+    setIsEdit(false)
   }, [meta])
+
+  const updateMeta = useDebounce(() => {
+    setMeta(meta.id, {
+      ...meta,
+      keyword,
+      type,
+      icon,
+      iconColor
+    })
+  }, 500)
 
   const onInputHandler = useCallback((e: ChangeEvent) => {
     const text = inputRef?.current?.value || ''
 
-    if (text === '')
-      return setMeta(meta.id, {
-        ...meta,
-        type: 'new',
-        keyword: ''
-      })
-
-    let type = 'topic', icon = 'fad fa-landmark', iconColor = 'text-gray-400'
+    let ttype = 'topic', ticon = 'fad fa-landmark', ticonColor = 'text-gray-400'
 
     if (text.startsWith('r/')) {
-      type = 'subreddit'
-      icon = 'fab fa-reddit-alien'
-      iconColor = 'text-orange-500'
+      ttype = 'subreddit'
+      ticon = 'fab fa-reddit-alien'
+      ticonColor = 'text-orange-500'
     } else if (text.startsWith('@')) {
-      type = 'handle'
-      icon = 'fab fa-twitter'
-      iconColor = 'text-blue-400'
+      ttype = 'handle'
+      ticon = 'fab fa-twitter'
+      ticonColor = 'text-blue-400'
     }
 
-    setMeta(meta.id, {
-      ...meta,
-      type: type,
-      keyword: text,
-      icon: icon,
-      iconColor: iconColor
-    })
+    if (text === '')
+      ttype = 'new'
+
+    setKeyword(text);
+    setType(ttype)
+    setIcon(ticon)
+    setIconColor(ticonColor)
+    
+    updateMeta()
   }, [inputRef, meta])
+
+  const handleKeyDown = useCallback((e: KeyboardEvent) => {
+    if (e.key === 'Escape')
+      cancelEdit()
+    else if (e.key === 'Enter')
+      applyChanges()
+  }, [meta])
 
   const applyChanges = useCallback(() => {
     if (!meta.keyword || meta.keyword === '')
       return
 
-    setMeta(meta.id, {
-      ...meta,
-      edit: false
-    })
+    setIsEdit(false)
   }, [meta])
 
   const editFeed = useCallback(() => {
-    setMeta(meta.id, {
-      ...meta,
-      edit: true
-    })
+    if (meta.type === 'featured')
+      return
+
+    setIsEdit(true)
   }, [meta])
 
   const cancelEdit = useCallback(() => {
-    if (meta.id === 'newtopic')
-      return removeFeed(meta.id)
+    if (meta.id === 'newtopic' || meta.keyword === '')
+      return removeCurrentFeed()
 
-    setMeta(meta.id, {
-      ...meta,
-      edit: false
-    })
+    setKeyword(meta.keyword);
+    setType(meta.type)
+    setIcon(meta.icon)
+    setIconColor(meta.iconColor)
+
+    setIsEdit(false)
+  }, [meta])
+
+  useEffect(() => {
+    setKeyword(meta.keyword);
+
+    if (meta.type === 'new')
+      setIsEdit(true)
   }, [meta])
 
   return (
@@ -86,15 +113,18 @@ export default function FeedHeader({ meta, removeFeed, setMeta }: { meta: FeedMe
               }
             </div>
 
-            {!meta.edit && meta.keyword}
-            {meta.edit &&
+            {!isEdit &&
+              <span className='border-b-2 border-transparent w-full' onDoubleClick={editFeed}>{meta.keyword}</span>
+            }
+            {isEdit &&
               <input type='text'
                 ref={inputRef}
-                value={meta.keyword}
+                value={keyword}
                 placeholder='Search..'
                 autoFocus
-                className='w-full text-xl text-gray-800 dark:text-gray-200 bg-transparent focus:outline-none'
-                onChange={onInputHandler} />
+                className='w-full text-xl text-gray-800 dark:text-gray-200 bg-transparent focus:outline-none border-b-2 border-transparent focus:border-gray-200 focus:dark:border-gray-800'
+                onChange={onInputHandler}
+                onKeyDown={handleKeyDown} />
             }
           </div>
         </div>
@@ -112,12 +142,12 @@ export default function FeedHeader({ meta, removeFeed, setMeta }: { meta: FeedMe
         }
 
         <div className='text-center'>
-          {!meta.edit && meta.type !== 'featured' &&
+          {!isEdit && meta.type !== 'featured' &&
             <Tooltip message='Edit feed' top={10} right={2} padding={1} minWidth={85}>
               <i className='fad fa-sliders-h text-xl cursor-pointer opacity-40 hover:opacity-100' onClick={editFeed} />
             </Tooltip>
           }
-          {meta.edit &&
+          {isEdit &&
             <span className='flex flex-row items-center'>
               <Tooltip message='Apply changes' top={10} right={3} padding={1} minWidth={110}>
                 <i className='fad fa-check-square text-2xl cursor-pointer text-green-500 opacity-40 hover:opacity-100 mr-2' onClick={applyChanges} />

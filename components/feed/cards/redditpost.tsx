@@ -33,9 +33,9 @@ export default function RedditPreview({ post }: { post: RedditPost }) {
             {post.subreddit_name_prefixed} <i className='fad fa-external-link ml-0.5 text-xs'></i>
           </span>
         </div>
-        <div className='flex flex-col items-center mb-3'>
+        <div className='flex flex-col items-center mb-1'>
           {post.post_hint === 'image' &&
-            <Image unoptimized src={post.url_overridden_by_dest} alt={post.title} width={320} height={160} className='min-w-[180px]' />
+            <Image unoptimized src={post.url_overridden_by_dest} alt={post.title} width={320} height={160} className='min-w-[180px] mb-1' />
           }
           {post.post_hint === 'hosted:video' &&
             <video style={{ width: post.media.reddit_video.width, height: 'auto' }} controls ref={video} onClick={onVideoClick}>

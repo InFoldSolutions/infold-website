@@ -10,8 +10,6 @@ import { APIResponse, ErrorAPIResponse } from '@/types/response'
 export async function getSubredditJSON(subreddit: string, lastId?: string): Promise<APIResponse> {
   if (subreddit.includes('r/'))
     subreddit = subreddit.split('r/')[1]
-  if (subreddit.length < 3)
-    return ErrorAPIResponse
 
   let posts: RedditPost[] = []
   let pageSize: number = 25
