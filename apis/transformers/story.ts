@@ -1,5 +1,5 @@
 import { getRandomInt } from '@/helpers/utils';
-import { filterKeyword } from '@/transformers/keyword';
+import { filterKeyword } from '@/apis/transformers/keyword';
 
 import config from '@/config';
 

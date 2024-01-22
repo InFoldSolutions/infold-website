@@ -15,7 +15,7 @@ import Affiliate from '@/components/carousel/affiliate'
 
 import { isBrowser } from '@/helpers/utils'
 
-import { filterStories } from '@/transformers/story'
+import { filterStories } from '@/apis/transformers/story'
 
 
 export default function StoryWrapper({ data, modal = false }: { data: any, modal?: boolean }) {

@@ -4,7 +4,7 @@ import { useState, useEffect, useRef, useCallback, ReactNode, useMemo, useReduce
 
 import { usePathname } from 'next/navigation'
 
-import { closeAllWebSockets } from '@/websocket'
+import { closeAllWebSockets } from '@/apis/websocket'
 
 import { feedDataReducer, loadFeedData } from '@/reducers/feedData'
 
@@ -88,6 +88,8 @@ export default function Feed({ meta, removeFeed, setMeta }: { meta: FeedMeta, re
 
   // meta changed
   useEffect(() => {
+    console.log('meta changed', meta)
+
     if (meta.edit && !meta.keyword && data.length > 0) {
       dispatchData({
         type: 'clear',

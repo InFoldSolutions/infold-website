@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState, useCallback, KeyboardEventHandler
 import TextareaAutosize from 'react-textarea-autosize';
 import ReconnectingWebSocket from 'reconnecting-websocket';
 
-import { closeWebsocket, getWebsocket } from '@/websocket';
+import { closeWebsocket, getWebsocket } from '@/apis/websocket';
 
 import { usePathname } from 'next/navigation'
 

@@ -6,8 +6,8 @@
 
 import { permanentRedirect } from 'next/navigation'
 
-import { transformStory, filterStory } from '@/transformers/story';
-import { filterKeyword } from '@/transformers/keyword';
+import { transformStory, filterStory } from '@/apis/transformers/story';
+import { filterKeyword } from '@/apis/transformers/keyword';
 
 import { searchParamsToQueryParams } from '@/helpers/utils';
 
