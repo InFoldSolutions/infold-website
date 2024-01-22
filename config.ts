@@ -154,7 +154,7 @@ const config = {
   // Input should be 'Politics', 'Culture', 'Sports', 'Technology', 'Law & Crime', 'Business', 'Science', 'Health' or 'Gaming'
 
   'media': {
-    'blacklistChannels': ['amweekly', 'ary media', 'india today', 'bloomberg television', 'los angeles times', 'universal pictures uk', 'cleo abram']
+    'blacklistChannels': ['megyn kelly', 'amweekly', 'ary media', 'india today', 'bloomberg television', 'los angeles times', 'universal pictures uk', 'cleo abram']
   },
 
   api_key: process.env.NEXT_API_KEY,
