@@ -52,7 +52,7 @@ export default function FeedHeader({ meta, removeFeed, setMeta }: { meta: FeedMe
     setType(ttype)
     setIcon(ticon)
     setIconColor(ticonColor)
-    
+
     updateMeta()
   }, [inputRef, meta])
 
@@ -149,15 +149,15 @@ export default function FeedHeader({ meta, removeFeed, setMeta }: { meta: FeedMe
           }
           {isEdit &&
             <span className='flex flex-row items-center'>
-              <Tooltip message='Apply changes' top={10} right={3} padding={1} minWidth={110}>
-                <i className='fad fa-check-square text-2xl cursor-pointer text-green-500 opacity-40 hover:opacity-100 mr-2' onClick={applyChanges} />
+              <Tooltip message='Remove feed' top={10} right={3} padding={1} minWidth={100}>
+                <i className='fad fa-trash text-xl cursor-pointer text-blue-500 opacity-40 hover:opacity-100' onClick={removeCurrentFeed} />
               </Tooltip>
+              <span className='px-2 text-gray-400 dark:text-white h-full flex opacity-50'>|</span>
               <Tooltip message='Cancel edit' top={10} right={3} padding={1} minWidth={100}>
                 <i className='fad fa-window-close text-2xl cursor-pointer text-gray-500 dark:text-white opacity-40 hover:opacity-100' onClick={cancelEdit} />
               </Tooltip>
-              <span className='px-2 text-gray-400 dark:text-white h-full flex opacity-50'>|</span>
-              <Tooltip message='Remove feed' top={10} right={3} padding={1} minWidth={100}>
-                <i className='fad fa-trash text-xl cursor-pointer text-blue-500 opacity-40 hover:opacity-100' onClick={removeCurrentFeed} />
+              <Tooltip message='Apply changes' top={10} right={3} padding={1} minWidth={110}>
+                <i className='fad fa-check-square text-2xl cursor-pointer text-green-500 opacity-40 hover:opacity-100 ml-2' onClick={applyChanges} />
               </Tooltip>
             </span>
           }
