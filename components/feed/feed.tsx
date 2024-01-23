@@ -155,7 +155,7 @@ export default function Feed({ meta, removeFeed, setMeta }: { meta: FeedMeta, re
 
           <ul className='mb-2'>
             {data.map((item: any, index: number) => (
-              <RenderCard item={item} type={meta.type} key={index} />
+              <RenderCard item={item} meta={meta} key={index} />
             ))}
           </ul>
 

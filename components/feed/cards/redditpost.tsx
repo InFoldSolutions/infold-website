@@ -7,8 +7,9 @@ import Image from 'next/image'
 import TimeAgo from 'react-timeago'
 
 import { RedditPost } from '@/types/redditpost'
+import { FeedMeta } from '@/types/feedmeta'
 
-export default function RedditPreview({ post }: { post: RedditPost }) {
+export default function RedditPreview({ post, meta }: { post: RedditPost, meta: FeedMeta }) {
 
   const video = useRef<HTMLVideoElement>(null)
 
@@ -28,10 +29,17 @@ export default function RedditPreview({ post }: { post: RedditPost }) {
     <li className='relative no-highlight-tap border-gray-200 border-b-2 border-dashed dark:border-gray-800 dark:border-opacity-80 last:border-b-0 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 dark:hover:bg-opacity-40 hover:bg-opacity-30'>
       <Link href={`https://www.reddit.com${post.permalink}`} prefetch={false} className='p-4 flex flex-col' target='_blank'>
 
-        <div className='flex items-center text-gray-600 dark:text-gray-300 text-sm font-bold'>
-          <span>
-            {post.subreddit_name_prefixed} <i className='fad fa-external-link ml-0.5 text-xs'></i>
-          </span>
+        <div className='flex items-center text-gray-600 dark:text-gray-300 text-sm font-bold mb-1'>
+          {post.author && post.author !== '' &&
+            <span className='mr-2'>
+              u/{post.author}
+            </span>
+          }
+          {meta.keyword === 'r/all' &&
+            <span className='ml-auto'>
+              {post.subreddit_name_prefixed} <i className='fad fa-external-link ml-0.5 text-xs'></i>
+            </span>
+          }
         </div>
         <div className='flex flex-col items-center mb-1'>
           {post.post_hint === 'image' &&

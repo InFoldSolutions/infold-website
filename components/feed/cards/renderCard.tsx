@@ -2,15 +2,17 @@
 import RedditPreview from '@/components/feed/cards/redditpost'
 import TopicPost from '@/components/feed/cards/topic'
 
-export default function RenderCard({ item, type }: { item: any, type: string }) {
-  switch (type) {
+import { FeedMeta } from '@/types/feedmeta'
+
+export default function RenderCard({ item, meta }: { item: any, meta: FeedMeta }) {
+  switch (meta.type) {
     case 'subreddit':
       return (
-        <RedditPreview post={item} />
+        <RedditPreview post={item} meta={meta} />
       )
     default:
       return (
-        <TopicPost topic={item} />
+        <TopicPost topic={item} meta={meta} />
       )
   }
 }
