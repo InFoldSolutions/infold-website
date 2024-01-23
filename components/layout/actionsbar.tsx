@@ -17,11 +17,6 @@ export default function ActionsBar({ addNewFeed }: { addNewFeed: any }) {
           <i className='fad fa-terminal text-xl text-black dark:text-white group-hover:text-blue-500'></i>
         </div>
       </Tooltip>
-      <Tooltip message={'Connect Social'} left={16} top={3} padding={1} minWidth={120}>
-        <div className='items-center text-center w-full mb-2 p-3 hover:bg-gray-200 hover:dark:bg-gray-800 hover:dark:bg-opacity-60 cursor-pointer group'>
-          <i className='fad fa-user-friends text-2xl text-black dark:text-white group-hover:text-blue-500'></i>
-        </div>
-      </Tooltip>
       <div className='flex flex-col items-center mt-auto text-center w-full'>
         <Tooltip message={'About InFold'} left={16} top={3} padding={1} minWidth={110}>
           <Link href='/about' target='_self'
@@ -33,7 +28,7 @@ export default function ActionsBar({ addNewFeed }: { addNewFeed: any }) {
         <Tooltip message={'Read on Medium'} left={16} top={3} padding={1} minWidth={125}>
           <Link href='https://infold.medium.com/a-lot-of-knowledge-is-a-dangerous-thing-6a4d2560cc83' target='_blank'
             title='Read more on our Medium'
-            className='items-center text-center w-full mb-2 p-3 hover:bg-gray-200 hover:dark:bg-gray-800 hover:dark:bg-opacity-60 cursor-pointer group'>
+            className='items-center text-center w-full md:mb-2 p-3 hover:bg-gray-200 hover:dark:bg-gray-800 hover:dark:bg-opacity-60 cursor-pointer group'>
             <i className='fab fa-medium text-3xl text-black dark:text-white group-hover:text-blue-500' />
           </Link>
         </Tooltip>
@@ -41,3 +36,9 @@ export default function ActionsBar({ addNewFeed }: { addNewFeed: any }) {
     </div>
   )
 }
+
+/*<Tooltip message={'Social Comming!'} left={16} top={3} padding={1} minWidth={120}>
+  <div className='items-center text-center w-full mb-2 p-3 hover:bg-gray-200 hover:dark:bg-gray-800 hover:dark:bg-opacity-60 cursor-pointer group'>
+    <i className='fad fa-user-friends text-2xl text-black dark:text-white group-hover:text-blue-500'></i>
+  </div>
+</Tooltip>*/
