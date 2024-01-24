@@ -1,5 +1,6 @@
-import { trackEvent } from '@/helpers/gtm'
 import { useCallback, useState } from 'react'
+
+import { trackEvent } from '@/helpers/gtm'
 
 export default function Outline({ outlines }: { outlines: string[] }) {
   const [expanded, setExpanded] = useState<boolean>(false)
@@ -14,7 +15,7 @@ export default function Outline({ outlines }: { outlines: string[] }) {
 
     setExpanded(true)
   }, [setExpanded])
-  
+
   const lessClick = useCallback(() => {
     trackEvent({
       action: "outline",

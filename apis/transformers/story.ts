@@ -44,7 +44,7 @@ export function transformStory(data: any): Topic {
         })
 
         // Filter out articles with social
-        item.popularArticles = item.articles.filter((article: any) =>  article.social && article.social.length > 0)
+        item.popularArticles = item.articles.filter((article: any) => article.social && article.social.length > 0)
       }
     })
   }
@@ -78,9 +78,14 @@ export function transformStory(data: any): Topic {
       })
   }
 
-  // @ts-ignore
-  if (data.questions)
-    data.suggested = data.questions
+  if (data.questions) {
+    data.suggested = data.questions.filter((item: any) => !config.questionsBlacklist.includes(item))
+    data.suggested = data.suggested.map((item: any) => item.replace(/\"/g, '').replace(/\?/g, '').replace(/\*/g, ''))
+  }
+
+  if (data.outline?.length > 0) {
+    data.outline = data.outline.filter((item: any) => item !== '').map((item: any) => item.replace(/\"/g, '').replace(/\*/g, ''))
+  }
 
   if (data.category)
     data.categoryIcon = config.categoryOptions.find(item => item.label === data.category)?.icon
