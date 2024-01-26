@@ -12,7 +12,7 @@ export default function RenderCard({ item, meta }: { item: any, meta: FeedMeta }
       )
     default:
       return (
-        <TopicPost topic={item} meta={meta} />
+        <TopicPost topic={item} />
       )
   }
 }

@@ -52,8 +52,13 @@ export function transformStory(data: any): Topic {
   let keywords: any = [], uniqueKeywords: any = []
 
   if (data.keywords?.data) {
+    // exclude some obvious false positives
     keywords = data.keywords?.data?.filter(filterKeyword)
+
+    // make sure keywords are unique
     uniqueKeywords = [...new Map(keywords.map((item: any) => [item['keyword'], item])).values()]
+
+    // sort keywords by appearance in title and outline
     uniqueKeywords.sort((a: any) => {
       if (data.title.toLowerCase().includes(a.keyword.toLowerCase()) || data.outline.join('. ').toLowerCase().includes(a.keyword.toLowerCase()))
         return -1
@@ -79,7 +84,7 @@ export function transformStory(data: any): Topic {
   }
 
   if (data.questions) {
-    data.suggested = data.questions.filter((item: any) => !config.questionsBlacklist.includes(item))
+    data.suggested = data.questions.filter((item: any) => !config.questionsBlacklist.includes(item.trim()))
     data.suggested = data.suggested.map((item: any) => item.replace(/\"/g, '').replace(/\?/g, '').replace(/\*/g, ''))
   }
 
@@ -103,7 +108,7 @@ export function filterStory(data: any): boolean {
   return true
 }
 
-export function filterStories(sources: any, sort: string = '') {
+export function filterSources(sources: any, sort: string = '') {
   switch (sort) {
     case 'latest':
       sources = sources.filter((source: any) => !source.popularArticles || source.popularArticles.length === 0)
@@ -115,9 +120,7 @@ export function filterStories(sources: any, sort: string = '') {
       break;
   }
 
-  return {
-    sources: sources.sort((a: any, b: any) => {
-      return new Date(b.articles[0].added_at).getTime() - new Date(a.articles[0].added_at).getTime()
-    })
-  }
+  return sources.sort((a: any, b: any) => {
+    return new Date(b.articles[0].added_at).getTime() - new Date(a.articles[0].added_at).getTime()
+  })
 }

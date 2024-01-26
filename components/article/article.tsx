@@ -12,9 +12,10 @@ interface IRelatedArticle {
   last?: boolean,
   popular?: boolean,
   children?: string,
+  sourcesCount?: number
 }
 
-export default function RelatedArticle({ item, last, popular }: IRelatedArticle) {
+export default function RelatedArticle({ item, last, popular, sourcesCount }: IRelatedArticle) {
   const firstArticle: any = item.articles[0]
   const articleList = (popular) ? item.articles.filter((article: any) => article.social?.length > 0) : item.articles
 
@@ -70,7 +71,7 @@ export default function RelatedArticle({ item, last, popular }: IRelatedArticle)
                 </Link>
 
                 {popular &&
-                  <SocialComments data={article} />
+                  <SocialComments data={article} expanded={(popular && sourcesCount === 1)} />
                 }
               </li>
             )

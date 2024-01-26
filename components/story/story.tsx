@@ -11,19 +11,16 @@ import ChatBot from '@/components/story/chatbot'
 import Category from '@/components/story/category'
 
 import YTMedia from '@/components/carousel/ytmedia'
-import Affiliate from '@/components/carousel/affiliate'
 
-import { isBrowser } from '@/helpers/utils'
+import { filterSources } from '@/apis/transformers/story'
 
-import { filterStories } from '@/apis/transformers/story'
-
+import { Source } from '@/types/source'
 
 export default function StoryWrapper({ data, modal = false }: { data: any, modal?: boolean }) {
 
-  const [latestArticles] = useState<any>(filterStories(data.sources, 'latest'))
-  const [popularArticles] = useState<any>(filterStories(data.sources, 'popular'))
-  const [initialCount] = useState(popularArticles.sources.length > 0 ? popularArticles.sources.length : 5)
-  const [isDesktop] = useState((isBrowser) ? window.innerWidth > 820 : false)
+  const [latestSources] = useState<Source[]>(filterSources(data.sources, 'latest'))
+  const [popularSources] = useState<Source[]>(filterSources(data.sources, 'popular'))
+  const [firstPopularSocialLength] = useState<number>(popularSources[0]?.articles[0]?.social?.length || 0)
 
   return (
     <article className='pb-2'>
@@ -48,10 +45,10 @@ export default function StoryWrapper({ data, modal = false }: { data: any, modal
             </Suspense>
           </span>
 
-          {data.meta.sources > 0 &&
+          {data.meta > 0 &&
             <span className="hidden md:inline-block items-center mr-3">
               <i className='fad fa-newspaper mr-2'></i>
-              {data.meta.sources}
+              {data.meta}
               <span className='ml-2'>Sources</span>
             </span>
           }
@@ -75,7 +72,7 @@ export default function StoryWrapper({ data, modal = false }: { data: any, modal
 
       <h3 className='mt-4 text-2xl font-bold'>News Coverage</h3>
 
-      {popularArticles.sources.length > 0 && latestArticles.sources.length > 0 &&
+      {popularSources.length > 0 && latestSources.length > 0 &&
         <div className='lg:flex'>
           <div className='lg:basis-1/2 lg:mr-4 shrink-1 lg:max-w-[50%]'>
             <div className={`p-2 px-3 mt-4 items-center justify-center bg-gray-100 dark:bg-gray-800 dark:bg-opacity-60 rounded hidden lg:flex`}>
@@ -83,11 +80,11 @@ export default function StoryWrapper({ data, modal = false }: { data: any, modal
 
               <span className='ml-auto flex items-center'>
                 <i className={`fad fa-chart-bar mr-2`} />
-                {popularArticles.sources.length}
+                {popularSources.length}
               </span>
             </div>
 
-            <ArticleList sources={popularArticles.sources} initialCount={(isDesktop) ? initialCount : popularArticles.sources.length} popular={true} />
+            <ArticleList sources={popularSources} popular={true} />
           </div>
 
           <div className='lg:basis-1/2 lg:ml-4 shrink-1 lg:max-w-[50%]'>
@@ -96,22 +93,22 @@ export default function StoryWrapper({ data, modal = false }: { data: any, modal
 
               <span className='ml-auto flex items-center'>
                 <i className={`fad fa-chart-bar mr-2`} />
-                {latestArticles.sources.length}
+                {latestSources.length}
               </span>
             </div>
 
-            <ArticleList sources={latestArticles.sources} initialCount={initialCount * 2} />
+            <ArticleList sources={latestSources} popularLength={popularSources.length} firstPopularSocialLength={firstPopularSocialLength} />
           </div>
         </div>
       }
 
-      {popularArticles.sources.length === 0 && latestArticles.sources.length > 0 &&
+      {popularSources.length === 0 && latestSources.length > 0 &&
         <div>
-          <ArticleList sources={latestArticles.sources} initialCount={initialCount * 2} />
+          <ArticleList sources={latestSources} />
         </div>
       }
 
-      {popularArticles.sources.length === 0 && latestArticles.sources.length === 0 &&
+      {popularSources.length === 0 && latestSources.length === 0 &&
         <div className='mt-4'>
           <p className='text-center'>No news coverage found.</p>
         </div>

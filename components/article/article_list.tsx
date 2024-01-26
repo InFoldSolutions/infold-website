@@ -3,8 +3,16 @@ import { useState, useCallback, MouseEventHandler } from 'react'
 import Spinner from '@/components/helpers/spinner'
 import RelatedArticle from '@/components/article/article'
 
-export default function ArticleList({ sources, initialCount = 2, popular }: { sources: any, initialCount?: number, popular?: boolean }) {
+export default function ArticleList({ sources, popular, popularLength, firstPopularSocialLength = 0 }: { sources: any, popular?: boolean, popularLength?: number, firstPopularSocialLength?: number }) {
   const [expandArticles, setExpandArticles] = useState(false)
+  const [initialCount] = useState(() => {
+    if (popular && sources.length > 0)
+      return sources.length
+    if (!popular && popularLength === 1)
+      return Math.min(firstPopularSocialLength, sources.length)
+
+    return 5
+  })
   const toggleMoreArticles: MouseEventHandler = useCallback(
     (e) => {
       setExpandArticles(true)
@@ -26,12 +34,12 @@ export default function ArticleList({ sources, initialCount = 2, popular }: { so
               </li>
             )
 
-          return <RelatedArticle item={item} key={index} last={index === initialCount - 1} popular={popular} />
+          return <RelatedArticle item={item} key={index} last={index === initialCount - 1} popular={popular} sourcesCount={sources.length} />
         })}
       </ul>
       <ul className={`${!expandArticles ? 'hidden' : ''} border-t-2 border-gray-200 dark:border-gray-800 dark:border-opacity-80 border-dashed`}>
         {sources.slice(initialCount).map((item: any, index: number) => {
-          return <RelatedArticle item={item} key={index} popular={popular} />
+          return <RelatedArticle item={item} key={index} popular={popular} sourcesCount={sources.length} />
         })}
       </ul>
     </div>

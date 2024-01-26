@@ -6,8 +6,8 @@ import config from '@/config';
 
 const sentiment: any = config.sentiment
 
-export default function SocialComments({ data }: { data: any }) {
-  const [expandComments, setExpandComments] = useState(false)
+export default function SocialComments({ data, expanded }: { data: any, expanded: boolean }) {
+  const [expandComments, setExpandComments] = useState(expanded)
   const [sortedComments] = useState(data.social.sort((a: any, b: any) => b.score - a.score) || [])
 
   const toggleMoreComments: MouseEventHandler = useCallback(
@@ -63,7 +63,7 @@ function Comment({ socialItem }: { socialItem: any }) {
             {socialItem.score}
           </span>
         </div>
-        
+
         <div className='truncate-4-lines w-auto flex flex-wrap max-w-none lg:max-w-[385px]'>
           {socialItem.body}
         </div>

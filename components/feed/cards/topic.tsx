@@ -8,9 +8,8 @@ import Link from 'next/link'
 import Thumbs from '@/components/story/thumbs'
 
 import { Topic } from '@/types/topic'
-import { FeedMeta } from '@/types/feedmeta'
 
-export default function TopicPost({ topic, meta }: { topic: Topic, meta: FeedMeta }) {
+export default function TopicPost({ topic }: { topic: Topic }) {
   return (
     <li className='relative no-highlight-tap border-gray-200 border-b-2 border-dashed dark:border-gray-800 dark:border-opacity-80 last:border-b-0 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 dark:hover:bg-opacity-40 hover:bg-opacity-30'>
       <Link href={`/story/${topic.slug}`} prefetch={false} className='p-4 flex flex-col'>
