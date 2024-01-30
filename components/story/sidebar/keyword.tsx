@@ -4,9 +4,11 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 
-import { slugifyKeyword, unSlugifyKeyword } from '@/helpers/utils';
+import { unSlugifyKeyword } from '@/helpers/utils';
 
-export default function Keyword({ keyword }: { keyword: any }) {
+import { Keyword } from '@/types/keyword';
+
+export default function Keyword({ keyword }: { keyword: Keyword }) {
   const pathname = usePathname()
   const pathnameParts = pathname.split('/')
   const paramKeyword = pathnameParts[2] ? unSlugifyKeyword(pathnameParts[2]) : null
@@ -37,25 +39,20 @@ export default function Keyword({ keyword }: { keyword: any }) {
   }
 
   return (
-    <li className='pb-2 mb-2 last:pb-0 last:mb-0 flex items-center group/item'>
-      <div className='mr-2'>
-        <Link
-          href={url}
-          title={`Lookup on ${label}`}
-          target='_blank'
-          prefetch={false}
-          className='group/image'>
-          <span className='group-hover/image:border-gray-400 border-2 bg-white dark:border-gray-600 dark:bg-gray-200 opacity:60 group-hover/image:dark:border-gray-200 p-px flex items-center justify-center h-8 w-8 rounded relative'>
-            <Image unoptimized src={icon} alt={label} fill={true} className={`h-8 w-8 rounded ${padding}`} />
-          </span>
-        </Link>
-      </div>
-
-      <Link href={`/keyword/${slugifyKeyword(keyword.keyword)}`} prefetch={false} className='group/link w-full' target={target}>
+    <li className='mb-3 last:mb-0 flex items-center group/item'>
+      <Link
+        href={url}
+        title={`Lookup on ${label}`}
+        target='_blank'
+        prefetch={false}
+        className='group/image flex items-center'>
+        <span className='group-hover/image:border-gray-400 border-2 bg-white dark:border-gray-600 dark:bg-gray-200 opacity:60 group-hover/image:dark:border-gray-200 p-px flex items-center justify-center h-8 w-8 rounded relative mr-2'>
+          <Image unoptimized src={icon} alt={label} fill={true} className={`h-8 w-8 rounded ${padding}`} />
+        </span>
         <span>
           <span className={`font-bold block leading-4 group-hover/link:underline ${paramKeyword && paramKeyword === keyword.keyword ? 'underline' : ''}`}>{keyword.keyword}</span>
           <span className='flex text-xs'>
-            {keyword.topics || 4} Topics
+            4 Topics
           </span>
         </span>
       </Link>
