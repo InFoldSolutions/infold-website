@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import Tooltip from '@/components/helpers/tooltip'
+import XIcon from '@/components/helpers/xIcon'
 
 export default function ActionsBar({ addNewFeed }: { addNewFeed: any }) {
   return (
@@ -20,23 +21,20 @@ export default function ActionsBar({ addNewFeed }: { addNewFeed: any }) {
       <div className='flex flex-col items-center mt-auto text-center w-full'>
         <Tooltip message={'About InFold'} left={16} top={3} padding={1} minWidth={105}>
           <Link href='/about' target='_self'
-            title='About InFold'
             className='items-center text-center w-full p-3 hover:bg-gray-200 hover:dark:bg-gray-800 hover:dark:bg-opacity-60 cursor-pointer group'>
             <i className='fad fa-question text-2xl text-black dark:text-white group-hover:text-blue-500' />
           </Link>
         </Tooltip>
         <Tooltip message={'Read on Medium'} left={16} top={3} padding={1} minWidth={120}>
           <Link href='https://infold.medium.com/a-lot-of-knowledge-is-a-dangerous-thing-6a4d2560cc83' target='_blank'
-            title='Read more on our Medium'
             className='items-center text-center w-full p-3 hover:bg-gray-200 hover:dark:bg-gray-800 hover:dark:bg-opacity-60 cursor-pointer group'>
             <i className='fab fa-medium text-3xl text-black dark:text-white group-hover:text-blue-500' />
           </Link>
         </Tooltip>
         <Tooltip message={'InFold on X'} left={16} top={3} padding={1} minWidth={100}>
           <Link href='https://x.com/infoldai' target='_blank'
-            title='InFold on Twitter'
-            className='items-center text-center w-full p-2 py-3 md:mb-2 hover:bg-gray-200 hover:dark:bg-gray-800 hover:dark:bg-opacity-60 cursor-pointer group text-black dark:text-white group-hover:text-blue-500'>
-            <Image src={'/assets/images/X_logo.svg'} width={25} height={25} alt='InFold on Twitter' className='m-auto' />
+            className='flex items-center text-center w-full p-2 py-3 md:mb-2 hover:bg-gray-200 hover:dark:bg-gray-800 hover:dark:bg-opacity-60 cursor-pointer group text-black dark:text-white group-hover:text-blue-500'>
+            <XIcon />
           </Link>
         </Tooltip>
       </div>
