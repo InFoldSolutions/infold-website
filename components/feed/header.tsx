@@ -5,18 +5,18 @@ import Tooltip from '@/components/helpers/tooltip'
 import { FeedMeta } from '@/types/feedmeta'
 import { useDebounce } from '@/helpers/useDebounce'
 
-export default function FeedHeader({ meta, removeFeed, setMeta, setIsEdit, isEdit }: { meta: FeedMeta, removeFeed: any, setMeta: any, setIsEdit: any, isEdit: boolean }) {
+export default function FeedHeader({ meta, removeFeed, setMeta }: { meta: FeedMeta, removeFeed: any, setMeta: any }) {
 
   const [keyword, setKeyword] = useState(meta.keyword || '')
   const [type, setType] = useState(meta.type)
   const [icon, setIcon] = useState(meta.icon)
+  const [isEdit, setIsEdit] = useState(meta.edit)
   const [iconColor, setIconColor] = useState(meta.iconColor)
 
   const inputRef = useRef<HTMLInputElement | null>(null)
 
   const removeCurrentFeed = useCallback(() => {
     removeFeed(meta.id)
-    setIsEdit(false)
   }, [meta])
 
   const updateMeta = useDebounce(() => {
@@ -25,7 +25,8 @@ export default function FeedHeader({ meta, removeFeed, setMeta, setIsEdit, isEdi
       keyword,
       type,
       icon,
-      iconColor
+      iconColor,
+      edit: isEdit
     })
   }, 500)
 
@@ -47,7 +48,7 @@ export default function FeedHeader({ meta, removeFeed, setMeta, setIsEdit, isEdi
     if (text === '')
       ttype = 'new'
 
-    setKeyword(text);
+    setKeyword(text)
     setType(ttype)
     setIcon(ticon)
     setIconColor(ticonColor)
@@ -67,6 +68,7 @@ export default function FeedHeader({ meta, removeFeed, setMeta, setIsEdit, isEdi
       return
 
     setIsEdit(false)
+    updateMeta()
   }, [meta])
 
   const editFeed = useCallback(() => {
@@ -80,19 +82,21 @@ export default function FeedHeader({ meta, removeFeed, setMeta, setIsEdit, isEdi
     if (meta.id === 'newtopic' || meta.keyword === '')
       return removeCurrentFeed()
 
-    setKeyword(meta.keyword);
+    setKeyword(meta.keyword)
     setType(meta.type)
     setIcon(meta.icon)
     setIconColor(meta.iconColor)
 
     setIsEdit(false)
+    updateMeta()
   }, [meta])
 
   useEffect(() => {
-    setKeyword(meta.keyword);
-
-    if (meta.type === 'new')
-      setIsEdit(true)
+    setKeyword(meta.keyword)
+    setIcon(meta.icon)
+    setIconColor(meta.iconColor)
+    setType(meta.type)
+    setIsEdit(meta.edit)
   }, [meta])
 
   return (
@@ -100,20 +104,20 @@ export default function FeedHeader({ meta, removeFeed, setMeta, setIsEdit, isEdi
       <div
         className='text-xl text-body-color flex flex-col w-full'>
         <div className='flex items-center w-full'>
-          <i className={`${meta.icon} ${meta.iconColor} text-xl mr-4`}></i>
+          <i className={`${icon} ${iconColor} text-xl mr-4`}></i>
 
           <div className={`relative w-full`}>
             <div className='flex w-full text-xs text-gray-600'>
-              {meta.type === 'new' &&
+              {type === 'new' &&
                 <span>topic | @handle | r/[sub]</span>
               }
-              {meta.type !== 'new' &&
-                <span>{meta.type}</span>
+              {type !== 'new' &&
+                <span>{type}</span>
               }
             </div>
 
             {!isEdit &&
-              <span className='border-b-2 border-transparent w-full' onDoubleClick={editFeed}>{meta.keyword}</span>
+              <span className='border-b-2 border-transparent w-full' onDoubleClick={editFeed}>{keyword}</span>
             }
             {isEdit &&
               <input type='text'
@@ -141,7 +145,7 @@ export default function FeedHeader({ meta, removeFeed, setMeta, setIsEdit, isEdi
         }
 
         <div className='text-center'>
-          {!isEdit && meta.type !== 'featured' &&
+          {!isEdit && type !== 'featured' &&
             <Tooltip message='Edit feed' top={10} right={2} padding={1} minWidth={85}>
               <i className='fad fa-sliders-h text-xl cursor-pointer opacity-40 hover:opacity-100' onClick={editFeed} />
             </Tooltip>

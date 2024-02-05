@@ -60,8 +60,14 @@ export function feedsReducer(feeds: FeedMeta[], action: FeedsReducerAction): Fee
 
       const localFeeds = getLocalStorage('feeds')
 
-      if (localFeeds && localFeeds.length > 0)
-        return localFeeds
+      if (localFeeds && localFeeds.length > 0) {
+        return localFeeds.map((item: FeedMeta) => {
+          return {
+            ...item,
+            id: slugifyKeyword(item.keyword)
+          }
+        })
+      }
 
       return config.defaultFeeds.map((item: FeedMeta) => {
         return {

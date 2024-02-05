@@ -16,7 +16,6 @@ export default function FeedWrapper(): ReactNode {
 
   const [feeds, dispatchFeeds] = useReducer(feedsReducer, [])
 
-
   const removeNewFeed = useCallback(() => {
     dispatchFeeds({
       type: 'removed',
@@ -36,6 +35,7 @@ export default function FeedWrapper(): ReactNode {
         type: 'new',
         id: 'newtopic',
         keyword: '',
+        edit: true,
         live: false,
         icon: 'fad fa-search',
         iconColor: 'text-green-500'
