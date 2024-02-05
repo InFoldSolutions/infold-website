@@ -31,14 +31,14 @@ export function feedsReducer(feeds: FeedMeta[], action: FeedsReducerAction): Fee
 
       newFeeds = [action.data].concat(feeds)
 
-      setLocalStorage('feeds', newFeeds)
+      updateLocalStorage(newFeeds)
 
       return newFeeds
     }
     case 'removed': {
       const newFeeds = feeds.filter((item: any) => item.id !== action.id)
 
-      setLocalStorage('feeds', newFeeds)
+      updateLocalStorage(newFeeds)
 
       return newFeeds
     }
@@ -51,7 +51,7 @@ export function feedsReducer(feeds: FeedMeta[], action: FeedsReducerAction): Fee
         }
       })
 
-      setLocalStorage('feeds', newFeeds)
+      updateLocalStorage(newFeeds)
 
       return newFeeds
     }
@@ -74,4 +74,8 @@ export function feedsReducer(feeds: FeedMeta[], action: FeedsReducerAction): Fee
       throw Error('Unknown action: ' + action.type)
     }
   }
+}
+
+function updateLocalStorage(feeds: FeedMeta[]) {
+  setLocalStorage('feeds', feeds.filter((item: any) => item.id !== 'newtopic'))
 }
