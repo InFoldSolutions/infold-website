@@ -10,7 +10,7 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-export default async function Rising() {
+export default async function AboutPage() {
   return (
     <Container header={true}>
       <About />

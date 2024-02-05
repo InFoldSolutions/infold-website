@@ -24,6 +24,7 @@ export default function Feed({ meta, removeFeed, setMeta }: { meta: FeedMeta, re
   const [lastId, setLastId] = useState<string>('')
   const [isLoading, setIsLoading] = useState(true)
   const [isLoadingMore, setIsLoadingMore] = useState(false)
+  const [isEdit, setIsEdit] = useState<boolean>(meta.type === 'new')
   const [endOfFeed, setEndOfFeed] = useState(false)
 
   const scrollParent = useRef<HTMLDivElement | null>(null)
@@ -98,6 +99,7 @@ export default function Feed({ meta, removeFeed, setMeta }: { meta: FeedMeta, re
       setOffset(1)
       setLastId('')
       setEndOfFeed(false)
+      setIsEdit(false)
 
       fetchInitialData()
         .catch(console.error)
@@ -137,7 +139,7 @@ export default function Feed({ meta, removeFeed, setMeta }: { meta: FeedMeta, re
 
   return (
     <div className='overflow-hidden min-h-[70vh] w-full max-w-full min-w-[89vw] md:min-w-[370px] border-r-2 border-gray-200 dark:border-gray-800'>
-      <FeedHeader meta={meta} removeFeed={removeFeed} setMeta={setMeta} />
+      <FeedHeader meta={meta} removeFeed={removeFeed} setMeta={setMeta} isEdit={isEdit} setIsEdit={setIsEdit} />
 
       <div className={`max-h-[94.5vh] pb-8 overflow-y-auto ${(isLoading) ? 'overflow-y-hidden' : ''}`} ref={scrollParent}>
         <div className={`flex md:mr-auto flex-col`}>

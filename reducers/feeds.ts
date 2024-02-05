@@ -12,7 +12,7 @@ export type FeedsReducerAction = {
   init?: boolean
 }
 
-export function feedsReducer(feeds: FeedMeta[], action: FeedsReducerAction) {
+export function feedsReducer(feeds: FeedMeta[], action: FeedsReducerAction): FeedMeta[] {
   switch (action.type) {
     case 'added': {
       if (!action.data) throw Error('No data provided')

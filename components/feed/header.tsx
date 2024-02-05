@@ -5,9 +5,8 @@ import Tooltip from '@/components/helpers/tooltip'
 import { FeedMeta } from '@/types/feedmeta'
 import { useDebounce } from '@/helpers/useDebounce'
 
-export default function FeedHeader({ meta, removeFeed, setMeta }: { meta: FeedMeta, removeFeed: any, setMeta: any }) {
+export default function FeedHeader({ meta, removeFeed, setMeta, setIsEdit, isEdit }: { meta: FeedMeta, removeFeed: any, setMeta: any, setIsEdit: any, isEdit: boolean }) {
 
-  const [isEdit, setIsEdit] = useState<boolean>(meta.type === 'new')
   const [keyword, setKeyword] = useState(meta.keyword || '')
   const [type, setType] = useState(meta.type)
   const [icon, setIcon] = useState(meta.icon)

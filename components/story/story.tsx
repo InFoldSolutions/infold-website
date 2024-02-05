@@ -15,9 +15,9 @@ import YTMedia from '@/components/carousel/ytmedia'
 import { filterSources } from '@/apis/transformers/story'
 
 import { Source } from '@/types/source'
+import { Topic } from '@/types/topic'
 
-export default function StoryWrapper({ data, modal = false }: { data: any, modal?: boolean }) {
-
+export default function StoryWrapper({ data, modal = false }: { data: Topic, modal?: boolean }) {
   const [latestSources] = useState<Source[]>(filterSources(data.sources, 'latest'))
   const [popularSources] = useState<Source[]>(filterSources(data.sources, 'popular'))
   const [firstPopularSocialLength] = useState<number>(popularSources[0]?.articles[0]?.social?.length || 0)
@@ -45,10 +45,10 @@ export default function StoryWrapper({ data, modal = false }: { data: any, modal
             </Suspense>
           </span>
 
-          {data.meta > 0 &&
+          {data.meta.sources > 0 &&
             <span className="hidden md:inline-block items-center mr-3">
               <i className='fad fa-newspaper mr-2'></i>
-              {data.meta}
+              {data.meta.sources}
               <span className='ml-2'>Sources</span>
             </span>
           }

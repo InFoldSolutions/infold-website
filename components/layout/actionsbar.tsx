@@ -6,11 +6,13 @@ import Link from 'next/link'
 import Tooltip from '@/components/helpers/tooltip'
 import XIcon from '@/components/helpers/xIcon'
 
-export default function ActionsBar({ addNewFeed }: { addNewFeed: any }) {
+export default function ActionsBar({ addNewFeed, removeNewFeed }: { addNewFeed: any, removeNewFeed: any }) {
   return (
     <div className='flex items-start flex-col h-[100dvh] w-[55px] py-2 border-r-2 border-gray-200 dark:border-gray-800 sticky left-0 z-40 bg-gray-100 dark:bg-black text-center'>
-      <div className='items-center text-center w-full mb-3 p-1'>
-        <Image unoptimized src='/assets/images/logo-infold-black.png' alt='InFold - logo' width={42} height={42} className='rounded m-auto' />
+      <div className='items-center text-center w-full mb-3 p-1' onClick={removeNewFeed}>
+        <Link href='/' target='_self'>
+          <Image unoptimized src='/assets/images/logo-infold-black.png' alt='InFold - logo' width={42} height={42} className='rounded m-auto' />
+        </Link>
       </div>
       <Tooltip message={'Add new Feed'} left={16} top={3} padding={1} minWidth={103}>
         <div className='items-center text-center w-full mb-2 p-3 hover:bg-gray-200 hover:dark:bg-gray-800 hover:dark:bg-opacity-60 cursor-pointer group'

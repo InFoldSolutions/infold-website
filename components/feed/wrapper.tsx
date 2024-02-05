@@ -16,7 +16,20 @@ export default function FeedWrapper(): ReactNode {
 
   const [feeds, dispatchFeeds] = useReducer(feedsReducer, [])
 
+
+  const removeNewFeed = useCallback(() => {
+    dispatchFeeds({
+      type: 'removed',
+      id: 'newtopic'
+    })
+  }, [])
+
   const addNewFeed = useCallback(() => {
+    if (feeds.find((feed: FeedMeta) => feed.id === 'newtopic')) {
+      removeNewFeed()
+      return
+    }
+
     dispatchFeeds({
       type: 'added',
       data: {
@@ -28,7 +41,7 @@ export default function FeedWrapper(): ReactNode {
         iconColor: 'text-green-500'
       }
     })
-  }, [])
+  }, [feeds])
 
   const removeFeed = useCallback((id: string) => {
     dispatchFeeds({
@@ -56,7 +69,7 @@ export default function FeedWrapper(): ReactNode {
 
   return (
     <div className='flex items-start flex-row font-mono overflow-y-hidden overflow-x-hidden md:overflow-x-scroll h-[100vh] w-full'>
-      <ActionsBar addNewFeed={addNewFeed} />
+      <ActionsBar addNewFeed={addNewFeed} removeNewFeed={removeNewFeed} />
 
       <div className='flex relative z-0 w-full h-full'>
         <Suspense fallback={<Loading />}>

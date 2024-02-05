@@ -19,6 +19,7 @@ export type Topic = {
   short_title: string
   title: string
   outline: string[]
+  suggested: string[]
 
   sentimentAgg: any
   media: any
