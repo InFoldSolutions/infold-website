@@ -46,7 +46,7 @@ export default function Keyword({ keyword }: { keyword: Keyword }) {
         target='_blank'
         prefetch={false}
         className='group/image flex items-center'>
-        <span className='group-hover/image:border-gray-400 border-2 bg-white dark:border-gray-600 dark:bg-gray-200 opacity:60 group-hover/image:dark:border-gray-200 p-px flex items-center justify-center h-8 w-8 rounded relative mr-2'>
+        <span className='group-hover/image:border-gray-400 border-2 bg-white dark:border-gray-600 dark:bg-gray-200 opacity:60 group-hover/image:dark:border-gray-200 p-px flex items-center justify-center h-8 w-8 rounded relative mr-2 shrink-0'>
           <Image unoptimized src={icon} alt={label} fill={true} className={`h-8 w-8 rounded ${padding}`} />
         </span>
         <span>
