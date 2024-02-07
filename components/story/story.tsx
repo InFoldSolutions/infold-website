@@ -16,6 +16,7 @@ import { filterSources } from '@/apis/transformers/story'
 
 import { Source } from '@/types/source'
 import { Topic } from '@/types/topic'
+import Affiliate from '../carousel/affiliate'
 
 export default function StoryWrapper({ data, modal = false }: { data: Topic, modal?: boolean }) {
   const [latestSources] = useState<Source[]>(filterSources(data.sources, 'latest'))
@@ -63,6 +64,8 @@ export default function StoryWrapper({ data, modal = false }: { data: Topic, mod
       {data.media?.length > 0 &&
         <YTMedia data={data.media} />
       }
+
+      <Affiliate slug={data.slug} />
 
       <h3 className='mt-4 text-2xl font-bold'>News Coverage</h3>
 
