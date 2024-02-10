@@ -111,13 +111,13 @@ export async function getFeaturedFeed(page: number = 1): Promise<APIResponse> {
 
 export async function getSearchFeed(query: string, page: number = 1): Promise<APIResponse> {
   try {
-    const url = getApiUrl('search', config.api.defaultLimit, null, page)
+    const url = `${config.api.url}/topics/search?page=${page}`
     const res = await fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ keywords: [query] }),
+      body: JSON.stringify({ query: query }),
       next: { revalidate: 1 }
     })
 
