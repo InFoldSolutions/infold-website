@@ -1,5 +1,5 @@
 import { getSubredditJSON } from '@/apis/reddit'
-import { getKeywordFeed, getFeaturedFeed } from '@/apis/infold'
+import { getFeaturedFeed, getSearchFeed } from '@/apis/infold'
 
 import { RedditPost } from '@/types/redditpost'
 import { Topic } from '@/types/topic'
@@ -39,13 +39,13 @@ export async function loadFeedData(meta: FeedMeta, offset: number, lastId: strin
       data = await getSubredditJSON(meta.keyword, lastId)
       break;
     case 'keyword':
-      data = await getKeywordFeed(meta.keyword, offset)
+      data = await getSearchFeed(meta.keyword, offset)
       break;
     case 'featured':
       data = await getFeaturedFeed(offset)
       break;
     default:
-      data = await getKeywordFeed(meta.keyword, offset)
+      data = await getSearchFeed(meta.keyword, offset)
       break;
   }
 

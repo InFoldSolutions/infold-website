@@ -85,15 +85,18 @@ export function transformStory(data: any): Topic {
 
   if (data.questions) {
     data.suggested = data.questions.filter((item: any) => !config.questionsBlacklist.includes(item.trim()))
-    data.suggested = data.suggested.map((item: any) => item.replace(/\"/g, '').replace(/\?/g, '').replace(/\*/g, ''))
+    data.suggested = data.suggested.map((item: any) => item.replace(/(?:\r\n|\r|\n|\*)/g, '').trim())
   }
 
   if (data.outline?.length > 0) {
-    data.outline = data.outline.filter((item: any) => item !== '').map((item: any) => item.replace(/\"/g, '').replace(/\*/g, ''))
+    data.outline = data.outline.filter((item: any) => item !== '').map((item: any) => item.replace(/(?:\r\n|\r|\n|\*)/g, '').trim())
   }
 
   if (data.category)
     data.categoryIcon = config.categoryOptions.find(item => item.label === data.category)?.icon
+
+  if (data.title)
+    data.title = data.title.replace(/(?:\r\n|\r|\n|\*)/g, '').trim()
 
   return {
     ...data,
