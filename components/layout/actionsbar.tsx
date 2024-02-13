@@ -1,5 +1,7 @@
 'use client'
 
+import { useState, useEffect } from 'react';
+
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -7,6 +9,15 @@ import Tooltip from '@/components/helpers/tooltip'
 import XIcon from '@/components/helpers/xIcon'
 
 export default function ActionsBar({ addNewFeed, removeNewFeed }: { addNewFeed: any, removeNewFeed: any }) {
+  const [browserLink, setBrowserLink] = useState("https://chrome.google.com/webstore/detail/infoldai/dfmmanoiegndhgdjendeidcakajifnlb?hl=en") // default
+
+  useEffect(() => {
+    const isFirefox = navigator?.userAgent.match(/firefox|fxios/i);
+
+    if (isFirefox)
+      setBrowserLink("https://addons.mozilla.org/en-US/firefox/addon/infold/");
+  }, [])
+
   return (
     <div className='flex items-start flex-col h-[100dvh] w-[55px] py-2 border-r-2 border-gray-200 dark:border-gray-800 sticky left-0 z-40 bg-gray-100 dark:bg-black text-center'>
       <div className='items-center text-center w-full mb-3 p-1' onClick={removeNewFeed}>
@@ -27,10 +38,10 @@ export default function ActionsBar({ addNewFeed, removeNewFeed }: { addNewFeed: 
             <i className='fad fa-question text-2xl text-black dark:text-white group-hover:text-blue-500' />
           </Link>
         </Tooltip>
-        <Tooltip message={'Read on Medium'} left={16} top={3} padding={1} minWidth={120}>
-          <Link href='https://infold.medium.com/a-lot-of-knowledge-is-a-dangerous-thing-6a4d2560cc83' target='_blank'
+        <Tooltip message={'Extension'} left={16} top={3} padding={1} minWidth={95}>
+          <Link href={browserLink} target='_blank'
             className='items-center text-center w-full p-3 hover:bg-gray-200 hover:dark:bg-gray-800 hover:dark:bg-opacity-60 cursor-pointer group'>
-            <i className='fab fa-medium text-3xl text-black dark:text-white group-hover:text-blue-500' />
+            <i className='fad fa-sliders-h text-2xl text-black dark:text-white group-hover:text-blue-500' />
           </Link>
         </Tooltip>
         <Tooltip message={'InFold on X'} left={16} top={3} padding={1} minWidth={100}>
