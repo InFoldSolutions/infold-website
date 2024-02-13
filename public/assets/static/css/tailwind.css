@@ -1181,8 +1181,28 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 565px;
 }
 
+.w-\[600px\] {
+  width: 600px;
+}
+
 .w-\[660px\] {
   width: 660px;
+}
+
+.w-\[710px\] {
+  width: 710px;
+}
+
+.w-\[740px\] {
+  width: 740px;
+}
+
+.w-\[730px\] {
+  width: 730px;
+}
+
+.w-\[750px\] {
+  width: 750px;
 }
 
 .w-1 {
