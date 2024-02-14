@@ -84,8 +84,11 @@ export function transformStory(data: any): Topic {
   }
 
   if (data.questions) {
-    data.suggested = data.questions.filter((item: any) => !config.questionsBlacklist.includes(item.trim()))
-    data.suggested = data.suggested.map((item: any) => item.replace(/(?:\r\n|\r|\n|\*)/g, '').trim())
+    data.suggested = data.questions.filter((item: any) => !config.questionsBlacklist.reduce((isBlacklisted, blacklistItem) => {
+      return isBlacklisted || item.includes(blacklistItem) || item === blacklistItem
+    }, false))
+
+    data.suggested = data.suggested.map((item: any) => item.replace(/(?:\r\n|\r|\n|\*)/g, '').trim().replace(/\d+. /g, ''))
   }
 
   if (data.outline?.length > 0) {

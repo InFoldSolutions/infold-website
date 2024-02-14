@@ -160,7 +160,7 @@ const config = {
   api_key: process.env.NEXT_API_KEY,
 
   // blacklist questions
-  'questionsBlacklist': ['**1. What is the main topic of the text?**', '**10 questions about the subject of the text:**', '**Here are 10 short questions about the text:**', '**Here are 10 questions about the text:**', '**10 short questions about the subject this text is describing:**', '**10 short questions about the subject of the text:**', '**Here are 10 short questions about the subject of the text:**', '**Here are 10 short questions about the subject the text is describing:**'],
+  'questionsBlacklist': ['Here are 10 short questions', '**Here are 10 short questions about the text provided:**', 'What is the main topic of the text', '**1. What is the main topic of the text?**', '**10 questions about the subject of the text:**', '**Here are 10 short questions about the text:**', '**Here are 10 questions about the text:**', '**10 short questions about the subject this text is describing:**', '**10 short questions about the subject of the text:**', '**Here are 10 short questions about the subject of the text:**', '**Here are 10 short questions about the subject the text is describing:**'],
 
   // temp keyword blacklist
   // lowercase

@@ -54,9 +54,3 @@ export default function ActionsBar({ addNewFeed, removeNewFeed }: { addNewFeed: 
     </div>
   )
 }
-
-/*<Tooltip message={'Social Comming!'} left={16} top={3} padding={1} minWidth={120}>
-  <div className='items-center text-center w-full mb-2 p-3 hover:bg-gray-200 hover:dark:bg-gray-800 hover:dark:bg-opacity-60 cursor-pointer group'>
-    <i className='fad fa-user-friends text-2xl text-black dark:text-white group-hover:text-blue-500'></i>
-  </div>
-</Tooltip>*/
