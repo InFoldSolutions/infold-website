@@ -85,7 +85,7 @@ export function transformStory(data: any): Topic {
 
   if (data.questions) {
     data.suggested = data.questions.filter((item: any) => !config.questionsBlacklist.reduce((isBlacklisted, blacklistItem) => {
-      return isBlacklisted || item.includes(blacklistItem) || item === blacklistItem
+      return isBlacklisted || item.toLowerCase().includes(blacklistItem.toLowerCase())
     }, false))
 
     data.suggested = data.suggested.map((item: any) => item.replace(/(?:\r\n|\r|\n|\*)/g, '').trim().replace(/\d+. /g, ''))
