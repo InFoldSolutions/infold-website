@@ -92,7 +92,7 @@ export function transformStory(data: any): Topic {
   }
 
   if (data.outline?.length > 0) {
-    data.outline = data.outline.filter((item: any) => item !== '').map((item: any) => item.replace(/(?:\r\n|\r|\n|\*)/g, '').trim())
+    data.outline = data.outline.filter((item: any) => item !== '').map((item: any) => item.replace(/(?:\r\n|\r|\n|\*)/g, '').trim().replace(/\d+. |\- /g, ''))
   }
 
   if (data.category)
