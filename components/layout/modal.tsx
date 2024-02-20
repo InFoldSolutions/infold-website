@@ -7,7 +7,6 @@ export default function Modal({ children, showClose = true, loadingState = false
   const overlay = useRef(null)
   const wrapper = useRef(null)
   const router = useRouter()
-  const pathname = usePathname()
 
   const [showCloseBtn] = useState(showClose)
 
@@ -17,6 +16,8 @@ export default function Modal({ children, showClose = true, loadingState = false
 
   const onClick: MouseEventHandler = useCallback(
     (e) => {
+      if (showClose === false) return
+
       if (e.target === overlay.current || e.target === wrapper.current)
         if (onDismiss) onDismiss()
     },
@@ -32,6 +33,7 @@ export default function Modal({ children, showClose = true, loadingState = false
 
   const onKeyDown = useCallback(
     (e: KeyboardEvent) => {
+      if (showClose === false) return
       if (e.key === 'Escape') onDismiss()
     },
     [onDismiss]
@@ -41,10 +43,7 @@ export default function Modal({ children, showClose = true, loadingState = false
     document.addEventListener('keydown', onKeyDown)
     return () => document.removeEventListener('keydown', onKeyDown)
   }, [onKeyDown])
-
-  if (!pathname.startsWith('/story') && !loadingState)
-    return null
-
+  
   return (
     <div
       ref={overlay}

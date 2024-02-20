@@ -22,7 +22,7 @@ const config = {
   },
 
   'interests': [
-    'World News', 'Middle East', 'Ukraine', 'Taiwan', 'America', 'China', 'Europe', 'Tech', 'Business', 'Stocks', 'Space', 'Science', 'Crypto', 'Gaming', 'Cars', 'Programming', 'Fitness', 'Health', 'Sports', 'NBA', 'NFL', 'UFC'
+    'World News', 'Politics', 'Tech', 'Business', 'Science', 'Stocks', 'Crypto', 'Health', 'Sports'
   ],
 
   'tagsAggs': {

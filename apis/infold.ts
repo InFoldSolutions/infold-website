@@ -287,6 +287,36 @@ export async function getTopKeywords(bucket: string = config.api.defaultBucket) 
   }
 }
 
+export async function submitEmail(email: string, interests: string[]): Promise<boolean> {
+  try {
+    const url = `${config.api.url}/signup/beta`
+    const res = await fetch(url, {
+      next: { revalidate: 1 },
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email,
+        interests
+      }),
+    })
+
+    if (!res.ok)
+      throw new Error('Response not ok')
+
+    const data = await res.json()
+
+    if (!data.meta.success)
+      throw new Error('No success')
+
+    return true
+  } catch (error) {
+    console.warn('Failed to submit email', error)
+    return false
+  }
+}
+
 export function handleRedirect(slug: string, searchParams: any) {
   let url = `/story/${slug}`
 
