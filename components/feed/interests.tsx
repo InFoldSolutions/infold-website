@@ -92,8 +92,8 @@ export default function Interests({ dispatchDigest }: { dispatchDigest: any }) {
 
   return (
     <Modal showClose={false}>
-      <div className='max-w-full font-mono bg-white dark:bg-black flex flex-col md:my-auto p-4 md:p-10 max-w-[680px] lg:w-[680px] flex items-start md:rounded-lg'>
-        <div className={`w-full mt-36 md:mt-0`}>
+      <div className='max-w-full font-mono bg-white dark:bg-black flex flex-col my-auto p-4 pl-6 md:p-10 max-w-[680px] lg:w-[680px] flex items-start md:rounded-lg'>
+        <div className={`w-full`}>
           <h3 className='text-2xl md:text-3xl font-bold mb-3 flex items-center'>
             <i className='fad fa-newspaper mr-4' />
             <span className='hidden md:flex'>Get your daily news digest</span>
