@@ -88,7 +88,7 @@ export function transformStory(data: any): Topic {
       return isBlacklisted || item.toLowerCase().includes(blacklistItem.toLowerCase())
     }, false))
 
-    data.suggested = data.suggested.map((item: any) => item.replace(/(?:\r\n|\r|\n|\*)/g, '').trim().replace(/\d+. /g, ''))
+    data.suggested = data.suggested.map((item: any) => item.replace(/(?:\r\n|\r|\n|\*)/g, '').trim().replace(/\d+. /g, '').replace(/Question /g, ''))
   }
 
   if (data.outline?.length > 0) {
